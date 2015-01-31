@@ -1,9 +1,10 @@
-# Phase 3: Editing and Displaying Posts
+# Phase 3: List
 
 ## Rails
 ### Models
 
 ### Controllers
+* Api::RhythmsController (index)
 
 ### Views
 
@@ -11,11 +12,11 @@
 ### Models
 
 ### Collections
+* Rhythms
 
 ### Views
-* PostForm
+* RhythmList
+* RhythmListItem
+* Filters
 
 ## Gems/Libraries
-* Filepicker
-* Markdown-js
-* Bootstrap Markdown

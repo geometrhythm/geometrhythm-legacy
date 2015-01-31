@@ -1,21 +1,17 @@
-# Phase 4: User Feeds
+# Phase 4: Polish
 
 ## Rails
 ### Models
 
 ### Controllers
-Api::PostsController (feed)
 
 ### Views
-posts/feed.json.jbuilder
 
 ## Backbone
 ### Models
 
 ### Collections
-* FeedPosts
 
 ### Views
-* FeedShow (composite view, contains PostShow subviews)
 
 ## Gems/Libraries

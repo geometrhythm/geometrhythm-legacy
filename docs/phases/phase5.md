@@ -2,10 +2,10 @@
 
 ## Rails
 ### Models
+* Sample
+* NameVote
 
 ### Controllers
-Api::BlogsController (search)
-Api::PostsController (search)
 
 ### Views
 
@@ -13,12 +13,12 @@ Api::PostsController (search)
 ### Models
 
 ### Collections
-* SearchBlogs
-* SearchPosts
 
 ### Views
-* BlogSearchItem
-* SearchShow (composite view, contains BlogSearchItem and PostShow subviews)
+* RhythmEdit (expands on Show page)
+* RhythmProperties (expands on Show page)
+* ProfileEdit
+* ProfileShow
 
 ## Gems/Libraries
-
+* Marked

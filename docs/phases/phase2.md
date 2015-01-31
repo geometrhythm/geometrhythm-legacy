@@ -1,26 +1,38 @@
-# Phase 2: JSON API and First Backbone Views
+# Phase 2: Accounts & Show
 
 ## Rails
 ### Models
+* User
+* Like
+* Tag
+* Tagging
+* Comment
 
 ### Controllers
-Api::BlogsController (create, destroy, index, show)
-Api::PostsController (create, destroy, show, update)
+* Api::RhythmsController (create, destroy, show)
+* Api::UsersController (create, destroy)
+* Api::NamesController (create, destroy)
+* Api::LikesController (create, destroy)
+* Api::TagsController (create, destroy)
+* Api::CommentsController (create, destroy)
 
 ### Views
-* blogs/show.json.jbuilder
+* rhythms/show.json.jbuilder
 
 ## Backbone
 ### Models
-* Blog (parses nested `posts` association)
-* Post
+* Name
+* Like
+* Tag
+* Comment
 
 ### Collections
-* Blogs
-* Posts
+* Names
+* Likes
+* Tags
+* Comments
 
 ### Views
-* BlogShow (composite view, contains PostShow subviews)
-* PostShow
+* RhythmShow
 
 ## Gems/Libraries
