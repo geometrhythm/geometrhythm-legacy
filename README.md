@@ -9,17 +9,17 @@ Geometrhythm is a network inspired by Soundcloud, but specifically for rhythms.
 
 Users can:
 
-Design rhythms
+<b>Design rhythms</b>
 - [ ] Use a visual tool to create a rhythm
 - [ ] Listen to the rhythm
 - [ ] Name the rhythm and save it
 
-Discover rhythms
+<b>Discover rhythms</b>
 - [ ] Sign up, log in, and create a profile
 - [ ] Browse other users' created & liked rhythms
 - [ ] Tag rhythms and search by tag
 
-Discuss rhythms
+<b>Discuss rhythms</b>
 - [ ] Like a rhythm
 - [ ] Comment on a rhythm
 - [ ] See play counts of rhythms
@@ -68,21 +68,22 @@ My most important stretch goal is to be able to turn on edit mode for a rhythm f
 
 Further stretch goals:
 
-Design rhythms
+<b>Design rhythms</b>
 - [ ] Onboarding
 - [ ] Upload your own percussion sample to use for playback
 - [ ] Download rhythms as MIDI
 
-Discover rhythms
+<b>Discover rhythms</b>
 - [ ] Find rhythms related by shared geometric properties
 - [ ] Find rhythms based on popularity and recency
 
-Discuss rhythms
+<b>Discuss rhythms</b>
 - [ ] Reference specific pulses of a rhythms in a comment
 - [ ] Share relevant external links for rhythms (recordings)
 - [ ] Share a bit of info about yourself on a profile
 - [ ] Up/down vote names
 - [ ] Comment on comments
+- [ ] Wiki-style article body for rhythm
 
 [phase-one]: ./docs/phases/phase1.md
 [phase-two]: ./docs/phases/phase2.md
