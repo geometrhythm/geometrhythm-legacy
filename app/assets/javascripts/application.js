@@ -14,9 +14,9 @@
 //= require jquery_ujs
 //= require jquery.serializejson.min
 //= require jquery-ui.min
-//= require bootstrap.min
 //= require underscore
 //= require backbone
+//= require rhythmRing
 //= require geometrhythm
 //= require_tree ../templates
 //= require_tree ./models
