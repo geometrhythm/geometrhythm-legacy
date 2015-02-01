@@ -81,5 +81,5 @@ test:
 production:
   <<: *default
   database: Geometrhythm_production
-  username: Geometrhythm
-  password: <%= ENV['GEOMETRHYTHM_DATABASE_PASSWORD'] %>
+  #username: Geometrhythm
+  #password: <%= ENV['GEOMETRHYTHM_DATABASE_PASSWORD'] %>
