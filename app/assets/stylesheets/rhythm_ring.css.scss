@@ -1,0 +1,105 @@
+#onsetsAndRestSeq {
+  float: right;
+  position: absolute;
+  margin: 20px 120px;
+  z-index: 1;
+}
+
+container {
+  // margin: 50px auto;
+  width: 100%;
+  position: relative;
+}
+
+.wrapper {
+  position: relative;
+  left: 30%;
+  top: 80px;
+  // transform: translateX(-50%)
+}
+
+.polygon-canvas {
+  position: absolute;
+  z-index: 2;
+}
+
+.rhythm-ring {
+  position: absolute;
+  width: 300px;
+  height: 300px;
+  border: solid 2px;
+  border-radius: 50%;
+}
+
+.cell {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  border: solid 2px;
+  background-color: white;
+  color: black;
+  position: absolute;
+  transform-origin: 120px 120px;
+  transition: transform 0.5s;
+  opacity: 0%
+}
+
+.c-draggable {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  border: solid 2px;
+  background-color: white;
+  color: black;
+  position: absolute;
+}
+
+.disappeared {
+  width: 0px;
+  height: 0px;
+  transform-origin: -0px -0px;
+}
+
+.cell:hover {
+  cursor: pointer
+}
+
+.intercell:hover {
+  cursor: pointer
+}
+
+.c-draggable:hover {
+  cursor: pointer
+}
+
+.onset {
+  background-color: black;
+}
+
+.intercell {
+  width: 15px;
+  height: 15px;
+  border-radius: 50%;
+  background-color: gray;
+  position: absolute;
+  transform-origin: 113px 113px;
+  transition: transform 0.5s;
+  display: hidden;
+}
+
+body {
+  background-color: white;
+}
+
+.wrapper img {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+}
+
+.backdrop img {
+  // background: url(images/backgrounds/white-construction-paper-texture.jpg) no-repeat center center fixed;
+  background-size: cover;
+  float: left;
+  z-index: 0;
+}
