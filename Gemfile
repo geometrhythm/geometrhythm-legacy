@@ -55,6 +55,11 @@ group :development, :test do
   gem 'faker'
   gem 'friendly_id'
   gem 'kaminari'
+
+end
+
+group :assets do
+  gem 'twitter-bootstrap-rails'
 end
 
 group :development do

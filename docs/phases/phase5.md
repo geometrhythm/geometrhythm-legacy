@@ -22,3 +22,6 @@
 
 ## Gems/Libraries
 * Marked
+* Kaminari
+* FriendlyId
+* D3
