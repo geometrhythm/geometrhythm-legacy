@@ -6,7 +6,6 @@
 }
 
 container {
-  // margin: 50px auto;
   width: 100%;
   position: relative;
 }
@@ -15,7 +14,8 @@ container {
   position: relative;
   left: 30%;
   top: 80px;
-  // transform: translateX(-50%)
+  width: 300px;
+  height: 300px;
 }
 
 .polygon-canvas {
@@ -41,7 +41,7 @@ container {
   position: absolute;
   transform-origin: 120px 120px;
   transition: transform 0.5s;
-  opacity: 0%
+  opacity: 0.0
 }
 
 .c-draggable {
@@ -95,6 +95,7 @@ body {
   position: absolute;
   top: 50%;
   left: 50%;
+  transform: translateX(-50%) translateY(-50%)
 }
 
 .backdrop img {
@@ -102,4 +103,22 @@ body {
   background-size: cover;
   float: left;
   z-index: 0;
+}
+
+.slider {
+  position: absolute;
+  float: right;
+  z-index: 4;
+  width: 100px;
+  height: 100px;
+}
+
+.slider span {
+  width: 100px;
+  height: 100px;
+}
+
+button {
+  position: absolute;
+  left: 120px;
 }

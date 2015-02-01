@@ -7,6 +7,8 @@
 <%= audio_tag "clave.wav" %>
 <%= audio_tag "clave.wav" %>
 
+
+
 <div class='backdrop'>
   <%#= image_tag "Free-High-Detail-Brown-Paper-Texture.jpg" %>
 </div>
@@ -16,7 +18,10 @@
   <div class='rhythm-ring' oncontextmenu="return false;">
   </div>
 
-  <canvas id='polygon-canvas' height='600' width='600'>
+  <%= image_tag "Play_small.png", size: "50x50" %>
+
+  <canvas id='polygon-canvas' height='300' width='300'>
   </canvas>
 
 </div>
+<div class='slider'></div>
