@@ -17,16 +17,13 @@ $.RhythmRing = function (el, ctx) {
 $.RhythmRing.prototype.initializeAudio = function() {
   this.busses = [];
   this.tempo = 125;
+  this.pulseDuration = ( 1000 / ( this.tempo / 60 ) ) / 4;
   $('audio').each(function(index) {
     this.busses.push($('audio')[index]);
   }.bind(this));
   this.playPos = -1;
   this.curBus = 0;
   this.paused = true;
-};
-
-$.RhythmRing.prototype.pulseDuration = function() {
-  return ( 1000 / ( this.tempo / 60 ) ) / 4;
 };
 
 $.RhythmRing.prototype.initializeEventHandlers = function() {
@@ -40,21 +37,41 @@ $.RhythmRing.prototype.initializeEventHandlers = function() {
   this.$el.on('dropout', '.cell', this.yankCellFromRing.bind(this));
   this.$el.on('dropover', '.intercell', this.squeezeCellIntoRing.bind(this));
   this.$el.on('dragstart', '.cell-handle', function(event) {
-    $(event.currentTarget).css('opacity', 1);
     this.$el.find(".cell[ord='" + parseInt($(event.currentTarget).attr("ord")) + "']").css('opacity', 0);
+    $(event.currentTarget).css('opacity', 1);
   }.bind(this));
   this.$el.on('dragstop', '.cell-handle', function(event) {
     if ($(event.currentTarget).hasClass("grabbed") === true) {
-       $(event.currentTarget).remove();
+       //$(event.currentTarget).remove();
+       $(event.currentTarget).hide("puff");
+       this.$el.find(".cell").css('box-shadow', '');
     } else {
 
     }
     this.grabbing = false;
   }.bind(this));
+  this.$el.on('mouseover', '.cell-handle', function(event) {
+    if (!this.grabbing) {
+      this.$el.find(".cell[ord='"
+        + parseInt($(event.currentTarget).attr("ord")) + "']")
+      .css('box-shadow', '0px 0px 5px DodgerBlue');
+    }
+  }.bind(this));
+  this.$el.on('mouseleave', '.cell-handle', function(event) {
+    this.$el.find(".cell[ord='" + parseInt($(event.currentTarget).attr("ord")) + "']").css('box-shadow', '');
+  }.bind(this));
+  this.$el.on('transitionend', '.cell-label', function(event) {
+    if ($(event.currentTarget).hasClass("markedForRemoval")) {
+      $(event.currentTarget).remove();
+    }
+  })
 };
 
 $.RhythmRing.prototype.changeTempo = function(event) {
   this.tempo = parseInt($(event.currentTarget).val());
+  this.pulseDuration = ( 1000 / ( this.tempo / 60 ) ) / 4;
+  clearInterval(this.playingRhythm);
+  this.playRhythm();
 }
 
 $.RhythmRing.prototype.togglePlay = function() {
@@ -64,18 +81,21 @@ $.RhythmRing.prototype.togglePlay = function() {
     $('button').addClass("active").html('Pause');
   } else {
     this.paused = true;
+    clearInterval(this.playingRhythm);
     $('button').removeClass("active").html('Play');
   }
 }
 
 $.RhythmRing.prototype.endAnimation = function() {
-  this.animating = false;
-  this.refreshHandles();
+  if (this.animating) {
+    this.refreshHandles();
+    this.animating = false;
+  }
 };
 
 $.RhythmRing.prototype.playRhythm = function() {
-  if (this.paused) return;
-  setTimeout(function() {
+  //if (this.paused) return;
+  this.playingRhythm = setInterval(function () {
     var fill = this.rhythmCells[this.playPos] ? 'black' : 'white';
     this.$el.find(".cell-handle[ord='" + this.playPos + "']:not('.grabbed')")
       .css('background-color', fill);
@@ -97,8 +117,8 @@ $.RhythmRing.prototype.playRhythm = function() {
         this.curBus = 0;
       }
     }
-    this.playRhythm();
-  }.bind(this), this.pulseDuration());
+    //this.playRhythm();
+  }.bind(this), this.pulseDuration);
 }
 
 $.RhythmRing.prototype.len = function() {
@@ -113,13 +133,13 @@ $.RhythmRing.prototype.initializeRhythm = function(rhythmText) {
   }
 }
 
-$.RhythmRing.prototype.placeCell = function(id, curAngle, visible) {
+$.RhythmRing.prototype.placeCell = function(id, curAngle) {
   var $newCell = $('<div class="cell">');
   $newCell.attr("ord", id);
   $newCell.css('transform',
     'translateX(25px) translateY(25px) rotate(' + curAngle + 'deg)');
-  if (visible) $newCell.css('opacity', 1);
   $newCell.droppable();
+  //$newCell.show("scale",{percent: 100}, 100 );
   if (this.rhythmCells[id]) { $newCell.addClass("onset"); }
   this.$el.append($newCell);
 };
@@ -229,8 +249,8 @@ $.RhythmRing.prototype.prepFirstAndLastCellsForSwap = function () {
   var lastIndex = this.rhythmCells.length - 1;
   this.$el.find(".cell[ord='0']").remove();
   this.$el.find(".cell[ord='" + lastIndex + "']").remove();
-  this.placeCell(0, 359.9 + 45, true);
-  this.placeCell(lastIndex, this.rhythmCellAngles[lastIndex] - 360, true);
+  this.placeCell(0, 359.9 + 45);
+  this.placeCell(lastIndex, this.rhythmCellAngles[lastIndex] - 360);
 };
 
 $.RhythmRing.prototype.refreshHandles = function() {
@@ -242,12 +262,25 @@ $.RhythmRing.prototype.refreshHandles = function() {
     var curPos = [130 + (148 * Math.cos(curAngleInRadians)),
       130 + (148 * Math.sin(curAngleInRadians))];
     this.placeHandle(i, curPos);
+
+    var labelPos = [138 + (175 * Math.cos(curAngleInRadians)),
+      132 + (175 * Math.sin(curAngleInRadians))];
+    this.placeLabel(i, labelPos);
     curAngle += rhythmUnitInDegrees;
   }
   curAngleInRadians = -90 * (Math.PI / 180);
   var curPos = [130 + (148 * Math.cos(curAngleInRadians)),
     130 + (148 * Math.sin(curAngleInRadians))];
 };
+
+$.RhythmRing.prototype.placeLabel = function(id, labelPos) {
+  var $newLabel = $('<div class="cell-label">')
+    .html("" + (id + 1))
+    .css("left", labelPos[0]).css("top", labelPos[1])
+    .attr("ord", id);
+  setTimeout(function() { $newLabel.css('opacity', 1)}, 0);
+  this.$el.append($newLabel);
+}
 
 $.RhythmRing.prototype.placeHandle = function(id, curPos) {
   var $newHandle = $('<div class="cell-handle">')
@@ -264,6 +297,10 @@ $.RhythmRing.prototype.clearHandles = function() {
   this.$el.find('.cell').css('opacity', 1);
   this.$el.find('.cell-handle:not(.ui-draggable-dragging)').remove();
 };
+
+$.RhythmRing.prototype.clearLabels = function() {
+  this.$el.find('.cell-label').css('opacity', 0).addClass("markedForRemoval");
+}
 
 $.RhythmRing.prototype.drawSide = function(curPos, prevPos) {
   this.ctx.beginPath();
@@ -310,6 +347,7 @@ $.RhythmRing.prototype.squeezeCellIntoRing = function(event) {
 $.RhythmRing.prototype.actionAt = function (action, id) {
   var options = this.actionOptions(action);
   this.clearHandles();
+  this.clearLabels();
   options.beforeLoopFn && options.beforeLoopFn(id);
   setTimeout( function() {
     this.loopApplyUpdates(id, options.cellFn, options.intercellFn, 1);
@@ -388,7 +426,7 @@ $.RhythmRing.prototype.insertCellAt = function (intercellId) {
   this.rhythmCells.splice(intercellId + 1, 0, false);
   this.updateLaterIds(intercellId);
   this.placeIntercell(intercellId + 1, this.rhythmIntercellAngles[intercellId]);
-  this.placeCell(intercellId + 1, this.rhythmIntercellAngles[intercellId], true);
+  this.placeCell(intercellId + 1, this.rhythmIntercellAngles[intercellId]);
 };
 
 //same as above "insertCellAt", just missing the last line...
