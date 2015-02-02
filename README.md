@@ -37,7 +37,9 @@ Users can:
 
 Having an account is not necessary to get started with Geometrhythm: the splash page is ready to go with a rhythm to play, and an interactive, animated tool you can use to play around with it. This bit is of paramount importance to have working first.
 
-The good news is that I almost have this done already - been hacking away at it for the last week during breaks, before lectures, and whenever I've finished the evening's work with time to spare. I'll have it up here ASAP. In the meantime, please enjoy what my Asteroids project became: http://rainbowbbles.com.s3-website-us-west-1.amazonaws.com/
+The good news is that I pretty much have this working already - been hacking away at it for the last week during breaks, before lectures, and whenever I've finished the evening's work with time to spare (check it out on Heroku!) This will free up my time to focus on the important Rails/Backbone stuff.
+
+Also, please enjoy what my Asteroids project became: http://rainbowbbles.com.s3-website-us-west-1.amazonaws.com/
 I own the domain rainbowbbles.com but whatever I did to redirect AWS apparently did not work...
 
 [Details][phase-one]
