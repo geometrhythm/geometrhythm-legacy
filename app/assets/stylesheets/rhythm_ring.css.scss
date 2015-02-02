@@ -44,7 +44,7 @@ container {
   opacity: 0.0
 }
 
-.c-draggable {
+.cell-handle {
   width: 30px;
   height: 30px;
   border-radius: 50%;
@@ -68,12 +68,16 @@ container {
   cursor: pointer
 }
 
-.c-draggable:hover {
+.cell-handle:hover {
   cursor: pointer
 }
 
-.onset {
+.onset:not(.grabbed){
   background-color: black;
+}
+
+.cell-handle.grabbed {
+  background-color: teal;
 }
 
 .intercell {
@@ -119,6 +123,11 @@ body {
 }
 
 button {
-  position: absolute;
+  //position: absolute;
   left: 120px;
+}
+
+interface {
+  position: absolute;
+  left: 50px;
 }
