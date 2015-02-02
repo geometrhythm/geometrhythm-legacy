@@ -2,7 +2,6 @@ $.RhythmRing = function (el, ctx) {
   this.$el = $(el);
   this.ctx = $('#polygon-canvas')[0].getContext("2d");
   this.initializeAudio();
-  //this.audio = new $.RhythmRingAudio();
   this.initializeRhythm("x--x--x---x-x---");
   this.initializeEventHandlers();
   this.animating = false;
@@ -35,37 +34,37 @@ $.RhythmRing.prototype.initializeEventHandlers = function() {
   this.$el.on("mousedown", ".cell-handle", this.maybeToggle.bind(this));
   this.$el.on("mousedown", ".intercell", this.handleIntercellClick.bind(this));
   this.$el.on('dropout', '.cell', this.yankCellFromRing.bind(this));
-  this.$el.on('dropover', '.intercell', this.squeezeCellIntoRing.bind(this));
-  this.$el.on('dragstart', '.cell-handle', function(event) {
-    this.$el.find(".cell[ord='" + parseInt($(event.currentTarget).attr("ord")) + "']").css('opacity', 0);
-    $(event.currentTarget).css('opacity', 1);
-  }.bind(this));
-  this.$el.on('dragstop', '.cell-handle', function(event) {
-    if ($(event.currentTarget).hasClass("grabbed") === true) {
-       //$(event.currentTarget).remove();
-       $(event.currentTarget).hide("puff");
-       this.$el.find(".cell").css('box-shadow', '');
-    } else {
-
-    }
-    this.grabbing = false;
-  }.bind(this));
-  this.$el.on('mouseover', '.cell-handle', function(event) {
-    if (!this.grabbing) {
-      this.$el.find(".cell[ord='"
-        + parseInt($(event.currentTarget).attr("ord")) + "']")
-      .css('box-shadow', '0px 0px 5px DodgerBlue');
-    }
-  }.bind(this));
-  this.$el.on('mouseleave', '.cell-handle', function(event) {
-    this.$el.find(".cell[ord='" + parseInt($(event.currentTarget).attr("ord")) + "']").css('box-shadow', '');
-  }.bind(this));
-  this.$el.on('transitionend', '.cell-label', function(event) {
-    if ($(event.currentTarget).hasClass("markedForRemoval")) {
-      $(event.currentTarget).remove();
-    }
-  })
+  this.$el.on('dragstart', '.cell-handle', this.hideCellItself.bind(this));
+  this.$el.on('dragstop', '.cell-handle', this.letGoOfCell.bind(this));
+  this.$el.on('mouseover', '.cell-handle', this.highlightCell.bind(this));
+  this.$el.on('mouseleave', '.cell-handle', this.highlightOffCell.bind(this));
+  this.$el.on('transitionend', '.cell-label', this.maybeRemoveLabel.bind(this));
 };
+
+$.RhythmRing.prototype.maybeRemoveLabel = function(event) {
+  if ($(event.currentTarget).hasClass("markedForRemoval")) {
+    $(event.currentTarget).remove();
+  }
+};
+
+$.RhythmRing.prototype.hideCellItself = function(event) {
+  this.$el.find(".cell[ord='" + parseInt($(event.currentTarget).attr("ord"))
+    + "']").css('opacity', 0);
+  $(event.currentTarget).css('opacity', 1);
+};
+
+$.RhythmRing.prototype.highlightCell = function(event) {
+  if (!this.grabbing) {
+    this.$el.find(".cell[ord='"
+      + parseInt($(event.currentTarget).attr("ord")) + "']")
+    .css('box-shadow', '0px 0px 5px DodgerBlue');
+  }
+};
+
+$.RhythmRing.prototype.highlightOffCell = function(event) {
+  this.$el.find(".cell[ord='" + parseInt($(event.currentTarget).attr("ord"))
+    + "']").css('box-shadow', '');
+}
 
 $.RhythmRing.prototype.changeTempo = function(event) {
   this.tempo = parseInt($(event.currentTarget).val());
@@ -73,6 +72,14 @@ $.RhythmRing.prototype.changeTempo = function(event) {
   clearInterval(this.playingRhythm);
   this.playRhythm();
 }
+
+$.RhythmRing.prototype.letGoOfCell = function(event) {
+  if ($(event.currentTarget).hasClass("grabbed") === true) {
+     $(event.currentTarget).hide("puff");
+     this.$el.find(".cell").css('box-shadow', '');
+  }
+  this.grabbing = false;
+};
 
 $.RhythmRing.prototype.togglePlay = function() {
   if (this.paused) {
@@ -94,7 +101,6 @@ $.RhythmRing.prototype.endAnimation = function() {
 };
 
 $.RhythmRing.prototype.playRhythm = function() {
-  //if (this.paused) return;
   this.playingRhythm = setInterval(function () {
     var fill = this.rhythmCells[this.playPos] ? 'black' : 'white';
     this.$el.find(".cell-handle[ord='" + this.playPos + "']:not('.grabbed')")
@@ -117,7 +123,6 @@ $.RhythmRing.prototype.playRhythm = function() {
         this.curBus = 0;
       }
     }
-    //this.playRhythm();
   }.bind(this), this.pulseDuration);
 }
 
@@ -137,9 +142,8 @@ $.RhythmRing.prototype.placeCell = function(id, curAngle) {
   var $newCell = $('<div class="cell">');
   $newCell.attr("ord", id);
   $newCell.css('transform',
-    'translateX(25px) translateY(25px) rotate(' + curAngle + 'deg)');
+    'translateX(32px) translateY(32px) rotate(' + curAngle + 'deg)');
   $newCell.droppable();
-  //$newCell.show("scale",{percent: 100}, 100 );
   if (this.rhythmCells[id]) { $newCell.addClass("onset"); }
   this.$el.append($newCell);
 };
@@ -147,10 +151,13 @@ $.RhythmRing.prototype.placeCell = function(id, curAngle) {
 $.RhythmRing.prototype.placeIntercell = function(id, curAngle) {
   var $newIntercell = $('<div class="intercell">');
   $newIntercell.attr('ord', id);
-  //$newIntercell.css('opacity', 0);
+  $newIntercell.css('opacity', 0);
   $newIntercell.css('transform',
-    'translateX(32px) translateY(32px) rotate(' + curAngle + 'deg)');
-  $newIntercell.droppable();
+    'translateX(25px) translateY(25px) rotate(' + curAngle + 'deg)');
+  $newIntercell.droppable({ tolerance: "touch",
+    //over: this.squeezeCellIntoRing.bind(this),
+    //out: this.recollapse.bind(this)
+  });
   this.$el.append($newIntercell);
 };
 
@@ -165,11 +172,21 @@ $.RhythmRing.prototype.animatePolygon = function() {
 $.RhythmRing.prototype.refreshPolygon = function() {
   var prevPos = null;
   var firstPos = null;
-  this.ctx.clearRect(0, 0, 600, 600);
+  this.ctx.clearRect(0, 0, 400, 400);
   for (var i = 0; i <= this.rhythmCells.length * 2; i++ ) {
     j = i % this.rhythmCells.length;
     if (i > this.rhythmCells.length && j > firstPos) break;
-    var curPosition = $(".cell[ord='" + j + "']").position();
+    // if (this.squeezing) {
+    //   debugger
+      // var curPosition = $(".cell-handle[ord='" + j + "']").position();
+    // } else {
+      var curPosition = $(".cell[ord='" + j + "']").position();
+    // }
+    if (!curPosition) {
+      //debugger
+      curPosition = $(".cell-handle.grabbed").position();
+      //debugger
+    }
     var curPos = [curPosition.left, curPosition.top];
     if (this.rhythmCells[j]) {
       if (prevPos) this.drawSide(curPos, prevPos);
@@ -209,9 +226,9 @@ $.RhythmRing.prototype.switchCellsAt = function (intercellId) {
   this.switchCellsInArray(intercellId);
   setTimeout( function() {
     this.switchDisplayCells(intercellId);
+    this.animating = true;
+    this.animatePolygon();
   }.bind(this), 0);
-  this.animating = true;
-  this.animatePolygon();
 };
 
 $.RhythmRing.prototype.neighborCellsAreTheSame = function(id) {
@@ -254,23 +271,24 @@ $.RhythmRing.prototype.prepFirstAndLastCellsForSwap = function () {
 };
 
 $.RhythmRing.prototype.refreshHandles = function() {
+  this.clearLabels();
   var curAngle = -90;
   var rhythmUnitInDegrees = 360 / this.rhythmCells.length;
   var prevPos = null;
   for (var i = 0; i < this.rhythmCells.length; i++ ) {
     var curAngleInRadians = curAngle * (Math.PI / 180);
-    var curPos = [130 + (148 * Math.cos(curAngleInRadians)),
-      130 + (148 * Math.sin(curAngleInRadians))];
+    var curPos = [139 + (152 * Math.cos(curAngleInRadians)),
+      139 + (152 * Math.sin(curAngleInRadians))];
     this.placeHandle(i, curPos);
 
-    var labelPos = [138 + (175 * Math.cos(curAngleInRadians)),
-      132 + (175 * Math.sin(curAngleInRadians))];
+    var labelPos = [142 + (175 * Math.cos(curAngleInRadians)),
+      136 + (175 * Math.sin(curAngleInRadians))];
     this.placeLabel(i, labelPos);
     curAngle += rhythmUnitInDegrees;
   }
   curAngleInRadians = -90 * (Math.PI / 180);
-  var curPos = [130 + (148 * Math.cos(curAngleInRadians)),
-    130 + (148 * Math.sin(curAngleInRadians))];
+  var curPos = [139 + (152 * Math.cos(curAngleInRadians)),
+    139 + (152 * Math.sin(curAngleInRadians))];
 };
 
 $.RhythmRing.prototype.placeLabel = function(id, labelPos) {
@@ -286,7 +304,7 @@ $.RhythmRing.prototype.placeHandle = function(id, curPos) {
   var $newHandle = $('<div class="cell-handle">')
     .draggable({revert: true, revertDuration: 100})
     .css("position", "absolute")
-    .css("opacity", 0)
+    .css("opacity", 0) //switch back to zero when repositioned right
     .css("left", curPos[0]).css("top", curPos[1])
     .attr("ord", id);
   if (this.rhythmCells[id] === true ) { $newHandle.addClass("onset"); }
@@ -304,8 +322,8 @@ $.RhythmRing.prototype.clearLabels = function() {
 
 $.RhythmRing.prototype.drawSide = function(curPos, prevPos) {
   this.ctx.beginPath();
-  this.ctx.moveTo(prevPos[0] + 20, prevPos[1] + 20);
-  this.ctx.lineTo(curPos[0] + 20, curPos[1] + 20);
+  this.ctx.moveTo(prevPos[0] + 13, prevPos[1] + 13);
+  this.ctx.lineTo(curPos[0] + 13, curPos[1] + 13);
   this.ctx.lineWidth = 2;
   this.ctx.stroke();
 };
@@ -317,31 +335,6 @@ $.RhythmRing.prototype.handleIntercellClick = function(event) {
   } else if (event.which === 3) {
     this.switchCellsAt(clickedIntercellId);
   }
-};
-
-$.RhythmRing.prototype.yankCellFromRing = function(event) {
-  if (!this.grabbing) {
-    this.grabbing = true;
-    setTimeout(function() {
-      var id = parseInt($(event.currentTarget).attr("ord"));
-      console.log("tried to yank from " + id);
-      this.actionAt("delete", id);
-      this.$el.find(".cell-handle").draggable("option", "disabled", true);
-      this.$el.find(".cell-handle[ord='" + id + "']").addClass("grabbed")
-        .css("opacity", 1)
-        .css("background-color", "DodgerBlue")
-        .draggable("option", "enabled", true)
-        .draggable("option", "revert", false);
-    }.bind(this), 0)
-  }
-};
-
-$.RhythmRing.prototype.squeezeCellIntoRing = function(event) {
-  setTimeout( function() {
-    var id = parseInt($(event.currentTarget).attr("ord"));
-    console.log("tried to squeeze at " + id);
-    this.actionAt("expand", id)
-  }.bind(this), 0);
 };
 
 $.RhythmRing.prototype.actionAt = function (action, id) {
@@ -397,14 +390,14 @@ $.RhythmRing.prototype.loopApplyUpdates =
 
 $.RhythmRing.prototype.updateCellAngle = function(id, curAngle) {
   this.$el.find(".cell[ord='" + id + "']").css('transform',
-    'translateX(25px) translateY(25px) rotate(' + curAngle + 'deg)');
-};
-//THESE TWO COULD BE DRIED OUT ONCE I'VE SETTLED ON HOW TO RENDER THEM HOPEFULLY CENTERED
-$.RhythmRing.prototype.updateIntercellAngle = function(id, curAngle) {
-  this.$el.find(".intercell[ord='" + id + "']").css('transform',
     'translateX(32px) translateY(32px) rotate(' + curAngle + 'deg)');
 };
-//I COULD MERGE THESE TWO BY HAVING IT DETECT IF IT'S A DELETION
+
+$.RhythmRing.prototype.updateIntercellAngle = function(id, curAngle) {
+  this.$el.find(".intercell[ord='" + id + "']").css('transform',
+    'translateX(25px) translateY(25px) rotate(' + curAngle + 'deg)');
+};
+
 $.RhythmRing.prototype.updateIntercellAngleOnDeletion =
   function(id, curAngle, pivotId, rhythmUnitInDegrees) {
   if (id >= pivotId) {
@@ -412,29 +405,6 @@ $.RhythmRing.prototype.updateIntercellAngleOnDeletion =
   } else {
     this.updateIntercellAngle(id, curAngle);
   }
-};
-
-$.RhythmRing.prototype.deleteCellAt = function(cellId) {
-  this.rhythmCells.splice(cellId, 1);
-  this.$el.find(".cell[ord='" + cellId + "']").remove();
-  this.$el.find(".intercell[ord='" + cellId + "']").addClass("markedForRemoval");
-  this.updateLaterIdsOfType(".cell", cellId);
-};
-
-$.RhythmRing.prototype.insertCellAt = function (intercellId) {
-  console.log("inserting at " + intercellId);
-  this.rhythmCells.splice(intercellId + 1, 0, false);
-  this.updateLaterIds(intercellId);
-  this.placeIntercell(intercellId + 1, this.rhythmIntercellAngles[intercellId]);
-  this.placeCell(intercellId + 1, this.rhythmIntercellAngles[intercellId]);
-};
-
-//same as above "insertCellAt", just missing the last line...
-$.RhythmRing.prototype.expandForCellAt = function (intercellId) {
-  console.log("expanding at " + intercellId);
-  this.rhythmCells.splice(intercellId + 1, 0, false);
-  this.updateLaterIds(intercellId);
-  this.placeIntercell(intercellId + 1, this.rhythmIntercellAngles[intercellId]);
 };
 
 $.RhythmRing.prototype.updateLaterIdsOfType = function(el, pivotId) {
@@ -455,6 +425,63 @@ $.RhythmRing.prototype.cleanupMergedIntercell = function(event) {
     $(event.currentTarget).remove();
   }
 }
+
+$.RhythmRing.prototype.deleteCellAt = function(cellId) {
+  this.rhythmCells.splice(cellId, 1);
+  this.$el.find(".cell[ord='" + cellId + "']").remove();
+  this.$el.find(".intercell[ord='" + cellId + "']").addClass("markedForRemoval");
+  this.updateLaterIdsOfType(".cell", cellId);
+};
+
+$.RhythmRing.prototype.insertCellAt = function (intercellId) {
+  console.log("inserting at " + intercellId);
+  this.rhythmCells.splice(intercellId + 1, 0, false);
+  this.updateLaterIds(intercellId);
+  this.placeIntercell(intercellId + 1, this.rhythmIntercellAngles[intercellId]);
+  this.placeCell(intercellId + 1, this.rhythmIntercellAngles[intercellId]);
+};
+
+// //same as above "insertCellAt", just missing the last line...
+// $.RhythmRing.prototype.expandForCellAt = function (intercellId) {
+//   console.log("expanding at " + intercellId);
+//   this.rhythmCells.splice(intercellId + 1, 0, false);
+//   this.updateLaterIds(intercellId);
+//   this.placeIntercell(intercellId + 1, this.rhythmIntercellAngles[intercellId]);
+// };
+
+// $.RhythmRing.prototype.recollapse = function (event) {
+//   var id = parseInt($(event.target).attr("ord"));
+//   this.rhythmCells.splice(id, 1);
+// };
+
+$.RhythmRing.prototype.yankCellFromRing = function(event) {
+  if (!this.grabbing) {
+    this.grabbing = true;
+    setTimeout(function() {
+      var id = parseInt($(event.currentTarget).attr("ord"));
+      console.log("tried to yank from " + id);
+      this.actionAt("delete", id);
+      //this.$el.find(".intercell").droppable();
+      this.$el.find(".cell-handle").draggable("option", "disabled", true);
+      this.$el.find(".cell-handle[ord='" + id + "']").addClass("grabbed")
+        .css("opacity", 1)
+        .css("background-color", "DodgerBlue")
+        .draggable("option", "enabled", true)
+        .draggable("option", "revert", false);
+    }.bind(this), 0)
+  }
+};
+
+// $.RhythmRing.prototype.squeezeCellIntoRing = function(event) {
+//   if (!this.squeezing && this.grabbing) {
+//     this.squeezing = true;
+//     setTimeout( function() {
+//       var id = parseInt($(event.target).attr("ord"));
+//       console.log("tried to squeeze at " + id);
+//       this.actionAt("expand", id)
+//     }.bind(this), 0);
+//   }
+// };
 
 $.fn.rhythmRing = function () {
   return this.each(function () {
