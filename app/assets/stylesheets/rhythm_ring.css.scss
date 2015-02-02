@@ -41,7 +41,7 @@ container {
   position: absolute;
   transform-origin: 120px 120px;
   transition: transform 0.5s;
-  opacity: 0.0
+  opacity: 1.0
 }
 
 .cell-handle {
@@ -73,6 +73,10 @@ container {
 }
 
 .onset:not(.grabbed){
+  background-color: black;
+}
+
+.onset {
   background-color: black;
 }
 
@@ -130,4 +134,8 @@ button {
 interface {
   position: absolute;
   left: 50px;
+}
+
+.cell-handle.ui-draggable-dragging {
+  opacity: 1;
 }

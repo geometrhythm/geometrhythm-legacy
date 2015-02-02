@@ -30,13 +30,8 @@ $.RhythmRing.prototype.pulseDuration = function() {
 };
 
 $.RhythmRing.prototype.initializeEventHandlers = function() {
-  $('body').on('click', 'button', function() {
-    this.paused = this.paused ? false : true;
-    if (!this.paused) this.playRhythm();
-  }.bind(this));
-  $('body').on('change', 'input', function(event) {
-    this.tempo = parseInt($(event.currentTarget).val());
-  }.bind(this));
+  $('body').on('click', 'button', this.togglePlay.bind(this));
+  $('body').on('change', 'input', this.changeTempo.bind(this));
   this.$el.on('transitionend', '.intercell',
     this.cleanupMergedIntercell.bind(this));
   this.$el.on('transitionend', '.cell', this.endAnimation.bind(this));
@@ -44,6 +39,10 @@ $.RhythmRing.prototype.initializeEventHandlers = function() {
   this.$el.on("mousedown", ".intercell", this.handleIntercellClick.bind(this));
   this.$el.on('dropout', '.cell', this.yankCellFromRing.bind(this));
   this.$el.on('dropover', '.intercell', this.squeezeCellIntoRing.bind(this));
+  this.$el.on('dragstart', '.cell-handle', function(event) {
+    $(event.currentTarget).css('opacity', 1);
+    this.$el.find(".cell[ord='" + parseInt($(event.currentTarget).attr("ord")) + "']").css('opacity', 0);
+  }.bind(this));
   this.$el.on('dragstop', '.cell-handle', function(event) {
     if ($(event.currentTarget).hasClass("grabbed") === true) {
        $(event.currentTarget).remove();
@@ -54,8 +53,22 @@ $.RhythmRing.prototype.initializeEventHandlers = function() {
   }.bind(this));
 };
 
+$.RhythmRing.prototype.changeTempo = function(event) {
+  this.tempo = parseInt($(event.currentTarget).val());
+}
+
+$.RhythmRing.prototype.togglePlay = function() {
+  if (this.paused) {
+    this.paused = false;
+    this.playRhythm();
+    $('button').addClass("active").html('Pause');
+  } else {
+    this.paused = true;
+    $('button').removeClass("active").html('Play');
+  }
+}
+
 $.RhythmRing.prototype.endAnimation = function() {
-  this.$el.find('.cell').css('opacity', 0)
   this.animating = false;
   this.refreshHandles();
 };
@@ -67,7 +80,7 @@ $.RhythmRing.prototype.playRhythm = function() {
     this.$el.find(".cell-handle[ord='" + this.playPos + "']:not('.grabbed')")
       .css('background-color', fill);
     this.$el.find(".cell[ord='" + this.playPos + "']")
-        .css('background-color', fill);
+      .css('background-color', fill);
 
     this.playPos += this.playPos >= this.len() - 1 ? -(this.len() - 1) : 1
 
@@ -75,7 +88,7 @@ $.RhythmRing.prototype.playRhythm = function() {
     this.$el.find(".cell-handle[ord='" + this.playPos + "']:not('.grabbed')")
       .css('background-color', fill);
     this.$el.find(".cell[ord='" + this.playPos + "']")
-          .css('background-color', fill);
+      .css('background-color', fill);
 
     if (this.rhythmCells[this.playPos]) {
       this.busses[this.curBus].play();
@@ -154,11 +167,13 @@ $.RhythmRing.prototype.maybeToggle = function(event) {
 $.RhythmRing.prototype.toggleCell = function(cellId) {
   if (this.rhythmCells[cellId]) {
     this.rhythmCells[cellId] = false;
-    this.$el.find(".cell[ord='" + cellId + "']").removeClass("onset");
+    this.$el.find(".cell[ord='" + cellId + "']").removeClass("onset")
+      .css('background-color', "white");
     this.$el.find(".cell-handle[ord='" + cellId + "']").removeClass("onset");
   } else {
     this.rhythmCells[cellId] = true;
-    this.$el.find(".cell[ord='" + cellId + "']").addClass("onset");
+    this.$el.find(".cell[ord='" + cellId + "']").addClass("onset")
+      .css('background-color', "black");
     this.$el.find(".cell-handle[ord='" + cellId + "']").addClass("onset");
   }
   this.refreshPolygon();
@@ -177,7 +192,6 @@ $.RhythmRing.prototype.switchCellsAt = function (intercellId) {
   }.bind(this), 0);
   this.animating = true;
   this.animatePolygon();
-  //setTimeout(this.refreshHandles.bind(this), 490);
 };
 
 $.RhythmRing.prototype.neighborCellsAreTheSame = function(id) {
@@ -239,6 +253,7 @@ $.RhythmRing.prototype.placeHandle = function(id, curPos) {
   var $newHandle = $('<div class="cell-handle">')
     .draggable({revert: true, revertDuration: 100})
     .css("position", "absolute")
+    .css("opacity", 0)
     .css("left", curPos[0]).css("top", curPos[1])
     .attr("ord", id);
   if (this.rhythmCells[id] === true ) { $newHandle.addClass("onset"); }
@@ -276,6 +291,7 @@ $.RhythmRing.prototype.yankCellFromRing = function(event) {
       this.actionAt("delete", id);
       this.$el.find(".cell-handle").draggable("option", "disabled", true);
       this.$el.find(".cell-handle[ord='" + id + "']").addClass("grabbed")
+        .css("opacity", 1)
         .css("background-color", "DodgerBlue")
         .draggable("option", "enabled", true)
         .draggable("option", "revert", false);
@@ -300,7 +316,6 @@ $.RhythmRing.prototype.actionAt = function (action, id) {
     options.afterLoopFn && options.afterLoopFn(id);
     this.animating = true;
     this.animatePolygon();
-    //setTimeout(this.refreshHandles.bind(this), 490);
   }.bind(this), 0);
 };
 
@@ -373,7 +388,7 @@ $.RhythmRing.prototype.insertCellAt = function (intercellId) {
   this.rhythmCells.splice(intercellId + 1, 0, false);
   this.updateLaterIds(intercellId);
   this.placeIntercell(intercellId + 1, this.rhythmIntercellAngles[intercellId]);
-  this.placeCell(intercellId + 1, this.rhythmIntercellAngles[intercellId]);
+  this.placeCell(intercellId + 1, this.rhythmIntercellAngles[intercellId], true);
 };
 
 //same as above "insertCellAt", just missing the last line...
