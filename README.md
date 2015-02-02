@@ -39,6 +39,12 @@ Having an account is not necessary to get started with Geometrhythm: the splash 
 
 The good news is that I pretty much have this working already - been hacking away at it for the last week during breaks, before lectures, and whenever I've finished the evening's work with time to spare. This will free up my time to focus on the important Rails/Backbone stuff.
 
+Right... no tool tips up yet:
+* Drag cells out of the circle to discard
+* Click between cells to insert a new one
+* Right-click on a cell to toggle whether it's on or now
+* Right-click between cells to switch them
+
 Also, please enjoy what my Asteroids project became: http://rainbowbbles.com.s3-website-us-west-1.amazonaws.com/
 I own the domain rainbowbbles.com but whatever I did to redirect AWS apparently did not work...
 
