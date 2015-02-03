@@ -71,7 +71,7 @@ container {
 
 .cell:hover {
   cursor: pointer;
-  box-shadow: 0px 0px 5px DodgerBlue;
+  box-shadow: 0px 0px 5px #3e4b60;
 }
 
 .intercell:hover {
@@ -90,9 +90,9 @@ container {
   background-color: black;
 }
 
-.cell-handle.grabbed {
-  background-color: teal;
-}
+// .cell-handle.grabbed {
+//   background-color: teal;
+// }
 
 .intercell {
   width: 40px;

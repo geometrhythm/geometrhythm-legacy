@@ -5,6 +5,7 @@ column name | data type | details
 ------------|-----------|-----------------------
 id          | integer   | not null, primary key
 creator_id  | integer   | not null, foreign key (references users)
+rhythm_str  | string    | not null
 play_count  | integer   | not null
 
 ## like
