@@ -38,7 +38,7 @@ $.RhythmRing.prototype.placeLabel = function(id, labelPos) {
 
 $.RhythmRing.prototype.placeHandle = function(id, curPos) {
   var $newHandle = $('<div class="cell-handle">')
-    .draggable({revert: true, revertDuration: 100})
+    .draggable({revert: true, revertDuration: 100, refreshPositions: true})
     .css("position", "absolute")
     .css("opacity", 0) //switch back to zero when repositioned right
     .css("left", curPos[0]).css("top", curPos[1])

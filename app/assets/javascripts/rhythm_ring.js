@@ -48,7 +48,9 @@ $.RhythmRing.prototype.initializeRhythm = function(rhythmText) {
 }
 
 $.RhythmRing.prototype.highlightCell = function(event) {
-  if (!this.grabbing) {
+  if (this.grabbing) {
+    this.$el.find(".grabbed").css('box-shadow', '0px 0px 5px DodgerBlue');
+  } else {
     this.$el.find(".cell[ord='"
       + parseInt($(event.currentTarget).attr("ord")) + "']")
     .css('box-shadow', '0px 0px 5px DodgerBlue');

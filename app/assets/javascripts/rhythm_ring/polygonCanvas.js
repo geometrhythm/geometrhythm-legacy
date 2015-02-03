@@ -6,6 +6,10 @@ $.RhythmRing.prototype.endAnimation = function() {
   if (this.animating) {
     this.refreshHandlesAndLabels();
     this.animating = false;
+    if (this.markedForCollapseAt) {
+      this.actionAt("delete", this.yankedId);
+      this.markedForCollapseAt = null;
+    }
   }
 };
 
