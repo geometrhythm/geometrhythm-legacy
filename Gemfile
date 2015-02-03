@@ -38,6 +38,13 @@ gem 'bootstrap-sass', '~> 3.2.0'
 gem 'autoprefixer-rails'
 gem 'bootswatch-rails'
 
+gem 'newrelic_rpm'
+
+gem 'friendly_id'
+gem 'kaminari'
+gem 'draper'
+gem 'bcrypt'
+
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug'
@@ -51,14 +58,13 @@ group :development, :test do
   gem 'pry-rails'
   gem 'quiet_assets'
   gem 'letter_opener'
-  gem 'bcrypt'
+
   gem 'rest-client'
-  gem 'draper'
   gem 'rspec-rails'
   gem 'factory_girl_rails'
   gem 'faker'
-  gem 'friendly_id'
-  gem 'kaminari'
+
+
 
 
 end

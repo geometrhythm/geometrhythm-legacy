@@ -1,4 +1,8 @@
 Rails.application.configure do
+
+  # config/environments/production.rb
+  config.serve_static_assets = true
+
   # Settings specified here will take precedence over those in config/application.rb.
 
   # Code is not reloaded between requests.

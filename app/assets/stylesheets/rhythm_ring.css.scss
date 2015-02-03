@@ -12,7 +12,9 @@ container {
 
 .wrapper {
   position: relative;
-  left: 30%;
+  display: block;
+  left: 50%;
+  transform: translateX(-50%);
   top: 80px;
   width: 300px;
   height: 300px;
@@ -164,4 +166,8 @@ interface {
 .cell-label {
   opacity: 0;
   transition: opacity 0.2s;
+}
+
+.well {
+  display: block;
 }

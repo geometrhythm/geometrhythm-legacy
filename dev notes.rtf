@@ -376,6 +376,16 @@
 \f0 	}when inserting a cell, a tiny animation to have it grow out of nothingnessly small\
 \pard\tx940\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\li1440\fi-1440\pardirnatural
 \ls5\ilvl1\cf0 {\listtext	\uc0\u8259 	}oy, this will require scaling in the handle then making it opaque once the animation is over, since the cell itself can\'92t scale in because its transform origin is in the middle!\
+\pard\tx220\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\li720\fi-720\pardirnatural
+\ls5\ilvl0\cf0 {\listtext	
+\f1 \uc0\u9642 
+\f0 	}\strike \strikec0 prevent dragging out all the cells\strike0\striked0 \
+\pard\tx940\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\li1440\fi-1440\pardirnatural
+\ls5\ilvl1\cf0 {\listtext	\uc0\u8259 	}already does it, though it can be impossible to play while there\'92s only one cell\'85 no big deal\
+\pard\tx220\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\li720\fi-720\pardirnatural
+\ls5\ilvl0\cf0 \strike \strikec0 {\listtext	
+\f1 \uc0\u9642 
+\f0 	}bug: too many numbers on refresh\strike0\striked0 \
 \pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural
 \cf0 \
 \pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural
@@ -383,21 +393,21 @@
 \b \cf0 \strike \strikec0 INSERT FROM DRAG
 \b0 \
 \pard\tx220\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\li720\fi-720\pardirnatural
-\ls6\ilvl0\cf0 \strikec0 {\listtext	
+\ls6\ilvl0\cf0 {\listtext	
 \f1 \uc0\u9642 
 \f0 	}"touch" as the droppable param for the intercells is too sensitive,\
 \pard\tx940\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\li1440\fi-1440\pardirnatural
-\ls6\ilvl1\cf0 \strikec0 {\listtext	\uc0\u8259 	}can't drag out the guy without triggering it when the rhythm is dense\
+\ls6\ilvl1\cf0 {\listtext	\uc0\u8259 	}can't drag out the guy without triggering it when the rhythm is dense\
 {\listtext	\uc0\u8259 	}might be solved by implementing the proportional size of cells\
 {\listtext	\uc0\u8259 	}or be solved by making draggables have a delay when you start...\
 {\listtext	\uc0\u8259 	}or by just decreasing the sensitivity of the intercells droppable to ...\
 {\listtext	\uc0\u8259 	}well you can't change the % of intersect from 50 as far as i can see...\
-{\listtext	\uc0\u8259 	}\strikec0 maybe "fit" would work? \
+{\listtext	\uc0\u8259 	}maybe "fit" would work? \
 \pard\tx1660\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\li2160\fi-2160\pardirnatural
 \ls6\ilvl2\cf0 {\listtext	\uc0\u8259 	}i expect more people are dealing with droppablesthat are larger than their draggables... \
-{\listtext	\uc0\u8259 	}nope that doesn't work\strikec0 \
+{\listtext	\uc0\u8259 	}nope that doesn't work\
 \pard\tx220\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\li720\fi-720\pardirnatural
-\ls6\ilvl0\cf0 \strikec0 {\listtext	
+\ls6\ilvl0\cf0 {\listtext	
 \f1 \uc0\u9642 
 \f0 	}but yeah if you finish the part where they take up ALL the room between cells, that would work...\
 {\listtext	
@@ -415,7 +425,7 @@
 \f1 \uc0\u9642 
 \f0 	}order of operations:\
 \pard\tx940\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\li1440\fi-1440\pardirnatural
-\ls6\ilvl1\cf0 \strikec0 {\listtext	\uc0\u8259 	}drag over, expands,\
+\ls6\ilvl1\cf0 {\listtext	\uc0\u8259 	}drag over, expands,\
 {\listtext	\uc0\u8259 	}drag out from there, contracts again\
 {\listtext	\uc0\u8259 	}drag back in, expands again\
 {\listtext	\uc0\u8259 	}drag back in elsewhere, expands there\
@@ -427,20 +437,19 @@
 \f1 \uc0\u9642 
 \f0 	}It\'92s still a little janky, but it will have to do\'85\strike \strikec0 \
 \pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural
-\cf0 \strikec0 \
-\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural
+\cf0 \
 
-\b \cf0 \strikec0 REFACTOR CODE:
+\b REFACTOR CODE:
 \b0 \
 \pard\tx220\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\li720\fi-720\pardirnatural
-\ls7\ilvl0\cf0 \strikec0 {\listtext	
+\ls7\ilvl0\cf0 {\listtext	
 \f1 \uc0\u9642 
 \f0 	}Hey, this is nice, my three visual elements each use a different library\
 {\listtext	
 \f1 \uc0\u9642 
 \f0 	}I wonder if their total lines of code break up evenly-ish?\
 \pard\tx940\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\li1440\fi-1440\pardirnatural
-\ls7\ilvl1\cf0 \strikec0 {\listtext	\uc0\u8259 	}Cells/CSS\
+\ls7\ilvl1\cf0 {\listtext	\uc0\u8259 	}Cells/CSS\
 {\listtext	\uc0\u8259 	}Polygon/Canvas\
 {\listtext	\uc0\u8259 	}Handles/jQuery UI\
 {\listtext	\uc0\u8259 	}(along with Audio / interface being a fourth piece)\strike0\striked0 \
@@ -711,11 +720,11 @@
 \f1 \uc0\u9642 
 \f0 	}splash page is key\
 \pard\tx940\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\li1440\fi-1440\pardirnatural
-\ls11\ilvl1\cf0 \strikec0 {\listtext	\uc0\u8259 	}big flashy image,\
+\ls11\ilvl1\cf0 {\listtext	\uc0\u8259 	}big flashy image,\
 {\listtext	\uc0\u8259 	} or interact right away\
 {\listtext	\uc0\u8259 	}they\'92ll only look at your code if they like what they see\
 \pard\tx1660\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\li2160\fi-2160\pardirnatural
-\ls11\ilvl2\cf0 \strikec0 {\listtext	\uc0\u8259 	}bouncy spinny shit\
+\ls11\ilvl2\cf0 {\listtext	\uc0\u8259 	}bouncy spinny shit\
 {\listtext	\uc0\u8259 	}tacky is okay\
 {\listtext	\uc0\u8259 	}seed data critical\
 {\listtext	\uc0\u8259 	}demo login\
@@ -727,25 +736,25 @@
 \f1 \uc0\u9642 
 \f0 	}show that you CARE,\
 \pard\tx940\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\li1440\fi-1440\pardirnatural
-\ls11\ilvl1\cf0 \strikec0 {\listtext	\uc0\u8259 	} that you\'92re dedicated and will work hard to make something great\
+\ls11\ilvl1\cf0 {\listtext	\uc0\u8259 	} that you\'92re dedicated and will work hard to make something great\
 {\listtext	\uc0\u8259 	}remember that we don\'92t have CS degrees or experience, \
 \pard\tx1660\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\li2160\fi-2160\pardirnatural
-\ls11\ilvl2\cf0 \strikec0 {\listtext	\uc0\u8259 	}they are going to pay us money believing we\'92ll improve their code based not on that\
+\ls11\ilvl2\cf0 {\listtext	\uc0\u8259 	}they are going to pay us money believing we\'92ll improve their code based not on that\
 \pard\tx2380\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\li2880\fi-2880\pardirnatural
-\ls11\ilvl3\cf0 \strikec0 {\listtext	\uc0\u8259 	}more on the demonstration of the seriousness of our committal to quality\
+\ls11\ilvl3\cf0 {\listtext	\uc0\u8259 	}more on the demonstration of the seriousness of our committal to quality\
 \pard\tx3100\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\li3600\fi-3600\pardirnatural
-\ls11\ilvl4\cf0 \strikec0 {\listtext	\uc0\u8259 	}that we\'92ll probably eat up their code base and start cleaning house\
+\ls11\ilvl4\cf0 {\listtext	\uc0\u8259 	}that we\'92ll probably eat up their code base and start cleaning house\
 \pard\tx220\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\li720\fi-720\pardirnatural
-\ls11\ilvl0\cf0 \strikec0 {\listtext	
+\ls11\ilvl0\cf0 {\listtext	
 \f1 \uc0\u9642 
 \f0 	}don\'92t copy and paste CSS, plagiarism can be detected\strike0\striked0 \
 \ls11\ilvl0\strike \strikec0 {\listtext	
 \f1 \uc0\u9642 
 \f0 	}\'93agile development\'94 is such a hot term right now that if we don\'92t know something about it we can seem like outsiders\
 \pard\tx940\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\li1440\fi-1440\pardirnatural
-\ls11\ilvl1\cf0 \strikec0 {\listtext	\uc0\u8259 	}related to testing\
+\ls11\ilvl1\cf0 {\listtext	\uc0\u8259 	}related to testing\
 \pard\tx1660\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\li2160\fi-2160\pardirnatural
-\ls11\ilvl2\cf0 \strikec0 {\listtext	\uc0\u8259 	}because things are built horiztonally, not founded on big decisions\
+\ls11\ilvl2\cf0 {\listtext	\uc0\u8259 	}because things are built horiztonally, not founded on big decisions\
 {\listtext	\uc0\u8259 	}this is a good strategy for final project too\strike0\striked0 \
 \pard\tx220\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\li720\fi-720\pardirnatural
 \ls11\ilvl0\cf0 {\listtext	

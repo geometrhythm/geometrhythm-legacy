@@ -69,7 +69,7 @@ $.RhythmRing.prototype.maybeToggle = function(event) {
   }
 };
 
-$.RhythmRing.prototype.toggleCell = function(cellId) {
+$.RhythmRing.prototype.toggleCell = function(cellId, dontRefresh) {
   if (this.rhythmCells[cellId]) {
     this.rhythmCells[cellId] = false;
     this.$el.find(".cell[ord='" + cellId + "']").removeClass("onset")
@@ -82,12 +82,14 @@ $.RhythmRing.prototype.toggleCell = function(cellId) {
     this.$el.find(".cell-handle[ord='" + cellId + "']").addClass("onset");
   }
   this.refreshPolygon();
-  setTimeout(this.refreshHandlesAndLabels.bind(this), 0);
+  if (!dontRefresh) {
+    setTimeout(this.refreshHandlesAndLabels.bind(this), 0);
+  }
 }
 
 $.RhythmRing.prototype.invertRhythm = function() {
   for (var i = 0; i < this.rhythmCells.length; i++) {
-    this.toggleCell(i);
+    this.toggleCell(i, true);
   }
 }
 
