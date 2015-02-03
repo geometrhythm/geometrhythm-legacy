@@ -11,24 +11,28 @@
   <!-- yesss! -->
   <!--<%#= stylesheet_link_tag "application" %>-->
 </head>
-</head>
 <body>
 
 <nav class="navbar navbar-default">
   <div class="container-fluid">
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <a class="navbar-brand" href="#">
-        <img alt="Brand" src="../assets/images/header_logo.png">
+        <%= image_tag "header_logo_dark.png", size: "292x45"%>
       </a>
       <!--<i class="glyphicon glyphicon-log-in"></i>-->
       <ul class="nav navbar-nav navbar-right">
         <button class="btn btn-primary btn-sm js-modal-open" id="sign-in-up">
-          Sign In/Up
+          <% if logged_in? %>
+            <%= "Sign Out" %>
+          <% else %>
+            <%= "Sign In" %>
+          <% end %>
         </button>
       <ul>
     </div>
   </div>
 </nav>
+
 <%= yield %>
 
 </body>

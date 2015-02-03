@@ -4,7 +4,11 @@ window.Geometrhythm = {
   Views: {},
   Routers: {},
   initialize: function() {
-    //alert('Hello from Backbone!');
+    var $rootEl = $('#bb-test')
+    new Geometrhythm.Routers.App({
+      $rootEl: $rootEl
+    });
+    Backbone.history.start();
   }
 };
 

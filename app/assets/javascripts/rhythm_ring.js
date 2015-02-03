@@ -20,6 +20,18 @@ $.RhythmRing.prototype.len = function() {
   return this.rhythmCells.length;
 };
 
+$.RhythmRing.prototype.rhythmAsStr = function() {
+  var str = "";
+  for ( var i = 0; i < this.rhythmCells.length; i++ ) {
+    if (this.rhythmCells[i]) {
+      str += "x";
+    } else {
+      str += "-";
+    }
+  };
+  return str;
+}
+
 $.RhythmRing.prototype.initializeEventHandlers = function() {
   $('body').on('click', '#play-pause', this.togglePlay.bind(this));
   $('body').on('click', '#invert', this.invertRhythm.bind(this));
@@ -39,11 +51,11 @@ $.RhythmRing.prototype.initializeEventHandlers = function() {
   this.$el.on('transitionend', '.cell-label', this.maybeRemoveLabel.bind(this));
 };
 
-$.RhythmRing.prototype.initializeRhythm = function(rhythmText) {
+$.RhythmRing.prototype.initializeRhythm = function(rhythmStr) {
   this.$el.find(':not(.polygon-canvas)').empty();
   this.rhythmCells = [];
-  for (var i = 0; i < rhythmText.length; i++) {
-    this.rhythmCells.push( rhythmText[i] === "x" ? true : false);
+  for (var i = 0; i < rhythmStr.length; i++) {
+    this.rhythmCells.push( rhythmStr[i] === "x" ? true : false);
   }
 }
 
@@ -90,6 +102,20 @@ $.RhythmRing.prototype.toggleCell = function(cellId, dontRefresh) {
 
 $.RhythmRing.prototype.refreshWell = function() {
   $('.well').html(Math.random());
+  // $('#cur-rhythm').attr('value', this.rhythmAsStr());
+  var that = this;
+  var maybeMatchingRhythm = Geometrhythm.Collections.rhythms
+    .find( function(rhythm){
+      // debugger
+      return rhythm.get("rhythm_str") === that.rhythmAsStr();
+    }
+  );
+  // debugger
+  if (maybeMatchingRhythm) {
+    var id = maybeMatchingRhythm.id;
+    //Backbone.history.navigate("/api/rhythms/" + id, { trigger: true });
+    //JUST REFRESH THE SUBVIEW :)
+  }
 }
 
 $.RhythmRing.prototype.invertRhythm = function() {
