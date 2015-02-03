@@ -6,6 +6,10 @@
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
+u1 = User.create(email: 'douglas.blumeyer@gmail.com', password: 'password')
+
+r1 = u1.rhythms.create(rhythm_str: "xx-x--x-x--x-")
+
 
 # u1 = User.create(email: 'ripe@gmail.com', password: 'password')
 # u2 = User.create(email: 'thejamaicandave@gmail.com', password: 'password')
@@ -13,7 +17,7 @@
 # b1 = u1.boards.create(title: 'Workout')
 # b2 = u1.boards.create(title: 'Jamaica')
 # b3 = u2.boards.create(title: 'Bouncy')
-# 
+#
 # l1 = b1.lists.create(title: 'todo')
 # l2 = b1.lists.create(title: 'doing')
 # l3 = b1.lists.create(title: 'done')
