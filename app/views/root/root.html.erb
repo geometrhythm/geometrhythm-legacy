@@ -13,6 +13,48 @@
   <%#= image_tag "Free-High-Detail-Brown-Paper-Texture.jpg" %>
 </div>
 
+
+<div class="modal">
+  <form class="modal-form">
+
+    <span class="modal-close js-modal-close">&times;</span>
+
+    <h1>Welcome</h1>
+
+    <p>Please sign in to continue.</p>
+
+    <div class="input">
+      <label for="form-email">Email</label>
+      <input type="text" id="form-email">
+    </div>
+
+    <div class="input">
+      <label for="form-password">Password</label>
+      <input type="password" id="form-password">
+    </div>
+
+    <div class="submit">
+      <button class="btn btn-primary btn-lg">Sign In</button>
+      <span class="button-alternative">or <strong class="js-modal-close">Cancel</strong></span>
+    </div>
+
+  </form>
+  <div class="modal-screen js-modal-close"></div>
+</div>
+
+<script>
+  $(function(){
+    $("body").on("click", ".js-modal-open", function(event){
+      event.preventDefault();
+      $(".modal").addClass("is-open");
+    });
+    $("body").on("click", ".js-modal-close", function(event){
+      event.preventDefault();
+      $(".modal").removeClass("is-open");
+    });
+  });
+</script>
+
 <container>
 <div class='col-md-2'>
 <interface>
@@ -21,7 +63,7 @@
   <button class="btn btn-warning" id="play-pause">Play</button><br><br>
   <!--manual input<br>
     <input type="text" id="input-rhythm" value="x--x--x---x-x---"><br>-->
-  <button class="btn btn-warning" id="invert">Invert</button>
+  <button class="btn btn-default btn-sm" id="invert">Invert</button>
 </interface>
 </div>
 
@@ -43,7 +85,7 @@
 <div class='col-md-4'>
   <div class='well'>
     Here's where I'll talk all about what geometrhythm is and what it can do!
-    <br><button class="btn btn-warning" id="save-rhythm">Save Rhythm</button>
+    <br><button class="btn btn-success btn-lrg" id="save-rhythm">Save Rhythm</button>
   </div>
 </div>
 </container>

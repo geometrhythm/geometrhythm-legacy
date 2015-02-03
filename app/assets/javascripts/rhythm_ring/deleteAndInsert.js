@@ -43,6 +43,7 @@ $.RhythmRing.prototype.actionAt = function (action, id) {
     options.afterLoopFn && options.afterLoopFn(id);
     this.animating = true;
     this.animatePolygon();
+    this.refreshWell();
   }.bind(this), 0);
 };
 
@@ -131,7 +132,6 @@ $.RhythmRing.prototype.deleteCellAt = function(cellId) {
 };
 
 $.RhythmRing.prototype.insertCellAt = function (intercellId) {
-  console.log("inserting at " + intercellId);
   this.rhythmCells.splice(intercellId + 1, 0, false);
   this.updateLaterIds(intercellId);
   this.placeIntercell(intercellId + 1, this.rhythmIntercellAngles[intercellId]);

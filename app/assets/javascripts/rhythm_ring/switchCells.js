@@ -9,6 +9,7 @@ $.RhythmRing.prototype.switchCellsAt = function (intercellId) {
     this.switchDisplayCells(intercellId);
     this.animating = true;
     this.animatePolygon();
+    this.refreshWell();
   }.bind(this), 0);
 };
 

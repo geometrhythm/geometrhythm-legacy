@@ -83,14 +83,20 @@ $.RhythmRing.prototype.toggleCell = function(cellId, dontRefresh) {
   }
   this.refreshPolygon();
   if (!dontRefresh) {
+    this.refreshWell();
     setTimeout(this.refreshHandlesAndLabels.bind(this), 0);
   }
+}
+
+$.RhythmRing.prototype.refreshWell = function() {
+  $('.well').html(Math.random());
 }
 
 $.RhythmRing.prototype.invertRhythm = function() {
   for (var i = 0; i < this.rhythmCells.length; i++) {
     this.toggleCell(i, true);
   }
+  this.refreshWell();
 }
 
 $.fn.rhythmRing = function () {
