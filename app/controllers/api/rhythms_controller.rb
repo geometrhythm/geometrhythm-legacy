@@ -16,6 +16,11 @@ module Api
     #   render json: {}
     # end
 
+    # def update
+    #   @rhythm = Rhythm.find(params[:id])
+    #   @rhythm.save
+    # end
+
     def index
       @rhythms = Rhythm.all
       render json: @rhythms

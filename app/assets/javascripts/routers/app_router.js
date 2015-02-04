@@ -9,12 +9,13 @@ Geometrhythm.Routers.App = Backbone.Router.extend({
   },
 
   root: function() {
-
-    var rhythm = Geometrhythm.Collections.rhythms.getOrFetch(2);
+    var activeRhythm = new Geometrhythm.Models.Rhythm();
+    activeRhythm.set("rhythm_str", "x--x--x---x-x---");
+    //var rhythm = Geometrhythm.Collections.rhythms.getOrFetch(2);
     //whatever the rhythm currently is that's being played with
     //debugger
     var rootView = new Geometrhythm.Views.Root({
-      model: rhythm
+      model: activeRhythm
     });
     this._swapView(rootView)
   },

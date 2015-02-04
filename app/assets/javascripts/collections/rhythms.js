@@ -24,4 +24,4 @@ Geometrhythm.Collections.Rhythms = Backbone.Collection.extend({
 
 Geometrhythm.Collections.rhythms = new Geometrhythm.Collections.Rhythms();
 Geometrhythm.Collections.rhythms.fetch();
-debugger
+//debugger
