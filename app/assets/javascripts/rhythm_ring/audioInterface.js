@@ -38,6 +38,16 @@ $.RhythmRing.prototype.playRhythm = function() {
       .css('background-color', fill);
 
     this.playPos += this.playPos >= this.rhythmCells.length - 1 ? -(this.rhythmCells.length - 1) : 1
+    if (this.playPos === this.rhythmCells.length - 1) {
+      var that = this;
+      var dbRhythm = Geometrhythm.Collections.rhythms.find( function(rhythm){
+          return rhythm.get("rhythm_str") === that.rhythmAsStr();
+        }
+      );
+      //debugger
+      dbRhythm.set("play_count", dbRhythm.get("play_count") + 1);
+      dbRhythm.save();
+    }
 
     var fill = this.rhythmCells[this.playPos] ? 'orange' : 'cornsilk';
     this.$el.find(".cell-handle[ord='" + this.playPos + "']:not('.grabbed')")

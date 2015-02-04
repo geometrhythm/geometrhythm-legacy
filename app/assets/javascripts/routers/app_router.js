@@ -6,7 +6,8 @@ Geometrhythm.Routers.App = Backbone.Router.extend({
 
   routes: {
     "" : "root",
-    "api/rhythms/:id" : "show"
+    //"api/rhythms/:id" : "show"
+    "api/rhythms" : "list"
   },
 
   root: function() {
@@ -21,12 +22,16 @@ Geometrhythm.Routers.App = Backbone.Router.extend({
     that._swapView(rootView);
   },
 
-  show: function(id) {
-    var rhythm = Geometrhythm.Collections.rhythms.getOrFetch(id);
-    var showView = new Geometrhythm.Views.RhythmShow({
-      model: rhythm
-    })
-    this._swapView(showView);
+  // show: function(id) {
+  //   var rhythm = Geometrhythm.Collections.rhythms.getOrFetch(id);
+  //   var showView = new Geometrhythm.Views.RhythmShow({
+  //     model: rhythm
+  //   })
+  //   this._swapView(showView);
+  // },
+  
+  list: function() {
+
   },
 
   _swapView: function(view) {

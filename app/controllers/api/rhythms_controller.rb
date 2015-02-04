@@ -16,10 +16,14 @@ module Api
     #   render json: {}
     # end
 
-    # def update
-    #   @rhythm = Rhythm.find(params[:id])
-    #   @rhythm.save
-    # end
+    def update
+      @rhythm = Rhythm.find(params[:id])
+      @rhythm.update(rhythm_params)
+      #@rhythm.save
+      #render :nil
+      render json: @rhythm
+      # render :update
+    end
 
     def index
       @rhythms = Rhythm.all
@@ -29,7 +33,6 @@ module Api
 
     def show
       @rhythm = Rhythm.find(params[:id])
-
       render :show
     end
 
