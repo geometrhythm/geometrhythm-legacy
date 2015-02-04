@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Geometrhythm</title>
+  <title>geometrhythm</title>
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
@@ -18,39 +18,34 @@
   <%= audio_tag "clave.wav" %>
   <%= audio_tag "clave.wav" %>
 
-<nav class="navbar navbar-default">
-  <div class="container-fluid">
-    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-      <a class="navbar-brand" href="#">
-        <%= image_tag "header_logo_dark.png", size: "292x45"%>
-      </a>
-      <!--<i class="glyphicon glyphicon-log-in"></i>-->
-      <ul class="nav navbar-nav navbar-right">
-        <button class="btn btn-primary btn-sm js-modal-open" id="sign-in-up">
-          <%= logged_in? ? "Sign Out" : "Sign In" %>
-        </button>
-        <span style="padding: 0px 15px">
-        <% if !logged_in? %>
-          <a href='#'>or sign up</a>
-        <% end %>
-        </span>
-      <ul>
-    </div>
-  </div>
-</nav>
+  <nav class="navbar navbar-default">
+    <div class="container-fluid">
+      <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+        <a class="navbar-brand" href="#">
+          <%= image_tag "header_logo_dark.png", size: "292x45"%>
+        </a>
+        <!--<i class="glyphicon glyphicon-log-in"></i>-->
+        <ul class="nav navbar-nav navbar-right">
 
-<script>
- $(function(){
-   $("body").on("click", ".js-modal-open", function(event){
-     event.preventDefault();
-     $(".modal").addClass("is-open");
-   });
-   $("body").on("click", ".js-modal-close", function(event){
-     event.preventDefault();
-     $(".modal").removeClass("is-open");
-   });
- });
-</script>
+          <% if logged_in? %>
+            <%= "Signed in as #{ current_user.email}" %>
+            <%= button_to "Sign Out", session_url, method: :delete, class: "btn btn-primary btn-sm" %>
+          <% else %>
+            <%= button_to "Sign In", new_session_url, method: :get, class: "btn btn-primary btn-sm" %>
+          <% end %>
+
+
+          <span style="padding: 0px 15px">
+          <% if !logged_in? %>
+            <%= link_to "or sign up", new_user_url %>
+          <% end %>
+          </span>
+        <ul>
+      </div>
+    </div>
+  </nav>
+
+<%= render "layouts/flash_notices" %>
 
 <%= yield %>
 

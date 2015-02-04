@@ -19,6 +19,7 @@
 //= require backbone
 //= require geometrhythm
 //= require rhythm_ring
+//= require_tree ./util
 //= require_tree ./rhythm_ring
 //= require_tree ./models
 //= require_tree ../templates
