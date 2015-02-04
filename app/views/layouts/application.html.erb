@@ -27,31 +27,32 @@
       <!--<i class="glyphicon glyphicon-log-in"></i>-->
       <ul class="nav navbar-nav navbar-right">
         <button class="btn btn-primary btn-sm js-modal-open" id="sign-in-up">
-          <% if logged_in? %>
-            <%= "Sign Out" %>
-          <% else %>
-            <%= "Sign In" %>
-          <% end %>
+          <%= logged_in? ? "Sign Out" : "Sign In" %>
         </button>
+        <span style="padding: 0px 15px">
+        <% if !logged_in? %>
+          <a href='#'>or sign up</a>
+        <% end %>
+        </span>
       <ul>
     </div>
   </div>
 </nav>
 
-<%= yield %>
-
 <script>
-  $(function(){
-    $("body").on("click", ".js-modal-open", function(event){
-      event.preventDefault();
-      $(".modal").addClass("is-open");
-    });
-    $("body").on("click", ".js-modal-close", function(event){
-      event.preventDefault();
-      $(".modal").removeClass("is-open");
-    });
-  });
+ $(function(){
+   $("body").on("click", ".js-modal-open", function(event){
+     event.preventDefault();
+     $(".modal").addClass("is-open");
+   });
+   $("body").on("click", ".js-modal-close", function(event){
+     event.preventDefault();
+     $(".modal").removeClass("is-open");
+   });
+ });
 </script>
+
+<%= yield %>
 
 </body>
 </html>

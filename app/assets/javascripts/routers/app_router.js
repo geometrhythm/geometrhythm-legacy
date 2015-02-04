@@ -11,6 +11,7 @@ Geometrhythm.Routers.App = Backbone.Router.extend({
   root: function() {
     var activeRhythm = new Geometrhythm.Models.Rhythm();
     activeRhythm.set("rhythm_str", "x--x--x---x-x---");
+    //activeRhythm.save();
     //var rhythm = Geometrhythm.Collections.rhythms.getOrFetch(2);
     //whatever the rhythm currently is that's being played with
     //debugger

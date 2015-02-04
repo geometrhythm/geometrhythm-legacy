@@ -3,14 +3,27 @@ Geometrhythm.Views.Root = Backbone.View.extend({
   template: JST['root'],
 
   events: {
-    'submit form' : 'submitTest',
+    'submit form' : 'submitForm',
     'plugin-change .well' : 'updateModel'
+    // 'click .js-modal-open' : 'openModalForm',
+    // 'click .js-modal-close' : 'closeModalForm'
   },
 
   initialize: function() {
     //this.listenTo(this.model, 'change:rhythm_str', this.renderInfoTeaseView)
+    this.renderInfoTeaseView();
     this.listenTo(this.model, 'change:rhythm_str', this.renderInfoTeaseView)
   },
+
+  // openModalForm: function(event) {
+  //   event.preventDefault();
+  //   $(".modal").addClass("is-open");
+  // },
+  //
+  // closeModalForm: function(event) {
+  //   event.preventDefault();
+  //   $(".modal").removeClass("is-open");
+  // },
 
   render: function() {
     //debugger
@@ -24,9 +37,10 @@ Geometrhythm.Views.Root = Backbone.View.extend({
   //hey, i can also refer to my RhythmRing namespace over in here to get the str
   //rather than hide it in a field on the page...
 
-  // submitTest: function(event) {
+  // submitForm: function(event) {
   //   event.preventDefault();
   //   console.log("hey hey hey");
+  //
   // },
 
   updateModel: function(event) {
@@ -38,7 +52,7 @@ Geometrhythm.Views.Root = Backbone.View.extend({
 
   renderInfoTeaseView: function(event) {
     console.log('its a me mario');
-
+    console.log($('#current-rhythm').val());
     //debugger
     var that = this;
     var maybeMatchingRhythm = Geometrhythm.Collections.rhythms
