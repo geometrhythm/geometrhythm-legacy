@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150204172450) do
+ActiveRecord::Schema.define(version: 20150204224301) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -26,6 +26,25 @@ ActiveRecord::Schema.define(version: 20150204172450) do
   add_index "likes", ["liker_id"], name: "index_likes_on_liker_id", using: :btree
   add_index "likes", ["rhythm_id", "liker_id"], name: "index_likes_on_rhythm_id_and_liker_id", unique: true, using: :btree
   add_index "likes", ["rhythm_id"], name: "index_likes_on_rhythm_id", using: :btree
+
+  create_table "names", force: :cascade do |t|
+    t.string   "name",       null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "namings", force: :cascade do |t|
+    t.integer  "name_id",    null: false
+    t.integer  "namer_id",   null: false
+    t.integer  "rhythm_id",  null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "namings", ["name_id", "namer_id", "rhythm_id"], name: "index_namings_on_name_id_and_namer_id_and_rhythm_id", unique: true, using: :btree
+  add_index "namings", ["name_id"], name: "index_namings_on_name_id", using: :btree
+  add_index "namings", ["namer_id"], name: "index_namings_on_namer_id", using: :btree
+  add_index "namings", ["rhythm_id"], name: "index_namings_on_rhythm_id", using: :btree
 
   create_table "rhythms", force: :cascade do |t|
     t.integer  "creator_id",             null: false

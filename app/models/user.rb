@@ -9,8 +9,13 @@ class User < ActiveRecord::Base
   after_initialize :ensure_session_token
 
   has_many :rhythms, foreign_key: :creator_id
-  has_many :liked_rhythms, through: :rhythm_likings, source: :rhythm
+
   has_many :rhythm_likings, class_name: 'Like', foreign_key: :liker_id
+  has_many :liked_rhythms, through: :rhythm_likings, source: :rhythm
+
+  has_many :namings, foreign_key: :namer_id
+  has_many :rhythms_named, through: :namings, source: :rhythm
+  has_many :names_named, through: :namings, source: :name
 
   def password=(password)
     @password = password
