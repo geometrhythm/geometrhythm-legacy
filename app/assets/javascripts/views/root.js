@@ -7,8 +7,9 @@ Geometrhythm.Views.Root = Backbone.View.extend({
   },
 
   render: function() {
+    //debugger
     var content = this.template({
-      //rhythm: this.model
+      rhythm: this.model
     })
     this.$el.html(content);
     return this;

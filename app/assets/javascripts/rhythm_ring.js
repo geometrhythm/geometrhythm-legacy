@@ -5,7 +5,8 @@ $.RhythmRing = function (el, ctx) {
   this.$el = $(el);
   this.ctx = $('#polygon-canvas')[0].getContext("2d");
   this.initializeAudio();
-  this.initializeRhythm("x--x--x---x-x---");
+  debugger
+  this.initializeRhythm($('#current-rhythm').val());
   this.initializeEventHandlers();
   this.animating = false;
   this.grabbing = false;
