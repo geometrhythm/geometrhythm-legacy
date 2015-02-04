@@ -10,9 +10,9 @@ Geometrhythm.Views.Root = Backbone.CompositeView.extend({
 
   initialize: function() {
     this.listenTo(this.model, 'sync', this.render);
-    this.listenTo(this.model, 'change:rhythm_str', this.renderInfoView);
-    this.listenTo(this.collection, 'sync add', this.renderInfoView);
-    setTimeout(this.renderInfoView, 0);
+    this.listenTo(this.model, 'change:rhythm_str', this.renderInfoView2);
+    this.listenTo(this.collection, 'sync add', this.renderInfoView2);
+    setTimeout(this.renderInfoView2, 0);
   },
 
   render: function() {
@@ -41,6 +41,38 @@ Geometrhythm.Views.Root = Backbone.CompositeView.extend({
     } else {
       $('#cur-rhythm-id').val("")
     }
+  },
+
+  renderInfoView2: function(event) {
+    var dbRhythm = Geometrhythm.Collections.rhythms.find( function(rhythm){
+        return rhythm.get("rhythm_str") === $('#current-rhythm').val();
+      }
+    );
+    if (dbRhythm) {
+      if ($('#cur-user-id').val()
+        && $('#cur-user-id').val() == dbRhythm.get("creator_id")) {
+        var template = "templateShowYours";
+      } else if ($('#cur-user-id').val()
+        && $('#cur-user-id').val() != dbRhythm.get("creator_id")) {
+        var template = "templateShowAnothers";
+      } else {
+        var template = "templateShowLoggedOut";
+      }
+    } else {
+      dbRhythm = new Geometrhythm.Models.Rhythm({rhythm_str: $('#current-rhythm').val()});
+      if ($('#cur-user-id').val()) {
+        var template = "templateClaim";
+      } else {
+        var template = "templateSignUpToClaim";
+      }
+    }
+    var view = new Geometrhythm.Views.Info({
+      model: dbRhythm
+    })
+    console.log("Well I made it this far 2");
+    this.currentView && this.currentView.remove();
+    this.currentView = view;
+    this.$('#bb-info').html(view.render({template: template}).$el)
   },
 
   renderInfoView: function(event) {
