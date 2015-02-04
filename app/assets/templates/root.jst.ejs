@@ -1,0 +1,62 @@
+<div class="modal">
+  <form class="modal-form">
+
+    <span class="modal-close js-modal-close">&times;</span>
+
+    <h1>Welcome</h1>
+
+    <p>Please sign in to continue.</p>
+
+    <div class="input">
+      <label for="form-email">Email</label>
+      <input type="text" id="form-email" name="user[email]">
+    </div>
+
+    <div class="input">
+      <label for="form-password">Password</label>
+      <input type="password" id="form-password" name="user[password]">
+    </div>
+
+    <div class="submit">
+      <button class="btn btn-primary btn-lg">Sign In</button>
+      <span class="button-alternative">or <strong class="js-modal-close">Cancel</strong></span>
+    </div>
+
+  </form>
+  <div class="modal-screen js-modal-close"></div>
+</div>
+
+
+
+<container>
+<div class='col-md-2'>
+<interface>
+  tempo<br>
+  <input type="text" id="input-tempo" value="125"><br><br>
+  <button class="btn btn-warning" id="play-pause">Play</button><br><br>
+  <button class="btn btn-default btn-sm" id="invert">Invert</button>
+</interface>
+</div>
+
+<div class='col-md-5'>
+<div class='wrapper'>
+
+  <div class='rhythm-ring' oncontextmenu="return false;">
+  </div>
+
+  <canvas id='polygon-canvas' height='400' width='400'>
+  </canvas>
+
+</div>
+<div class='slider'></div>
+</div>
+
+<div class='col-md-4'>
+  <div class='well'>
+    Here's where I'll talk all about what geometrhythm is and what it can do!
+    <div id="bb-test"></div>
+    <br><button class="btn btn-success btn-lrg" id="save-rhythm">Save Rhythm</button>
+  </div>
+</div>
+
+</container>

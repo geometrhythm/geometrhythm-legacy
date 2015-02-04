@@ -4,7 +4,7 @@ window.Geometrhythm = {
   Views: {},
   Routers: {},
   initialize: function() {
-    var $rootEl = $('#bb-test')
+    var $rootEl = $('#bb-core')
     new Geometrhythm.Routers.App({
       $rootEl: $rootEl
     });

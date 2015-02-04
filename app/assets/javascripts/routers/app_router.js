@@ -4,12 +4,16 @@ Geometrhythm.Routers.App = Backbone.Router.extend({
   },
 
   routes: {
-    "/" : "root",
+    "" : "root",
     "api/rhythms/:id" : "show"
   },
 
   root: function() {
-
+    //whatever the rhythm currently is that's being played with
+    var rootView = new Geometrhythm.Views.Root({
+      //model: whatever that rhythm is called
+    });
+    this._swapView(rootView)
   },
 
   show: function(id) {
