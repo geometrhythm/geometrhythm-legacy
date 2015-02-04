@@ -3,6 +3,7 @@ Rails.application.routes.draw do
 
   namespace :api, defaults: { format: :json } do
     resources :rhythms, only: [:index, :show, :create]
+    resources :likes, only: [:show, :create, :destroy]
   end
 
   resources :users, only: [:new, :create]

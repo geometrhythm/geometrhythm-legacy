@@ -1,5 +1,25 @@
+Rhythm's Id: <%= rhythm.get("id") %><br>
 Rhythm: <%= rhythm.get("rhythm_str") %><br>
 Play Count: <%= rhythm.get("play_count") %><br>
 Created by: <%= rhythm.get("creator") %>
 
 <br>Check out this user's other rhythms!
+
+<% if (rhythm.get("likers") && rhythm.get("likers").length > 0) { %>
+  <br>
+  Liked by:
+  <ul>
+    <% rhythm.get("likers").forEach(function(liker) { %>
+      <li><%= liker.email %></li>
+    <% }) %>
+  </ul>
+<% } %>
+
+<br>Your id: <%= $('#cur-user-id').val() %>
+<br>Array of likes: <%= _(rhythm.get("likers")).pluck("id") %>
+
+<% if ( _(rhythm.get("likers")).pluck("id").indexOf(parseInt($('#cur-user-id').val())) == -1 ) { %>
+  <button class='like'>Like</button>
+<% } else { %>
+  <br>You like this rhythm.
+<% } %>

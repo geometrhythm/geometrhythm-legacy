@@ -4,19 +4,15 @@ Geometrhythm.Views.Root = Backbone.CompositeView.extend({
 
   events: {
     'submit form' : 'submitForm',
-    'plugin-change .well' : 'updateModel'
+    'plugin-change #bb-info' : 'updateModel',
+    'click button.like' : 'likeThisRhythm'
   },
 
   initialize: function() {
     this.listenTo(this.model, 'sync', this.render);
-    this.listenTo(this.model, 'change:rhythm_str', this.renderInfoTeaseView);
-    this.listenTo(this.collection, 'sync add', this.renderInfoTeaseView);
-    setTimeout(this.renderInfoTeaseView, 0);
-    if (window.storedRhythm) {
-      console.log("hello");
-      console.log(window.storedRhythm);
-      $('#current-rhythm').attr("value", window.storedRhythm);
-    }
+    this.listenTo(this.model, 'change:rhythm_str', this.renderInfoView);
+    this.listenTo(this.collection, 'sync add', this.renderInfoView);
+    setTimeout(this.renderInfoView, 0);
   },
 
   render: function() {
@@ -24,51 +20,118 @@ Geometrhythm.Views.Root = Backbone.CompositeView.extend({
       rhythm: this.model
     })
     this.$el.html(content);
+    //this.rhythmRing = this.$('.rhythm-ring').rhythmRing(); <<-- I SHOULD DO THIS
+      //INSTEAD OF OF THE ON DOC READY THIGN AT THE BOTTOM OF RHYTHM_RING.JS
+      //THIS WAY I'LL ACTUALLY HAVE ACCESS TO ALL OF THE IVARS OF THE RHYTHMRING INSTANCE!
     return this;
   },
 
   updateModel: function(event) {
     this.model.set("rhythm_str", $('#current-rhythm').val());
-  },
 
-  renderInfoTeaseView: function(event) {
-    console.log($('#current-rhythm').val());
-    //debugger
-    var maybeMatchingRhythm = Geometrhythm.Collections.rhythms.find( function(rhythm){
-        //debugger
+    var dbRhythm = Geometrhythm.Collections.rhythms.find( function(rhythm){
         return rhythm.get("rhythm_str") === $('#current-rhythm').val();
       }
     );
+
     //debugger
-    if (maybeMatchingRhythm) {
-      console.log($('#cur-user-id').val());
-      console.log(maybeMatchingRhythm.get("creator_id"));
+
+    if (dbRhythm) {
+      $('#cur-rhythm-id').val(dbRhythm.id)
+    } else {
+      $('#cur-rhythm-id').val("")
+    }
+  },
+
+  renderInfoView: function(event) {
+    var dbRhythm = Geometrhythm.Collections.rhythms.find( function(rhythm){
+        return rhythm.get("rhythm_str") === $('#current-rhythm').val();
+      }
+    );
+
+     //dbRhythm && dbRhythm.fetch();
+
+    if (dbRhythm) {
+
       if ($('#cur-user-id').val()
-        && $('#cur-user-id').val() == maybeMatchingRhythm.get("creator_id")) {
-        console.log("woo hoo, made it in here!");
+        && $('#cur-user-id').val() == dbRhythm.get("creator_id")) {
         var view = new Geometrhythm.Views.ShowYourRhythmsInfo({
-          model: maybeMatchingRhythm
+          model: dbRhythm
         });
+
       } else if ($('#cur-user-id').val()
-        && $('#cur-user-id').val() != maybeMatchingRhythm.get("creator_id")) {
+        && $('#cur-user-id').val() != dbRhythm.get("creator_id")) {
         var view = new Geometrhythm.Views.ShowAnothersRhythmsInfo({
-          model: maybeMatchingRhythm
+          model: dbRhythm
         });
+
       } else {
         var view = new Geometrhythm.Views.ShowRhythmsInfoLoggedOut({
-          model: maybeMatchingRhythm
+          model: dbRhythm
         });
       }
+
     } else {
+
       if ($('#cur-user-id').val()) {
         var view = new Geometrhythm.Views.ClaimRhythm();
       } else {
         var view = new Geometrhythm.Views.SignUpToClaimRhythm();
       }
+
     }
+
+    console.log("Well I made it this far");
     this.currentView && this.currentView.remove();
     this.currentView = view;
     this.$('#bb-info').html(view.render().$el)
+
+  },
+
+  likeThisRhythm: function() {
+    var dbRhythm = Geometrhythm.Collections.rhythms.find( function(rhythm){
+        return rhythm.get("rhythm_str") === $('#current-rhythm').val();
+      }
+    );
+
+    //debugger
+
+    if (dbRhythm) {
+      $('#cur-rhythm-id').val(dbRhythm.id)
+    } else {
+      $('#cur-rhythm-id').val("")
+    }
+
+    var that = this;
+    console.log("DOM steez");
+    console.log($('#cur-rhythm-id').val());
+    // console.log("BB steez"); //of course this doesn't work, it's ACTIVERHYTHM, not an actual DB one...
+    //debugger
+    // console.log(this.model.id);
+    new Geometrhythm.Models.Like().save({
+      rhythm_id: $('#cur-rhythm-id').val()
+    }, {
+      success: function() {
+        // that.renderInfoView();
+        var dbRhythm = Geometrhythm.Collections.rhythms.find( function(rhythm){
+            return rhythm.get("rhythm_str") === $('#current-rhythm').val();
+          });
+        dbRhythm.fetch();
+      },
+      error: function () {
+        console.log("Something went wrong!");
+      }
+    });
+    // },
+    // { success: function() {
+    //   console.log("I'm supposed to re-render");
+    //   that.model.fetch({ success: function() {
+    //     that.renderInfoView();
+    //   }});
+    // }}
+    // );
+    //that.model.fetch();
+
   }
 
 });

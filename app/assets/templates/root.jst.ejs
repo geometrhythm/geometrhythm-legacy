@@ -1,33 +1,38 @@
 <input type='hidden' id='current-rhythm' value='<%= rhythm.get("rhythm_str") %>'>
+<input type='hidden' id='cur-rhythm-id' value=''>
 
 <container>
-<div class='col-md-2'>
-<interface>
-  tempo<br>
-  <input type="text" id="input-tempo" value="125"><br><br>
-  <button class="btn btn-warning" id="play-pause">Play</button><br><br>
-  <button class="btn btn-default btn-sm" id="invert">Invert</button>
-</interface>
-</div>
 
-<div class='col-md-5'>
-<div class='wrapper'>
+  <div class='row'>
 
-  <div class='rhythm-ring' oncontextmenu="return false;">
+    <div class='col-md-2'>
+      <interface>
+        tempo<br><input type="text" id="input-tempo" value="125"><br><br>
+        <button class="btn btn-warning" id="play-pause">Play</button><br><br>
+        <button class="btn btn-default btn-sm" id="invert">Invert</button>
+      </interface>
+    </div>
+
+    <div class='col-md-5'>
+      <div class='wrapper' style='min-height: 480px'>
+        <div class='rhythm-ring' oncontextmenu="return false;"></div>
+        <canvas id='polygon-canvas' height='400' width='400'></canvas>
+      </div>
+    </div>
+
+    <div class='col-md-4'>
+      <div class='well'>
+        Here's where I'll talk all about what geometrhythm is and what it can do!<br>
+        <div id="bb-info"></div>
+      </div>
+    </div>
+
   </div>
 
-  <canvas id='polygon-canvas' height='400' width='400'>
-  </canvas>
+  <div class='row'>
 
-</div>
-<div class='slider'></div>
-</div>
-
-<div class='col-md-4'>
-  <div class='well'>
-    Here's where I'll talk all about what geometrhythm is and what it can do!<br>
-    <div id="bb-info"></div>
-  </div>
-</div>
+    <div class='col-md-6'>
+      <div class='well'>
+    </div>
 
 </container>

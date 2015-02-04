@@ -102,7 +102,7 @@ $.RhythmRing.prototype.toggleCell = function(cellId, dontRefresh) {
 
 $.RhythmRing.prototype.refreshWell = function() {
   $('#current-rhythm').attr('value', this.rhythmAsStr());
-  $('.well').trigger('plugin-change');
+  $('#bb-info').trigger('plugin-change');
 }
 
 $.RhythmRing.prototype.invertRhythm = function() {
