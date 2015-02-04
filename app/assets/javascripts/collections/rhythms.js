@@ -3,7 +3,6 @@ Geometrhythm.Collections.Rhythms = Backbone.Collection.extend({
   model: Geometrhythm.Models.Rhythm,
 
   getOrFetch: function(id) {
-    // debugger
     var model = this.get(id);
     var rhythms = this;
     if (!model) {
@@ -24,4 +23,3 @@ Geometrhythm.Collections.Rhythms = Backbone.Collection.extend({
 
 Geometrhythm.Collections.rhythms = new Geometrhythm.Collections.Rhythms();
 Geometrhythm.Collections.rhythms.fetch();
-//debugger

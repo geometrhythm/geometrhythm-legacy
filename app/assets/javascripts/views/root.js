@@ -8,7 +8,15 @@ Geometrhythm.Views.Root = Backbone.CompositeView.extend({
   },
 
   initialize: function() {
-    this.listenTo(this.model, 'change:rhythm_str', this.renderInfoTeaseView)
+    this.listenTo(this.model, 'sync', this.render);
+    this.listenTo(this.model, 'change:rhythm_str', this.renderInfoTeaseView);
+    this.listenTo(this.collection, 'sync add', this.renderInfoTeaseView);
+    setTimeout(this.renderInfoTeaseView, 0);
+    if (window.storedRhythm) {
+      console.log("hello");
+      console.log(window.storedRhythm);
+      $('#current-rhythm').attr("value", window.storedRhythm);
+    }
   },
 
   render: function() {
@@ -16,7 +24,6 @@ Geometrhythm.Views.Root = Backbone.CompositeView.extend({
       rhythm: this.model
     })
     this.$el.html(content);
-    this.attachSubviews();
     return this;
   },
 
@@ -25,17 +32,43 @@ Geometrhythm.Views.Root = Backbone.CompositeView.extend({
   },
 
   renderInfoTeaseView: function(event) {
-    var that = this;
-    var maybeMatchingRhythm = Geometrhythm.Collections.rhythms
-      .find( function(rhythm){
+    console.log($('#current-rhythm').val());
+    //debugger
+    var maybeMatchingRhythm = Geometrhythm.Collections.rhythms.find( function(rhythm){
+        //debugger
         return rhythm.get("rhythm_str") === $('#current-rhythm').val();
       }
     );
-    var content = "Hey, you've found a new one!"
+    //debugger
     if (maybeMatchingRhythm) {
-      content = "Already in db! id: " + maybeMatchingRhythm.id;
+      console.log($('#cur-user-id').val());
+      console.log(maybeMatchingRhythm.get("creator_id"));
+      if ($('#cur-user-id').val()
+        && $('#cur-user-id').val() == maybeMatchingRhythm.get("creator_id")) {
+        console.log("woo hoo, made it in here!");
+        var view = new Geometrhythm.Views.ShowYourRhythmsInfo({
+          model: maybeMatchingRhythm
+        });
+      } else if ($('#cur-user-id').val()
+        && $('#cur-user-id').val() != maybeMatchingRhythm.get("creator_id")) {
+        var view = new Geometrhythm.Views.ShowAnothersRhythmsInfo({
+          model: maybeMatchingRhythm
+        });
+      } else {
+        var view = new Geometrhythm.Views.ShowRhythmsInfoLoggedOut({
+          model: maybeMatchingRhythm
+        });
+      }
+    } else {
+      if ($('#cur-user-id').val()) {
+        var view = new Geometrhythm.Views.ClaimRhythm();
+      } else {
+        var view = new Geometrhythm.Views.SignUpToClaimRhythm();
+      }
     }
-    $('#bb-info-tease').html(content);
-  },
+    this.currentView && this.currentView.remove();
+    this.currentView = view;
+    this.$('#bb-info').html(view.render().$el)
+  }
 
 });

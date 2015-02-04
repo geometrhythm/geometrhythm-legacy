@@ -27,17 +27,29 @@
         <!--<i class="glyphicon glyphicon-log-in"></i>-->
         <ul class="nav navbar-nav navbar-right">
 
-          <% if logged_in? %>
-            <%= "Signed in as #{ current_user.email}" %>
-            <%= button_to "Sign Out", session_url, method: :delete, class: "btn btn-primary btn-sm" %>
-          <% else %>
-            <%= button_to "Sign In", new_session_url, method: :get, class: "btn btn-primary btn-sm" %>
-          <% end %>
-
+          <li>
+            <% if logged_in? %>
+              <%= "Signed in as #{ current_user.email}" %>
+              <input type='hidden' id='cur-user-id' value='<%=current_user.id%>'>
+              <%= button_to "Sign Out", session_url,
+                method: :delete, class: "btn btn-primary btn-sm" %>
+            <% else %>
+              <%= button_to "Sign In", new_session_url,
+                method: :get, class: "btn btn-primary btn-sm" %>
+            <% end %>
+          </li>
 
           <span style="padding: 0px 15px">
           <% if !logged_in? %>
-            <%= link_to "or sign up", new_user_url %>
+            <li>
+              <%= button_to "Sign In As Guest", session_url,
+                params: {:"user[email]" => "guest@geometrhythm.com",
+                  :"user[password]" => "password" },
+                class: "btn btn-success btn-sm" %>
+            </li>
+            <li>
+              <%= link_to "or sign up", new_user_url %>
+            </li>
           <% end %>
           </span>
         <ul>
@@ -46,6 +58,7 @@
   </nav>
 
 <%= render "layouts/flash_notices" %>
+
 
 <%= yield %>
 

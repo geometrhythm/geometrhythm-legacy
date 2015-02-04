@@ -23,7 +23,8 @@ module Api
 
     def index
       @rhythms = Rhythm.all
-      render json: @rhythms
+      # render json: @rhythms
+      render :all
     end
 
     def show

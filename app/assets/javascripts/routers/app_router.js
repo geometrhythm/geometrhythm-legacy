@@ -1,6 +1,7 @@
 Geometrhythm.Routers.App = Backbone.Router.extend({
   initialize: function(options) {
     this.$rootEl = options.$rootEl
+    //Geometrhythm.Collections.rhythms.fetch();
   },
 
   routes: {
@@ -11,19 +12,17 @@ Geometrhythm.Routers.App = Backbone.Router.extend({
   root: function() {
     var activeRhythm = new Geometrhythm.Models.Rhythm();
     activeRhythm.set("rhythm_str", "x--x--x---x-x---");
-    //activeRhythm.save();
-    //var rhythm = Geometrhythm.Collections.rhythms.getOrFetch(2);
-    //whatever the rhythm currently is that's being played with
-    //debugger
+    var that = this;
+    Geometrhythm.Collections.rhythms.fetch();
     var rootView = new Geometrhythm.Views.Root({
-      model: activeRhythm
+      model: activeRhythm,
+      collection: Geometrhythm.Collections.rhythms
     });
-    this._swapView(rootView)
+    that._swapView(rootView);
   },
 
   show: function(id) {
     var rhythm = Geometrhythm.Collections.rhythms.getOrFetch(id);
-  //  debugger
     var showView = new Geometrhythm.Views.RhythmShow({
       model: rhythm
     })
