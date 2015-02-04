@@ -5,7 +5,6 @@ $.RhythmRing = function (el, ctx) {
   this.$el = $(el);
   this.ctx = $('#polygon-canvas')[0].getContext("2d");
   this.initializeAudio();
-  //debugger
   this.initializeRhythm($('#current-rhythm').val());
   this.initializeEventHandlers();
   this.animating = false;
@@ -104,22 +103,6 @@ $.RhythmRing.prototype.toggleCell = function(cellId, dontRefresh) {
 $.RhythmRing.prototype.refreshWell = function() {
   $('#current-rhythm').attr('value', this.rhythmAsStr());
   $('.well').trigger('plugin-change');
-  //$('.well').html(Math.random());
-
-  //debugger
-  var that = this;
-  var maybeMatchingRhythm = Geometrhythm.Collections.rhythms
-    .find( function(rhythm){
-      // debugger
-      return rhythm.get("rhythm_str") === that.rhythmAsStr();
-    }
-  );
-  // debugger
-  if (maybeMatchingRhythm) {
-    var id = maybeMatchingRhythm.id;
-    //Backbone.history.navigate("/api/rhythms/" + id, { trigger: true });
-    //JUST REFRESH THE SUBVIEW :)
-  }
 }
 
 $.RhythmRing.prototype.invertRhythm = function() {
