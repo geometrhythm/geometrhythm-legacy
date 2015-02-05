@@ -5,12 +5,13 @@ Geometrhythm.Views.RhythmsList = Backbone.CompositeView.extend({
   events: {
     "click li.rhythm" : "selectRhythm",
     "change .creator" : "filterByCreator",
-    "change .liker" : "filterByLiker"
+    "change .liker" : "filterByLiker",
+    "change .rhythm-str" : "filterByRhythmStr",
+    "change .rhythm-id" : "filterByRhythmId"
   },
 
   initialize: function(options) {
-    console.log("getting initialized");
-    this.listenTo(this.collection, 'sync', this.render); //or no users to pick from in dropdowns...
+    this.listenTo(this.collection, 'sync', this.render);
     this.listenTo(this.collection, 'add', this.addRhythmListItemView);
     this.listenTo(this.collection, 'remove', this.removeRhythmListItemView)
 
@@ -19,19 +20,12 @@ Geometrhythm.Views.RhythmsList = Backbone.CompositeView.extend({
     this.creatorId = options.creator;
 
     this.collection.each(function(rhythm) {
-      // if (!(this.likerId && this.likerId != rhythm.id)
-      //   && !(this.creatorId && this.creatorId != rhythm.id)) {
-        this.addRhythmListItemView(rhythm);
-      // } else {
-      //   console.log('hey i actually filtered someone');
-      // }
+      this.addRhythmListItemView(rhythm);
     }.bind(this))
 
   },
 
   render: function() {
-    console.log("getting rendered");
-    console.log(this.collection);
     var content = this.template({
       rhythms: this.collection,
       users: this.users,
@@ -69,27 +63,40 @@ Geometrhythm.Views.RhythmsList = Backbone.CompositeView.extend({
   },
 
   filterByCreator: function(event) {
-    this.creatorId = $(event.currentTarget).val()
-    var that = this;
-    this.collection.each(function(rhythm) {
-      if (rhythm.get("creator_id") != that.creatorId) {
-        that.removeRhythmListItemView(rhythm);
-        // that.collection.remove(rhythm, {
-        //   success: function() {
-        //     //that.collection.fetch();
-        //   }
-        // });
-        //that.collection.fetch();
-      }
-    });
-    // this.render();
-    console.log("in filter method:");
-    console.log(this.collection);
+    if ($(event.currentTarget).val() === "") {
+      this.creatorId = null;
+      this.collection.filter.creator_id = null;
+      this.collection.fetch();
+    } else {
+      this.creatorId = $(event.currentTarget).val();
+      this.collection.filter.creator_id = this.creatorId;
+      this.collection.fetchByFilter();
+      debugger
+    }
+
+    // this.collection.fetch({ data: { creator_id: this.creatorId } });
   },
 
   filterByLiker: function(event) {
     this.likerId = $(event.currentTarget).val()
-    this.render();
-  }
+    this.collection.filter.liker_id = this.likerId;
+    this.collection.fetchByFilter();
+  },
+
+  filterByRhythmStr: function(event) {
+    console.log("filtering by rhythm str");
+    this.rhythmStr = $(event.currentTarget).val()
+    this.collection.filter.rhythm_str = this.rhythmStr;
+    this.collection.fetchByFilter();
+    debugger
+  },
+
+  filterByRhythmId: function(event) {
+    console.log("filtering by rhythm id");
+    this.filterId = $(event.currentTarget).val()
+    this.collection.filter.id = this.filterId;
+    this.collection.fetchByFilter();
+    debugger
+  },
 
 });

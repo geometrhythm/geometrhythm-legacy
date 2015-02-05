@@ -1,6 +1,7 @@
 Geometrhythm.Collections.Rhythms = Backbone.Collection.extend({
   url: '/api/rhythms',
   model: Geometrhythm.Models.Rhythm,
+  filter: {},
 
   getOrFetch: function(id) {
     var model = this.get(id);
@@ -19,12 +20,10 @@ Geometrhythm.Collections.Rhythms = Backbone.Collection.extend({
     return model;
   },
 
-  // byCreator: function(creator_id) {
-  //   var filtered = this.filter(function(rhythm) {
-  //     return rhythm.get("creator_id") === creator_id;
-  //     });
-  //   return new Geometrhythm.Collections.Rhythms(filtered);
-  // }
+  fetchByFilter: function() {
+    debugger
+    this.fetch({ data: this.filter });
+  }
 
 });
 

@@ -26,8 +26,20 @@ module Api
     end
 
     def index
-      @rhythms = Rhythm.all
-      # render json: @rhythms
+      if params[:creator_id]
+        @rhythms = Rhythm.where(creator_id: params[:creator_id])
+      else
+        @rhythms = Rhythm.all
+      end
+
+      if params[:rhythm_str]
+        @rhythms = @rhythms.where(rhythm_str: params[:rhythm_str])
+      end
+
+      if params[:liker_id]
+        @rhythms = @rhythms.where(id: User.find(params[:liker_id]).liked_rhythms)
+      end
+
       render :all
     end
 
