@@ -2,15 +2,31 @@
 
   <div class='row'>
 
+    <div class='col-md-4'>
+      <ul>
+      <% rhythms.each(function(rhythm) { %>
+        <% if (rhythm.get) { %>
+          <li class='rhythm' data-id='<%= rhythm.id %>'>
+            <%= rhythm.get("rhythm_str") %>
+          </li>
+        <% } %>
+      <% }); %>
+      </ul>
+    </div>
 
+    <div class='col-md-4'>
+      Filter results by:
+
+
+
+
+
+    </div>
 
 <container>
 
-<ul>
-<% rhythms.each(function(rhythm) { %>
-  <li class='rhythm' data-id='<%= rhythm.id %>'>
-      <%= rhythm.get("rhythm_str") %>
-    </a>
-  </li>
-<% }); %>
-</ul>
+
+<!--<input type='text' class="portfolio">
+<button class='portfolio'>All a user's creations</button>
+<input type='text' class="collection">
+<button class='collection'>All a user's likes (their collection)</button>-->

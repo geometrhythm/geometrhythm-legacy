@@ -45,8 +45,10 @@ $.RhythmRing.prototype.playRhythm = function() {
         }
       );
       //debugger
-      dbRhythm.set("play_count", dbRhythm.get("play_count") + 1);
-      dbRhythm.save();
+      if (dbRhythm) {
+        dbRhythm.set("play_count", dbRhythm.get("play_count") + 1);
+        dbRhythm.save();
+      }
     }
 
     var fill = this.rhythmCells[this.playPos] ? 'orange' : 'cornsilk';

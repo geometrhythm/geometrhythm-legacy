@@ -14,6 +14,7 @@
 //= require jquery_ujs
 //= require jquery.serializejson.min
 //= require jquery-ui.min
+//= require jquery.cookie
 //= require bootstrap-sprockets
 //= require underscore
 //= require backbone

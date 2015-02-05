@@ -11,7 +11,7 @@ Geometrhythm.Views.Root = Backbone.CompositeView.extend({
   initialize: function() {
     this.listenTo(this.model, 'sync', this.render);
     this.listenTo(this.model, 'change:rhythm_str', this.renderInfoView2);
-    this.listenTo(this.collection, 'sync add', this.renderInfoView2);
+    // this.listenTo(this.collection, 'sync add', this.renderInfoView2);
     setTimeout(this.renderInfoView2, 0);
   },
 
@@ -75,50 +75,50 @@ Geometrhythm.Views.Root = Backbone.CompositeView.extend({
     this.$('#bb-info').html(view.render({template: template}).$el)
   },
 
-  renderInfoView: function(event) {
-    var dbRhythm = Geometrhythm.Collections.rhythms.find( function(rhythm){
-        return rhythm.get("rhythm_str") === $('#current-rhythm').val();
-      }
-    );
-
-     //dbRhythm && dbRhythm.fetch();
-
-    if (dbRhythm) {
-
-      if ($('#cur-user-id').val()
-        && $('#cur-user-id').val() == dbRhythm.get("creator_id")) {
-        var view = new Geometrhythm.Views.ShowYourRhythmsInfo({
-          model: dbRhythm
-        });
-
-      } else if ($('#cur-user-id').val()
-        && $('#cur-user-id').val() != dbRhythm.get("creator_id")) {
-        var view = new Geometrhythm.Views.ShowAnothersRhythmsInfo({
-          model: dbRhythm
-        });
-
-      } else {
-        var view = new Geometrhythm.Views.ShowRhythmsInfoLoggedOut({
-          model: dbRhythm
-        });
-      }
-
-    } else {
-
-      if ($('#cur-user-id').val()) {
-        var view = new Geometrhythm.Views.ClaimRhythm();
-      } else {
-        var view = new Geometrhythm.Views.SignUpToClaimRhythm();
-      }
-
-    }
-
-    console.log("Well I made it this far");
-    this.currentView && this.currentView.remove();
-    this.currentView = view;
-    this.$('#bb-info').html(view.render().$el)
-
-  },
+  // renderInfoView: function(event) {
+  //   var dbRhythm = Geometrhythm.Collections.rhythms.find( function(rhythm){
+  //       return rhythm.get("rhythm_str") === $('#current-rhythm').val();
+  //     }
+  //   );
+  //
+  //    //dbRhythm && dbRhythm.fetch();
+  //
+  //   if (dbRhythm) {
+  //
+  //     if ($('#cur-user-id').val()
+  //       && $('#cur-user-id').val() == dbRhythm.get("creator_id")) {
+  //       var view = new Geometrhythm.Views.ShowYourRhythmsInfo({
+  //         model: dbRhythm
+  //       });
+  //
+  //     } else if ($('#cur-user-id').val()
+  //       && $('#cur-user-id').val() != dbRhythm.get("creator_id")) {
+  //       var view = new Geometrhythm.Views.ShowAnothersRhythmsInfo({
+  //         model: dbRhythm
+  //       });
+  //
+  //     } else {
+  //       var view = new Geometrhythm.Views.ShowRhythmsInfoLoggedOut({
+  //         model: dbRhythm
+  //       });
+  //     }
+  //
+  //   } else {
+  //
+  //     if ($('#cur-user-id').val()) {
+  //       var view = new Geometrhythm.Views.ClaimRhythm();
+  //     } else {
+  //       var view = new Geometrhythm.Views.SignUpToClaimRhythm();
+  //     }
+  //
+  //   }
+  //
+  //   console.log("Well I made it this far");
+  //   this.currentView && this.currentView.remove();
+  //   this.currentView = view;
+  //   this.$('#bb-info').html(view.render().$el)
+  //
+  // },
 
   likeThisRhythm: function() {
     var dbRhythm = Geometrhythm.Collections.rhythms.find( function(rhythm){

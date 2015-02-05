@@ -1,0 +1,11 @@
+<% if (rhythm.get("namings") && rhythm.get("namings").length > 0) { %>
+  <br>
+  Known as:
+  <ul>
+    <% rhythm.get("namings").forEach(function(naming) { %>
+      <li><%= naming.name.name %></li> (suggested by <%= naming.namer.email %>)
+    <% }) %>
+  </ul>
+<% } else { %>
+  Hey, this one doesn't have a name yet. Why don't you name it?
+<% } %>

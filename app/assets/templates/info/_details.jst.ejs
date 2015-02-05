@@ -1,16 +1,6 @@
 Rhythm's Id: <%= rhythm.get("id") %><br>
 
-<% if (rhythm.get("namings") && rhythm.get("namings").length > 0) { %>
-  <br>
-  Known as:
-  <ul>
-    <% rhythm.get("namings").forEach(function(naming) { %>
-      <li><%= naming.name.name %></li> (suggested by <%= naming.namer.email %>)
-    <% }) %>
-  </ul>
-<% } %>
-
-<%= JST['info/_name_form']() %>
+<%= JST['info/_name_info']({rhythm: rhythm}) %>
 
 Rhythm: <%= rhythm.get("rhythm_str") %><br>
 Play Count: <%= rhythm.get("play_count") %><br>

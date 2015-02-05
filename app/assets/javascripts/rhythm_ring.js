@@ -5,8 +5,12 @@ $.RhythmRing = function (el, ctx) {
   this.$el = $(el);
   this.ctx = $('#polygon-canvas')[0].getContext("2d");
   this.initializeAudio();
-  //debugger
-  this.initializeRhythm($('#current-rhythm').val());
+  if ($.cookie('_Geometrhythm_stored_rhythm')) {
+    //debugger
+    this.initializeRhythm($.cookie('_Geometrhythm_stored_rhythm'));
+  } else {
+    this.initializeRhythm($('#current-rhythm').val());
+  }
   this.initializeEventHandlers();
   this.animating = false;
   this.grabbing = false;
@@ -104,6 +108,7 @@ $.RhythmRing.prototype.toggleCell = function(cellId, dontRefresh) {
 $.RhythmRing.prototype.refreshWell = function() {
   //debugger
   $('#current-rhythm').attr('value', this.rhythmAsStr());
+  $.cookie('_Geometrhythm_stored_rhythm', this.rhythmAsStr(), { expires: 7, path: '/' });
   $('#bb-info').trigger('plugin-change');
 }
 

@@ -17,7 +17,6 @@ Users can:
 <b>Discover rhythms</b>
 - [x] Sign up, log in, and create a profile
 - [ ] Browse other users' created & liked rhythms
-- [ ] Tag rhythms and search by tag
 
 <b>Discuss rhythms</b>
 - [x] Like a rhythm
@@ -87,6 +86,7 @@ Further stretch goals:
 - [ ] Find rhythms related by shared geometric properties
 - [ ] Investigate these properties using beautiful graphs/charts/histograms
 - [ ] Find rhythms based on popularity and recency
+- [ ] Tag rhythms and search by tag
 
 <b>Discuss rhythms</b>
 - [ ] Reference specific pulses of a rhythms in a comment
