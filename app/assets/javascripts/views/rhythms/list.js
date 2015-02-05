@@ -9,7 +9,8 @@ Geometrhythm.Views.RhythmsList = Backbone.CompositeView.extend({
   },
 
   initialize: function(options) {
-    this.listenTo(this.collection, 'sync', this.render);
+    console.log("getting initialized");
+    this.listenTo(this.collection, 'sync', this.render); //or no users to pick from in dropdowns...
     this.listenTo(this.collection, 'add', this.addRhythmListItemView);
     this.listenTo(this.collection, 'remove', this.removeRhythmListItemView)
 
@@ -18,15 +19,18 @@ Geometrhythm.Views.RhythmsList = Backbone.CompositeView.extend({
     this.creatorId = options.creator;
 
     this.collection.each(function(rhythm) {
-      if (!(this.likerId && this.likerId != rhythm.id)
-        && !(this.creatorId && this.creatorId != rhythm.id)) {
+      // if (!(this.likerId && this.likerId != rhythm.id)
+      //   && !(this.creatorId && this.creatorId != rhythm.id)) {
         this.addRhythmListItemView(rhythm);
-      }
+      // } else {
+      //   console.log('hey i actually filtered someone');
+      // }
     }.bind(this))
 
   },
 
   render: function() {
+    console.log("getting rendered");
     var content = this.template({
       rhythms: this.collection,
       users: this.users,
