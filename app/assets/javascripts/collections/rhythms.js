@@ -17,7 +17,14 @@ Geometrhythm.Collections.Rhythms = Backbone.Collection.extend({
     }
 
     return model;
-  }
+  },
+
+  // byCreator: function(creator_id) {
+  //   var filtered = this.filter(function(rhythm) {
+  //     return rhythm.get("creator_id") === creator_id;
+  //     });
+  //   return new Geometrhythm.Collections.Rhythms(filtered);
+  // }
 
 });
 

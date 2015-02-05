@@ -3,36 +3,31 @@
   <div class='row'>
 
     <div class='col-md-4'>
-      <ul>
-      <% rhythms.each(function(rhythm) { %>
-        <% if ($('select.portfolio').val() != "" && $('select.portfolio').val() === rhythm.get("creator_id")) { %>
-          <li class='rhythm' data-id='<%= rhythm.id %>'>
-            <%= rhythm.get("rhythm_str") %>
-          </li>
-        <% } else { %>
-          <li> Not created by that user! :) </li>
-        <% } %>
-      <% }); %>
-      </ul>
+      <ol class='subview-version'>
+      </ol>
     </div>
 
     <div class='col-md-4'>
       Filter results by:
       <br>Similar to current rhythm: <%= cur_rhythm.get("rhythm_str") %>
-      <br>Creator: <select class="portfolio" name="user">
+      <br>Creator: <select class="creator" name="creator">
+
         <option value=""></option>
         <% users && users.each(function (user) { %>
-          <option value="<%= user.id %>">
-            <%= user.escape("email") %>
+          <% var sel = (creator == user.id) ? "selected" : "" %>
+          <option value="<%= user.id %>" <%= sel %> >
+            <%= user.escape("email") %>, id <%= user.id %>
           </option>
         <% }); %>
       </select>
 
-      <br>Liker: <select class="collection" name="user">
+      <br>Liker: <select class="liker" name="liker">
         <option value=""></option>
+
         <% users && users.each(function (user) { %>
-          <option value="<%= user.id %>">
-            <%= user.escape("email") %>
+          <% var sel = (liker == user.id) ? "selected" : "" %>
+          <option value="<%= user.id %>" <%= sel %> >
+            <%= user.escape("email") %>, id <%= user.id %>
           </option>
         <% }); %>
       </select>
@@ -41,9 +36,3 @@
     </div>
 
 <container>
-
-
-<!--<input type='text' class="portfolio">
-<button class='portfolio'>All a user's creations</button>
-<input type='text' class="collection">
-<button class='collection'>All a user's likes (their collection)</button>-->

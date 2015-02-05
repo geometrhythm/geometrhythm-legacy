@@ -5,10 +5,6 @@ Geometrhythm.Views.Info = Backbone.View.extend({
   templateClaim: JST['info/claim'],
   templateSignUpToClaim: JST['info/sign_up_to_claim'],
 
-  // initialize: function(options) {
-  //   this.template = this[options.template];
-  // },
-
   initialize: function() {
     this.listenTo(this.model, 'sync change:likers change:play_count', this.render)
   },
@@ -29,27 +25,30 @@ Geometrhythm.Views.Info = Backbone.View.extend({
   },
 
   signUpToClaimRhythm: function() {
-    // window.storedRhythm = $('#current-rhythm').val();
-    // //see root.js too... wish i could get to the session from here!
     window.location.href = '/users/new'
-
   },
 
   claimRhythm: function() {
-    console.log("what happened?");
     var rhythmToClaim = new Geometrhythm.Models.Rhythm();
+
+    var dbRhythm = Geometrhythm.Collections.rhythms.find( function(rhythm){
+        return rhythm.get("rhythm_str") === $('#current-rhythm').val();
+      }
+    );
+    if (dbRhythm) {
+      $('#cur-rhythm-id').val(dbRhythm.id)
+    } else {
+      $('#cur-rhythm-id').val("")
+    }
+
     rhythmToClaim.set({
       creator_id: $('#cur-user-id').val(),
       rhythm_str: $('#current-rhythm').val()
     });
-    debugger
     rhythmToClaim.save({}, {
       success: function() {
         Geometrhythm.Collections.rhythms.add(rhythmToClaim);
         Geometrhythm.Collections.rhythms.fetch();
-        console.log("somethign went ...right???");
-      }, error: function() {
-        console.log("something went wrong");
       }
     });
   },
@@ -58,15 +57,12 @@ Geometrhythm.Views.Info = Backbone.View.extend({
     event.preventDefault();
     var attrs = $(event.currentTarget).serializeJSON();
     var dbName = Geometrhythm.Collections.names.find( function(name){
-        //debugger
         return name.get("name") === attrs["name"].name;
       }
     );
-
     if (!dbName) {
       var dbName = new Geometrhythm.Models.Name(attrs);
       var that = this;
-      //debugger
       dbName.save({}, {
         success: function() {
           that.saveNaming(dbName);
