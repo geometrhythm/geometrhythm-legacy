@@ -1,3 +1,16 @@
+<container>
+
+  <div class='row'>
+
+
+
+<container>
+
+<ul>
 <% rhythms.each(function(rhythm) { %>
-  <%= rhythm.get("rhythm_str") %>
+  <li class='rhythm' data-id='<%= rhythm.id %>'>
+      <%= rhythm.get("rhythm_str") %>
+    </a>
+  </li>
 <% }); %>
+</ul>

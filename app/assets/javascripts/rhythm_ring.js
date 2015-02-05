@@ -5,6 +5,7 @@ $.RhythmRing = function (el, ctx) {
   this.$el = $(el);
   this.ctx = $('#polygon-canvas')[0].getContext("2d");
   this.initializeAudio();
+  //debugger
   this.initializeRhythm($('#current-rhythm').val());
   this.initializeEventHandlers();
   this.animating = false;
@@ -101,6 +102,7 @@ $.RhythmRing.prototype.toggleCell = function(cellId, dontRefresh) {
 }
 
 $.RhythmRing.prototype.refreshWell = function() {
+  //debugger
   $('#current-rhythm').attr('value', this.rhythmAsStr());
   $('#bb-info').trigger('plugin-change');
 }
@@ -118,6 +120,6 @@ $.fn.rhythmRing = function () {
   });
 };
 
-$(function() {
-  $('.rhythm-ring').rhythmRing();
-});
+// $(function() {
+//   $('.rhythm-ring').rhythmRing();
+// });

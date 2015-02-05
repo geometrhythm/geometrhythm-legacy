@@ -12,7 +12,7 @@ Users can:
 <b>Design rhythms</b>
 - [x] Use a visual tool to create a rhythm
 - [x] Listen to the rhythm
-- [ ] Name the rhythm and save it
+- [x] Name the rhythm and save it
 
 <b>Discover rhythms</b>
 - [x] Sign up, log in, and create a profile
