@@ -93,7 +93,7 @@ Further stretch goals:
 - [ ] Share relevant external links for rhythms (recordings)
 - [ ] Share a bit of info about yourself on a profile
 - [ ] Up/down vote names
-- [ ] Comment on comments
+- [x] Comment on comments
 - [ ] Wiki-style article body for rhythm
 
 At first glance, being "a Soundcloud for rhythms", Geometrhythm might seem like a subset. But not exactly! The set of possible rhythms is many orders of magnitude smaller than the set of possible audio waveforms, so in that sense Geomerhythm is maybe more like a cross between Soundcloud and the OEIS.

@@ -15,11 +15,11 @@
 //= require jquery.serializejson.min
 //= require jquery-ui.min
 //= require jquery.cookie
-//= require bootstrap-sprockets
 //= require underscore
 //= require backbone
 //= require geometrhythm
 //= require rhythm_ring
+//= require tooltips
 //= require_tree ./util
 //= require_tree ./rhythm_ring
 //= require_tree ./models

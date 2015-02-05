@@ -9,6 +9,7 @@ $.RhythmRing.prototype.placeCell = function(id, curAngle, temp, isGrabbedOnset) 
   if (temp) $newCell.css('opacity', 0.5);
   if (this.rhythmCells[id] || isGrabbedOnset) { $newCell.addClass("onset"); }
   this.$el.append($newCell);
+
 };
 
 $.RhythmRing.prototype.placeIntercell = function(id, curAngle) {
