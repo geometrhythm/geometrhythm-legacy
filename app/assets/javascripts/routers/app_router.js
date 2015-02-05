@@ -2,7 +2,15 @@ Geometrhythm.Routers.App = Backbone.Router.extend({
   initialize: function(options) {
     this.$rootEl = options.$rootEl;
     this.activeRhythm = new Geometrhythm.Models.Rhythm();
-    this.activeRhythm.set("rhythm_str", "x--x--x---x-x---");
+    if ($.cookie('_Geometrhythm_stored_rhythm')) {
+      //debugger
+      //this.initializeRhythm($.cookie('_Geometrhythm_stored_rhythm'));
+      this.activeRhythm.set("rhythm_str", $.cookie('_Geometrhythm_stored_rhythm'));
+    } else {
+      //this.initializeRhythm($('#current-rhythm').val());
+      this.activeRhythm.set("rhythm_str", $('#current-rhythm').val());
+    }
+    //this.activeRhythm.set("rhythm_str", "x--x--x---x-x---");
     //Geometrhythm.Collections.rhythms.fetch();
   },
 
@@ -35,6 +43,7 @@ Geometrhythm.Routers.App = Backbone.Router.extend({
     Geometrhythm.Collections.rhythms.fetch();
     var listView = new Geometrhythm.Views.RhythmsList({
       collection: Geometrhythm.Collections.rhythms,
+      users: Geometrhythm.Collections.users,
       model: this.activeRhythm
     });
     this._swapView(listView);

@@ -11,11 +11,12 @@ Geometrhythm.Views.Root = Backbone.CompositeView.extend({
   initialize: function() {
     this.listenTo(this.model, 'sync', this.render);
     this.listenTo(this.model, 'change:rhythm_str', this.renderInfoView2);
-    // this.listenTo(this.collection, 'sync add', this.renderInfoView2);
+    this.listenTo(this.collection, 'sync add', this.renderInfoView2); //DEF NEED THIS FOR CLAIM TO WORK!
     setTimeout(this.renderInfoView2, 0);
   },
 
   render: function() {
+    //debugger
     var content = this.template({
       rhythm: this.model
     })
@@ -48,6 +49,7 @@ Geometrhythm.Views.Root = Backbone.CompositeView.extend({
         return rhythm.get("rhythm_str") === $('#current-rhythm').val();
       }
     );
+    //debugger
     if (dbRhythm) {
       if ($('#cur-user-id').val()
         && $('#cur-user-id').val() == dbRhythm.get("creator_id")) {

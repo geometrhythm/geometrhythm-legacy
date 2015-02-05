@@ -5,10 +5,12 @@
     <div class='col-md-4'>
       <ul>
       <% rhythms.each(function(rhythm) { %>
-        <% if (rhythm.get) { %>
+        <% if ($('select.portfolio').val() != "" && $('select.portfolio').val() === rhythm.get("creator_id")) { %>
           <li class='rhythm' data-id='<%= rhythm.id %>'>
             <%= rhythm.get("rhythm_str") %>
           </li>
+        <% } else { %>
+          <li> Not created by that user! :) </li>
         <% } %>
       <% }); %>
       </ul>
@@ -16,9 +18,24 @@
 
     <div class='col-md-4'>
       Filter results by:
+      <br>Similar to current rhythm: <%= cur_rhythm.get("rhythm_str") %>
+      <br>Creator: <select class="portfolio" name="user">
+        <option value=""></option>
+        <% users && users.each(function (user) { %>
+          <option value="<%= user.id %>">
+            <%= user.escape("email") %>
+          </option>
+        <% }); %>
+      </select>
 
-
-
+      <br>Liker: <select class="collection" name="user">
+        <option value=""></option>
+        <% users && users.each(function (user) { %>
+          <option value="<%= user.id %>">
+            <%= user.escape("email") %>
+          </option>
+        <% }); %>
+      </select>
 
 
     </div>

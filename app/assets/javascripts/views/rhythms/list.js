@@ -1,19 +1,23 @@
-Geometrhythm.Views.RhythmsList = Backbone.View.extend({
+Geometrhythm.Views.RhythmsList = Backbone.CompositeView.extend({
 
   template: JST['rhythms/list'],
   events: {
     "click li.rhythm" : "selectRhythm",
-    // "change input.portfolio" : "filterPortfolio",
-    // "change input.collection" : "filterCollection"
+    "change .portfolio" : "render", //it's overwriting the selector too, haha...
+    "change .collection" : "render"
   },
 
-  initialize: function() {
-    this.listenTo(this.collection, 'sync', this.render)
+  initialize: function(options) {
+    this.listenTo(this.collection, 'sync', this.render);
+    this.users = options.users;
   },
 
   render: function() {
+    // debugger
     var content = this.template({
-      rhythms: this.collection
+      rhythms: this.collection,
+      users: this.users,
+      cur_rhythm: this.model
     })
     this.$el.html(content);
     return this;

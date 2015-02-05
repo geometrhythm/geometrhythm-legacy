@@ -36,13 +36,22 @@ Geometrhythm.Views.Info = Backbone.View.extend({
   },
 
   claimRhythm: function() {
+    console.log("what happened?");
     var rhythmToClaim = new Geometrhythm.Models.Rhythm();
     rhythmToClaim.set({
       creator_id: $('#cur-user-id').val(),
       rhythm_str: $('#current-rhythm').val()
     });
-    rhythmToClaim.save();
-    Geometrhythm.Collections.rhythms.add(rhythmToClaim);
+    debugger
+    rhythmToClaim.save({}, {
+      success: function() {
+        Geometrhythm.Collections.rhythms.add(rhythmToClaim);
+        Geometrhythm.Collections.rhythms.fetch();
+        console.log("somethign went ...right???");
+      }, error: function() {
+        console.log("something went wrong");
+      }
+    });
   },
 
   suggestName: function(event) {
