@@ -17,6 +17,8 @@ class User < ActiveRecord::Base
   has_many :rhythms_named, through: :namings, source: :rhythm
   has_many :names_named, through: :namings, source: :name
 
+  has_many :comments
+
   def password=(password)
     @password = password
     self.password_digest = BCrypt::Password.create(password)

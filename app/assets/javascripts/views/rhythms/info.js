@@ -12,7 +12,9 @@ Geometrhythm.Views.Info = Backbone.View.extend({
   events: {
     'click #sign-up-to-claim-rhythm' : 'signUpToClaimRhythm',
     'click #claim-rhythm' : 'claimRhythm',
-    'submit form.suggest-name' : 'suggestName'
+    'submit form.suggest-name' : 'suggestName',
+    'submit form.add-comment' : 'addComment',
+    'submit form.add-meta-comment' : 'addMetaComment'
   },
 
   render: function(options) {
@@ -85,6 +87,42 @@ Geometrhythm.Views.Info = Backbone.View.extend({
         that.model.fetch();
       }
     });
-  }
+  },
+
+  addComment: function(event) {
+    event.preventDefault();
+    var attrs = $(event.currentTarget).serializeJSON();
+    // debugger
+    var comment = new Geometrhythm.Models.Comment({
+      commentable_id: $('#cur-rhythm-id').val(),
+      commentable_type: 'Rhythm',
+      user_id: $('#cur-user-id').val(),
+      body: $(event.currentTarget).serializeJSON()["comment"].body
+    });
+    var that = this;
+    comment.save({}, {
+      success: function() {
+        that.model.fetch();
+      }
+    });
+  },
+
+  addMetaComment: function(event) {
+    event.preventDefault();
+    var attrs = $(event.currentTarget).serializeJSON();
+    // debugger
+    var comment = new Geometrhythm.Models.Comment({
+      commentable_id: $(event.currentTarget).serializeJSON()["comment"].comment_id,
+      commentable_type: 'Comment',
+      user_id: $('#cur-user-id').val(),
+      body: $(event.currentTarget).serializeJSON()["comment"].body
+    });
+    var that = this;
+    comment.save({}, {
+      success: function() {
+        that.model.fetch();
+      }
+    });
+  },
 
 });

@@ -9,4 +9,6 @@ class Rhythm < ActiveRecord::Base
   has_many :namings
   has_many :names, through: :namings, source: :name
   has_many :namers, through: :namings, source: :namer
+
+  has_many :comments, as: :commentable
 end

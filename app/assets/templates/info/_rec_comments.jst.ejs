@@ -1,0 +1,14 @@
+<%= comment.commenter %> says: <%= comment.body %>
+<ol>
+  <% comment.comments.forEach(function(subcomment) { %>
+    <li>
+      <%= JST['info/_rec_comments']({comment: subcomment}) %>
+    </li>
+  <% }); %>
+</ol>
+
+<form class="add-meta-comment">
+  <input type="hidden" name="comment[comment_id]" value="<%= comment.id %>">
+  <input type="text" name="comment[body]">
+  <input type="submit" value="Comment">
+</form>
