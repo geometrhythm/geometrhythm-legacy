@@ -44,7 +44,6 @@ $.RhythmRing.prototype.playRhythm = function() {
           return rhythm.get("rhythm_str") === that.rhythmAsStr();
         }
       );
-      //debugger
       if (dbRhythm) {
         dbRhythm.set("play_count", dbRhythm.get("play_count") + 1);
         dbRhythm.save();

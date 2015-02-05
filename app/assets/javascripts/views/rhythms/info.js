@@ -6,7 +6,7 @@ Geometrhythm.Views.Info = Backbone.View.extend({
   templateSignUpToClaim: JST['info/sign_up_to_claim'],
 
   initialize: function() {
-    this.listenTo(this.model, 'sync change:likers change:play_count', this.render)
+    this.listenTo(this.model, 'sync change:likers', this.render) //change:play_count
   },
 
   events: {
@@ -92,7 +92,6 @@ Geometrhythm.Views.Info = Backbone.View.extend({
   addComment: function(event) {
     event.preventDefault();
     var attrs = $(event.currentTarget).serializeJSON();
-    // debugger
     var comment = new Geometrhythm.Models.Comment({
       commentable_id: $('#cur-rhythm-id').val(),
       commentable_type: 'Rhythm',
@@ -110,7 +109,6 @@ Geometrhythm.Views.Info = Backbone.View.extend({
   addMetaComment: function(event) {
     event.preventDefault();
     var attrs = $(event.currentTarget).serializeJSON();
-    // debugger
     var comment = new Geometrhythm.Models.Comment({
       commentable_id: $(event.currentTarget).serializeJSON()["comment"].comment_id,
       commentable_type: 'Comment',

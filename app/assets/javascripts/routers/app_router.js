@@ -2,15 +2,6 @@ Geometrhythm.Routers.App = Backbone.Router.extend({
   initialize: function(options) {
     this.$rootEl = options.$rootEl;
     this.activeRhythm = new Geometrhythm.Models.Rhythm();
-
-    if ($.cookie('_Geometrhythm_stored_rhythm')) {
-      this.activeRhythm.set("rhythm_str", $.cookie('_Geometrhythm_stored_rhythm'));
-    } else if ($('#current-rhythm').val()){
-      this.activeRhythm.set("rhythm_str", $('#current-rhythm').val());
-    } else {
-      this.activeRhythm.set("rhythm_str", "x--x--x---x-x---");
-    }
-
   },
 
   routes: {
@@ -22,6 +13,14 @@ Geometrhythm.Routers.App = Backbone.Router.extend({
   },
 
   root: function() {
+    if ($.cookie('_Geometrhythm_stored_rhythm')) {
+      this.activeRhythm.set("rhythm_str", $.cookie('_Geometrhythm_stored_rhythm'));
+      $('#current-rhythm').attr('value', $.cookie('_Geometrhythm_stored_rhythm'));
+    } else {
+      this.activeRhythm.set("rhythm_str", "x--x--x---x-x---");
+      $('#current-rhythm').attr('value', "x--x--x---x-x---");
+    }
+
     Geometrhythm.Collections.rhythms.fetch();
     var rootView = new Geometrhythm.Views.Root({
       model: this.activeRhythm,

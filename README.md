@@ -20,7 +20,7 @@ Users can:
 
 <b>Discuss rhythms</b>
 - [x] Like a rhythm
-- [ ] Comment on a rhythm
+- [x] Comment on a rhythm
 - [x] See play counts of rhythms
 
 ## Design Docs

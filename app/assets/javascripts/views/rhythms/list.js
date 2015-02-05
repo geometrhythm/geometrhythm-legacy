@@ -44,7 +44,7 @@ Geometrhythm.Views.RhythmsList = Backbone.CompositeView.extend({
     var id = $(event.currentTarget).data('id');
     var selectedRhythm = this.collection.getOrFetch(id);
     this.model.set(selectedRhythm.attributes);
-    $.removeCookie('_Geometrhythm_stored_rhythm', { path: '/' });
+    $.cookie('_Geometrhythm_stored_rhythm', $(event.currentTarget).attr('rhythm-str'), { expires: 7, path: '/' });
     Backbone.history.navigate('/', {trigger: true})
   },
 

@@ -2,7 +2,6 @@ module Api
   class LikesController < ApplicationController
     def create
       @like = current_user.rhythm_likings.new(like_params)
-      #debugger
       if @like.save
         render json: @like
       else
@@ -15,11 +14,6 @@ module Api
       @like.try(:destroy)
       render json: {}
     end
-
-    # def index
-    #   @likes = Like.all
-    #   render :all
-    # end
 
     def show
       @like = Like.find(params[:id])
