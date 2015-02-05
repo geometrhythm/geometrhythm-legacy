@@ -10,19 +10,19 @@ Geometrhythm is a network inspired by Soundcloud, but specifically for rhythms.
 Users can:
 
 <b>Design rhythms</b>
-- [ ] Use a visual tool to create a rhythm
-- [ ] Listen to the rhythm
+- [x] Use a visual tool to create a rhythm
+- [x] Listen to the rhythm
 - [ ] Name the rhythm and save it
 
 <b>Discover rhythms</b>
-- [ ] Sign up, log in, and create a profile
+- [x] Sign up, log in, and create a profile
 - [ ] Browse other users' created & liked rhythms
 - [ ] Tag rhythms and search by tag
 
 <b>Discuss rhythms</b>
-- [ ] Like a rhythm
+- [x] Like a rhythm
 - [ ] Comment on a rhythm
-- [ ] See play counts of rhythms
+- [x] See play counts of rhythms
 
 ## Design Docs
 * [View Wireframes][views]

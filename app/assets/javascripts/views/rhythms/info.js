@@ -15,7 +15,8 @@ Geometrhythm.Views.Info = Backbone.View.extend({
 
   events: {
     'click #sign-up-to-claim-rhythm' : 'signUpToClaimRhythm',
-    'click #claim-rhythm' : 'claimRhythm'
+    'click #claim-rhythm' : 'claimRhythm',
+    'submit form.suggest-name' : 'suggestName'
   },
 
   render: function(options) {
@@ -42,5 +43,43 @@ Geometrhythm.Views.Info = Backbone.View.extend({
     });
     rhythmToClaim.save();
     Geometrhythm.Collections.rhythms.add(rhythmToClaim);
+  },
+
+  suggestName: function(event) {
+    event.preventDefault();
+    var attrs = $(event.currentTarget).serializeJSON();
+    var dbName = Geometrhythm.Collections.names.find( function(name){
+        //debugger
+        return name.get("name") === attrs["name"].name;
+      }
+    );
+
+    if (!dbName) {
+      var dbName = new Geometrhythm.Models.Name(attrs);
+      var that = this;
+      //debugger
+      dbName.save({}, {
+        success: function() {
+          that.saveNaming(dbName);
+        }
+      });
+    } else {
+      this.saveNaming(dbName);
+    }
+  },
+
+  saveNaming: function(dbName) {
+    var naming = new Geometrhythm.Models.Naming({
+      rhythm_id: $('#cur-rhythm-id').val(),
+      namer_id: $('#cur-user-id').val(),
+      name_id: dbName.id
+    });
+    var that = this;
+    naming.save({}, {
+      success: function() {
+        that.model.fetch();
+      }
+    });
   }
+
 });

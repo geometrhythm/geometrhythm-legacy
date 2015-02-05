@@ -6,3 +6,8 @@ json.likers rhythm.likers do |liker|
   json.id liker.id
   json.email liker.email
 end
+
+json.namings rhythm.namings do |naming|
+  json.name naming.name
+  json.namer naming.namer
+end

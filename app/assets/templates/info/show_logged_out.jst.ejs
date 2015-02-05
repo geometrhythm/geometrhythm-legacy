@@ -1,6 +1,3 @@
-Rhythm's Id: <%= rhythm.get("id") %><br>
-Rhythm: <%= rhythm.get("rhythm_str") %><br>
-Play Count: <%= rhythm.get("play_count") %><br>
-Created by: <%= rhythm.get("creator") %>
+<%= JST['info/_details']({rhythm: rhythm}) %>
 
 <br>Sign up to be able to comment and build collections!
