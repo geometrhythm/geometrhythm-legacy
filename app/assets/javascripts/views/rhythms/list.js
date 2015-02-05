@@ -31,6 +31,7 @@ Geometrhythm.Views.RhythmsList = Backbone.CompositeView.extend({
 
   render: function() {
     console.log("getting rendered");
+    console.log(this.collection);
     var content = this.template({
       rhythms: this.collection,
       users: this.users,
@@ -72,15 +73,18 @@ Geometrhythm.Views.RhythmsList = Backbone.CompositeView.extend({
     var that = this;
     this.collection.each(function(rhythm) {
       if (rhythm.get("creator_id") != that.creatorId) {
-        that.collection.remove(rhythm, {
-          success: function() {
-            that.collection.fetch();
-          }
-        });
-        that.collection.fetch();
+        that.removeRhythmListItemView(rhythm);
+        // that.collection.remove(rhythm, {
+        //   success: function() {
+        //     //that.collection.fetch();
+        //   }
+        // });
+        //that.collection.fetch();
       }
     });
-    this.render();
+    // this.render();
+    console.log("in filter method:");
+    console.log(this.collection);
   },
 
   filterByLiker: function(event) {
