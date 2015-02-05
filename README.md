@@ -16,7 +16,7 @@ Users can:
 
 <b>Discover rhythms</b>
 - [x] Sign up, log in, and create a profile
-- [ ] Browse other users' created & liked rhythms
+- [x] Browse other users' created & liked rhythms
 
 <b>Discuss rhythms</b>
 - [x] Like a rhythm

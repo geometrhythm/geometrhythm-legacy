@@ -40,9 +40,13 @@ Geometrhythm.Routers.App = Backbone.Router.extend({
   },
 
   likesOfUser: function(id) {
-    Geometrhythm.Collections.rhythms.fetch();
+    var likesCollection = new Geometrhythm.Collections.Rhythms();
+    likesCollection.filter = {};
+    likesCollection.filter.liker_id = id;
+    likesCollection.fetchByFilter();
+    //Geometrhythm.Collections.rhythms.fetch();
     var listView = new Geometrhythm.Views.RhythmsList({
-      collection: Geometrhythm.Collections.rhythms,
+      collection: likesCollection, //Geometrhythm.Collections.rhythms,
       users: Geometrhythm.Collections.users,
       model: this.activeRhythm,
       liker: id
@@ -51,12 +55,13 @@ Geometrhythm.Routers.App = Backbone.Router.extend({
   },
 
   creationsOfUser: function(id) {
-    var creationCollection = new Geometrhythm.Collections.Rhythms();
-    creationCollection.filter.creator_id = id;
-    creationCollection.fetchByFilter();
+    var creationsCollection = new Geometrhythm.Collections.Rhythms();
+    creationsCollection.filter = {};
+    creationsCollection.filter.creator_id = id;
+    creationsCollection.fetchByFilter();
     // Geometrhythm.Collections.rhythms.fetch();
     var listView = new Geometrhythm.Views.RhythmsList({
-      collection: creationCollection, //Geometrhythm.Collections.rhythms,
+      collection: creationsCollection, //Geometrhythm.Collections.rhythms,
       users: Geometrhythm.Collections.users,
       model: this.activeRhythm,
       creator: id

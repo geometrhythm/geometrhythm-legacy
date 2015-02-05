@@ -3,7 +3,12 @@
   Liked by:
   <ul>
     <% rhythm.get("likers").forEach(function(liker) { %>
-      <li><%= liker.email %></li>
+      <li>
+        <%= liker.email %>
+        <button class="view-likes" value="<%= liker.id %>" >
+          all this user's likes
+        </button>
+      </li>
     <% }) %>
   </ul>
 <% } %>

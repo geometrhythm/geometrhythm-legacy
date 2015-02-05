@@ -15,7 +15,8 @@ Geometrhythm.Views.Info = Backbone.View.extend({
     'submit form.suggest-name' : 'suggestName',
     'submit form.add-comment' : 'addComment',
     'submit form.add-meta-comment' : 'addMetaComment',
-    'click button.view-collection' : 'viewCollection'
+    'click button.view-creations' : 'viewCreations',
+    'click button.view-likes' : 'viewLikes'
   },
 
   render: function(options) {
@@ -124,9 +125,14 @@ Geometrhythm.Views.Info = Backbone.View.extend({
     });
   },
 
-  viewCollection: function(event) {
-    // debugger
-    Backbone.history.navigate("/creations/" + $(event.currentTarget).val(), {trigger: true});
+  viewCreations: function(event) {
+    Backbone.history.navigate("/creations/" + $(event.currentTarget).val(),
+      {trigger: true});
+  },
+
+  viewLikes: function(event) {
+    Backbone.history.navigate("/likes/" + $(event.currentTarget).val(), 
+      {trigger: true});
   }
 
 });

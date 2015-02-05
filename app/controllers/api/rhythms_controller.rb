@@ -10,22 +10,15 @@ module Api
       end
     end
 
-    # def destroy
-    #   @rhythm = current_user.rhythms.find(params[:id])
-    #   @rhythm.try(:destroy)
-    #   render json: {}
-    # end
-
     def update
       @rhythm = Rhythm.find(params[:id])
       @rhythm.update(rhythm_params)
-      #@rhythm.save
-      #render :nil
       render json: @rhythm
-      # render :update
     end
 
     def index
+      @rhythms = @rhythms.where(id: params[:id]) if params[:id]
+
       if params[:creator_id]
         @rhythms = Rhythm.where(creator_id: params[:creator_id])
       else
