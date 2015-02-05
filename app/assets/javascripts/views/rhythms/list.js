@@ -16,8 +16,16 @@ Geometrhythm.Views.RhythmsList = Backbone.CompositeView.extend({
     this.listenTo(this.collection, 'remove', this.removeRhythmListItemView)
 
     this.users = options.users;
-    this.likerId = options.liker;
-    this.creatorId = options.creator;
+
+    // if (options.creator) {
+      this.creatorId = options.creator;
+    //   this.filterByCreator();
+    // } else if (options.liker) {
+      this.likerId = options.liker;
+    //   this.filterByLiker();
+    // } else {
+    //
+    // }
 
     this.collection.each(function(rhythm) {
       this.addRhythmListItemView(rhythm);
@@ -38,15 +46,6 @@ Geometrhythm.Views.RhythmsList = Backbone.CompositeView.extend({
     return this;
   },
 
-  selectRhythm: function(event){
-    event.preventDefault();
-    var id = $(event.currentTarget).data('id');
-    var selectedRhythm = this.collection.getOrFetch(id);
-    this.model.set(selectedRhythm.attributes);
-    $.cookie('_Geometrhythm_stored_rhythm', $(event.currentTarget).attr('rhythm-str'), { expires: 7, path: '/' });
-    Backbone.history.navigate('/', {trigger: true})
-  },
-
   addRhythmListItemView: function(rhythm) {
     var rhythmListItemView = new Geometrhythm.Views.RhythmListItemView({
       model: rhythm
@@ -63,15 +62,21 @@ Geometrhythm.Views.RhythmsList = Backbone.CompositeView.extend({
   },
 
   filterByCreator: function(event) {
-    if ($(event.currentTarget).val() === "") {
+    if (event) {
+      var creator_id = $(event.currentTarget).val();
+    } else {
+      var creator_id = this.creatorId;
+    }
+
+    if (creator_id === "") {
       this.creatorId = null;
       this.collection.filter.creator_id = null;
       this.collection.fetch();
     } else {
-      this.creatorId = $(event.currentTarget).val();
+      this.creatorId = creator_id;
       this.collection.filter.creator_id = this.creatorId;
       this.collection.fetchByFilter();
-      debugger
+      // debugger
     }
 
     // this.collection.fetch({ data: { creator_id: this.creatorId } });
@@ -88,7 +93,7 @@ Geometrhythm.Views.RhythmsList = Backbone.CompositeView.extend({
     this.rhythmStr = $(event.currentTarget).val()
     this.collection.filter.rhythm_str = this.rhythmStr;
     this.collection.fetchByFilter();
-    debugger
+    // debugger
   },
 
   filterByRhythmId: function(event) {
@@ -96,7 +101,16 @@ Geometrhythm.Views.RhythmsList = Backbone.CompositeView.extend({
     this.filterId = $(event.currentTarget).val()
     this.collection.filter.id = this.filterId;
     this.collection.fetchByFilter();
-    debugger
+    // debugger
+  },
+
+  selectRhythm: function(event){
+    event.preventDefault();
+    var id = $(event.currentTarget).data('id');
+    var selectedRhythm = this.collection.getOrFetch(id);
+    this.model.set(selectedRhythm.attributes);
+    $.cookie('_Geometrhythm_stored_rhythm', $(event.currentTarget).attr('rhythm-str'), { expires: 7, path: '/' });
+    Backbone.history.navigate('/', {trigger: true})
   },
 
 });

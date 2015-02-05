@@ -21,7 +21,7 @@ Geometrhythm.Collections.Rhythms = Backbone.Collection.extend({
   },
 
   fetchByFilter: function() {
-    debugger
+    // debugger
     this.fetch({ data: this.filter });
   }
 

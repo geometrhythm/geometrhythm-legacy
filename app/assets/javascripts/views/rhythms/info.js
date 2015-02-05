@@ -14,7 +14,8 @@ Geometrhythm.Views.Info = Backbone.View.extend({
     'click #claim-rhythm' : 'claimRhythm',
     'submit form.suggest-name' : 'suggestName',
     'submit form.add-comment' : 'addComment',
-    'submit form.add-meta-comment' : 'addMetaComment'
+    'submit form.add-meta-comment' : 'addMetaComment',
+    'click button.view-collection' : 'viewCollection'
   },
 
   render: function(options) {
@@ -122,5 +123,10 @@ Geometrhythm.Views.Info = Backbone.View.extend({
       }
     });
   },
+
+  viewCollection: function(event) {
+    // debugger
+    Backbone.history.navigate("/creations/" + $(event.currentTarget).val(), {trigger: true});
+  }
 
 });

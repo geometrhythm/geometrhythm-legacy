@@ -51,9 +51,12 @@ Geometrhythm.Routers.App = Backbone.Router.extend({
   },
 
   creationsOfUser: function(id) {
-    Geometrhythm.Collections.rhythms.fetch();
+    var creationCollection = new Geometrhythm.Collections.Rhythms();
+    creationCollection.filter.creator_id = id;
+    creationCollection.fetchByFilter();
+    // Geometrhythm.Collections.rhythms.fetch();
     var listView = new Geometrhythm.Views.RhythmsList({
-      collection: Geometrhythm.Collections.rhythms,
+      collection: creationCollection, //Geometrhythm.Collections.rhythms,
       users: Geometrhythm.Collections.users,
       model: this.activeRhythm,
       creator: id
