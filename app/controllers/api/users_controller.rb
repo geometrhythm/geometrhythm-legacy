@@ -5,45 +5,23 @@ module Api
       @users = User.all
 
       if params[:creator_id]
-        query = <<-SQL
-        SELECT
-          u.*
-        FROM
-          users AS u
-        LEFT OUTER JOIN
-          likes AS l
-        ON
-          l.liker_id = u.id
-        WHERE
-          l.rhythm_id IN (SELECT
-                            r.id
-                          FROM
-                            rhythms AS r
-                          WHERE
-                            r.creator_id = ? )
-        SQL
-        @users = @users.find_by_sql( [ query, params[:creator_id] ] )
+        @users = @users.joins('LEFT OUTER JOIN likes
+          on likes.liker_id = users.id')
+          .where('likes.rhythm_id' =>
+          Rhythm.where(creator_id:
+          params[:creator_id])
+          .pluck(:id))
+          .distinct
       end
 
       if params[:liker_id]
-        query = <<-SQL
-        SELECT
-          u.*
-        FROM
-          users AS u
-        WHERE
-          u.id IN (SELECT
-                    r.creator_id
-                  FROM
-                    rhythms AS r
-                  LEFT OUTER JOIN
-                    likes AS l
-                  ON
-                    r.id = l.rhythm_id
-                  WHERE
-                    l.liker_id = ? )
-        SQL
-        @users = @users.find_by_sql( [ query, params[:liker_id] ] )
+        @users = @users.where(id:
+          Rhythm.joins('LEFT OUTER JOIN likes
+          on likes.rhythm_id = rhythms.id')
+          .where('likes.liker_id' =>
+          params[:liker_id])
+          .pluck(:creator_id))
+          .distinct
       end
 
       render :all

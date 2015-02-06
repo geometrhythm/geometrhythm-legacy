@@ -19,17 +19,19 @@ module Api
     def index
       @rhythms = Rhythm.all
 
-      if params[:creator_id]
+      if params[:creator_id] #&& !@rhythms.empty?
         @rhythms = Rhythm.where(creator_id: params[:creator_id])
       end
 
-      if params[:rhythm_str]
+      if params[:rhythm_str] #&& !@rhythms.empty?
         @rhythms = @rhythms.where(rhythm_str: params[:rhythm_str])
       end
 
-      if params[:liker_id]
+      if params[:liker_id] #&& !@rhythms.empty?
         @rhythms = @rhythms.where(id: User.find(params[:liker_id]).liked_rhythms)
       end
+
+      # @rhythms = @rhythms.page(params[:page])
 
       render :all
     end

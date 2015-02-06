@@ -39,11 +39,20 @@ Geometrhythm.Views.RhythmsList = Backbone.CompositeView.extend({
     })
     this.$el.html(content);
     this.attachSubviews();
+    if
     this.$el.find('.mini-rhythm-ring').miniRhythmRing();
-    console.log("ptntl creators: ");
-    console.log(this.potentialCreators);
-    console.log("ptntl likers: ");
-    console.log(this.potentialLikers);
+
+    console.log("");
+    console.log("collection: " + this.collection.length);
+    console.log("");
+    console.log("ptntl creators: " + this.potentialCreators.length);
+    console.log("creators filter: ");
+    console.log(this.potentialCreators.filter);
+    console.log("");
+    console.log("ptntl likers: " + this.potentialLikers.length);
+    console.log("likers filter: ");
+    console.log(this.potentialLikers.filter);
+
     return this;
   },
 
@@ -68,13 +77,15 @@ Geometrhythm.Views.RhythmsList = Backbone.CompositeView.extend({
       this.creatorId = null;
       delete this.collection.filter.creator_id;
       delete this.potentialLikers.filter.creator_id;
+      this.potentialLikers.fetch();
     } else {
       this.collection.filter.creator_id = this.creatorId;
       this.potentialLikers.filter.creator_id = this.creatorId;
+      this.potentialLikers.fetchByFilter();
     }
     this.collection.fetchByFilter();
-    this.potentialLikers.fetchByFilter();
-    this.potentialCreators.fetchByFilter();
+
+    // this.potentialCreators.fetchByFilter(); //the issue
   },
 
   filterByLiker: function(event) {
@@ -83,13 +94,15 @@ Geometrhythm.Views.RhythmsList = Backbone.CompositeView.extend({
       this.likerId = null;
       delete this.collection.filter.liker_id;
       delete this.potentialCreators.filter.liker_id;
+      this.potentialCreators.fetch();
     } else {
       this.collection.filter.liker_id = this.likerId;
       this.potentialCreators.filter.liker_id = this.likerId;
+      this.potentialCreators.fetchByFilter();
     }
     this.collection.fetchByFilter();
-    this.potentialCreators.fetchByFilter();
-    this.potentialLikers.fetchByFilter();
+
+    // this.potentialLikers.fetchByFilter(); //the issue
   },
 
   filterByRhythmStr: function(event) {
@@ -101,8 +114,6 @@ Geometrhythm.Views.RhythmsList = Backbone.CompositeView.extend({
       this.collection.filter.rhythm_str = this.rhythmStr;
     }
     this.collection.fetchByFilter();
-    this.potentialCreators.fetchByFilter();
-    this.potentialLikers.fetchByFilter();
   },
 
   selectRhythm: function(event){
