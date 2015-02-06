@@ -34,6 +34,11 @@ module Api
       # @rhythms = @rhythms.page(params[:page])
 
       render :all
+      # render :all => {
+      #   models: @rhythms,
+      #   page_number: params[:page_number],
+      #   total_pages: @rhythms.total_pages
+      # }
     end
 
     def show

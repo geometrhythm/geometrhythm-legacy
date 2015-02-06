@@ -30,6 +30,7 @@ Geometrhythm.Routers.App = Backbone.Router.extend({
   },
 
   list: function() {
+    // Geometrhythm.Collections.rhythms.fetch({data: { page: 1 }});
     Geometrhythm.Collections.rhythms.fetch();
     var listView = new Geometrhythm.Views.RhythmsList({
       collection: Geometrhythm.Collections.rhythms,

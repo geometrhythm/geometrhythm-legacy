@@ -15,7 +15,7 @@ Geometrhythm.Views.RhythmListItemView = Backbone.CompositeView.extend({
     }.bind(this));
     this.playPos = -1;
     this.curBus = 0;
-    window.curPlayingRhythm = null;
+    Geometrhythm.curPlayingRhythm = null;
   },
 
   render: function() {
@@ -34,14 +34,14 @@ Geometrhythm.Views.RhythmListItemView = Backbone.CompositeView.extend({
   togglePlay: function(event) {
     event.stopPropagation();
     //console.log("hehe it worked");
-    if (window.curPlayingRhythm !== $(event.currentTarget).attr('rhythm-str')) { //(window.curPlayingRhythm = null)
-      window.curPlayingRhythm = $(event.currentTarget).attr('rhythm-str');
+    if (Geometrhythm.curPlayingRhythm !== $(event.currentTarget).attr('rhythm-str')) { //(Geometrhythm.curPlayingRhythm = null)
+      Geometrhythm.curPlayingRhythm = $(event.currentTarget).attr('rhythm-str');
       this.playRhythm();
       // debugger
       $(event.currentTarget).removeClass('glyphicon-play').addClass('glyphicon-pause');
       //  $('#play-pause').addClass("active").html('Pause');
-    } else { //if (window.curPlayingRhythm === $(event.currentTarget).attr('rhythm-str'))
-      window.curPlayingRhythm = null;
+    } else { //if (Geometrhythm.curPlayingRhythm === $(event.currentTarget).attr('rhythm-str'))
+      Geometrhythm.curPlayingRhythm = null;
       clearInterval(this.playingRhythm);
       $(event.currentTarget).removeClass('glyphicon-pause').addClass('glyphicon-play');
       //  $('#play-pause').removeClass("active").html('Play');
@@ -53,7 +53,7 @@ Geometrhythm.Views.RhythmListItemView = Backbone.CompositeView.extend({
 
   playRhythm: function() {
     this.playingRhythm = setInterval(function () {
-      if (window.curPlayingRhythm === this.rhythmStr) {
+      if (Geometrhythm.curPlayingRhythm === this.rhythmStr) {
         var fill = this.rhythmCells[this.playPos] ? 'black' : 'white';
 
         this.$el.find(".mini-cell[ord='" + this.playPos + "']")
@@ -85,7 +85,7 @@ Geometrhythm.Views.RhythmListItemView = Backbone.CompositeView.extend({
           }
         }
       } else {
-        console.log("wow ok you can turn yourself off");
+        // console.log("wow ok you can turn yourself off");
         clearInterval(this.playingRhythm);
         this.$el.find('i').removeClass('glyphicon-pause').addClass('glyphicon-play');
       }

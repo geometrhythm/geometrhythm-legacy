@@ -39,19 +39,21 @@ Geometrhythm.Views.RhythmsList = Backbone.CompositeView.extend({
     })
     this.$el.html(content);
     this.attachSubviews();
-    if
+
+    // if no subviews, say "no rhythms match."
+
     this.$el.find('.mini-rhythm-ring').miniRhythmRing();
 
-    console.log("");
-    console.log("collection: " + this.collection.length);
-    console.log("");
-    console.log("ptntl creators: " + this.potentialCreators.length);
-    console.log("creators filter: ");
-    console.log(this.potentialCreators.filter);
-    console.log("");
-    console.log("ptntl likers: " + this.potentialLikers.length);
-    console.log("likers filter: ");
-    console.log(this.potentialLikers.filter);
+    // console.log("");
+    // console.log("collection: " + this.collection.length);
+    // console.log("");
+    // console.log("ptntl creators: " + this.potentialCreators.length);
+    // console.log("creators filter: ");
+    // console.log(this.potentialCreators.filter);
+    // console.log("");
+    // console.log("ptntl likers: " + this.potentialLikers.length);
+    // console.log("likers filter: ");
+    // console.log(this.potentialLikers.filter);
 
     return this;
   },
@@ -124,5 +126,23 @@ Geometrhythm.Views.RhythmsList = Backbone.CompositeView.extend({
     $.cookie('_Geometrhythm_stored_rhythm', $(event.currentTarget).attr('rhythm-str'), { expires: 7, path: '/' });
     Backbone.history.navigate('/', {trigger: true})
   },
+
+  listenForScroll: function () {
+    $(window).off("scroll"); // remove previous listeners
+    var throttledCallback = _.throttle(this.nextPage.bind(this), 200);
+    $(window).on("scroll", throttledCallback);
+  },
+
+  nextPage: function () {
+    var view = this;
+    if ($(window).scrollTop() > $(document).height() - $(window).height() - 50) {
+      if (view.collection.page_number < view.collection.total_pages) {
+        view.collection.fetch({
+          data: { page: view.collection.page_number + 1 },
+          remove: false
+        });
+      }
+    }
+  }
 
 });
