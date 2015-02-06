@@ -1,5 +1,6 @@
 div.rhythm:hover {
-  cursor: pointer
+  cursor: pointer;
+  background-color: Cornsilk;
 }
 
 div.rhythm {
@@ -35,4 +36,19 @@ div.rhythm {
   color: black;
   position: absolute;
   transform-origin: 35px 35px;
+}
+
+div.rhythm i {
+  position: absolute;
+  top: 42px;
+  left: 43px;
+  visibility: hidden;
+}
+
+div.rhythm:hover i {
+  visibility: visible;
+}
+
+div.rhythm i:hover {
+  color: DodgerBlue;
 }

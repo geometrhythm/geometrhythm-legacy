@@ -3,7 +3,7 @@ Geometrhythm.Views.RhythmsList = Backbone.CompositeView.extend({
   template: JST['rhythms/list'],
 
   events: {
-    "click .rhythm" : "selectRhythm",
+    "click .rhythm:not('i')" : "selectRhythm",
     "change .creator" : "filterByCreator",
     "change .liker" : "filterByLiker",
     "change .rhythm-str" : "filterByRhythmStr",
