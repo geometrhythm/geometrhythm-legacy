@@ -1,4 +1,9 @@
-<div class="rhythm" rhythm-str="<%= rhythm.get("rhythm_str") %>">
-  <%= rhythm.get("rhythm_str") %>, by <%= rhythm.get("creator_id") %>
-  <div class="mini-rhythm-ring" rhythm-str="<%= rhythm.get("rhythm_str") %>"></div>
+<div class="rhythm"
+  rhythm-str="<%= rhythm.get("rhythm_str") %>">
+
+  <div class="mini-rhythm-ring"
+    rhythm-str="<%= rhythm.get("rhythm_str") %>">
+    <canvas class='mini-polygon-canvas' height='89' width='89'></canvas>
+  </div>
+  
 </div>
