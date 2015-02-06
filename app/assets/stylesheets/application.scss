@@ -10,19 +10,11 @@
  * defined in the other CSS/SCSS files in this directory. It is generally better to create a new
  * file per style scope.
  *
- *= jquery-ui.theme.min
  *= require_tree .
  *= require_self
- 
- */
 
+ */
+ @import "compass/css3";
  @import "bootswatch/paper/variables";
  @import "bootstrap";
- body { padding-top: 60px; }
  @import "bootswatch/paper/bootswatch";
-//  @import "bootstrap-sprockets";
-//  @font-face {
-//   font-family: 'Glyphicons Halflings';
-//   src: url("app/assets/fonts/bootstrap/glyphicons-halflings-regular.eot");
-//   src: url("app/assets/fonts/bootstrap/glyphicons-halflings-regular.eot?#iefix") format("embedded-opentype"), url("fonts/bootstrap/glyphicons-halflings-regular.woff") format("woff"), url("fonts/bootstrap/glyphicons-halflings-regular.ttf") format("truetype"), url("fonts/bootstrap/glyphicons-halflings-regular.svg#glyphicons_halflingsregular") format("svg");
-// }
