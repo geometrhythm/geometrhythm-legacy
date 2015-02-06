@@ -11,23 +11,27 @@ Geometrhythm.Views.RhythmsList = Backbone.CompositeView.extend({
   },
 
   initialize: function(options) {
-    this.listenTo(this.collection, 'sync', this.render);
-    this.listenTo(this.collection, 'add', this.addRhythmListItemView);
-    this.listenTo(this.collection, 'remove', this.removeRhythmListItemView)
-
-    this.users = options.users;
+    this.potentialCreators = options.potentialCreators;
+    this.potentialLikers = options.potentialLikers;
     this.creatorId = options.creator;
     this.likerId = options.liker;
 
     this.collection.each(function(rhythm) {
       this.addRhythmListItemView(rhythm);
     }.bind(this))
+
+    this.listenTo(this.collection, 'sync', this.render);
+    this.listenTo(this.potentialCreators, 'sync', this.render);
+    this.listenTo(this.potentialLikers, 'sync', this.render);
+    this.listenTo(this.collection, 'add', this.addRhythmListItemView);
+    this.listenTo(this.collection, 'remove', this.removeRhythmListItemView)
   },
 
   render: function() {
     var content = this.template({
       rhythms: this.collection,
-      users: this.users,
+      potentialCreators: this.potentialCreators,
+      potentialLikers: this.potentialLikers,
       cur_rhythm: this.model,
       liker: this.likerId,
       creator: this.creatorId,
@@ -36,6 +40,10 @@ Geometrhythm.Views.RhythmsList = Backbone.CompositeView.extend({
     this.$el.html(content);
     this.attachSubviews();
     this.$el.find('.mini-rhythm-ring').miniRhythmRing();
+    console.log("ptntl creators: ");
+    console.log(this.potentialCreators);
+    console.log("ptntl likers: ");
+    console.log(this.potentialLikers);
     return this;
   },
 
@@ -59,10 +67,14 @@ Geometrhythm.Views.RhythmsList = Backbone.CompositeView.extend({
     if (this.creatorId === "") {
       this.creatorId = null;
       delete this.collection.filter.creator_id;
+      delete this.potentialLikers.filter.creator_id;
     } else {
       this.collection.filter.creator_id = this.creatorId;
+      this.potentialLikers.filter.creator_id = this.creatorId;
     }
     this.collection.fetchByFilter();
+    this.potentialLikers.fetchByFilter();
+    this.potentialCreators.fetchByFilter();
   },
 
   filterByLiker: function(event) {
@@ -70,10 +82,14 @@ Geometrhythm.Views.RhythmsList = Backbone.CompositeView.extend({
     if (this.likerId === "") {
       this.likerId = null;
       delete this.collection.filter.liker_id;
+      delete this.potentialCreators.filter.liker_id;
     } else {
       this.collection.filter.liker_id = this.likerId;
+      this.potentialCreators.filter.liker_id = this.likerId;
     }
     this.collection.fetchByFilter();
+    this.potentialCreators.fetchByFilter();
+    this.potentialLikers.fetchByFilter();
   },
 
   filterByRhythmStr: function(event) {
@@ -85,6 +101,8 @@ Geometrhythm.Views.RhythmsList = Backbone.CompositeView.extend({
       this.collection.filter.rhythm_str = this.rhythmStr;
     }
     this.collection.fetchByFilter();
+    this.potentialCreators.fetchByFilter();
+    this.potentialLikers.fetchByFilter();
   },
 
   selectRhythm: function(event){

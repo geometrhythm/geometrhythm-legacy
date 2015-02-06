@@ -13,10 +13,10 @@
       <br>Creator: <select class="creator" name="creator">
 
         <option value=""></option>
-        <% users && users.each(function (user) { %>
-          <% var sel = (creator == user.id) ? "selected" : "" %>
-          <option value="<%= user.id %>" <%= sel %> >
-            <%= user.escape("email") %>, id <%= user.id %>
+        <% potentialCreators && potentialCreators.each(function (potentialCreator) { %>
+          <% var sel = (creator == potentialCreator.id) ? "selected" : "" %>
+          <option value="<%= potentialCreator.id %>" <%= sel %> >
+            <%= potentialCreator.escape("email") %>, id <%= potentialCreator.id %>
           </option>
         <% }); %>
       </select>
@@ -24,10 +24,10 @@
       <br>Liker: <select class="liker" name="liker">
         <option value=""></option>
 
-        <% users && users.each(function (user) { %>
-          <% var sel = (liker == user.id) ? "selected" : "" %>
-          <option value="<%= user.id %>" <%= sel %> >
-            <%= user.escape("email") %>, id <%= user.id %>
+        <% potentialLikers && potentialLikers.each(function (potentialLiker) { %>
+          <% var sel = (liker == potentialLiker.id) ? "selected" : "" %>
+          <option value="<%= potentialLiker.id %>" <%= sel %> >
+            <%= potentialLiker.escape("email") %>, id <%= potentialLiker.id %>
           </option>
         <% }); %>
       </select>

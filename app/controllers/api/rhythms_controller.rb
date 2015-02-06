@@ -17,12 +17,10 @@ module Api
     end
 
     def index
-      @rhythms = @rhythms.where(id: params[:id]) if params[:id]
+      @rhythms = Rhythm.all
 
       if params[:creator_id]
         @rhythms = Rhythm.where(creator_id: params[:creator_id])
-      else
-        @rhythms = Rhythm.all
       end
 
       if params[:rhythm_str]
