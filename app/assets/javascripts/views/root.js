@@ -12,6 +12,8 @@ Geometrhythm.Views.Root = Backbone.CompositeView.extend({
     this.listenTo(this.model, 'sync', this.render);
     this.listenTo(this.model, 'change:rhythm_str', this.renderInfoView);
     this.listenTo(this.collection, 'sync', this.renderInfoView);
+    // this.updateModel();
+    // this.wtfStoreRhythmId();
     setTimeout(this.renderInfoView, 0);
   },
 
@@ -23,16 +25,30 @@ Geometrhythm.Views.Root = Backbone.CompositeView.extend({
     return this;
   },
 
-  updateModel: function(event) {
+  // wtfStoreRhythmId: function() {
+  //   var dbRhythm = Geometrhythm.Collections.rhythms.find( function(rhythm){
+  //       return rhythm.get("rhythm_str") === $('#current-rhythm').val();
+  //     }
+  //   );
+  //   if (dbRhythm) {
+  //     $('#cur-rhythm-id').attr('value', dbRhythm.id);
+  //   } else {
+  //     $('#cur-rhythm-id').attr('value', '');
+  //   }
+  //   debugger
+  // },
+
+  updateModel: function() {
+    // debugger
     this.model.set("rhythm_str", $('#current-rhythm').val());
     var dbRhythm = Geometrhythm.Collections.rhythms.find( function(rhythm){
         return rhythm.get("rhythm_str") === $('#current-rhythm').val();
       }
     );
     if (dbRhythm) {
-      $('#cur-rhythm-id').val(dbRhythm.id)
+      $('#cur-rhythm-id').attr('value', dbRhythm.id);
     } else {
-      $('#cur-rhythm-id').val("")
+      $('#cur-rhythm-id').attr('value', '');
     }
   },
 
@@ -64,6 +80,20 @@ Geometrhythm.Views.Root = Backbone.CompositeView.extend({
         }
       }
     }
+
+
+      var dbRhythm = Geometrhythm.Collections.rhythms.find( function(rhythm){
+          return rhythm.get("rhythm_str") === $('#current-rhythm').val();
+        }
+      );
+      if (dbRhythm) {
+        $('#cur-rhythm-id').attr('value', dbRhythm.id);
+      } else {
+        $('#cur-rhythm-id').attr('value', '');
+      }
+      debugger
+
+
     var view = new Geometrhythm.Views.Info({
       model: dbRhythm,
       template: template
@@ -79,9 +109,9 @@ Geometrhythm.Views.Root = Backbone.CompositeView.extend({
       }
     );
     if (dbRhythm) {
-      $('#cur-rhythm-id').val(dbRhythm.id)
+      $('#cur-rhythm-id').attr('value', dbRhythm.id);
     } else {
-      $('#cur-rhythm-id').val("")
+      $('#cur-rhythm-id').attr('value', '');
     }
 
     var that = this;

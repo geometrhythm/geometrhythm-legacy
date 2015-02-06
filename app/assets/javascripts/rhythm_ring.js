@@ -19,6 +19,15 @@ $.RhythmRing = function (el, ctx) {
 $.RhythmRing.prototype.refreshWell = function() {
   console.log("hey");
   $('#current-rhythm').attr('value', this.rhythmAsStr());
+  var dbRhythm = Geometrhythm.Collections.rhythms.find( function(rhythm){
+      return rhythm.get("rhythm_str") === $('#current-rhythm').val();
+    }
+  );
+  if (dbRhythm) {
+    $('#cur-rhythm-id').attr('value', dbRhythm.id);
+  } else {
+    $('#cur-rhythm-id').attr('value', '');
+  }
   $.cookie('_Geometrhythm_stored_rhythm', this.rhythmAsStr(), { expires: 7, path: '/' });
   $('#bb-info').trigger('plugin-change');
 }

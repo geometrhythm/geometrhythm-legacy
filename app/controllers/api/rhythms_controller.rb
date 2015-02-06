@@ -31,14 +31,15 @@ module Api
         @rhythms = @rhythms.where(id: User.find(params[:liker_id]).liked_rhythms)
       end
 
-      # @rhythms = @rhythms.page(params[:page])
+      @rhythms = @rhythms.page(params[:page]).per(25)
 
-      render :all
-      # render :all => {
-      #   models: @rhythms,
-      #   page_number: params[:page_number],
-      #   total_pages: @rhythms.total_pages
-      # }
+      # render :all
+      page_number = params[:page] || 1
+      render partial: 'api/rhythms/all', locals: {
+        models: @rhythms,
+        page_number: page_number,
+        total_pages: @rhythms.total_pages
+      }
     end
 
     def show

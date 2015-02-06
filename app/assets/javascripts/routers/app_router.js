@@ -20,7 +20,17 @@ Geometrhythm.Routers.App = Backbone.Router.extend({
       this.activeRhythm.set("rhythm_str", "x--x--x---x-x---");
       $('#current-rhythm').attr('value', "x--x--x---x-x---");
     }
-
+    // debugger
+    var dbRhythm = Geometrhythm.Collections.rhythms.find( function(rhythm){
+        return rhythm.get("rhythm_str") === $('#current-rhythm').val();
+      }
+    );
+    if (dbRhythm) {
+      $('#cur-rhythm-id').attr('value', dbRhythm.id);
+    } else {
+      $('#cur-rhythm-id').attr('value', '');
+    }
+    debugger
     Geometrhythm.Collections.rhythms.fetch();
     var rootView = new Geometrhythm.Views.Root({
       model: this.activeRhythm,

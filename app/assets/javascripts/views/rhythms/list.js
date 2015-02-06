@@ -38,6 +38,7 @@ Geometrhythm.Views.RhythmsList = Backbone.CompositeView.extend({
       rhythm_str: this.rhythmStr
     })
     this.$el.html(content);
+    this.listenForScroll();
     this.attachSubviews();
 
     // if no subviews, say "no rhythms match."
@@ -137,10 +138,12 @@ Geometrhythm.Views.RhythmsList = Backbone.CompositeView.extend({
     var view = this;
     if ($(window).scrollTop() > $(document).height() - $(window).height() - 50) {
       if (view.collection.page_number < view.collection.total_pages) {
-        view.collection.fetch({
-          data: { page: view.collection.page_number + 1 },
-          remove: false
-        });
+        view.collection.filter.page = view.collection.page_number + 1;
+        view.collection.fetchByFilter(true);
+        // view.collection.fetch({
+        //   data: { page: view.collection.page_number + 1 },
+        //   remove: false
+        // });
       }
     }
   }

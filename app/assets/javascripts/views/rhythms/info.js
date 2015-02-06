@@ -24,19 +24,15 @@ Geometrhythm.Views.Info = Backbone.View.extend({
   },
 
   render: function(options) {
-    // debugger
-
     var earliestNameId = null;
     var primaryName = null;
     this.model.get("namings") && this.model.get("namings").forEach(function(naming) {
-      // debugger
       if (earliestNameId == undefined || naming.name.id <= earliestNameId) {
-        console.log("went in here");
         earliestNameId = naming.name.id;
         primaryName = naming.name.name;
       }
     });
-     debugger
+    // debugger
     var content = this.template({
       rhythm: this.model,
       primaryName: primaryName,
@@ -58,9 +54,9 @@ Geometrhythm.Views.Info = Backbone.View.extend({
       }
     );
     if (dbRhythm) {
-      $('#cur-rhythm-id').val(dbRhythm.id)
+      $('#cur-rhythm-id').attr('value', dbRhythm.id);
     } else {
-      $('#cur-rhythm-id').val("")
+      $('#cur-rhythm-id').attr('value', '');
     }
 
     rhythmToClaim.set({
