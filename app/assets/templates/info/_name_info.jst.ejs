@@ -1,11 +1,16 @@
 <% if (rhythm.get("namings") && rhythm.get("namings").length > 0) { %>
   <br>
-  Known as:
-  <ul>
-    <% rhythm.get("namings").forEach(function(naming) { %>
-      <li><%= naming.name.name %></li> (suggested by <%= naming.namer.email %>)
-    <% }) %>
-  </ul>
+  <h6>known as: <%= primaryName %></h6>
+  <% if (nameDeets) { %>
+    <ul>
+      <% rhythm.get("namings").forEach(function(naming) { %>
+        <li><%= naming.name.name %></li> (suggested by <% naming.namer.email %>)
+      <% }) %>
+    </ul>
+    <span class="deets_link name_deets_collapse">collapse</span>
+  <% } else if ( rhythm.get("namings").length > 1) { %>
+    <span class="deets_link name_deets_link">additional names</span>
+  <% } %>
 <% } else { %>
   Hey, this one doesn't have a name yet. Why don't you name it?
 <% } %>

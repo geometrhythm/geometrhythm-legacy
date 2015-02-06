@@ -37,34 +37,40 @@ Geometrhythm.Views.Root = Backbone.CompositeView.extend({
   },
 
   renderInfoView: function(event) {
-    var dbRhythm = Geometrhythm.Collections.rhythms.find( function(rhythm){
-        return rhythm.get("rhythm_str") === $('#current-rhythm').val();
-      }
-    );
-    if (dbRhythm) {
-      if ($('#cur-user-id').val()
-        && $('#cur-user-id').val() == dbRhythm.get("creator_id")) {
-        var template = "templateShowYours";
-      } else if ($('#cur-user-id').val()
-        && $('#cur-user-id').val() != dbRhythm.get("creator_id")) {
-        var template = "templateShowAnothers";
-      } else {
-        var template = "templateShowLoggedOut";
-      }
-    } else {
+    if ($.cookie('_Geometrhythm_stored_rhythm') === undefined ) {
+      var template = "templateSplash";
       dbRhythm = new Geometrhythm.Models.Rhythm({rhythm_str: $('#current-rhythm').val()});
-      if ($('#cur-user-id').val()) {
-        var template = "templateClaim";
+    } else {
+      var dbRhythm = Geometrhythm.Collections.rhythms.find( function(rhythm){
+          return rhythm.get("rhythm_str") === $('#current-rhythm').val();
+        }
+      );
+      if (dbRhythm) {
+        if ($('#cur-user-id').val()
+          && $('#cur-user-id').val() == dbRhythm.get("creator_id")) {
+          var template = "templateShowYours";
+        } else if ($('#cur-user-id').val()
+          && $('#cur-user-id').val() != dbRhythm.get("creator_id")) {
+          var template = "templateShowAnothers";
+        } else {
+          var template = "templateShowLoggedOut";
+        }
       } else {
-        var template = "templateSignUpToClaim";
+        dbRhythm = new Geometrhythm.Models.Rhythm({rhythm_str: $('#current-rhythm').val()});
+        if ($('#cur-user-id').val()) {
+          var template = "templateClaim";
+        } else {
+          var template = "templateSignUpToClaim";
+        }
       }
     }
     var view = new Geometrhythm.Views.Info({
-      model: dbRhythm
+      model: dbRhythm,
+      template: template
     })
     this.currentView && this.currentView.remove();
     this.currentView = view;
-    this.$('#bb-info').html(view.render({template: template}).$el)
+    this.$('#bb-info').html(view.render().$el)
   },
 
   likeThisRhythm: function() {

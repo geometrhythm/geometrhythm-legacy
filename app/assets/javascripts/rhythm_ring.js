@@ -17,6 +17,7 @@ $.RhythmRing = function (el, ctx) {
 };
 
 $.RhythmRing.prototype.refreshWell = function() {
+  console.log("hey");
   $('#current-rhythm').attr('value', this.rhythmAsStr());
   $.cookie('_Geometrhythm_stored_rhythm', this.rhythmAsStr(), { expires: 7, path: '/' });
   $('#bb-info').trigger('plugin-change');
@@ -96,7 +97,7 @@ $.RhythmRing.prototype.toggleCell = function(cellId, dontRefresh) {
   } else {
     this.rhythmCells[cellId] = true;
     this.$el.find(".cell[ord='" + cellId + "']").addClass("onset")
-      .css('background-color', "black");
+      .css('background-color', "#333");
     this.$el.find(".cell-handle[ord='" + cellId + "']").addClass("onset");
   }
   this.refreshPolygon();

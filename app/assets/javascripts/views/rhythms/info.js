@@ -4,9 +4,11 @@ Geometrhythm.Views.Info = Backbone.View.extend({
   templateShowLoggedOut: JST['info/show_logged_out'],
   templateClaim: JST['info/claim'],
   templateSignUpToClaim: JST['info/sign_up_to_claim'],
+  templateSplash: JST['info/splash'],
 
-  initialize: function() {
-    this.listenTo(this.model, 'sync change:likers', this.render) //change:play_count
+  initialize: function(options) {
+    this.listenTo(this.model, 'sync change:likers', this.render); //change:play_count
+    this.template = this[options.template]; //this[options.template] || this.template;
   },
 
   events: {
@@ -16,14 +18,30 @@ Geometrhythm.Views.Info = Backbone.View.extend({
     'submit form.add-comment' : 'addComment',
     'submit form.add-meta-comment' : 'addMetaComment',
     'click button.view-creations' : 'viewCreations',
-    'click button.view-likes' : 'viewLikes'
+    'click button.view-likes' : 'viewLikes',
+    'click span.name_deets_link' : 'expandNames',
+    'click span.name_deets_collapse' : 'collapseNames',
   },
 
   render: function(options) {
-    this.template = this[options.template] || this.template;
+    // debugger
+
+    var earliestNameId = null;
+    var primaryName = null;
+    this.model.get("namings") && this.model.get("namings").forEach(function(naming) {
+      // debugger
+      if (earliestNameId == undefined || naming.name.id <= earliestNameId) {
+        console.log("went in here");
+        earliestNameId = naming.name.id;
+        primaryName = naming.name.name;
+      }
+    });
+     debugger
     var content = this.template({
-      rhythm: this.model
-    })
+      rhythm: this.model,
+      primaryName: primaryName,
+      nameDeets: this.nameDeets
+    });
     this.$el.html(content);
     return this;
   },
@@ -131,8 +149,18 @@ Geometrhythm.Views.Info = Backbone.View.extend({
   },
 
   viewLikes: function(event) {
-    Backbone.history.navigate("/likes/" + $(event.currentTarget).val(), 
+    Backbone.history.navigate("/likes/" + $(event.currentTarget).val(),
       {trigger: true});
+  },
+
+  expandNames: function() {
+    this.nameDeets = true;
+    this.render();
+  },
+
+  collapseNames: function() {
+    this.nameDeets = false;
+    this.render();
   }
 
 });

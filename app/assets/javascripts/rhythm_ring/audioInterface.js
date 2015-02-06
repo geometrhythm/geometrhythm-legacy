@@ -31,7 +31,7 @@ $.RhythmRing.prototype.togglePlay = function() {
 
 $.RhythmRing.prototype.playRhythm = function() {
   this.playingRhythm = setInterval(function () {
-    var fill = this.rhythmCells[this.playPos] ? 'black' : 'white';
+    var fill = this.rhythmCells[this.playPos] ? '#333' : 'white';
     this.$el.find(".cell-handle[ord='" + this.playPos + "']:not('.grabbed')")
       .css('background-color', fill);
     this.$el.find(".cell[ord='" + this.playPos + "']")

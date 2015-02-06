@@ -40,7 +40,7 @@ container {
   border-radius: 50%;
   border: solid 2px;
   background-color: white;
-  color: black;
+  color: #333;
   position: absolute;
   transform-origin: 116px 116px;
   transition: transform 0.5s;
@@ -52,7 +52,7 @@ container {
 .cell-label {
   position: absolute;
   transform-origin: 120px 120px;
-  color: black;
+  color: #333;
 }
 
 .cell-handle {
@@ -61,7 +61,7 @@ container {
   border-radius: 50%;
   border: solid 2px;
   background-color: white;
-  color: black;
+  color: #333;
   position: absolute;
 }
 
@@ -85,11 +85,11 @@ container {
 }
 
 .onset:not(.grabbed){
-  background-color: black;
+  background-color: #333;
 }
 
 .onset {
-  background-color: black;
+  background-color: #333;
 }
 
 .intercell {

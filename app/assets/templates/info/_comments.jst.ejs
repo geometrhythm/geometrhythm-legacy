@@ -1,13 +1,18 @@
-<br>Comments:
-<ol>
-  <% rhythm.get("comments") && rhythm.get("comments").forEach(function(comment) {  %>
-    <li>
-      <%= JST['info/_rec_comments']({comment: comment}) %>
-    </li>
-  <% }) %>
-</ol>
+<br>
+<% if (rhythm.get("comments").length > 0) { %>
+  Comments:
+  <ol>
+    <% rhythm.get("comments").forEach(function(comment) {  %>
+      <li>
+        <%= JST['info/_rec_comments']({comment: comment, enabled: enabled}) %>
+      </li>
+    <% }) %>
+  </ol>
+<% } %>
 
-<form class="add-comment">
-  <input type="text" name="comment[body]">
-  <input type="submit" value="Comment">
-</form>
+<% if (enabled) { %>
+  <form class="add-comment">
+    <input type="text" name="comment[body]">
+    <input type="submit" value="Comment">
+  </form>
+<% } %>

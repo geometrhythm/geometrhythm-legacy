@@ -1,3 +1,6 @@
-<%= JST['info/_details']({rhythm: rhythm}) %>
+<h3>This rhythm has been catalogued.</h3>
+<h5>Sign up to add it to your collection and join the conversation!</h5>
 
-<br>Sign up to be able to comment and build collections!
+<%= JST['info/_details']({rhythm: rhythm, primaryName: primaryName, nameDeets: nameDeets}) %>
+
+<%= JST['info/_comments']({rhythm: rhythm, enabled: false}) %>

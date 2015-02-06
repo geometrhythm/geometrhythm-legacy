@@ -54,7 +54,7 @@ Geometrhythm.Views.RhythmListItemView = Backbone.CompositeView.extend({
   playRhythm: function() {
     this.playingRhythm = setInterval(function () {
       if (Geometrhythm.curPlayingRhythm === this.rhythmStr) {
-        var fill = this.rhythmCells[this.playPos] ? 'black' : 'white';
+        var fill = this.rhythmCells[this.playPos] ? '#333' : 'white';
 
         this.$el.find(".mini-cell[ord='" + this.playPos + "']")
           .css('background-color', fill);
