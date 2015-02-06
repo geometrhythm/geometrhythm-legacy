@@ -36,8 +36,8 @@
         </div>
 
 
-
-        <i class="glyphicon glyphicon-log-in"></i>
+        <i class="glyphicon glyphicon-show-thumbnails"></i>
+        <!--<i class="glyphicon glyphicon-log-in"></i>-->
         <ul class="nav navbar-nav navbar-right">
 
           <li>
@@ -58,7 +58,7 @@
               <%= button_to "Sign In As Guest", session_url,
                 params: {:"user[email]" => "guest@geometrhythm.com",
                   :"user[password]" => "password" },
-                class: "btn btn-success btn-sm" %>
+                class: "btn btn-success btn-sm d-tt" %>
             </li>
             <li>
               <%= link_to "or sign up", new_user_url %>
@@ -74,6 +74,9 @@
 
 
 <%= yield %>
+
+<link href='http://fonts.googleapis.com/css?family=Roboto:400,300,500' rel='stylesheet' type='text/css'>
+<!-- <span class="d-tt" data-d-tooltip="Just click and hold to dismiss tooltip!">me<span> -->
 
 </body>
 </html>

@@ -8,6 +8,45 @@
 //   width: 200px;
 // }
 
-li.rhythm:hover {
+div.rhythm:hover {
   cursor: pointer
+}
+
+div.rhythm {
+  float: left;
+  min-height: 111px;
+  min-width: 180px;
+  margin: 10px;
+  background-color: gray;
+  position: relative;
+}
+
+.glyphicon {
+  font-size: 24px
+}
+
+.mini-rhythm-ring {
+  position: absolute;
+  width: 89px;
+  height: 89px;
+  border: solid 1px;
+  border-radius: 50%;
+  z-index: 0;
+  left: 10px;
+  top: 10px;
+}
+
+.mini-cell {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  border: solid 1px;
+  background-color: white;
+  color: black;
+  position: absolute;
+  transform-origin: 35px 35px;
+  //transition: transform 0.5s;
+  //transition: background-color 0.1s; //this slows down site to uselessness, though it looks nice!
+  //opacity: 1.0;
+  //transform: scale(1);
 }

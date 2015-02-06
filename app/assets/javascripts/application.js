@@ -19,6 +19,7 @@
 //= require backbone
 //= require geometrhythm
 //= require rhythm_ring
+//= require mini_rhythm_ring
 //= require tooltips
 //= require_tree ./util
 //= require_tree ./rhythm_ring

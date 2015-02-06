@@ -3,7 +3,7 @@ Geometrhythm.Views.RhythmsList = Backbone.CompositeView.extend({
   template: JST['rhythms/list'],
 
   events: {
-    "click li.rhythm" : "selectRhythm",
+    "click .rhythm" : "selectRhythm",
     "change .creator" : "filterByCreator",
     "change .liker" : "filterByLiker",
     "change .rhythm-str" : "filterByRhythmStr",
@@ -31,8 +31,8 @@ Geometrhythm.Views.RhythmsList = Backbone.CompositeView.extend({
       this.addRhythmListItemView(rhythm);
     }.bind(this))
 
-    console.log("hey this might have stuff in it when we start");
-    console.log(this.collection.filter);
+    // console.log("hey this might have stuff in it when we start");
+    // console.log(this.collection.filter);
 
   },
 
@@ -47,6 +47,7 @@ Geometrhythm.Views.RhythmsList = Backbone.CompositeView.extend({
     })
     this.$el.html(content);
     this.attachSubviews();
+    this.$el.find('.mini-rhythm-ring').miniRhythmRing();
     return this;
   },
 
@@ -54,15 +55,15 @@ Geometrhythm.Views.RhythmsList = Backbone.CompositeView.extend({
     var rhythmListItemView = new Geometrhythm.Views.RhythmListItemView({
       model: rhythm
     });
-    this.addSubview('ol.subview-version', rhythmListItemView);
+    this.addSubview('div.subview-version', rhythmListItemView);
   },
 
   removeRhythmListItemView: function(rhythm) {
-    var subviews = this.subviews('ol.subview-version');
+    var subviews = this.subviews('div.subview-version');
     var subviewToRemove = _(subviews).find( function(sv){
       return sv.model.id == rhythm.id;
     });
-    this.removeSubview('ol.subview-version', subviewToRemove);
+    this.removeSubview('div.subview-version', subviewToRemove);
   },
 
   filterByCreator: function(event) {
@@ -91,7 +92,7 @@ Geometrhythm.Views.RhythmsList = Backbone.CompositeView.extend({
       //this.collection.fetch();
     } else {
       this.collection.filter.creator_id = this.creatorId;
-      console.log(this.collection.filter);
+      // console.log(this.collection.filter);
 
     }
     this.collection.fetchByFilter();
@@ -107,7 +108,7 @@ Geometrhythm.Views.RhythmsList = Backbone.CompositeView.extend({
       //this.collection.fetch();
     } else {
       this.collection.filter.liker_id = this.likerId;
-      console.log(this.collection.filter);
+      // console.log(this.collection.filter);
 
     }
     this.collection.fetchByFilter();
@@ -122,7 +123,7 @@ Geometrhythm.Views.RhythmsList = Backbone.CompositeView.extend({
       //this.collection.fetch();
     } else {
       this.collection.filter.rhythm_str = this.rhythmStr;
-      console.log(this.collection.filter);
+      // console.log(this.collection.filter);
 
     }
     // debugger
