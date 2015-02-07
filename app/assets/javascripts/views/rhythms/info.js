@@ -7,7 +7,7 @@ Geometrhythm.Views.Info = Backbone.View.extend({
   templateSplash: JST['info/splash'],
 
   initialize: function(options) {
-    this.listenTo(this.model, 'sync change:likers', this.render); //change:play_count
+    this.listenTo(this.model, 'sync', this.render); //change:play_count
     this.template = this[options.template]; //this[options.template] || this.template;
   },
 
@@ -22,7 +22,7 @@ Geometrhythm.Views.Info = Backbone.View.extend({
     'click span.name_deets_link' : 'expandNames',
     'click span.name_deets_collapse' : 'collapseNames',
     'click span.comment_deets_link' : 'expandComments',
-    'click span.comment_deets_collapse' : 'collapseComments',
+    'click span.comment_deets_collapse' : 'collapseComments'
   },
 
   render: function(options) {
@@ -34,7 +34,7 @@ Geometrhythm.Views.Info = Backbone.View.extend({
         primaryName = naming.name.name;
       }
     });
-    debugger
+    // debugger
     var content = this.template({
       rhythm: this.model,
       primaryName: primaryName,
@@ -171,6 +171,6 @@ Geometrhythm.Views.Info = Backbone.View.extend({
   collapseComments: function() {
     this.commentDeets = false;
     this.render();
-  }
+  },
 
 });

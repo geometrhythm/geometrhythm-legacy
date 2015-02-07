@@ -4,9 +4,12 @@ Geometrhythm.Views.RhythmListItemView = Backbone.CompositeView.extend({
 
   events: {
     "click .rhythm i" : "togglePlay",
+    "click .key-rhythm i" : "togglePlay",
   },
 
-  initialize: function() {
+  initialize: function(options) {
+    this.superSizeMe = options.superSizeMe;
+    // debugger
     this.busses = [];
     this.tempo = 125;
     this.pulseDuration = ( 1000 / ( this.tempo / 60 ) ) / 4;
@@ -20,10 +23,15 @@ Geometrhythm.Views.RhythmListItemView = Backbone.CompositeView.extend({
 
   render: function() {
     var content = this.template({
-      rhythm: this.model
+      rhythm: this.model,
+      superSizeMe: this.superSizeMe
     })
     this.$el.html(content);
-    this.rhythmStr = this.$el.find('.rhythm').attr('rhythm-str');
+    if (this.superSizeMe) {
+      this.rhythmStr = this.$el.find('.key-rhythm').attr('rhythm-str');
+    } else {
+      this.rhythmStr = this.$el.find('.rhythm').attr('rhythm-str');
+    }
     this.rhythmCells = [];
     for (var i = 0; i < this.rhythmStr.length; i++) {
       this.rhythmCells.push( this.rhythmStr[i] === "x" ? true : false);
@@ -58,6 +66,8 @@ Geometrhythm.Views.RhythmListItemView = Backbone.CompositeView.extend({
 
         this.$el.find(".mini-cell[ord='" + this.playPos + "']")
           .css('background-color', fill);
+        this.$el.find(".med-cell[ord='" + this.playPos + "']")
+          .css('background-color', fill);
 
         this.playPos += this.playPos >= this.rhythmCells.length - 1 ? -(this.rhythmCells.length - 1) : 1
         // if (this.playPos === this.rhythmCells.length - 1) {
@@ -76,6 +86,8 @@ Geometrhythm.Views.RhythmListItemView = Backbone.CompositeView.extend({
 
         this.$el.find(".mini-cell[ord='" + this.playPos + "']")
           .css('background-color', fill);
+        this.$el.find(".med-cell[ord='" + this.playPos + "']")
+            .css('background-color', fill);
 
         if (this.rhythmCells[this.playPos]) {
           this.busses[this.curBus].play();

@@ -3,10 +3,24 @@ div.rhythm:hover {
   background-color: Cornsilk;
 }
 
+div.key-rhythm:hover {
+  cursor: pointer;
+  background-color: Cornsilk;
+}
+
 div.rhythm {
   float: left;
   min-height: 111px;
   min-width: 180px;
+  margin: 10px;
+  background-color: #eee;
+  position: relative;
+}
+
+div.key-rhythm {
+  float: left;
+  min-height: 242px;
+  min-width: 380px;
   margin: 10px;
   background-color: #eee;
   position: relative;
@@ -27,6 +41,17 @@ div.rhythm {
   top: 10px;
 }
 
+.medium-rhythm-ring {
+  position: absolute;
+  width: 195px;
+  height: 195px;
+  border: solid 2px;
+  border-radius: 50%;
+  z-index: 0;
+  left: 24px;
+  top: 24px;
+}
+
 .mini-cell {
   width: 8px;
   height: 8px;
@@ -38,6 +63,17 @@ div.rhythm {
   transform-origin: 35px 35px;
 }
 
+.med-cell {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  border: solid 1px;
+  background-color: white;
+  color: #333;
+  position: absolute;
+  transform-origin: 75px 75px;
+}
+
 div.rhythm i {
   position: absolute;
   top: 42px;
@@ -45,10 +81,26 @@ div.rhythm i {
   visibility: hidden;
 }
 
+div.key-rhythm i {
+  font-size: 36px;
+  position: absolute;
+  top: 102px;
+  left: 103px;
+  visibility: hidden;
+}
+
 div.rhythm:hover i {
   visibility: visible;
 }
 
+div.key-rhythm:hover i {
+  visibility: visible;
+}
+
 div.rhythm i:hover {
+  color: DodgerBlue;
+}
+
+div.key-rhythm i:hover {
   color: DodgerBlue;
 }

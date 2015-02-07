@@ -6,3 +6,49 @@ span.deets_link {
 span.deets_link:hover {
   cursor: pointer;
 }
+
+*{font-family: 'Maven Pro', sans-serif;}
+
+navbar-right li {
+  float: right;
+  position: absolute;
+  top: 30px;
+  padding: 0px 10px;
+  // margin: 0 10px
+}
+
+li .give-me-space {
+  margin: 10px;
+}
+
+navbar-right ul {
+  position: relative;
+}
+
+navbar-right a {
+  padding-top: 25px
+}
+
+.who-you-are {
+  position: absolute;
+  top: 40px;
+  left: -20px;
+}
+
+.what-you-are {
+  position: absolute;
+  top: 19px;
+  left: -15px;
+}
+
+.what-you-are:hover {
+  color: DodgerBlue;
+}
+
+// navbar-right form {
+//   display: inline;
+// }
+//
+// navbar-right button {
+//   display: inline;
+// }

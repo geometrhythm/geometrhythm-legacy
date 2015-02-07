@@ -1,17 +1,25 @@
 MINI_POLYGON_OFFSET = 4;
 MINI_CANVAS_DIMENSION = 89;
+MED_POLYGON_OFFSET = 8;
+MED_CANVAS_DIMENSION = 6;
 
-$.MiniRhythmRing = function (el, ctx) {
+$.MiniRhythmRing = function (el, superSizeMe) {
   this.$el = $(el);
-  this.ctx = this.$el.find('.mini-polygon-canvas')[0].getContext("2d");
+  this.superSizeMe = superSizeMe;
+  // debugger
+  if (this.superSizeMe) {
+    this.ctx = this.$el.find('.medium-polygon-canvas')[0].getContext("2d");
+  } else {
+    this.ctx = this.$el.find('.mini-polygon-canvas')[0].getContext("2d");
+  }
   this.rhythmStr = this.$el.attr("rhythm-str");
   this.initializeRhythm(this.rhythmStr);
   this.refreshPolygon();
 };
 
-$.fn.miniRhythmRing = function () {
+$.fn.miniRhythmRing = function (superSizeMe) {
   return this.each(function () {
-    new $.MiniRhythmRing(this);
+    new $.MiniRhythmRing(this, superSizeMe);
   });
 };
 
@@ -33,11 +41,24 @@ $.MiniRhythmRing.prototype.placeCell = function(i, curAngle) {
 
 };
 
+$.MiniRhythmRing.prototype.placeMedCell = function(i, curAngle) {
+  var $newCell = $('<div class="med-cell">');
+  $newCell.css('transform',
+    'translateX(21px) translateY(-182px) rotate(' + curAngle + 'deg)');
+  $newCell.attr('ord', i);
+  if (this.rhythmCells[i]) { $newCell.addClass("onset"); }
+  this.$el.append($newCell);
+};
+
 $.MiniRhythmRing.prototype.loopApplyUpdates = function() {
   var curAngle = CSS_EL_ANGLE_OFFSET;
   var rhythmUnitInDegrees = 360 / this.rhythmCells.length;
   for (var i = 0; i < this.rhythmCells.length; i++ ) {
-    this.placeCell(i, curAngle);
+    if (this.superSizeMe) {
+      this.placeMedCell(i, curAngle);
+    } else {
+      this.placeCell(i, curAngle);
+    }
     curAngle += rhythmUnitInDegrees;
   };
 };
@@ -50,7 +71,11 @@ $.MiniRhythmRing.prototype.refreshPolygon = function() {
     j = i % this.rhythmCells.length;
     if (i > this.rhythmCells.length && j > firstPos) break;
     //debugger
-    var curPosition = this.$el.find(".mini-cell[ord='" + j + "']").position();
+    if (this.superSizeMe) {
+      var curPosition = this.$el.find(".med-cell[ord='" + j + "']").position();
+    } else {
+      var curPosition = this.$el.find(".mini-cell[ord='" + j + "']").position();
+    }
     // if (!curPosition) { curPosition = $(".cell-handle.grabbed").position(); }
     var curPos = [curPosition.left, curPosition.top];
     if (this.rhythmCells[j]) {
@@ -63,8 +88,14 @@ $.MiniRhythmRing.prototype.refreshPolygon = function() {
 
 $.MiniRhythmRing.prototype.drawSide = function(curPos, prevPos) {
   this.ctx.beginPath();
-  this.ctx.moveTo(prevPos[0] + MINI_POLYGON_OFFSET, prevPos[1] + MINI_POLYGON_OFFSET);
-  this.ctx.lineTo(curPos[0] + MINI_POLYGON_OFFSET, curPos[1] + MINI_POLYGON_OFFSET);
-  this.ctx.lineWidth = 1;
+  if (this.superSizeMe) {
+    this.ctx.moveTo(prevPos[0] + MED_POLYGON_OFFSET, prevPos[1] + MED_CANVAS_DIMENSION);
+    this.ctx.lineTo(curPos[0] + MED_POLYGON_OFFSET, curPos[1] + MED_CANVAS_DIMENSION);
+    this.ctx.lineWidth = 1;
+  } else {
+    this.ctx.moveTo(prevPos[0] + MINI_POLYGON_OFFSET, prevPos[1] + MINI_POLYGON_OFFSET);
+    this.ctx.lineTo(curPos[0] + MINI_POLYGON_OFFSET, curPos[1] + MINI_POLYGON_OFFSET);
+    this.ctx.lineWidth = 1;
+  }
   this.ctx.stroke();
 };

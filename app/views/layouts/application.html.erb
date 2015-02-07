@@ -2,6 +2,7 @@
 <html>
 <head>
   <title>geometrhythm</title>
+  <link href='http://fonts.googleapis.com/css?family=Maven+Pro:400,900,700,500' rel='stylesheet' type='text/css'>
   <%#= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
   <%= stylesheet_link_tag    'application', media: 'all' %>
   <%#= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
@@ -9,7 +10,7 @@
   <%= csrf_meta_tags %>
   <!--<%#= paginate @rhythms %>-->
 
-  <!-- noooo!
+  <!-- noooo! HAHAHAH ok i have to fix the above thien....
   <link href="/assets/application.css" type="text/css">-->
   <!-- yesss! -->
   <!--<%#= stylesheet_link_tag "application" %>-->
@@ -41,31 +42,36 @@
         <!--<i class="glyphicon glyphicon-log-in"></i>-->
         <ul class="nav navbar-nav navbar-right">
 
-          <li>
-            <% if logged_in? %>
-              <%= "Signed in as #{ current_user.email}" %>
-              <input type='hidden' id='cur-user-id' value='<%=current_user.id%>'>
-              <%= button_to "Sign Out", session_url,
-                method: :delete, class: "btn btn-primary btn-sm" %>
-            <% else %>
-              <%= button_to "Sign In", new_session_url,
-                method: :get, class: "btn btn-primary btn-sm" %>
-            <% end %>
+          <% if logged_in? %>
+            <li class="who-you-are">
+            Signed in as <strong><%= current_user.email %></strong>
+            <input type='hidden' id='cur-user-id' value='<%=current_user.id%>'>
           </li>
+          <% end %>
 
-          <span style="padding: 0px 15px">
           <% if !logged_in? %>
             <li>
+              <br>
               <%= button_to "Sign In As Guest", session_url,
                 params: {:"user[email]" => "guest@geometrhythm.com",
                   :"user[password]" => "password" },
-                class: "btn btn-success btn-sm d-tt" %>
+                class: "btn btn-warning btn-sm d-tt give-me-space" %>
             </li>
             <li>
-              <%= link_to "or sign up", new_user_url %>
+              <br>
+              <%= button_to "Sign Up", new_user_url, method: :get,
+                class: "btn btn-primary btn-sm give-me-space" %>
             </li>
           <% end %>
-          </span>
+
+          <li class="what-you-are">
+            <% if logged_in? %>
+              <%= link_to "sign out", session_url, method: :delete %>
+            <% else %>
+              <%= link_to "or sign in", new_session_url, method: :get %>
+            <% end %>
+          </li>
+
         <ul>
       </div>
     </div>

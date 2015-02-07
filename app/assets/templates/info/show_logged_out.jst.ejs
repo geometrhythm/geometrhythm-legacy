@@ -1,11 +1,12 @@
 <h3>This rhythm has been catalogued.</h3>
 
 <% if (rhythm.get("namings") && rhythm.get("namings").length > 0) { %>
-  <h5>Sign up to add it to your collection and join the conversation!</h5>
+  <h5>Sign up to add it to your collection and join the conversation.</h5>
   <%= JST['info/_name_info']({rhythm: rhythm, primaryName: primaryName, nameDeets: nameDeets}) %>
 <% } else { %>
-  <h5> But it hasn't been named! <br>
+  <h5> But it hasn't been named. <br>
   Why don't you sign up and name it? </h5>
+  <button class="btn btn-primary btn-lrg" id="claim-rhythm">Claim Rhythm</button>
 <% } %>
 
 <%= JST['info/_comments']({rhythm: rhythm, enabled: false, commentDeets: commentDeets}) %>

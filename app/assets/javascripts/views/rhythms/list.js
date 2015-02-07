@@ -7,7 +7,7 @@ Geometrhythm.Views.RhythmsList = Backbone.CompositeView.extend({
     "change .creator" : "filterByCreator",
     "change .liker" : "filterByLiker",
     "change .rhythm-str" : "filterByRhythmStr",
-    "change .rhythm-id" : "filterByRhythmId"
+    "click #return-to-root" : "returnToRoot"
   },
 
   initialize: function(options) {
@@ -15,6 +15,10 @@ Geometrhythm.Views.RhythmsList = Backbone.CompositeView.extend({
     this.potentialLikers = options.potentialLikers;
     this.creatorId = options.creator;
     this.likerId = options.liker;
+    this.rootLink = $('.navbar-brand');
+
+    // debugger
+    // this.collection.add(this.model);
 
     this.collection.each(function(rhythm) {
       this.addRhythmListItemView(rhythm);
@@ -44,6 +48,7 @@ Geometrhythm.Views.RhythmsList = Backbone.CompositeView.extend({
     // if no subviews, say "no rhythms match."
 
     this.$el.find('.mini-rhythm-ring').miniRhythmRing();
+    this.$el.find('.medium-rhythm-ring').miniRhythmRing(true);
 
     // console.log("");
     // console.log("collection: " + this.collection.length);
@@ -60,8 +65,12 @@ Geometrhythm.Views.RhythmsList = Backbone.CompositeView.extend({
   },
 
   addRhythmListItemView: function(rhythm) {
+    var superSizeMe = false;
+    if (this.subviews('div.subview-version').length == 0) { superSizeMe = true }
+    // debugger
     var rhythmListItemView = new Geometrhythm.Views.RhythmListItemView({
-      model: rhythm
+      model: rhythm,
+      superSizeMe: superSizeMe
     });
     this.addSubview('div.subview-version', rhythmListItemView);
   },
@@ -146,6 +155,11 @@ Geometrhythm.Views.RhythmsList = Backbone.CompositeView.extend({
         // });
       }
     }
+  },
+
+  returnToRoot: function() {
+    console.log("DSGOIIOEJOIEJFIOJF");
+    Backbone.history.navigate("/", {trigger: true})
   }
 
 });

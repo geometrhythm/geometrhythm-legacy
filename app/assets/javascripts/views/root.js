@@ -3,9 +3,10 @@ Geometrhythm.Views.Root = Backbone.CompositeView.extend({
   template: JST['root'],
 
   events: {
-    'submit form' : 'submitForm',
+    //'submit form' : 'submitForm',
     'plugin-change #bb-info' : 'updateModel',
-    'click button.like' : 'likeThisRhythm'
+    'click button.like' : 'likeThisRhythm',
+    // 'click .navbar-brand' : 'visitList'
   },
 
   initialize: function() {
@@ -138,5 +139,9 @@ Geometrhythm.Views.Root = Backbone.CompositeView.extend({
         dbRhythm.fetch();
       }
     });
-  }
+  },
+
+  // visitList: function() {
+  //   Backbone.history.navigate("/rhythms", {trigger: true})
+  // }
 });
