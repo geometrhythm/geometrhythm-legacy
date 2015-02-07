@@ -17,28 +17,50 @@ Geometrhythm.Views.Info = Backbone.View.extend({
     'submit form.suggest-name' : 'suggestName',
     'submit form.add-comment' : 'addComment',
     'submit form.add-meta-comment' : 'addMetaComment',
-    'click button.view-creations' : 'viewCreations',
-    'click button.view-likes' : 'viewLikes',
+    'click span.view-creations' : 'viewCreations',
+    'click span.view-likes' : 'viewLikes',
     'click span.name_deets_link' : 'expandNames',
     'click span.name_deets_collapse' : 'collapseNames',
     'click span.comment_deets_link' : 'expandComments',
-    'click span.comment_deets_collapse' : 'collapseComments'
+    'click span.comment_deets_collapse' : 'collapseComments',
+    'click span.like_deets_link' : 'expandLikes',
+    'click span.like_deets_collapse' : 'collapseLikes',
   },
 
   render: function(options) {
     var earliestNameId = null;
     var primaryName = null;
+    // var nameHash = {};
+    // console.log("nameHash: ");
+    // console.log(nameHash);
+    // debugger
+    var additionalNames = [];
     this.model.get("namings") && this.model.get("namings").forEach(function(naming) {
       if (earliestNameId == undefined || naming.name.id <= earliestNameId) {
         earliestNameId = naming.name.id;
         primaryName = naming.name.name;
       }
+      // debugger
+      if (naming.name.name != primaryName) {
+        // if (nameHash[naming.name.name] === undefined) {
+        //   nameHash[naming.name.name] = 1;
+        // } else {
+        //   nameHash[naming.name.name] += 1;
+        // }
+        additionalNames.push(naming)
+      }
     });
-    // debugger
+    // console.log("nameHash: ");
+    // console.log(nameHash);
+
+    console.log(this.nameDeets);
     var content = this.template({
       rhythm: this.model,
       primaryName: primaryName,
       nameDeets: this.nameDeets,
+      likeDeets: this.likeDeets,
+      additionalNames: additionalNames,
+      // largeName: this.largeName,
       commentDeets: this.commentDeets
     });
     this.$el.html(content);
@@ -144,12 +166,13 @@ Geometrhythm.Views.Info = Backbone.View.extend({
   },
 
   viewCreations: function(event) {
-    Backbone.history.navigate("/creations/" + $(event.currentTarget).val(),
+    // console.log($(event.currentTarget).val());
+    Backbone.history.navigate("/creations/" + $(event.currentTarget).attr("value"),
       {trigger: true});
   },
 
   viewLikes: function(event) {
-    Backbone.history.navigate("/likes/" + $(event.currentTarget).val(),
+    Backbone.history.navigate("/likes/" + $(event.currentTarget).attr("value"),
       {trigger: true});
   },
 
@@ -170,6 +193,16 @@ Geometrhythm.Views.Info = Backbone.View.extend({
 
   collapseComments: function() {
     this.commentDeets = false;
+    this.render();
+  },
+
+  expandLikes: function() {
+    this.likeDeets = true;
+    this.render();
+  },
+
+  collapseLikes: function() {
+    this.likeDeets = false;
     this.render();
   },
 

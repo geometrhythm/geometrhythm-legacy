@@ -1,13 +1,5 @@
-<%= JST['info/_name_info']({rhythm: rhythm, primaryName: primaryName, nameDeets: nameDeets}) %>
+<%= JST['info/_name_info']({rhythm: rhythm, primaryName: primaryName, nameDeets: nameDeets, largeName: true, enabled: true, additionalNames: additionalNames}) %>
 <%= JST['info/_creator_details']({rhythm: rhythm}) %>
 <%= JST['info/_extra_details']({rhythm: rhythm}) %>
-<%= JST['info/_name_form']() %>
-
-<br>
-<button class="view-creations" value="<%= rhythm.get("creator_id") %>" >
-  Check out this user's other rhythms!
-</button>
-
-<%= JST['info/_likes']({rhythm: rhythm}) %>
-
+<%= JST['info/_likes']({rhythm: rhythm, likeDeets: likeDeets}) %>
 <%= JST['info/_comments']({rhythm: rhythm, enabled: true, commentDeets: commentDeets}) %>

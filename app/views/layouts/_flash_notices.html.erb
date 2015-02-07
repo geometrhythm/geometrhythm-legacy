@@ -1,5 +1,7 @@
-<% if flash.now[:notices] %>
-  <% flash.now[:notices].each do |error| %>
-    <%= error %><br />
+<div class='flash-notices'>
+  <% if flash.now[:notices] %>
+    <% flash.now[:notices].each do |error| %>
+      <%= error %><br />
+    <% end %>
   <% end %>
-<% end %>
+</div>

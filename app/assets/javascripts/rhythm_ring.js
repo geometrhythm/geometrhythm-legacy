@@ -17,10 +17,8 @@ $.RhythmRing = function (el, ctx) {
 };
 
 $.RhythmRing.prototype.refreshWell = function() {
-  // console.log("hey");
   $('#current-rhythm').attr('value', this.rhythmAsStr());
   var dbRhythm = Geometrhythm.Collections.rhythms.find( function(rhythm){
-    // debugger
       return rhythm.get("rhythm_str") === $('#current-rhythm').val();
     }
   );
@@ -58,10 +56,6 @@ $.RhythmRing.prototype.initializeEventHandlers = function() {
   $('body').on('change', '#input-tempo', this.changeTempo.bind(this));
   $('body').on('change', '#input-rhythm', this.manualOverrideRhythm.bind(this));
   $('body').on('dbl-click', '#clockwise', this.rotateRhythmClockwise.bind(this));
-
-  // $('#clockwise').mousedown(function() {
-  //   this.cwise = setTimeout(this.rotateRhythmClockwiseByOnset.bind(this), 1000);
-  // }.bind(this)).bind('mouseup mouseleave', function() { clearTimeout(this.cwise) });
 
   this.$el.on('transitionend', '.intercell',
     this.cleanupMergedIntercell.bind(this));
@@ -135,7 +129,6 @@ $.RhythmRing.prototype.invertRhythm = function() {
 $.RhythmRing.prototype.reverseRhythm = function() {
   var tempRhythmCells = this.rhythmCells.slice(0);
   for (var i = 0; i < this.rhythmCells.length; i++) {
-    // debugger
     if (this.rhythmCells[i] != tempRhythmCells[(this.rhythmCells.length - i) - 1]) {
       this.toggleCell(i, true);
     }
@@ -183,8 +176,43 @@ $.RhythmRing.prototype.rotateRhythmClockwiseByOnset = function() {
 };
 
 $.RhythmRing.prototype.rotateRhythmCounterClockwise = function() {
-
+  if (event.which === LEFT_CLICK ) {
+    this.rotateRhythmCounterClockwiseByCell();
+  } else if (event.which === RIGHT_CLICK ) {
+    this.rotateRhythmCounterClockwiseByOnset();
+  }
+  this.refreshWell();
 }
+
+$.RhythmRing.prototype.rotateRhythmCounterClockwiseByCell = function() {
+  var tempCell = this.rhythmCells[0];
+  for (var i = 0; i < this.rhythmCells.length - 1; i++) {
+    if (this.rhythmCells[i] != this.rhythmCells[i + 1]) {
+      this.toggleCell(i, true);
+    }
+  }
+  if (this.rhythmCells[this.rhythmCells.length - 1] != tempCell) {
+    this.toggleCell(this.rhythmCells.length - 1, true);
+  }
+};
+
+$.RhythmRing.prototype.rotateRhythmCounterClockwiseByOnset = function() {
+  var firstOnsetDiff = null;
+  for (var i = 1; i < this.rhythmCells.length - 1; i++) {
+    if ( this.rhythmCells[i] ) {
+      firstOnsetDiff = i;
+      break;
+    }
+  }
+  var tempCells = this.rhythmCells.slice(0);
+  for (var i = 0; i < this.rhythmCells.length; i++) {
+    var thisIndex = i + firstOnsetDiff;
+    if (thisIndex >= this.rhythmCells.length ) thisIndex -= this.rhythmCells.length;
+    if (this.rhythmCells[i] != tempCells[thisIndex]) {
+      this.toggleCell(i, true);
+    }
+  }
+};
 
 $.fn.rhythmRing = function () {
   return this.each(function () {

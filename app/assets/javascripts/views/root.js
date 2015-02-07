@@ -12,7 +12,9 @@ Geometrhythm.Views.Root = Backbone.CompositeView.extend({
   initialize: function() {
     this.listenTo(this.model, 'sync', this.render);
     this.listenTo(this.model, 'change:rhythm_str', this.renderInfoView);
-    this.listenTo(this.collection, 'sync', this.renderInfoView);
+    this.listenTo(this.model, 'change:id', this.renderInfoView);
+    this.listenTo(this.collection, 'sync', this.renderInfoView); //OKAY BIG EXPERIMENT
+
     // this.updateModel();
     // this.wtfStoreRhythmId();
     //this.renderInfoView();

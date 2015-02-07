@@ -1,15 +1,25 @@
 <% if (rhythm.get("namings") && rhythm.get("namings").length > 0) { %>
-  known as: <strong><%= primaryName %></strong>
+  <% if (largeName) { %>
+    <h4><strong><%= primaryName %></strong></h4>
+  <% } else { %>
+    known as: <strong><%= primaryName %></strong>
+  <% } %>
   <% if (nameDeets) { %>
     <ul>
-      <% rhythm.get("namings").forEach(function(naming) { %>
-        <li><%= naming.name.name %></li> (suggested by <%= naming.namer.email %>)
+      <% additionalNames.forEach(function(naming) { %>
+          <li><%= naming.name.name %></li>
       <% }) %>
     </ul>
+    <% if (enabled) { %>
+      <%= JST['info/_name_form']() %>
+    <% } %>
     <span class="deets_link name_deets_collapse">collapse</span>
-  <% } else if ( rhythm.get("namings").length > 1) { %>
+  <% } else if ( additionalNames.length > 0 ) { %>
     <span class="deets_link name_deets_link"><br>additional names</span>
+  <% } else if (enabled) { %>
+    <span class="deets_link name_deets_link"><br>suggest another name</span>
   <% } %>
 <% } else { %>
-  This one doesn't have a name yet. Why don't you name it?
+  <h5>This one doesn't have a name yet. Why don't you name it?</h5>
+  <%= JST['info/_name_form']() %>
 <% } %>

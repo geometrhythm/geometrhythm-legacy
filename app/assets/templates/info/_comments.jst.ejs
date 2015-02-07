@@ -11,14 +11,16 @@
     </ol>
   <% } %>
 
-  <span class="deets_link comment_deets_collapse">collapse</span>
-<% } else if ( rhythm.get("comments") && rhythm.get("comments").length > 1) { %>
-  <span class="deets_link comment_deets_link"><br>view comments</span>
-<% } %>
+  <% if (enabled) { %>
+    <form class="add-comment">
+      <input type="text" name="comment[body]">
+      <input type="submit" value="Comment">
+    </form>
+  <% } %>
 
-<% if (enabled) { %>
-  <form class="add-comment">
-    <input type="text" name="comment[body]">
-    <input type="submit" value="Comment">
-  </form>
+  <span class="deets_link comment_deets_collapse">collapse</span>
+<% } else if ( rhythm.get("comments") && rhythm.get("comments").length > 0) { %>
+  <span class="deets_link comment_deets_link"><br>view comments</span>
+<% } else { %>
+  <span class="deets_link comment_deets_link"><br>add comment</span>
 <% } %>

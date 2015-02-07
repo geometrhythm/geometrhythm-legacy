@@ -1,9 +1,27 @@
 span.deets_link {
   color: DodgerBlue;
-  font-size: 10px;
+  font-size: 12px;
 }
 
 span.deets_link:hover {
+  cursor: pointer;
+}
+
+span.view-creations {
+  color: DodgerBlue;
+  font-size: 12px;
+}
+
+span.view-creations:hover {
+  cursor: pointer;
+}
+
+span.view-likes {
+  color: DodgerBlue;
+  font-size: 12px;
+}
+
+span.view-likes:hover {
   cursor: pointer;
 }
 
