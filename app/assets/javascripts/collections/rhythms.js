@@ -1,7 +1,7 @@
 Geometrhythm.Collections.Rhythms = Backbone.Collection.extend({
   url: '/api/rhythms',
   model: Geometrhythm.Models.Rhythm,
-  filter: { page: 1 },
+  filter: {  },
 
   getOrFetch: function(id) {
     var model = this.get(id);
@@ -30,7 +30,13 @@ Geometrhythm.Collections.Rhythms = Backbone.Collection.extend({
     this.total_pages = parseInt(response.total_pages);
     // deal with any nested resources on response.models and return
     //... guess I don't really need their likers or namings yet!
-    return response.models;
+    if (response.models) {
+      return response.models;
+    } else {
+      return response;
+    }
+
+    // return response.models; this makes pagination work
   }
 });
 

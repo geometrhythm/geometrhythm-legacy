@@ -31,21 +31,43 @@ module Api
         @rhythms = @rhythms.where(id: User.find(params[:liker_id]).liked_rhythms)
       end
 
-      @rhythms = @rhythms.page(params[:page]).per(25)
 
+
+      if params[:page]
+        @rhythms = @rhythms.page(params[:page]).per(25)
       # render :all
-      page_number = params[:page] || 1
-      render partial: 'api/rhythms/all', locals: {
-        models: @rhythms,
-        page_number: page_number,
-        total_pages: @rhythms.total_pages
-      }
+        page_number = params[:page] #so this is necessary to start it over, but breaks the root page...
+        render partial: 'api/rhythms/all', locals: {
+          models: @rhythms,
+          page_number: page_number,
+          total_pages: @rhythms.total_pages
+        }
+      else
+        render :all
+      end
     end
 
     def show
       @rhythm = Rhythm.find(params[:id])
       render :show
     end
+
+    def rhythms_all
+      @rhythms = Rhythm.all
+      render :all
+    end
+
+    # def exists_in_db
+    #   @rhythm = Rhythm.find(params[:rhythm_str])
+    #   render :show if @rhythm
+    #   render json: {}
+    # end
+    #
+    # $.ajax(options)
+    # options would be url where sends request, by default get, seems fine
+    # data type json
+    # data is the payload
+    # on success do the thing w widget
 
     private
 

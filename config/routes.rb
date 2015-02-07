@@ -2,7 +2,7 @@ Rails.application.routes.draw do
   root to: "root#root"
 
   namespace :api, defaults: { format: :json } do
-    resources :rhythms, only: [:index, :show, :create, :update]
+    resources :rhythms, only: [:index, :show, :create, :update] #, :rhythms_all]
     resources :likes, only: [:show, :create, :destroy, :index]
     resources :comments, only: [:show, :create, :destroy, :index, :update]
     resources :names, only: [:show, :create, :destroy, :index]

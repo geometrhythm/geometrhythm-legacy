@@ -30,7 +30,7 @@ Geometrhythm.Routers.App = Backbone.Router.extend({
     } else {
       $('#cur-rhythm-id').attr('value', '');
     }
-    debugger
+    // debugger
     Geometrhythm.Collections.rhythms.fetch();
     var rootView = new Geometrhythm.Views.Root({
       model: this.activeRhythm,
@@ -41,7 +41,7 @@ Geometrhythm.Routers.App = Backbone.Router.extend({
 
   list: function() {
     // Geometrhythm.Collections.rhythms.fetch({data: { page: 1 }});
-    Geometrhythm.Collections.rhythms.fetch();
+    Geometrhythm.Collections.rhythms.fetch({ data: { page: 1 } });
     var listView = new Geometrhythm.Views.RhythmsList({
       collection: Geometrhythm.Collections.rhythms,
       potentialLikers: Geometrhythm.Collections.potentialLikers,
