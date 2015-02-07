@@ -55,7 +55,7 @@ Geometrhythm.Views.Info = Backbone.View.extend({
     // console.log("nameHash: ");
     // console.log(nameHash);
 
-    console.log(this.nameDeets);
+    // console.log(this.nameDeets);
     var content = this.template({
       rhythm: this.model,
       primaryName: primaryName,

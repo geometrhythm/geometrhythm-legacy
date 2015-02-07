@@ -28,10 +28,9 @@
   <nav class="navbar navbar-default" style="min-height: 80px">
     <div class="container-fluid">
       <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-        <a class="navbar-brand" href="#/rhythms">
+        <a class="navbar-brand">
           <%= image_tag "header_logo_dark.png", size: "292x45"%>
         </a>
-
 
         <div class="font_preload" style="opacity: 0">
           <span style="font-family: 'Glyphicons Halflings', Arial, sans-serif;"></span>
@@ -41,6 +40,13 @@
         <i class="glyphicon glyphicon-show-thumbnails"></i>
         <!--<i class="glyphicon glyphicon-log-in"></i>-->
         <ul class="nav navbar-nav navbar-right">
+
+          <li>
+            <a href="#/rhythms" style="margin: 10px 0px">
+              browse rhythms
+              <%= image_tag "thumbnail_icon.png" %>
+            </a>
+          </li>
 
           <% if logged_in? %>
             <li class="who-you-are">

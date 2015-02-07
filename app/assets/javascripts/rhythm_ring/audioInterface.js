@@ -22,11 +22,11 @@ $.RhythmRing.prototype.togglePlay = function() {
   if (this.paused) {
     this.paused = false;
     this.playRhythm();
-    $('#play-pause').addClass("active").html('Pause');
+    $('#play-pause').addClass("active").html('<i style="font-size: 12px" class="glyphicon glyphicon-pause"></i>&nbsp;Pause');
   } else {
     this.paused = true;
     clearInterval(this.playingRhythm);
-    $('#play-pause').removeClass("active").html('Play');
+    $('#play-pause').removeClass("active").html('<i style="font-size: 12px" class="glyphicon glyphicon-play"></i>&nbsp;Play');
   }
 }
 
