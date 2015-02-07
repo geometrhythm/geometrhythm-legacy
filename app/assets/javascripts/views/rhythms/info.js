@@ -34,7 +34,7 @@ Geometrhythm.Views.Info = Backbone.View.extend({
         primaryName = naming.name.name;
       }
     });
-    // debugger
+    debugger
     var content = this.template({
       rhythm: this.model,
       primaryName: primaryName,

@@ -55,6 +55,7 @@ Geometrhythm.Views.Root = Backbone.CompositeView.extend({
   },
 
   renderInfoView: function(event) {
+    // debugger
 
       // dbRhythm = new Geometrhythm.Models.Rhythm({rhythm_str: $('#current-rhythm').val()});
     // } else {
