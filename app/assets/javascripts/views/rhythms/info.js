@@ -21,6 +21,8 @@ Geometrhythm.Views.Info = Backbone.View.extend({
     'click button.view-likes' : 'viewLikes',
     'click span.name_deets_link' : 'expandNames',
     'click span.name_deets_collapse' : 'collapseNames',
+    'click span.comment_deets_link' : 'expandComments',
+    'click span.comment_deets_collapse' : 'collapseComments',
   },
 
   render: function(options) {
@@ -36,7 +38,8 @@ Geometrhythm.Views.Info = Backbone.View.extend({
     var content = this.template({
       rhythm: this.model,
       primaryName: primaryName,
-      nameDeets: this.nameDeets
+      nameDeets: this.nameDeets,
+      commentDeets: this.commentDeets
     });
     this.$el.html(content);
     return this;
@@ -107,6 +110,7 @@ Geometrhythm.Views.Info = Backbone.View.extend({
 
   addComment: function(event) {
     event.preventDefault();
+    console.log("huh?");
     var attrs = $(event.currentTarget).serializeJSON();
     var comment = new Geometrhythm.Models.Comment({
       commentable_id: $('#cur-rhythm-id').val(),
@@ -156,6 +160,16 @@ Geometrhythm.Views.Info = Backbone.View.extend({
 
   collapseNames: function() {
     this.nameDeets = false;
+    this.render();
+  },
+
+  expandComments: function() {
+    this.commentDeets = true;
+    this.render();
+  },
+
+  collapseComments: function() {
+    this.commentDeets = false;
     this.render();
   }
 

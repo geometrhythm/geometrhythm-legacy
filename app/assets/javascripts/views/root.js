@@ -75,7 +75,7 @@ Geometrhythm.Views.Root = Backbone.CompositeView.extend({
 
       if (dbRhythm) {
         $('#cur-rhythm-id').attr('value', dbRhythm.id);
-        debugger
+        // debugger
         if ($('#cur-user-id').val()
           && $('#cur-user-id').val() == dbRhythm.get("creator_id")) {
           var template = "templateShowYours";

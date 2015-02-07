@@ -1,13 +1,19 @@
-<br>
-<% if (rhythm.get("comments").length > 0) { %>
-  Comments:
-  <ol>
-    <% rhythm.get("comments").forEach(function(comment) {  %>
-      <li>
-        <%= JST['info/_rec_comments']({comment: comment, enabled: enabled}) %>
-      </li>
-    <% }) %>
-  </ol>
+<% if (commentDeets) { %>
+  <br>
+  <% if (rhythm.get("comments").length > 0) { %>
+    Comments:
+    <ol>
+      <% rhythm.get("comments").forEach(function(comment) {  %>
+        <li>
+          <%= JST['info/_rec_comments']({comment: comment, enabled: enabled}) %>
+        </li>
+      <% }) %>
+    </ol>
+  <% } %>
+
+  <span class="deets_link comment_deets_collapse">collapse</span>
+<% } else if ( rhythm.get("comments").length > 1) { %>
+  <span class="deets_link comment_deets_link"><br>view comments</span>
 <% } %>
 
 <% if (enabled) { %>

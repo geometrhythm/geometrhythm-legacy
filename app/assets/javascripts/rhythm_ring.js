@@ -20,7 +20,7 @@ $.RhythmRing.prototype.refreshWell = function() {
   console.log("hey");
   $('#current-rhythm').attr('value', this.rhythmAsStr());
   var dbRhythm = Geometrhythm.Collections.rhythms.find( function(rhythm){
-    debugger
+    // debugger
       return rhythm.get("rhythm_str") === $('#current-rhythm').val();
     }
   );

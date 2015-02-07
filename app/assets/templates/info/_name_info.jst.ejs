@@ -1,6 +1,5 @@
 <% if (rhythm.get("namings") && rhythm.get("namings").length > 0) { %>
-  <br>
-  <h6>known as: <%= primaryName %></h6>
+  known as: <strong><%= primaryName %></strong>
   <% if (nameDeets) { %>
     <ul>
       <% rhythm.get("namings").forEach(function(naming) { %>
@@ -9,8 +8,8 @@
     </ul>
     <span class="deets_link name_deets_collapse">collapse</span>
   <% } else if ( rhythm.get("namings").length > 1) { %>
-    <span class="deets_link name_deets_link">additional names</span>
+    <span class="deets_link name_deets_link"><br>additional names</span>
   <% } %>
 <% } else { %>
-  Hey, this one doesn't have a name yet. Why don't you name it?
+  This one doesn't have a name yet. Why don't you name it?
 <% } %>
