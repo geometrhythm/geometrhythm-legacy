@@ -26,6 +26,50 @@ div.key-rhythm {
   position: relative;
 }
 
+.key-rhythm button {
+  position: absolute;
+  top: 200px;
+  left: 320px;
+  visibility: hidden;
+}
+
+.rhythm button {
+  position: absolute;
+  top: 83px;
+  left: 138px;
+  visibility: hidden;
+}
+
+.rhythm:hover button {
+  visibility: visible;
+}
+
+.key-rhythm:hover button {
+  visibility: visible;
+}
+
+.key-rhythm span {
+  position: absolute;
+  top: 210px;
+  left: 340px;
+  visibility: hidden;
+}
+
+.rhythm span {
+  position: absolute;
+  top: 83px;
+  left: 138px;
+  visibility: hidden;
+}
+
+.rhythm:hover span {
+  visibility: visible;
+}
+
+.key-rhythm:hover span {
+  visibility: visible;
+}
+
 .glyphicon {
   font-size: 24px
 }

@@ -12,6 +12,13 @@
     <i class="glyphicon glyphicon-play"
       rhythm-str="<%= rhythm.get("rhythm_str") %>"></i>
 
+    <% if (loggedIn) { %>
+      <% if (yetUnliked) { %>
+        <button class="btn btn-default btn-sm">like</button>
+      <% } else { %>
+        <span style="color: #ff9800">liked</span>
+      <% } %>
+    <% } %>
   </div>
 <% } else { %>
   <div class="rhythm"
@@ -26,5 +33,12 @@
     <i class="glyphicon glyphicon-play"
       rhythm-str="<%= rhythm.get("rhythm_str") %>"></i>
 
+    <% if (loggedIn) { %>
+      <% if (yetUnliked) { %>
+        <button class="btn btn-default btn-xs">like</button>
+      <% } else { %>
+        <span style="color: #ff9800">liked</span>
+      <% } %>
+    <% } %>
   </div>
 <% } %>

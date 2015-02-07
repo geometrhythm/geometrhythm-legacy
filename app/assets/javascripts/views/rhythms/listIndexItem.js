@@ -5,6 +5,8 @@ Geometrhythm.Views.RhythmListItemView = Backbone.CompositeView.extend({
   events: {
     "click .rhythm i" : "togglePlay",
     "click .key-rhythm i" : "togglePlay",
+    "click .rhythm button" : "likeIt",
+    "click .key-rhythm button" : "likeIt",
   },
 
   initialize: function(options) {
@@ -22,8 +24,20 @@ Geometrhythm.Views.RhythmListItemView = Backbone.CompositeView.extend({
   },
 
   render: function() {
+    var yetUnliked = false;
+    if ( _(this.model.get("likers")).pluck("id").indexOf(parseInt($('#cur-user-id').val())) == -1 ) {
+      yetUnliked = true;
+    }
+    var loggedIn = false;
+    if ($('#cur-user-id').length > 0) {
+      loggedIn = true;
+    }
+    // debugger
+    // console.log(loggedIn);
     var content = this.template({
       rhythm: this.model,
+      yetUnliked: yetUnliked,
+      loggedIn: loggedIn,
       superSizeMe: this.superSizeMe
     })
     this.$el.html(content);
@@ -36,6 +50,7 @@ Geometrhythm.Views.RhythmListItemView = Backbone.CompositeView.extend({
     for (var i = 0; i < this.rhythmStr.length; i++) {
       this.rhythmCells.push( this.rhythmStr[i] === "x" ? true : false);
     }
+    // debugger
     return this;
   },
 
@@ -104,6 +119,21 @@ Geometrhythm.Views.RhythmListItemView = Backbone.CompositeView.extend({
       // debugger
 
     }.bind(this), this.pulseDuration);
-  }
+  },
+
+  likeIt: function(event) {
+    // var dbRhythm = Geometrhythm.Collections.rhythms.find( function(rhythm){
+    //     return rhythm.get("rhythm_str") === $('#current-rhythm').val();
+    //   }
+    // );
+    // if (dbRhythm) {
+    //   $('#cur-rhythm-id').attr('value', dbRhythm.id);
+    // } else {
+    //   $('#cur-rhythm-id').attr('value', '');
+    // }
+    event.stopPropagation();
+    var that = this;
+    new Geometrhythm.Models.Like().save({rhythm_id: this.model.id});
+  },
 
 });
