@@ -3,10 +3,17 @@
   <div class='row'>
 
     <div class='col-md-2'>
-      <interface>
+      <interface oncontextmenu="return false;">
         tempo<br><input type="text" id="input-tempo" value="125"><br><br>
-        <button class="btn btn-warning" id="play-pause">Play</button><br><br>
+        <button class="btn btn-warning" id="play-pause"><i style="font-size: 12px" class="glyphicon glyphicon-play"></i>&nbsp;Play</button><br><br>
         <button class="btn btn-default btn-sm" id="invert">Invert</button>
+        <button class="btn btn-default btn-sm" id="reverse">Reverse</button>
+        <button class="btn btn-default btn-sm" id="clockwise">
+          <i style="font-size: 12px" class="glyphicon glyphicon-refresh"></i>
+        </button>
+        <button class="btn btn-default btn-sm" id="c-clockwise">
+          <i style="font-size: 12px" class="glyphicon glyphicon-refresh c-clockwise"></i>
+        </button>
       </interface>
     </div>
 

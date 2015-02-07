@@ -45,6 +45,10 @@ navbar-right a {
   color: DodgerBlue;
 }
 
+.c-clockwise {
+  transform: scale(-1, 1);
+}
+
 // navbar-right form {
 //   display: inline;
 // }
