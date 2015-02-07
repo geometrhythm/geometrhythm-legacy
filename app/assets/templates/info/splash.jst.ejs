@@ -1,6 +1,35 @@
-<h2><strong> BEATS + MATH </strong></h2>
-<h4> <strong>explore the rhythmic network. </strong></h4>
+<% if (!instructionDeets) { %>
+  <h2><strong> BEATS + MATH </strong></h2>
+  <h4> <strong>explore the rhythmic network. </strong></h4>
+<% } %>
 
-<br>press 'PLAY' to hear what you see.
+<br>press <strong>PLAY</strong> to hear what you see.
 <br>click on / between cells to change it up.
 <br>also, drag and drop.
+<br>
+<br>you can listen while you're mutating the rhythm.
+<br>click the logo to browse rhythms.
+
+<% if (instructionDeets) { %>
+  <br><br>
+  <strong>between cells</strong>
+  <ul>
+    <li><strong>left-click</strong> to insert a new cell</li>
+    <li><strong>right-click</strong> to swap </li>
+  </ul>
+
+  <strong>on cells</strong>
+  <ul>
+    <li>
+      <strong>left-click and hold</strong> to grab
+      <ul>
+        <li>drag and drop to a new location</li>
+        <li>drag away to remove</li>
+      </ul>
+    </li>
+    <li><strong>right-click</strong> to toggle on/off </li>
+  </ul>
+<% } else { %>
+  <br><br>
+  <span class="deets_link instruction_deets_link">detailed instructions</span>
+<% } %>

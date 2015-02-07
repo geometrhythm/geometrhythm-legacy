@@ -5,6 +5,7 @@ span.deets_link {
 
 span.deets_link:hover {
   cursor: pointer;
+  color: #2196F3;
 }
 
 span.view-creations {
@@ -14,6 +15,7 @@ span.view-creations {
 
 span.view-creations:hover {
   cursor: pointer;
+  color: #2196F3;
 }
 
 span.view-likes {
@@ -23,6 +25,11 @@ span.view-likes {
 
 span.view-likes:hover {
   cursor: pointer;
+  color: #2196F3;
+}
+
+interface button {
+  margin: 5px 0px;
 }
 
 *{font-family: 'Maven Pro', sans-serif;}

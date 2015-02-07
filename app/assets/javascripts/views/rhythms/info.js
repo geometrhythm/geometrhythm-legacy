@@ -14,6 +14,7 @@ Geometrhythm.Views.Info = Backbone.View.extend({
   events: {
     'click #sign-up-to-claim-rhythm' : 'signUpToClaimRhythm',
     'click #claim-rhythm' : 'claimRhythm',
+    'click button.like' : 'likeThisRhythm',
     'submit form.suggest-name' : 'suggestName',
     'submit form.add-comment' : 'addComment',
     'submit form.add-meta-comment' : 'addMetaComment',
@@ -25,6 +26,7 @@ Geometrhythm.Views.Info = Backbone.View.extend({
     'click span.comment_deets_collapse' : 'collapseComments',
     'click span.like_deets_link' : 'expandLikes',
     'click span.like_deets_collapse' : 'collapseLikes',
+    'click span.instruction_deets_link' : 'expandInstructions',
   },
 
   render: function(options) {
@@ -61,6 +63,7 @@ Geometrhythm.Views.Info = Backbone.View.extend({
       likeDeets: this.likeDeets,
       additionalNames: additionalNames,
       // largeName: this.largeName,
+      instructionDeets: this.instructionDeets,
       commentDeets: this.commentDeets
     });
     this.$el.html(content);
@@ -165,6 +168,30 @@ Geometrhythm.Views.Info = Backbone.View.extend({
     });
   },
 
+  likeThisRhythm: function() {
+    var dbRhythm = Geometrhythm.Collections.rhythms.find( function(rhythm){
+        return rhythm.get("rhythm_str") === $('#current-rhythm').val();
+      }
+    );
+    if (dbRhythm) {
+      $('#cur-rhythm-id').attr('value', dbRhythm.id);
+    } else {
+      $('#cur-rhythm-id').attr('value', '');
+    }
+
+    var that = this;
+    new Geometrhythm.Models.Like().save({
+      rhythm_id: $('#cur-rhythm-id').val()
+    }, {
+      success: function() {
+        var dbRhythm = Geometrhythm.Collections.rhythms.find( function(rhythm){
+            return rhythm.get("rhythm_str") === $('#current-rhythm').val();
+          });
+        dbRhythm.fetch();
+      }
+    });
+  },
+
   viewCreations: function(event) {
     // console.log($(event.currentTarget).val());
     Backbone.history.navigate("/creations/" + $(event.currentTarget).attr("value"),
@@ -206,4 +233,8 @@ Geometrhythm.Views.Info = Backbone.View.extend({
     this.render();
   },
 
+  expandInstructions: function() {
+    this.instructionDeets = true;
+    this.render();
+  },
 });

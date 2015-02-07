@@ -133,6 +133,7 @@ $.RhythmRing.prototype.reverseRhythm = function() {
       this.toggleCell(i, true);
     }
   }
+  this.rotateRhythmClockwiseByCell();
   this.refreshWell();
 };
 

@@ -5,7 +5,8 @@ Geometrhythm.Views.Root = Backbone.CompositeView.extend({
   events: {
     //'submit form' : 'submitForm',
     'plugin-change #bb-info' : 'updateModel',
-    'click button.like' : 'likeThisRhythm',
+    // 'click button.like' : 'likeThisRhythm',
+
     // 'click .navbar-brand' : 'visitList'
   },
 
@@ -14,7 +15,6 @@ Geometrhythm.Views.Root = Backbone.CompositeView.extend({
     this.listenTo(this.model, 'change:rhythm_str', this.renderInfoView);
     this.listenTo(this.model, 'change:id', this.renderInfoView);
     this.listenTo(this.collection, 'sync', this.renderInfoView); //OKAY BIG EXPERIMENT
-
     // this.updateModel();
     // this.wtfStoreRhythmId();
     //this.renderInfoView();
@@ -27,6 +27,7 @@ Geometrhythm.Views.Root = Backbone.CompositeView.extend({
       rhythm: this.model
     })
     this.$el.html(content);
+    // this.$el.find('#clockwise').popover();
     return this;
   },
 
@@ -119,29 +120,7 @@ Geometrhythm.Views.Root = Backbone.CompositeView.extend({
     this.$('#bb-info').html(view.render().$el)
   },
 
-  likeThisRhythm: function() {
-    var dbRhythm = Geometrhythm.Collections.rhythms.find( function(rhythm){
-        return rhythm.get("rhythm_str") === $('#current-rhythm').val();
-      }
-    );
-    if (dbRhythm) {
-      $('#cur-rhythm-id').attr('value', dbRhythm.id);
-    } else {
-      $('#cur-rhythm-id').attr('value', '');
-    }
 
-    var that = this;
-    new Geometrhythm.Models.Like().save({
-      rhythm_id: $('#cur-rhythm-id').val()
-    }, {
-      success: function() {
-        var dbRhythm = Geometrhythm.Collections.rhythms.find( function(rhythm){
-            return rhythm.get("rhythm_str") === $('#current-rhythm').val();
-          });
-        dbRhythm.fetch();
-      }
-    });
-  },
 
   // visitList: function() {
   //   Backbone.history.navigate("/rhythms", {trigger: true})

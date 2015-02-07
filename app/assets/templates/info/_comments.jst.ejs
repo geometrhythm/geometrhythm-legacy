@@ -1,26 +1,26 @@
 <% if (commentDeets) { %>
   <br>
   <% if (rhythm.get("comments") && rhythm.get("comments").length > 0) { %>
-    Comments:
-    <ol>
+    <strong>comments</strong>
+    <ul>
       <% rhythm.get("comments").forEach(function(comment) {  %>
         <li>
           <%= JST['info/_rec_comments']({comment: comment, enabled: enabled}) %>
         </li>
       <% }) %>
-    </ol>
+    </ul>
   <% } %>
 
   <% if (enabled) { %>
     <form class="add-comment">
       <input type="text" name="comment[body]">
-      <input type="submit" value="Comment">
+      <button class="btn btn-default btn-xs" type="submit">Comment</button>
     </form>
   <% } %>
 
   <span class="deets_link comment_deets_collapse">collapse</span>
 <% } else if ( rhythm.get("comments") && rhythm.get("comments").length > 0) { %>
   <span class="deets_link comment_deets_link"><br>view comments</span>
-<% } else { %>
+<% } else if (enabled){ %>
   <span class="deets_link comment_deets_link"><br>add comment</span>
 <% } %>

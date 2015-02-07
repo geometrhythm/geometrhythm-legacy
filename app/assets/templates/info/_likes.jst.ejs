@@ -13,12 +13,18 @@
     </ul>
     <span class="deets_link like_deets_collapse"><br>collapse</span>
   <% } else { %>
-    <span class="deets_link like_deets_link"><%= rhythm.get("likers").length %> likes</span>
+    <span class="deets_link like_deets_link"><%= rhythm.get("likers").length %>
+      <% if (rhythm.get("likers").length > 1 ) { %>
+        likes
+      <% } else { %>
+        like
+      <% } %>
+    </span>
   <% } %>
 <% } %>
 
 <% if ( _(rhythm.get("likers")).pluck("id").indexOf(parseInt($('#cur-user-id').val())) == -1 ) { %>
-  <button class='like'>Like</button>
+  <button class='like btn btn-default btn-xs'>Like</button>
 <% } else { %>
-  <br>You like this rhythm.
+  <br><span style="color: #ff9800">You like this rhythm.</span>
 <% } %>

@@ -1,16 +1,17 @@
-<%= comment.commenter %> says: <%= comment.body %>
-<ol>
+<strong><%= comment.body %></strong>
+&nbsp<span style="font-size: 12px"><%= comment.commenter %></span>
+<ul>
   <% comment.comments.forEach(function(subcomment) { %>
     <li>
       <%= JST['info/_rec_comments']({comment: subcomment, enabled: enabled}) %>
     </li>
   <% }); %>
-</ol>
+</ul>
 
 <% if (enabled) { %>
   <form class="add-meta-comment">
     <input type="hidden" name="comment[comment_id]" value="<%= comment.id %>">
     <input type="text" name="comment[body]">
-    <input type="submit" value="Comment">
+    <button class="btn btn-default btn-xs" type="submit">comment</button>
   </form>
 <% } %>

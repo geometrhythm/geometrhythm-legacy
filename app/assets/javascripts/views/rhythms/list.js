@@ -4,6 +4,7 @@ Geometrhythm.Views.RhythmsList = Backbone.CompositeView.extend({
 
   events: {
     "click .rhythm:not('i')" : "selectRhythm",
+    "click .key-rhythm:not('i')" : "selectRhythm",
     "change .creator" : "filterByCreator",
     "change .liker" : "filterByLiker",
     "change .rhythm-str" : "filterByRhythmStr",
@@ -44,6 +45,10 @@ Geometrhythm.Views.RhythmsList = Backbone.CompositeView.extend({
     this.$el.html(content);
     this.listenForScroll();
     this.attachSubviews();
+
+    if (this.subviews('div.subview-version').length == 0) {
+      this.$el.find('div.subview-version').append("No rhythms matched these constraints.")
+    }
 
     // if no subviews, say "no rhythms match."
 
