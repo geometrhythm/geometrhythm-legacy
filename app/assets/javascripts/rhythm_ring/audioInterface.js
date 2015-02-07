@@ -4,6 +4,7 @@ $.RhythmRing.prototype.initializeAudio = function() {
   this.pulseDuration = ( 1000 / ( this.tempo / 60 ) ) / 4;
   $('audio').each(function(index) {
     this.busses.push($('audio')[index]);
+    // this.busses[index].volume = 0.75;
   }.bind(this));
   this.playPos = -1;
   this.curBus = 0;
@@ -51,12 +52,14 @@ $.RhythmRing.prototype.playRhythm = function() {
     }
 
     var fill = this.rhythmCells[this.playPos] ? 'orange' : 'cornsilk';
+    if (this.playPos === 0 && this.rhythmCells[this.playPos]) fill = 'DodgerBlue';
     this.$el.find(".cell-handle[ord='" + this.playPos + "']:not('.grabbed')")
       .css('background-color', fill);
     this.$el.find(".cell[ord='" + this.playPos + "']")
       .css('background-color', fill);
 
     if (this.rhythmCells[this.playPos]) {
+      this.busses[this.curBus].volume = this.playPos === 0 ? 1 : 0.75
       this.busses[this.curBus].play();
       this.curBus += 1;
       if (this.curBus >= 4) {

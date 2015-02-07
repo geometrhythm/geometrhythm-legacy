@@ -141,60 +141,49 @@ $.RhythmRing.prototype.reverseRhythm = function() {
     }
   }
   this.refreshWell();
-}
+};
 
 $.RhythmRing.prototype.rotateRhythmClockwise = function(event) {
-  // event.preventDefault();
-  // console.log("it's me");
   if (event.which === LEFT_CLICK ) {
-    var tempCell = this.rhythmCells[this.rhythmCells.length - 1];
-    for (var i = this.rhythmCells.length - 1; i > 0; i--) {
-      if (this.rhythmCells[i] != this.rhythmCells[i - 1]) {
-        this.toggleCell(i, true);
-      }
-    }
-    if (this.rhythmCells[0] != tempCell) {
-      this.toggleCell(0, true);
-    }
-    this.refreshWell();
+    this.rotateRhythmClockwiseByCell();
   } else if (event.which === RIGHT_CLICK ) {
-    // console.log("na na na na");
-    var lastOnsetDiff = null;
-    for (var i = this.rhythmCells.length - 1; i > 0; i--) {
-      if ( this.rhythmCells[i] ) {
-        lastOnsetDiff = this.rhythmCells.length - i;
-        break;
-      }
-    }
-    // debugger
-    var tempCells = this.rhythmCells.slice(0)
-    for (var i = this.rhythmCells.length - 1; i >= 0; i--) {
-      var thisIndex = i - lastOnsetDiff;
-      if (thisIndex < 0 ) thisIndex += this.rhythmCells.length;
-      console.log("i: " + i);
-      console.log("thisIndex: " + thisIndex);
-      // debugger
-      if (this.rhythmCells[i] != tempCells[thisIndex]) {
-        this.toggleCell(i, true);
-      }
-    }
-    // if (this.rhythmCells[0] != tempCell) {
-    //   this.toggleCell(0, true);
-    // }
-    this.refreshWell();
-  }
-}
-
-$.RhythmRing.prototype.rotateRhythmClockwiseByOnset = function() {
-  // console.log("it's me mario");
-
-}
-
-$.RhythmRing.prototype.rotateRhythmCounterClockwise = function() {
-  for (var i = 0; i < this.rhythmCells.length; i++) {
-    this.toggleCell(i, true);
+    this.rotateRhythmClockwiseByOnset();
   }
   this.refreshWell();
+};
+
+$.RhythmRing.prototype.rotateRhythmClockwiseByCell = function() {
+  var tempCell = this.rhythmCells[this.rhythmCells.length - 1];
+  for (var i = this.rhythmCells.length - 1; i > 0; i--) {
+    if (this.rhythmCells[i] != this.rhythmCells[i - 1]) {
+      this.toggleCell(i, true);
+    }
+  }
+  if (this.rhythmCells[0] != tempCell) {
+    this.toggleCell(0, true);
+  }
+};
+
+$.RhythmRing.prototype.rotateRhythmClockwiseByOnset = function() {
+  var lastOnsetDiff = null;
+  for (var i = this.rhythmCells.length - 1; i > 0; i--) {
+    if ( this.rhythmCells[i] ) {
+      lastOnsetDiff = this.rhythmCells.length - i;
+      break;
+    }
+  }
+  var tempCells = this.rhythmCells.slice(0)
+  for (var i = this.rhythmCells.length - 1; i >= 0; i--) {
+    var thisIndex = i - lastOnsetDiff;
+    if (thisIndex < 0 ) thisIndex += this.rhythmCells.length;
+    if (this.rhythmCells[i] != tempCells[thisIndex]) {
+      this.toggleCell(i, true);
+    }
+  }
+};
+
+$.RhythmRing.prototype.rotateRhythmCounterClockwise = function() {
+
 }
 
 $.fn.rhythmRing = function () {
