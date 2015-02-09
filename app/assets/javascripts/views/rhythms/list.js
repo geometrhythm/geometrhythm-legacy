@@ -18,9 +18,6 @@ Geometrhythm.Views.RhythmsList = Backbone.CompositeView.extend({
     this.likerId = options.liker;
     this.rootLink = $('.navbar-brand');
 
-    // debugger
-    // this.collection.add(this.model);
-
     this.collection.each(function(rhythm) {
       this.addRhythmListItemView(rhythm);
     }.bind(this))
@@ -50,8 +47,6 @@ Geometrhythm.Views.RhythmsList = Backbone.CompositeView.extend({
       this.$el.find('div.subview-version').append("No rhythms matched these constraints.")
     }
 
-    // if no subviews, say "no rhythms match."
-
     this.$el.find('.mini-rhythm-ring').miniRhythmRing();
     this.$el.find('.medium-rhythm-ring').miniRhythmRing(true);
 
@@ -72,7 +67,6 @@ Geometrhythm.Views.RhythmsList = Backbone.CompositeView.extend({
   addRhythmListItemView: function(rhythm) {
     var superSizeMe = false;
     if (this.subviews('div.subview-version').length == 0) { superSizeMe = true }
-    // debugger
     var rhythmListItemView = new Geometrhythm.Views.RhythmListItemView({
       model: rhythm,
       superSizeMe: superSizeMe
@@ -101,8 +95,7 @@ Geometrhythm.Views.RhythmsList = Backbone.CompositeView.extend({
       this.potentialLikers.fetchByFilter();
     }
     this.collection.fetchByFilter();
-
-    // this.potentialCreators.fetchByFilter(); //the issue
+    // this.potentialCreators.fetchByFilter();
   },
 
   filterByLiker: function(event) {
@@ -118,8 +111,7 @@ Geometrhythm.Views.RhythmsList = Backbone.CompositeView.extend({
       this.potentialCreators.fetchByFilter();
     }
     this.collection.fetchByFilter();
-
-    // this.potentialLikers.fetchByFilter(); //the issue
+    // this.potentialLikers.fetchByFilter();
   },
 
   filterByRhythmStr: function(event) {
@@ -139,7 +131,7 @@ Geometrhythm.Views.RhythmsList = Backbone.CompositeView.extend({
     var selectedRhythm = this.collection.getOrFetch(id);
     this.model.set(selectedRhythm.attributes);
     $.cookie('_Geometrhythm_stored_rhythm', $(event.currentTarget).attr('rhythm-str'), { expires: 7, path: '/' });
-    Backbone.history.navigate('/', {trigger: true})
+    Backbone.history.navigate('/', { trigger: true } )
   },
 
   listenForScroll: function () {
@@ -153,7 +145,7 @@ Geometrhythm.Views.RhythmsList = Backbone.CompositeView.extend({
     if ($(window).scrollTop() > $(document).height() - $(window).height() - 50) {
       if (view.collection.page_number < view.collection.total_pages) {
         view.collection.filter.page = view.collection.page_number + 1;
-        view.collection.fetchByFilter(true);
+        view.collection.fetchByFilter(true); // here's the "dontRemove part, my attempt to replicate the commented out below but including my filters"
         // view.collection.fetch({
         //   data: { page: view.collection.page_number + 1 },
         //   remove: false
@@ -163,7 +155,6 @@ Geometrhythm.Views.RhythmsList = Backbone.CompositeView.extend({
   },
 
   returnToRoot: function() {
-    // console.log("DSGOIIOEJOIEJFIOJF");
     Backbone.history.navigate("/", {trigger: true})
   }
 

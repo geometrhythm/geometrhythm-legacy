@@ -29,7 +29,7 @@ Geometrhythm.Collections.Rhythms = Backbone.Collection.extend({
     this.page_number = parseInt(response.page_number);
     this.total_pages = parseInt(response.total_pages);
     // deal with any nested resources on response.models and return
-    //... guess I don't really need their likers or namings yet!
+
     if (response.models) {
       return response.models;
     } else {

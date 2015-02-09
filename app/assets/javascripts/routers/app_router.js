@@ -20,7 +20,7 @@ Geometrhythm.Routers.App = Backbone.Router.extend({
       this.activeRhythm.set("rhythm_str", "x--x--x---x-x---");
       $('#current-rhythm').attr('value', "x--x--x---x-x---");
     }
-    // debugger
+
     var dbRhythm = Geometrhythm.Collections.rhythms.find( function(rhythm){
         return rhythm.get("rhythm_str") === $('#current-rhythm').val();
       }
@@ -30,7 +30,7 @@ Geometrhythm.Routers.App = Backbone.Router.extend({
     } else {
       $('#cur-rhythm-id').attr('value', '');
     }
-    // debugger
+
     Geometrhythm.Collections.rhythms.fetch();
     var rootView = new Geometrhythm.Views.Root({
       model: this.activeRhythm,
@@ -40,9 +40,9 @@ Geometrhythm.Routers.App = Backbone.Router.extend({
   },
 
   list: function() {
-    // Geometrhythm.Collections.rhythms.fetch({data: { page: 1 }});
+    Geometrhythm.Collections.rhythms.fetch( { data: { page: 1 } } );
     // Geometrhythm.Collections.rhythms.fetch(this.activeRhythm)
-    Geometrhythm.Collections.rhythms.fetch({ data: { page: 1 } }, {page: 1});
+    // Geometrhythm.Collections.rhythms.fetch({ data: { page: 1 } }, { page: 1 });
     var listView = new Geometrhythm.Views.RhythmsList({
       collection: Geometrhythm.Collections.rhythms,
       potentialLikers: Geometrhythm.Collections.potentialLikers,
@@ -56,7 +56,7 @@ Geometrhythm.Routers.App = Backbone.Router.extend({
     var likesCollection = new Geometrhythm.Collections.Rhythms();
     likesCollection.filter = {};
     likesCollection.filter.liker_id = id;
-    likesCollection.fetchByFilter();
+    likesCollection.fetchByFilter(); //would prefer to fetch only the first page here, too
     var listView = new Geometrhythm.Views.RhythmsList({
       collection: likesCollection,
       potentialLikers: Geometrhythm.Collections.potentialLikers,
@@ -71,7 +71,7 @@ Geometrhythm.Routers.App = Backbone.Router.extend({
     var creationsCollection = new Geometrhythm.Collections.Rhythms();
     creationsCollection.filter = {};
     creationsCollection.filter.creator_id = id;
-    creationsCollection.fetchByFilter();
+    creationsCollection.fetchByFilter(); //would prefer to fetch only the first page here, too
     var listView = new Geometrhythm.Views.RhythmsList({
       collection: creationsCollection,
       potentialLikers: Geometrhythm.Collections.potentialLikers,

@@ -496,4 +496,80 @@ class Rhythm < ActiveRecord::Base
     # 9999
   end
 
+  def toggle_rhythm?
+    (0...len).each do |i|
+
+      first_half_onsets = nil
+      convenience_rhythm_str[i...(len / 2) + i].split("").each do |cell|
+        if cell == "x"
+          if first_half_onsets.nil?
+            first_half_onsets = i % 2 ? :even : :odd
+          elsif first_half_onsets == :even && i % 2 != 0 ||
+            first_half_onsets == :odd && i % 2 == 0
+            first_half_onsets = :mixed
+            break
+          end
+        end
+      end
+
+      return true if first_half_onsets.nil?
+      next if first_half_onsets == :mixed
+
+      flag = true
+      if first_half_onsets == :even
+        convenience_rhythm_str[(len / 2) + i...len + i].split("").each do |cell|
+          if cell == "x" && i % 2 == 0
+            flag = false
+            break
+          end
+        end
+      elsif first_half_onsets == :even
+        convenience_rhythm_str[(len / 2) + i...len + i].split("").each do |cell|
+          if cell == "x" && i % 2 != 0
+            flag = false
+            break
+          end
+        end
+      end
+
+      return true if flag == true
+    end
+
+    false
+  end
+
+
+
+            # elsif first_half_mark
+
+      #     first_half_count += 1 if cell == "x"
+      #   end
+
+    # total = 0
+    # (0...len).each do |i|
+    #   first_half_count, second_half_count = 0, 0
+    #   # j = (len/2) + i > len - 1 ? (len/2) + i - len : (len/2) + i
+    #   # k =
+    #   puts "first half is #{i} through #{(len / 2) + i} excluding"
+    #   convenience_rhythm_str[i...(len / 2) + i].split("").each do |cell|
+    #     first_half_count += 1 if cell == "x"
+    #   end
+    #   puts "second half is #{(len / 2) + i} through #{len + i} excluding"
+    #   convenience_rhythm_str[(len / 2) + i...len + i].split("").each do |cell|
+    #     second_half_count += 1 if cell == "x"
+    #   end
+    #   puts "i: #{i}"
+    #   puts "  first_half_count:  #{first_half_count}"
+    #   puts "  second_half_count: #{second_half_count}"
+    #   result = (first_half_count - second_half_count).abs
+    #   if result > 1
+    #     total += result - 1
+    #   end
+    # end
+    #
+    # total = total / 2
+    # total
+    # 9999
+  # end
+
 end
