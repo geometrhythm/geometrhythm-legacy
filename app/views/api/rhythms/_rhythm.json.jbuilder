@@ -1,4 +1,14 @@
-json.extract! rhythm, :rhythm_str, :play_count, :creator_id, :id
+json.extract! rhythm, :rhythm_str, :play_count, :creator_id, :id,
+  :durational_pattern, :contour, :full_interval_content,
+  :full_interval_content_entropy, :interval_vector, :flat?,
+  :perfectly_flat?, :has_all_intervals?, :tallness, :deep?,
+  :shallowness, :distinct_durations, :metric_syncopation, :offbeatness,
+  :strongbeatness, :has_closure?, :has_anacrusis?, :irregularity,
+  :oddity, :odd?, :unevenness, :symmetries_by_onset,
+  :symmetries_by_interonset, :adjacent_interval_content_entropy,
+  :adjacent_interval_content, :onset_distinct_distance_complexity,
+  :shelling_count, :perfectly_even?, :maximally_even?, :almost_maximally_even?,
+  :imbalance
 
 json.creator rhythm.user.email
 

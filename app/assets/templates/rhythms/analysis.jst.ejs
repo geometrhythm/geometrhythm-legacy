@@ -1,0 +1,98 @@
+TEDAS:
+<div class="TEDAS_box">
+  <% sum = 0 %>
+  <% rhythm.get("durational_pattern") && rhythm.get("durational_pattern").forEach(function(interval_duration, index) { %>
+
+    <div class="TEDAS_sq" ord="<%= sum %>"
+          style="height: <%= interval_duration * 20 %>px;
+                width: <%= interval_duration * 20 %>px;
+                left: <%= sum * 20 %>px;
+                top: <%= (Math.max.apply(null, rhythm.get("durational_pattern")) - interval_duration) * 20 %>px">
+    </div>
+    <% sum += interval_duration %>
+  <% }) %>
+</div>
+
+FIC:
+<div class="FIC_box">
+  <% rhythm.get("full_interval_content") && rhythm.get("full_interval_content").forEach(function(duration_count, h_index) { %>
+    <% for (v_index = 0; v_index < duration_count; v_index++ ) { %>
+      <div class="FIC_sq" style="left: <%= FIC_sq_dim * h_index %>px;
+                                 top: <%= 400 - FIC_sq_dim * v_index %>px;
+                                 height: <%= FIC_sq_dim %>px;
+                                 width: <%= FIC_sq_dim %>px">
+      </div>
+    <% } %>
+  <% }) %>
+</div>
+
+<ul>
+  <li>full interval content: <%= rhythm.get("full_interval_content") %></li>
+  <li>durational pattern: <%= rhythm.get("durational_pattern") %></li>
+  <li>contour: <%= rhythm.get("contour") %></li>
+  <li>full interval content entropy: <%= rhythm.get("full_interval_content_entropy") %></li>
+  <li>interval vector: <%= rhythm.get("interval_vector") %></li>
+
+  <% if (rhythm.get("perfectly_flat?")) { %>
+    <li>perfectly flat</li>
+  <% } else if (rhythm.get("flat?")) { %>
+    <li>flat</li>
+  <% } %>
+
+  <% if (rhythm.get("deep?")) { %>
+    <li>deep</li>
+  <% } else if (rhythm.get("has_all_intervals?")) { %>
+    <li>has all intervals</li>
+  <% } %>
+
+  <li>tallness: <%= rhythm.get("tallness") %></li>
+  <li>shallowness: <%= rhythm.get("shallowness") %></li>
+  <li>distinct durations: <%= rhythm.get("distinct_durations") %></li>
+  <li>metric syncopation: <%= rhythm.get("metric_syncopation") %></li>
+  <li>offbeatness: <%= rhythm.get("offbeatness") %></li>
+  <li>strongbeatedness: <%= rhythm.get("strongbeatness") %></li>
+  <li>irregularity: <%= rhythm.get("irregularity") %></li>
+
+  <% if (rhythm.get("odd?")) { %>
+    <li>is odd,
+  <% } else { %>
+    <li>not odd,
+  <% } %>
+    oddity: <%= rhythm.get("oddity") %></li>
+
+  <% if (rhythm.get("has_closure?")) { %><li>has closure</li><% } %>
+  <% if (rhythm.get("has_anacrusis?")) { %><li>has anacrusis</li><% } %>
+
+  <li>irregularity: <%= rhythm.get("irregularity") %></li>
+  <li>oddity: <%= rhythm.get("oddity") %></li>
+  <li>unevenness: <%= rhythm.get("unevenness") %></li>
+  <li>adjacent interval content entropy: <%= rhythm.get("adjacent_interval_content_entropy") %></li>
+  <li>onset_distinct_distance_complexity: <%= rhythm.get("onset_distinct_distance_complexity") %></li>
+  <li>shelling_count: <%= rhythm.get("shelling_count") %></li>
+  <li>adjacent interval content: <%= rhythm.get("adjacent_interval_content") %></li>
+  <li>imbalance: <%= rhythm.get("imbalance") %></li>
+
+  <% if (rhythm.get("perfectly_even?")) { %>
+    <li>perfectly even</li>
+  <% } else if (rhythm.get("maximally_even?")) { %>
+    <li>maximally even</li>
+  <% } else if (rhythm.get("almost_maximally_even?")) { %>
+    <li>almost maximally even</li>
+  <% } %>
+
+  <% if (rhythm.get("symmetries_by_onset")) { %>
+    <li>symmetries by onset:
+      <% rhythm.get("symmetries_by_onset").forEach(function(symmetry) { %>
+        <li><%= symmetry %></li>
+      <% }) %>
+    </li>
+  <% } %>
+  <% if (rhythm.get("symmetries_by_interonset")) { %>
+    <li>symmetries by onset:
+      <% rhythm.get("symmetries_by_interonset").forEach(function(symmetry) { %>
+        <li><%= symmetry %></li>
+      <% }) %>
+    </li>
+  <% } %>
+
+</ul>

@@ -75,6 +75,45 @@ navbar-right a {
   transform: scale(-1, 1);
 }
 
+.bb-analysis {
+  position: relative;
+}
+
+.TEDAS_sq {
+  border: 1px solid #eee;
+  background-color: #6da2d1;
+  // float: left;
+  // display: block;
+  position: absolute;
+  // bottom: 0px;
+}
+
+.TEDAS_box {
+  position: relative;
+  // background-color: gray;
+  margin: 10px;
+  float: left;
+  width: 400px;
+  height: 100px;
+}
+
+.FIC_box {
+  position: relative;
+  // background-color: red;
+  margin: 10px;
+  float: left;
+  width: 300px;
+  height: 500px;
+}
+
+.FIC_sq {
+  position: absolute;
+  background-color: #6da2d1;
+  border: 1px solid #eee;
+  height: 15px;
+  width: 15px;
+}
+
 // navbar-right form {
 //   display: inline;
 // }

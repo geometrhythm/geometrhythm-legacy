@@ -76,7 +76,7 @@ $.RhythmRing.prototype.togglePlay = function() {
 // }
 //
 $.RhythmRing.prototype.manualOverrideRhythm = function(event) {
-  console.log("hey");
+  // console.log("hey");
   this.initializeRhythm($(event.currentTarget).val());
 }
 
@@ -87,7 +87,7 @@ $.RhythmRing.prototype.playRhythm2 = function() {
   this.elapsed = '0.0';
 
   this.playingRhythm2 = function() {
-    console.log("woot");
+    // console.log("woot");
     this.time += this.pulseDuration;
     this.elapsed = Math.floor(this.time / 100) / 10;
     if(Math.round(this.elapsed) == this.elapsed) { this.elapsed += '.0'; }
@@ -119,6 +119,11 @@ $.RhythmRing.prototype.playRhythm2 = function() {
       .css('background-color', fill);
     this.$el.find(".cell[ord='" + this.playPos + "']")
       .css('background-color', fill);
+    if (this.rhythmCells[this.playPos]) {
+      $('.TEDAS_sq').css('background-color', '#6da2d1')
+      $('body').find(".TEDAS_sq[ord='" + this.playPos + "']")
+        .css('background-color', 'DodgerBlue');
+    }
 
     if (this.rhythmCells[this.playPos]) {
       this.busses[this.curBus].volume = this.playPos === 0 ? 1 : 0.75

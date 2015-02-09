@@ -163,7 +163,7 @@ Geometrhythm.Views.RhythmsList = Backbone.CompositeView.extend({
   },
 
   returnToRoot: function() {
-    console.log("DSGOIIOEJOIEJFIOJF");
+    // console.log("DSGOIIOEJOIEJFIOJF");
     Backbone.history.navigate("/", {trigger: true})
   }
 

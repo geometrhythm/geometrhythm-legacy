@@ -19,6 +19,10 @@ Geometrhythm.Views.Root = Backbone.CompositeView.extend({
     // this.wtfStoreRhythmId();
     //this.renderInfoView();
     // debugger
+    this.listenTo(this.model, 'change:rhythm_str', this.renderAnalysisView);
+    this.listenTo(this.model, 'change:id', this.renderAnalysisView);
+    this.listenTo(this.collection, 'sync', this.renderAnalysisView);
+
     setTimeout(this.renderInfoView, 0);
   },
 
@@ -59,53 +63,30 @@ Geometrhythm.Views.Root = Backbone.CompositeView.extend({
   },
 
   renderInfoView: function(event) {
-    // debugger
-
-      // dbRhythm = new Geometrhythm.Models.Rhythm({rhythm_str: $('#current-rhythm').val()});
-    // } else {
-      var dbRhythm = Geometrhythm.Collections.rhythms.find( function(rhythm){
-          // debugger
-          return rhythm.get("rhythm_str") == $('#current-rhythm').val();
-        }
-      );
-
-      // $.ajax({
-      //   url: "/api/rhythms_all.json",
-      //   type: "GET",
-      //   data: { rhythm_str: $('#current-rhythm').val() },
-      //   success: function () { $('#cur-rhythm-id').attr('value', data.id) }
-      // });
-      //
-      // debugger
-
-      if (dbRhythm) {
-        $('#cur-rhythm-id').attr('value', dbRhythm.id);
-        // debugger
-        if ($('#cur-user-id').val()
-          && $('#cur-user-id').val() == dbRhythm.get("creator_id")) {
-          var template = "templateShowYours";
-        } else if ($('#cur-user-id').val()
-          && $('#cur-user-id').val() != dbRhythm.get("creator_id")) {
-          var template = "templateShowAnothers";
-        } else {
-          var template = "templateShowLoggedOut";
-        }
-      } else {
-        // $('#cur-rhythm-id').attr('value', '');
-        dbRhythm = new Geometrhythm.Models.Rhythm({rhythm_str: $('#current-rhythm').val()});
-        if ($('#cur-user-id').val()) {
-          var template = "templateClaim";
-        } else {
-          var template = "templateSignUpToClaim";
-        }
+    var dbRhythm = Geometrhythm.Collections.rhythms.find( function(rhythm){
+        return rhythm.get("rhythm_str") == $('#current-rhythm').val();
       }
-    // }
-    //
-    // if (dbRhythm) {
-    //   $('#cur-rhythm-id').attr('value', dbRhythm.id);
-    // } else {
-    //   $('#cur-rhythm-id').attr('value', '');
-    // }
+    );
+
+    if (dbRhythm) {
+      $('#cur-rhythm-id').attr('value', dbRhythm.id);
+      if ($('#cur-user-id').val()
+        && $('#cur-user-id').val() == dbRhythm.get("creator_id")) {
+        var template = "templateShowYours";
+      } else if ($('#cur-user-id').val()
+        && $('#cur-user-id').val() != dbRhythm.get("creator_id")) {
+        var template = "templateShowAnothers";
+      } else {
+        var template = "templateShowLoggedOut";
+      }
+    } else {
+      dbRhythm = new Geometrhythm.Models.Rhythm({rhythm_str: $('#current-rhythm').val()});
+      if ($('#cur-user-id').val()) {
+        var template = "templateClaim";
+      } else {
+        var template = "templateSignUpToClaim";
+      }
+    }
 
     if ($.cookie('_Geometrhythm_stored_rhythm') === undefined ) {
       var template = "templateSplash";
@@ -115,12 +96,29 @@ Geometrhythm.Views.Root = Backbone.CompositeView.extend({
       model: dbRhythm,
       template: template
     })
-    this.currentView && this.currentView.remove();
-    this.currentView = view;
+    this.currentInfoView && this.currentInfoView.remove();
+    this.currentInfoView = view;
     this.$('#bb-info').html(view.render().$el)
   },
 
+  renderAnalysisView: function(event) {
+    var dbRhythm = Geometrhythm.Collections.rhythms.find( function(rhythm){
+        return rhythm.get("rhythm_str") == $('#current-rhythm').val();
+      }
+    );
 
+    if (!dbRhythm) {
+      dbRhythm = new Geometrhythm.Models.Rhythm({rhythm_str: $('#current-rhythm').val()});
+    }
+
+    var view = new Geometrhythm.Views.Analysis({
+      model: dbRhythm,
+    });
+
+    this.currentAnalysisView && this.currentAnalysisView.remove();
+    this.currentAnalysisView = view;
+    this.$('#bb-analysis').html(view.render().$el);
+  },
 
   // visitList: function() {
   //   Backbone.history.navigate("/rhythms", {trigger: true})
