@@ -16,6 +16,12 @@ Geometrhythm.Views.Analysis = Backbone.CompositeView.extend({
         FIC_sq_dim: FIC_sq_dim
       });
       this.$el.html(content);
+
+      $( "body" ).tooltip({
+        items: "#f_i_c",
+        content: "Full interval content is a histogram of every internal interval."
+      });
+
       return this;
     }
   }

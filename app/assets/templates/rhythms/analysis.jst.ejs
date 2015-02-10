@@ -26,8 +26,24 @@ FIC:
   <% }) %>
 </div>
 
+
+metric hierarchy:
+<div class="MH_box">
+  <% rhythm.get("metric_hierarchy") && rhythm.get("metric_hierarchy").forEach(function(duration_count, h_index) { %>
+    <% for (v_index = 0; v_index < duration_count; v_index++ ) { %>
+      <div class="FIC_sq" style="left: <%= FIC_sq_dim * h_index %>px;
+                                 top: <%= 400 - FIC_sq_dim * v_index %>px;
+                                 height: <%= FIC_sq_dim %>px;
+                                 width: <%= FIC_sq_dim %>px">
+      </div>
+    <% } %>
+  <% }) %>
+</div>
+
+
+
 <ul>
-  <li>full interval content: <%= rhythm.get("full_interval_content") %></li>
+  <li id="f_i_c">full interval content: <%= rhythm.get("full_interval_content") %></li>
   <li>durational pattern: <%= rhythm.get("durational_pattern") %></li>
   <li>contour: <%= rhythm.get("contour") %></li>
   <li>full interval content entropy: <%= rhythm.get("full_interval_content_entropy") %></li>

@@ -32,6 +32,11 @@ interface button {
   margin: 5px 0px;
 }
 
+.bb-info {
+  // overflow: scroll;
+  max-height: 400px;
+}
+
 *{font-family: 'Maven Pro', sans-serif;}
 
 navbar-right li {
@@ -87,6 +92,7 @@ navbar-right a {
 
 .TEDAS_box {
   position: relative;
+  background-color: Cornsilk;
   margin: 10px;
   float: left;
   width: 400px;
@@ -96,6 +102,7 @@ navbar-right a {
 .FIC_box {
   position: relative;
   margin: 10px;
+  background-color: Cornsilk;
   float: left;
   width: 300px;
   height: 500px;
@@ -108,4 +115,26 @@ navbar-right a {
   height: 15px;
   width: 15px;
   border-radius: 4px;
+}
+
+.MH_box {
+  position: relative;
+  margin: 10px;
+  background-color: Cornsilk;
+  float: left;
+  width: 300px;
+  height: 500px;
+}
+
+.MH_sq {
+  position: absolute;
+  background-color: #6da2d1;
+  border: 1px solid #eee;
+  height: 15px;
+  width: 15px;
+  border-radius: 4px;
+}
+
+div.ui-tooltip {
+    max-width: 400px;
 }

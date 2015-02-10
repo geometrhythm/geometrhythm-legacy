@@ -18,6 +18,8 @@ Geometrhythm.Views.RhythmsList = Backbone.CompositeView.extend({
     this.likerId = options.liker;
     this.rootLink = $('.navbar-brand');
 
+    this.addRhythmListItemView(this.model);
+
     this.collection.each(function(rhythm) {
       this.addRhythmListItemView(rhythm);
     }.bind(this))
@@ -27,6 +29,12 @@ Geometrhythm.Views.RhythmsList = Backbone.CompositeView.extend({
     this.listenTo(this.potentialLikers, 'sync', this.render);
     this.listenTo(this.collection, 'add', this.addRhythmListItemView);
     this.listenTo(this.collection, 'remove', this.removeRhythmListItemView)
+
+
+    // setTimeout(function() {
+    //
+    //   addRhythmListItemView()
+    // },0);
   },
 
   render: function() {
@@ -127,9 +135,10 @@ Geometrhythm.Views.RhythmsList = Backbone.CompositeView.extend({
 
   selectRhythm: function(event){
     event.preventDefault();
-    var id = $(event.currentTarget).data('id');
-    var selectedRhythm = this.collection.getOrFetch(id);
-    this.model.set(selectedRhythm.attributes);
+    // var id = $(event.currentTarget).data('id');
+    // var selectedRhythm = this.collection.getOrFetch(id);
+    // this.model.set(selectedRhythm.attributes);
+    Backbone.View.prototype.remove.call(this)
     $.cookie('_Geometrhythm_stored_rhythm', $(event.currentTarget).attr('rhythm-str'), { expires: 7, path: '/' });
     Backbone.history.navigate('/', { trigger: true } )
   },

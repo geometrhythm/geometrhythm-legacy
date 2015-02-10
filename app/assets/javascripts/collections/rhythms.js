@@ -3,22 +3,22 @@ Geometrhythm.Collections.Rhythms = Backbone.Collection.extend({
   model: Geometrhythm.Models.Rhythm,
   filter: { },
 
-  getOrFetch: function(id) {
-    var model = this.get(id);
-    var rhythms = this;
-    if (!model) {
-      model = new Geometrhythm.Models.Rhythm( { id: id } );
-      model.fetch({
-        success: function() {
-          rhythms.add(model);
-        }
-      });
-    } else {
-      model.fetch();
-    }
-
-    return model;
-  },
+  // getOrFetch: function(id) {
+  //   var model = this.get(id);
+  //   var rhythms = this;
+  //   if (!model) {
+  //     model = new Geometrhythm.Models.Rhythm( { id: id } );
+  //     model.fetch({
+  //       success: function() {
+  //         rhythms.add(model);
+  //       }
+  //     });
+  //   } else {
+  //     model.fetch();
+  //   }
+  //
+  //   return model;
+  // },
 
   fetchByFilter: function(dontRemove) {
     var remove = dontRemove || false;
