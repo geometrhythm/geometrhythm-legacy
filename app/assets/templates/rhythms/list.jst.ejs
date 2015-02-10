@@ -11,8 +11,11 @@
       <br>
       <button class="btn btn-warning btn-lrg" style="float: right" id="return-to-root">back to home</button>
       <br><br><br><br>
-      <i class="glyphicon glyphicon-search"></i><strong style='color=red'>COMING SOON</strong>
-      <br>Creator: <select class="creator" name="creator">
+      <i class="glyphicon glyphicon-search"></i>&nbsp;&nbsp;&nbsp;<strong style='color: red'>COMING SOON</strong>
+
+
+      <br><br><strong>user</strong>
+      <br>charter<select class="creator" name="creator">
 
         <option value=""></option>
         <% potentialCreators && potentialCreators.each(function (potentialCreator) { %>
@@ -23,7 +26,7 @@
         <% }); %>
       </select>
 
-      <br>Liker: <select class="liker" name="liker">
+      <br>liker<select class="liker" name="liker">
         <option value=""></option>
 
         <% potentialLikers && potentialLikers.each(function (potentialLiker) { %>
@@ -34,52 +37,31 @@
         <% }); %>
       </select>
 
-      <br>by rhythm string: <input type="text"
-        class="rhythm-str" value="<%= rhythm_str %>">
+      <br><br><strong>id</strong>
+      <br>name<input type="text" class="" value="">
+      <br>rhythm string<input type="text" class="" value="">
+      <br>durational pattern<input type="text" class="" value="">
 
-      <br>by name: <input type="text"
-        class="" value="<%= %>">
+      <br><br><strong>distance</strong>
+      <br>L<sub>1</sub> norm distance<input type="text" class="l1-distance" value="">
+      <br>Euclidian distance<input type="text" class="" value="">
+      <br>sup distance<input type="text" class="" value="">
+      <br>edit distance<input type="text" class="" value="">
+      <br>chronotonic distance<input type="text" class="" value="">
 
-      <br>by L1 norm distance: <input type="text"
-        class="" value="<%= %>">
+      <br><br><strong>class</strong>
+      <br>necklace<input type="text" class="" value="">
+      <br>bracelet<input type="text" class="" value="">
+      <br>full interval content<input type="text" class="" value="">
 
-      <br>by Euclidian distance: <input type="text"
-        class="" value="<%= %>">
+      <br><br><strong>contour</strong>
+      <br>interval combinatorial class<input type="text" class="" value="">
+      <br>superset<input type="text" class="" value="">
+      <br>subset<input type="text" class="" value="">
+      <br>shadows<input type="text" class="" value="">
+      <br>transformational analogs<input type="text" class="" value="">
 
-      <br>by sup distance: <input type="text"
-        class="" value="<%= %>">
-
-      <br>by edit distance: <input type="text"
-        class="" value="<%= %>">
-
-      <br>by chronotonic distance: <input type="text"
-        class="" value="<%= %>">
-
-      <br>by necklace: <input type="text"
-        class="" value="<%= %>">
-
-      <br>by bracelet: <input type="text"
-        class="" value="<%= %>">
-
-      <br>by interval combinatorial class: <input type="text"
-        class="" value="<%= %>">
-
-      <br>by superset: <input type="text"
-        class="" value="<%= %>">
-
-      <br>by subset: <input type="text"
-        class="" value="<%= %>">
-
-      <br>shadows: <input type="text"
-        class="" value="<%= %>">
-
-      <br>transformational analogs: <input type="text"
-        class="" value="<%= %>">
-
-      <br>by full interval content: <input type="text"
-        class="" value="<%= %>">
-
-      <!--<br>by rhythm id: <input type="text" class="rhythm-id">-->
+      <!--<br>rhythm id<input type="text" class="rhythm-id">-->
 
     </div>
 

@@ -86,72 +86,14 @@ Geometrhythm.Views.Root = Backbone.CompositeView.extend({
   },
 
   renderAnalysisView: function(event) {
-    this.renderAnalysisBasicView(event);
-    this.renderAnalysisIntervalView(event);
-    this.renderAnalysisMeterView(event);
-    this.renderAnalysisOnsetView(event);
-    this.renderAnalysisEvennessView(event);
-    this.renderAnalysisSymmetryView(event);
-  },
-
-  renderAnalysisBasicView: function(rhythm) {
-    var view = new Geometrhythm.Views.AnalysisBasic({
-      model: rhythm
-    });
-
-    this.currentAnalysisBasicView && this.currentAnalysisBasicView.remove();
-    this.currentAnalysisBasicView = view;
-    this.$('#bb-analysis-basic').html(view.render().$el);
-  },
-
-  renderAnalysisIntervalView: function(rhythm) {
-    var view = new Geometrhythm.Views.AnalysisInterval({
-      model: rhythm
-    });
-
-    this.currentAnalysisIntervalView && this.currentAnalysisIntervalView.remove();
-    this.currentAnalysisIntervalView = view;
-    this.$('#bb-analysis-interval').html(view.render().$el);
-  },
-
-  renderAnalysisMeterView: function(rhythm) {
-    var view = new Geometrhythm.Views.AnalysisMeter({
-      model: rhythm
-    });
-
-    this.currentAnalysisMeterView && this.currentAnalysisMeterView.remove();
-    this.currentAnalysisMeterView = view;
-    this.$('#bb-analysis-meter').html(view.render().$el);
-  },
-
-  renderAnalysisOnsetView: function(rhythm) {
-    var view = new Geometrhythm.Views.AnalysisOnset({
-      model: rhythm
-    });
-
-    this.currentAnalysisOnsetView && this.currentAnalysisOnsetView.remove();
-    this.currentAnalysisOnsetView = view;
-    this.$('#bb-analysis-onset').html(view.render().$el);
-  },
-
-  renderAnalysisEvennessView: function(rhythm) {
-    var view = new Geometrhythm.Views.AnalysisEvenness({
-      model: rhythm
-    });
-
-    this.currentAnalysisEvennessView && this.currentAnalysisEvennessView.remove();
-    this.currentAnalysisEvennessView = view;
-    this.$('#bb-analysis-evenness').html(view.render().$el);
-  },
-
-  renderAnalysisSymmetryView: function(rhythm) {
-    var view = new Geometrhythm.Views.AnalysisSymmetry({
-      model: rhythm
-    });
-
-    this.currentAnalysisSymmetryView && this.currentAnalysisSymmetryView.remove();
-    this.currentAnalysisSymmetryView = view;
-    this.$('#bb-analysis-symmetry').html(view.render().$el);
-  },
+    var view = new Geometrhythm.Views.Analysis({
+      model: this.model
+    })
+    this.currentAnalysisView && this.currentAnalysisView.remove();
+    this.currentAnalysisView = view;
+    this.$('#bb-analysis-main').html(view.render().$el)
+    console.log("hey everybody");
+    console.log(view.render().$el);
+  }
 
 });

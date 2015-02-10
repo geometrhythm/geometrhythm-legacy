@@ -52,6 +52,7 @@ Geometrhythm.Views.RhythmsList = Backbone.CompositeView.extend({
 
     this.$el.find('.mini-rhythm-ring').miniRhythmRing();
     this.$el.find('.medium-rhythm-ring').miniRhythmRing(true);
+    // this.$el.find(".l1-distance").spinner();
 
     // console.log("");
     // console.log("collection: " + this.collection.length);
@@ -85,48 +86,48 @@ Geometrhythm.Views.RhythmsList = Backbone.CompositeView.extend({
     this.removeSubview('div.subview-version', subviewToRemove);
   },
 
-  // filterByCreator: function(event) {
-  //   this.creatorId = $(event.currentTarget).val();
-  //   if (this.creatorId === "") {
-  //     this.creatorId = null;
-  //     delete this.collection.filter.creator_id;
-  //     delete this.potentialLikers.filter.creator_id;
-  //     this.potentialLikers.fetch();
-  //   } else {
-  //     this.collection.filter.creator_id = this.creatorId;
-  //     this.potentialLikers.filter.creator_id = this.creatorId;
-  //     this.potentialLikers.fetchByFilter();
-  //   }
-  //   this.collection.fetchByFilter();
-  //   // this.potentialCreators.fetchByFilter();
-  // },
+  filterByCreator: function(event) {
+    this.creatorId = $(event.currentTarget).val();
+    if (this.creatorId === "") {
+      this.creatorId = null;
+      delete this.collection.filter.creator_id;
+      delete this.potentialLikers.filter.creator_id;
+      this.potentialLikers.fetch();
+    } else {
+      this.collection.filter.creator_id = this.creatorId;
+      this.potentialLikers.filter.creator_id = this.creatorId;
+      this.potentialLikers.fetchByFilter();
+    }
+    this.collection.fetchByFilter();
+    // this.potentialCreators.fetchByFilter();
+  },
 
-  // filterByLiker: function(event) {
-  //   this.likerId = $(event.currentTarget).val()
-  //   if (this.likerId === "") {
-  //     this.likerId = null;
-  //     delete this.collection.filter.liker_id;
-  //     delete this.potentialCreators.filter.liker_id;
-  //     this.potentialCreators.fetch();
-  //   } else {
-  //     this.collection.filter.liker_id = this.likerId;
-  //     this.potentialCreators.filter.liker_id = this.likerId;
-  //     this.potentialCreators.fetchByFilter();
-  //   }
-  //   this.collection.fetchByFilter();
-  //   // this.potentialLikers.fetchByFilter();
-  // },
+  filterByLiker: function(event) {
+    this.likerId = $(event.currentTarget).val()
+    if (this.likerId === "") {
+      this.likerId = null;
+      delete this.collection.filter.liker_id;
+      delete this.potentialCreators.filter.liker_id;
+      this.potentialCreators.fetch();
+    } else {
+      this.collection.filter.liker_id = this.likerId;
+      this.potentialCreators.filter.liker_id = this.likerId;
+      this.potentialCreators.fetchByFilter();
+    }
+    this.collection.fetchByFilter();
+    // this.potentialLikers.fetchByFilter();
+  },
 
-  // filterByRhythmStr: function(event) {
-  //   this.rhythmStr = $(event.currentTarget).val()
-  //   if (this.rhythmStr === "") {
-  //     this.rhythmStr = null;
-  //     delete this.collection.filter.rhythm_str;
-  //   } else {
-  //     this.collection.filter.rhythm_str = this.rhythmStr;
-  //   }
-  //   this.collection.fetchByFilter();
-  // },
+  filterByRhythmStr: function(event) {
+    this.rhythmStr = $(event.currentTarget).val()
+    if (this.rhythmStr === "") {
+      this.rhythmStr = null;
+      delete this.collection.filter.rhythm_str;
+    } else {
+      this.collection.filter.rhythm_str = this.rhythmStr;
+    }
+    this.collection.fetchByFilter();
+  },
 
   selectRhythm: function(event){
     event.preventDefault();

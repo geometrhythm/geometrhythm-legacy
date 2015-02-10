@@ -13,11 +13,13 @@ $.RhythmRing = function (el, ctx) {
     this.placeCell.bind(this), this.placeIntercell.bind(this), 0);
   this.refreshHandlesAndLabels();
   this.refreshPolygon();
-  $('#bb-info').trigger('plugin-change');
+  this.refreshWell();
+  //$('#bb-info').trigger('plugin-change');
 };
 
 $.RhythmRing.prototype.refreshWell = function() {
   $('#current-rhythm').attr('value', this.rhythmAsStr());
+  $('#current-rhythm-user-input').attr('value', this.rhythmAsStr());
   $.cookie('_Geometrhythm_stored_rhythm', this.rhythmAsStr(), { expires: 7, path: '/' });
   $('#bb-info').trigger('plugin-change');
 }

@@ -14,6 +14,7 @@
         <button class="btn btn-default btn-sm" id="c-clockwise">
           <i style="font-size: 12px" class="glyphicon glyphicon-refresh c-clockwise"></i>
         </button>
+        <br><br>manual input<br><input type='text' id='current-rhythm-user-input' value=''>
       </interface>
     </div>
 
@@ -32,37 +33,7 @@
 
   </div>
 
-  <div class='row'>
-    <div class='col-md-4 col-md-offset-1'>
-      <div class='well bb-analysis' id='bb-analysis-basic'>
-      </div>
-    </div>
-    <div class='col-md-4'>
-      <div class='well bb-analysis' id='bb-analysis-interval'>
-      </div>
-    </div>
-  </div>
-
-  <div class='row'>
-    <div class='col-md-4 col-md-offset-1'>
-      <div class='well bb-analysis' id='bb-analysis-meter'>
-      </div>
-    </div>
-    <div class='col-md-4'>
-      <div class='well bb-analysis' id='bb-analysis-onset'>
-      </div>
-    </div>
-  </div>
-
-  <div class='row'>
-    <div class='col-md-4 col-md-offset-1'>
-      <div class='well bb-analysis' id='bb-analysis-evenness'>
-      </div>
-    </div>
-    <div class='col-md-4'>
-      <div class='well bb-analysis' id='bb-analysis-symmetry'>
-      </div>
-    </div>
+  <div id='bb-analysis-main'>
   </div>
 
 </container>

@@ -1,13 +1,13 @@
-<h4>Interval</h4>
+<h5>Interval</h5>
 
-FIC:
 <div class="FIC_box">
   <% rhythm.get("full_interval_content") && rhythm.get("full_interval_content").forEach(function(duration_count, h_index) { %>
     <% for (v_index = 0; v_index < duration_count; v_index++ ) { %>
-      <div class="FIC_sq" style="left: <%= FIC_sq_dim * h_index %>px;
-                                 top: <%= 400 - FIC_sq_dim * v_index %>px;
-                                 height: <%= FIC_sq_dim %>px;
-                                 width: <%= FIC_sq_dim %>px">
+      <div class="FIC_sq" ord="<%= sum %>"
+            style="height: <%= heightPixelsUnit %>px;
+                  width: <%= widthPercentageUnit %>%;
+                  left: <%= (h_index - 0.5) * widthPercentageUnit %>%;
+                  top: <%= (max_height - v_index) * heightPixelsUnit %>px">
       </div>
     <% } %>
   <% }) %>

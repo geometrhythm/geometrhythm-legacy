@@ -90,21 +90,40 @@ navbar-right a {
   border-radius: 4px;
 }
 
+// .TEDAS_sq_alt {
+//   border: 1px solid #eee;
+//   box-sizing: border-box;
+//   background-color: #6da2d1;
+//   // position: absolute;
+//   border-radius: 4px;
+// }
+
+// .TEDAS_sq strong {
+//   vertical-align: text-bottom;
+// }
+
+.TEDAS_box .glyphicon {
+  font-size: 15px;
+  position: absolute;
+  z-index: 6;
+}
+
 .TEDAS_box {
   position: relative;
-  background-color: #ddd;
+  // background-color: #ddd;
   margin: 10px;
   float: left;
   min-width: 100%;
-  min-height: 175px;
+  min-height: 50px;
 }
 
 .FIC_box {
   position: relative;
   margin: 10px;
   background-color: #ddd;
-  float: left;
-  width: 80%;
+  // float: left;
+  display: block;
+  width: 50%;
   height: 80%;
 }
 
@@ -141,6 +160,15 @@ div.ui-tooltip {
 
 div.bb-analysis {
   width: 100%;
-  height: 300px;
+  height: 200px;
   // background-color: #ccc;
 }
+
+div#bb-info {
+  max-height: 400px;
+  overflow: auto;
+}
+
+// div.bb-analysis-basic span#contour:hover  {
+//
+// }

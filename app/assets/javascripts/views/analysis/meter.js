@@ -7,10 +7,11 @@ Geometrhythm.Views.AnalysisMeter = Backbone.CompositeView.extend({
       this.$el.html("");
       return this;
     } else {
-      var content = this.template({
-        rhythm: this.model,
-      });
-      this.$el.html(content);
+      // var content = this.template({
+      //   rhythm: this.model,
+      // });
+      // this.$el.html(content);
+      this.$el.html("");
 
       return this;
     }
