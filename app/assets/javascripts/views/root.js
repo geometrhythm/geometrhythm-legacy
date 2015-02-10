@@ -21,16 +21,6 @@ Geometrhythm.Views.Root = Backbone.CompositeView.extend({
 
   updateModel: function() {
     this.model.set("rhythm_str", $('#current-rhythm').val());
-    // var dbRhythm = Geometrhythm.Collections.rhythms.find( function(rhythm){
-    //     return rhythm.get("rhythm_str") === $('#current-rhythm').val();
-    //   }
-    // );
-    // if (dbRhythm) {
-    //   console.log("do we ever make it in here?");
-    //   $('#cur-rhythm-id').attr('value', dbRhythm.id);
-    // } else {
-    //   $('#cur-rhythm-id').attr('value', '');
-    // }
 
     var that = this;
     $.ajax({
@@ -52,12 +42,12 @@ Geometrhythm.Views.Root = Backbone.CompositeView.extend({
             }, success: function (payload) {
               that.model.set(payload);
               that.renderInfoView();
-              that.renderAnalysisView();
+              // that.renderAnalysisView();
             }
           })
         }
         that.renderInfoView();
-        that.renderAnalysisView();
+        // that.renderAnalysisView();
       }
     });
   },
@@ -96,13 +86,72 @@ Geometrhythm.Views.Root = Backbone.CompositeView.extend({
   },
 
   renderAnalysisView: function(event) {
-    var view = new Geometrhythm.Views.Analysis({
-      model: this.model
+    this.renderAnalysisBasicView(event);
+    this.renderAnalysisIntervalView(event);
+    this.renderAnalysisMeterView(event);
+    this.renderAnalysisOnsetView(event);
+    this.renderAnalysisEvennessView(event);
+    this.renderAnalysisSymmetryView(event);
+  },
+
+  renderAnalysisBasicView: function(rhythm) {
+    var view = new Geometrhythm.Views.AnalysisBasic({
+      model: rhythm
     });
 
-    this.currentAnalysisView && this.currentAnalysisView.remove();
-    this.currentAnalysisView = view;
-    this.$('#bb-analysis').html(view.render().$el);
+    this.currentAnalysisBasicView && this.currentAnalysisBasicView.remove();
+    this.currentAnalysisBasicView = view;
+    this.$('#bb-analysis-basic').html(view.render().$el);
+  },
+
+  renderAnalysisIntervalView: function(rhythm) {
+    var view = new Geometrhythm.Views.AnalysisInterval({
+      model: rhythm
+    });
+
+    this.currentAnalysisIntervalView && this.currentAnalysisIntervalView.remove();
+    this.currentAnalysisIntervalView = view;
+    this.$('#bb-analysis-interval').html(view.render().$el);
+  },
+
+  renderAnalysisMeterView: function(rhythm) {
+    var view = new Geometrhythm.Views.AnalysisMeter({
+      model: rhythm
+    });
+
+    this.currentAnalysisMeterView && this.currentAnalysisMeterView.remove();
+    this.currentAnalysisMeterView = view;
+    this.$('#bb-analysis-meter').html(view.render().$el);
+  },
+
+  renderAnalysisOnsetView: function(rhythm) {
+    var view = new Geometrhythm.Views.AnalysisOnset({
+      model: rhythm
+    });
+
+    this.currentAnalysisOnsetView && this.currentAnalysisOnsetView.remove();
+    this.currentAnalysisOnsetView = view;
+    this.$('#bb-analysis-onset').html(view.render().$el);
+  },
+
+  renderAnalysisEvennessView: function(rhythm) {
+    var view = new Geometrhythm.Views.AnalysisEvenness({
+      model: rhythm
+    });
+
+    this.currentAnalysisEvennessView && this.currentAnalysisEvennessView.remove();
+    this.currentAnalysisEvennessView = view;
+    this.$('#bb-analysis-evenness').html(view.render().$el);
+  },
+
+  renderAnalysisSymmetryView: function(rhythm) {
+    var view = new Geometrhythm.Views.AnalysisSymmetry({
+      model: rhythm
+    });
+
+    this.currentAnalysisSymmetryView && this.currentAnalysisSymmetryView.remove();
+    this.currentAnalysisSymmetryView = view;
+    this.$('#bb-analysis-symmetry').html(view.render().$el);
   },
 
 });

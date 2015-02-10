@@ -1,0 +1,19 @@
+<h4>Basic</h4>
+
+TEDAS:
+<div class="TEDAS_box">
+  <% sum = 0 %>
+  <% rhythm.get("durational_pattern") && rhythm.get("durational_pattern").forEach(function(interval_duration, index) { %>
+
+    <div class="TEDAS_sq" ord="<%= sum %>"
+          style="height: <%= interval_duration / len * windowWidth %>px;
+                width: <%= interval_duration / len * windowWidth %>px;
+                left: <%= sum / len * windowWidth %>px;
+                top: <%= (Math.max.apply(null, rhythm.get("durational_pattern")) - interval_duration) / len * windowWidth %>px">
+    </div>
+    <% sum += interval_duration %>
+  <% }) %>
+</div>
+
+  <li>durational pattern: <%= rhythm.get("durational_pattern") %></li>
+    <li>contour: <%= rhythm.get("contour") %></li>

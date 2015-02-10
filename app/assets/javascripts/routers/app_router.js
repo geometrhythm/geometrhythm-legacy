@@ -21,19 +21,6 @@ Geometrhythm.Routers.App = Backbone.Router.extend({
       $('#current-rhythm').attr('value', "x--x--x---x-x---");
     }
 
-    // console.log("here");
-    // var dbRhythm = Geometrhythm.Collections.rhythms.find( function(rhythm){
-    //     console.log("but never here?");
-    //     return rhythm.get("rhythm_str") === $('#current-rhythm').val();
-    //   }
-    // );
-    // if (dbRhythm) {
-    //   $('#cur-rhythm-id').attr('value', dbRhythm.id);
-    // } else {
-    //   $('#cur-rhythm-id').attr('value', '');
-    //   dbRhythm = new Geometrhythm.Models.Rhythm();
-    // }
-
     var rootView = new Geometrhythm.Views.Root({
       model: this.activeRhythm,
     });

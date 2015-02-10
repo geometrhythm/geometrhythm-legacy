@@ -64,19 +64,6 @@ Geometrhythm.Views.Info = Backbone.View.extend({
   },
 
   claimRhythm: function() {
-    // console.log("do i go in here?");
-    // var dbRhythm = Geometrhythm.Collections.rhythms.find( function(rhythm){
-    //     console.log("yes i do sometimes");
-    //     return rhythm.get("rhythm_str") === $('#current-rhythm').val();
-    //   }
-    // );
-    // console.log(dbRhythm); but I never find anything
-    // if (dbRhythm) {
-    //   $('#cur-rhythm-id').attr('value', dbRhythm.id);
-    // } else {
-    //   $('#cur-rhythm-id').attr('value', '');
-    // }
-
     this.model.save({
       creator_id: $('#cur-user-id').val(),
       rhythm_str: $('#current-rhythm').val()

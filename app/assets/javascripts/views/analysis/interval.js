@@ -1,6 +1,6 @@
-Geometrhythm.Views.Analysis = Backbone.CompositeView.extend({
+Geometrhythm.Views.AnalysisInterval = Backbone.CompositeView.extend({
 
-  template: JST['rhythms/analysis'],
+  template: JST['analysis/interval'],
 
   render: function() {
     if (this.model.id === undefined) {
@@ -15,13 +15,7 @@ Geometrhythm.Views.Analysis = Backbone.CompositeView.extend({
       });
       this.$el.html(content);
 
-      // $( "body" ).tooltip({
-      //   items: "#f_i_c",
-      //   content: "Full interval content is a histogram of every internal interval."
-      // });
-
       return this;
     }
   }
-
 })

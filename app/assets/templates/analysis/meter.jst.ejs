@@ -1,0 +1,24 @@
+<h4>Meter</h4>
+
+metric hierarchy:
+<div class="MH_box">
+  <% rhythm.get("metric_hierarchy") && rhythm.get("metric_hierarchy").forEach(function(duration_count, h_index) { %>
+    <% for (v_index = 0; v_index < duration_count; v_index++ ) { %>
+      <div class="FIC_sq" style="left: <%= FIC_sq_dim * h_index %>px;
+                                 top: <%= 400 - FIC_sq_dim * v_index %>px;
+                                 height: <%= FIC_sq_dim %>px;
+                                 width: <%= FIC_sq_dim %>px">
+      </div>
+    <% } %>
+  <% }) %>
+</div>
+
+  <li>metric syncopation: <%= rhythm.get("metric_syncopation") %></li>
+  <li>offbeatness: <%= rhythm.get("offbeatness") %></li>
+  <li>strongbeatedness: <%= rhythm.get("strongbeatness") %></li>
+  <li>irregularity: <%= rhythm.get("irregularity") %></li>
+
+    <% if (rhythm.get("has_closure?")) { %><li>has closure</li><% } %>
+    <% if (rhythm.get("has_anacrusis?")) { %><li>has anacrusis</li><% } %>
+
+      <li>irregularity: <%= rhythm.get("irregularity") %></li>

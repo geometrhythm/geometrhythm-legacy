@@ -18,7 +18,7 @@ Geometrhythm.Views.RhythmsList = Backbone.CompositeView.extend({
     this.likerId = options.liker;
     this.rootLink = $('.navbar-brand');
 
-    this.addRhythmListItemView(this.model);
+    // this.addRhythmListItemView(this.model); should only do this if there's no filter!
 
     this.collection.each(function(rhythm) {
       this.addRhythmListItemView(rhythm);
@@ -30,11 +30,6 @@ Geometrhythm.Views.RhythmsList = Backbone.CompositeView.extend({
     this.listenTo(this.collection, 'add', this.addRhythmListItemView);
     this.listenTo(this.collection, 'remove', this.removeRhythmListItemView)
 
-
-    // setTimeout(function() {
-    //
-    //   addRhythmListItemView()
-    // },0);
   },
 
   render: function() {
@@ -90,61 +85,58 @@ Geometrhythm.Views.RhythmsList = Backbone.CompositeView.extend({
     this.removeSubview('div.subview-version', subviewToRemove);
   },
 
-  filterByCreator: function(event) {
-    this.creatorId = $(event.currentTarget).val();
-    if (this.creatorId === "") {
-      this.creatorId = null;
-      delete this.collection.filter.creator_id;
-      delete this.potentialLikers.filter.creator_id;
-      this.potentialLikers.fetch();
-    } else {
-      this.collection.filter.creator_id = this.creatorId;
-      this.potentialLikers.filter.creator_id = this.creatorId;
-      this.potentialLikers.fetchByFilter();
-    }
-    this.collection.fetchByFilter();
-    // this.potentialCreators.fetchByFilter();
-  },
+  // filterByCreator: function(event) {
+  //   this.creatorId = $(event.currentTarget).val();
+  //   if (this.creatorId === "") {
+  //     this.creatorId = null;
+  //     delete this.collection.filter.creator_id;
+  //     delete this.potentialLikers.filter.creator_id;
+  //     this.potentialLikers.fetch();
+  //   } else {
+  //     this.collection.filter.creator_id = this.creatorId;
+  //     this.potentialLikers.filter.creator_id = this.creatorId;
+  //     this.potentialLikers.fetchByFilter();
+  //   }
+  //   this.collection.fetchByFilter();
+  //   // this.potentialCreators.fetchByFilter();
+  // },
 
-  filterByLiker: function(event) {
-    this.likerId = $(event.currentTarget).val()
-    if (this.likerId === "") {
-      this.likerId = null;
-      delete this.collection.filter.liker_id;
-      delete this.potentialCreators.filter.liker_id;
-      this.potentialCreators.fetch();
-    } else {
-      this.collection.filter.liker_id = this.likerId;
-      this.potentialCreators.filter.liker_id = this.likerId;
-      this.potentialCreators.fetchByFilter();
-    }
-    this.collection.fetchByFilter();
-    // this.potentialLikers.fetchByFilter();
-  },
+  // filterByLiker: function(event) {
+  //   this.likerId = $(event.currentTarget).val()
+  //   if (this.likerId === "") {
+  //     this.likerId = null;
+  //     delete this.collection.filter.liker_id;
+  //     delete this.potentialCreators.filter.liker_id;
+  //     this.potentialCreators.fetch();
+  //   } else {
+  //     this.collection.filter.liker_id = this.likerId;
+  //     this.potentialCreators.filter.liker_id = this.likerId;
+  //     this.potentialCreators.fetchByFilter();
+  //   }
+  //   this.collection.fetchByFilter();
+  //   // this.potentialLikers.fetchByFilter();
+  // },
 
-  filterByRhythmStr: function(event) {
-    this.rhythmStr = $(event.currentTarget).val()
-    if (this.rhythmStr === "") {
-      this.rhythmStr = null;
-      delete this.collection.filter.rhythm_str;
-    } else {
-      this.collection.filter.rhythm_str = this.rhythmStr;
-    }
-    this.collection.fetchByFilter();
-  },
+  // filterByRhythmStr: function(event) {
+  //   this.rhythmStr = $(event.currentTarget).val()
+  //   if (this.rhythmStr === "") {
+  //     this.rhythmStr = null;
+  //     delete this.collection.filter.rhythm_str;
+  //   } else {
+  //     this.collection.filter.rhythm_str = this.rhythmStr;
+  //   }
+  //   this.collection.fetchByFilter();
+  // },
 
   selectRhythm: function(event){
     event.preventDefault();
-    // var id = $(event.currentTarget).data('id');
-    // var selectedRhythm = this.collection.getOrFetch(id);
-    // this.model.set(selectedRhythm.attributes);
     Backbone.View.prototype.remove.call(this)
     $.cookie('_Geometrhythm_stored_rhythm', $(event.currentTarget).attr('rhythm-str'), { expires: 7, path: '/' });
     Backbone.history.navigate('/', { trigger: true } )
   },
 
   listenForScroll: function () {
-    $(window).off("scroll"); // remove previous listeners
+    $(window).off("scroll");
     var throttledCallback = _.throttle(this.nextPage.bind(this), 200);
     $(window).on("scroll", throttledCallback);
   },

@@ -1,12 +1,10 @@
 module Api
   class RhythmsController < ApplicationController
     def create
-      # @rhythm = Rhythm.new(rhythm_params)
-      # @rhythm.creator_id = current_user.id unless @rhythm.creator_id
       @rhythm = current_user.rhythms.create(rhythm_params)
 
       if @rhythm.save
-        render :show 
+        render :show
       else
         render json: @rhythm.errors.full_messages, status: :unprocessable_entity
       end
@@ -21,31 +19,41 @@ module Api
     def index
       @rhythms = Rhythm.all
 
-      if params[:creator_id] #&& !@rhythms.empty?
+      if params[:creator_id]
         @rhythms = Rhythm.where(creator_id: params[:creator_id])
       end
 
-      if params[:rhythm_str] #&& !@rhythms.empty?
+      if params[:rhythm_str]
         @rhythms = @rhythms.where(rhythm_str: params[:rhythm_str])
       end
 
-      if params[:liker_id] #&& !@rhythms.empty?
+      if params[:liker_id]
         @rhythms = @rhythms.where(id: User.find(params[:liker_id]).liked_rhythms)
       end
 
-      if params[:page]
-        @rhythms = @rhythms.page(params[:page]).per(25)
-        page_number = params[:page] #so this is necessary to start it over, but breaks the root page...
-        # meaning, on some views, if there's no page given, it's meant to start over at 1
-        # but on others if no page it's meant to give all of them
-        render partial: 'api/rhythms/all', locals: {
-          models: @rhythms,
-          page_number: page_number,
-          total_pages: @rhythms.total_pages
-        }
-      else
-        render :all
-      end
+      page_number = params[:page] || 1
+
+
+      @rhythms = @rhythms.includes(:user).includes(:likers)
+        .includes(:names).includes(:namers).includes(:comments)
+        .page(page_number).per(25)
+
+        # page_number = params[:page]
+
+      render partial: 'api/rhythms/all', locals: {
+        models: @rhythms,
+        page_number: page_number,
+        total_pages: @rhythms.total_pages
+      }
+      # else
+      #   @rhythms = @rhythms.page(1).per(25)
+      #   page_number = 1
+      #   render partial: 'api/rhythms/all', locals: {
+      #     models: @rhythms,
+      #     page_number: page_number,
+      #     total_pages: @rhythms.total_pages
+      #   }
+      # end
     end
 
     def match
