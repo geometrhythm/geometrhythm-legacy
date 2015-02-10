@@ -29,12 +29,13 @@ Geometrhythm.Routers.App = Backbone.Router.extend({
       $('#cur-rhythm-id').attr('value', dbRhythm.id);
     } else {
       $('#cur-rhythm-id').attr('value', '');
+      dbRhythm = new Geometrhythm.Models.Rhythm();
     }
 
-    Geometrhythm.Collections.rhythms.fetch();
+    // Geometrhythm.Collections.rhythms.fetch();
     var rootView = new Geometrhythm.Views.Root({
       model: this.activeRhythm,
-      collection: Geometrhythm.Collections.rhythms
+      // collection: Geometrhythm.Collections.rhythms
     });
     this._swapView(rootView);
   },

@@ -1,7 +1,9 @@
 module Api
   class RhythmsController < ApplicationController
     def create
-      @rhythm = current_user.rhythms.new(rhythm_params)
+      # @rhythm = Rhythm.new(rhythm_params)
+      # @rhythm.creator_id = current_user.id unless @rhythm.creator_id
+      @rhythm = current_user.rhythms.create(rhythm_params)
 
       if @rhythm.save
         render json: @rhythm
@@ -46,8 +48,22 @@ module Api
       end
     end
 
+    def match
+      @rhythm = Rhythm.find_by_rhythm_str(params[:rhythm_str])
+      if @rhythm
+        render :show
+      else
+        render json: nil #, status: 404
+      end
+    end
+
     def show
       @rhythm = Rhythm.find(params[:id])
+      render :show
+    end
+
+    def present
+      @rhythm = Rhythm.new(rhythm_params)
       render :show
     end
 
@@ -59,7 +75,7 @@ module Api
     private
 
     def rhythm_params
-      params.require(:rhythm).permit(:rhythm_str, :play_count)
+      params.require(:rhythm).permit(:rhythm_str, :play_count, :creator_id)
     end
   end
 end

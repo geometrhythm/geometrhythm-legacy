@@ -15,7 +15,7 @@ $.RhythmRing.prototype.expandForCellAt = function (intercellId) {
 };
 
 $.RhythmRing.prototype.recollapse = function (event) {
-  console.log(this.yankedId);
+  // console.log(this.yankedId);
   if (!this.grabbing || !this.squeezing) return;
   this.squeezing = false;
   if (this.animating) {
@@ -43,7 +43,7 @@ $.RhythmRing.prototype.yankCellFromRing = function(event) {
 };
 
 $.RhythmRing.prototype.squeezeCellIntoRing = function(event) {
-  console.log("squeezing?" + this.squeezing);
+  // console.log("squeezing?" + this.squeezing);
   if (!this.squeezing && this.grabbing) {
     this.squeezing = true;
     setTimeout( function() {

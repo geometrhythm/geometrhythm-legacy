@@ -135,7 +135,7 @@ Geometrhythm.Views.Info = Backbone.View.extend({
 
   addComment: function(event) {
     event.preventDefault();
-    console.log("huh?");
+    // console.log("huh?");
     var attrs = $(event.currentTarget).serializeJSON();
     var comment = new Geometrhythm.Models.Comment({
       commentable_id: $('#cur-rhythm-id').val(),
