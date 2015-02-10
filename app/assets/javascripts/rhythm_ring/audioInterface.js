@@ -102,15 +102,36 @@ $.RhythmRing.prototype.playRhythm2 = function() {
 
     this.playPos += this.playPos >= this.rhythmCells.length - 1 ? -(this.rhythmCells.length - 1) : 1
     if (this.playPos === this.rhythmCells.length - 1) {
+      // var that = this;
+      // console.log("this as rhythm_str: " + this.rhythmAsStr());
+      // console.log(Geometrhythm.Collections.rhythms);
+      // var dbRhythm = Geometrhythm.Collections.rhythms.find( function(rhythm){
+      //   console.log(rhythm.get("rhythm_str"));
+      //     return rhythm.get("rhythm_str") === that.rhythmAsStr();
+      //   }
+      // );
+      // if (dbRhythm) {
+      //   dbRhythm.set("play_count", dbRhythm.get("play_count") + 1);
+      //   dbRhythm.save();
+      // }
       var that = this;
-      var dbRhythm = Geometrhythm.Collections.rhythms.find( function(rhythm){
-          return rhythm.get("rhythm_str") === that.rhythmAsStr();
+      $.ajax({
+        url: "api/rhythms/match",
+        type: "GET",
+        data: {
+          rhythm_str: $('#current-rhythm').val()
+        }, success: function(payload) {
+          $.ajax({
+            url: "api/rhythms/" + payload.id,
+            type: "PATCH",
+            data: {
+              rhythm: {
+                play_count: payload.play_count + 1
+              }
+            }
+          });
         }
-      );
-      if (dbRhythm) {
-        dbRhythm.set("play_count", dbRhythm.get("play_count") + 1);
-        dbRhythm.save();
-      }
+      });
     }
 
     var fill = this.rhythmCells[this.playPos] ? 'orange' : 'cornsilk';

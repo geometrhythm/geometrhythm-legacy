@@ -1,6 +1,9 @@
 u1 = User.where(email: "seed@geometrhythm.com")
   .first_or_create!(email: 'seed@geometrhythm.com', password_digest: '1')
 
+u2 = User.where(email: "guest@geometrhythm.com")
+  .first_or_create!(email: 'guest@geometrhythm.com', password_digest: '2')
+
 r01 = Rhythm.where(rhythm_str: "x--x--x---x-x---").first_or_create!(creator_id: u1.id, rhythm_str: "x--x--x---x-x---")
 n01 = Name.where(name: "clave son").first_or_create!(name: "clave son")
 g01 = Naming.create!(rhythm_id: r01.id, name_id: n01.id, namer_id: u1.id)
@@ -585,323 +588,313 @@ g142 = Naming.create!(rhythm_id: r142.id, name_id: n142.id, namer_id: u1.id)
 # n??? = Name.where(name: "").first_or_create!(name: "")
 # g??? = Naming.create!(rhythm_id: r???.id, name_id: n???.id, namer_id: u1.id)
 
-# def euclid_rhythm(num_onsets, num_pulses)
-#   return nil if num_pulses % num_onsets == 0
-#   euclid_arr = Array.new(num_pulses) { ["-"] }
-#   (0...num_onsets).each { |i| euclid_arr[i] = ["x"] }
-#   until ( euclid_arr.all? { |el| el.count == euclid_arr[0].count } &&
-#     euclid_arr[0].count != 1 ) || euclid_arr[-1].count != euclid_arr[-2].count
-#     diff = euclid_arr.count - num_onsets
-#     num_onsets = [diff, num_onsets].min
-#     new_diff = euclid_arr.count - num_onsets
-#     (0...num_onsets).each do |i|
-#       euclid_arr[i].concat(euclid_arr[i + new_diff])
-#     end
-#     euclid_arr = euclid_arr.slice(0, new_diff)
-#   end
-#
-#   euclid_arr.flatten.join("")
-# end
-#
-# def euclid_rhythms_of_length(length)
-#   output = {}
-#   (0...length).each do |rotation|
-#     (2...length).each do |num_onsets|
-#       next if length % num_onsets == 0
-#       if rotation == 0
-#         output["Euclidean Algorithm e(#{num_onsets}/#{length})"] =
-#           euclid_rhythm(num_onsets, length)
-#       else
-#         output["Euclidean Algorithm e(#{num_onsets}/#{length}) rotation #{rotation}"] =
-#           rotate(euclid_rhythm(num_onsets, length), rotation)
-#       end
-#     end
-#   end
-#
-#   output
-# end
-#
-# def rotate(rhythm_str, amount)
-#   len = rhythm_str.length
-#   rhythm_str[(len - amount)...len] + rhythm_str[0...(len - amount)]
-# end
-#
-# [6, 8, 12, 16, 24].each do |length|
-#   euclid_rhythms_of_length(length).each do |e_r_o_l_name, e_r_o_l|
-#     r = Rhythm.where(rhythm_str: e_r_o_l).first_or_create!(creator_id: u1.id, rhythm_str: e_r_o_l)
-#     n = Name.where(name: e_r_o_l_name).first_or_create!(name: e_r_o_l_name)
-#     g = Naming.create!(rhythm_id: r.id, name_id: n.id, namer_id: u1.id)
-#   end
-# end
-#
-# # puts "checkpoint -1"
-#
-# def hop_and_jump_rhythm(num_pulses, num_hops, hop_size)
-#   new_rhythm = "-"*num_pulses
-#   try_next_index = 0
-#   (0...num_hops).each do |hop_i|
-#     first_try_index = try_next_index
-#     success = false
-#     lapped = false
-#     until success || (first_try_index == try_next_index && lapped)
-#       if new_rhythm[try_next_index] != "x" &&
-#         seed_antipode(new_rhythm, try_next_index) == "-"
-#         new_rhythm[try_next_index] = "x"
-#         success = true
-#       else
-#         try_next_index += 1
-#         try_next_index = try_next_index % num_pulses
-#       end
-#       lapped = true if try_next_index == num_pulses - 1
-#     end
-#     return nil unless success
-#     try_next_index += hop_size
-#     try_next_index = try_next_index % num_pulses
-#   end
-#
-#   new_rhythm
-# end
-#
-# def seed_antipode(rhythm_str, index)
-#   rhythm_str[(index + (rhythm_str.length / 2)) % rhythm_str.length]
-# end
-#
-# def hop_and_jump_rhythms(num_pulses)
-#   output  = []
-#   (2...num_pulses-1).each do |hop_size| #exclude trivial cases
-#     i = 2
-#     while true
-#       new_rhythm = hop_and_jump_rhythm(num_pulses, i, hop_size)
-#       break if new_rhythm.nil?
-#       output << [new_rhythm, "hop and jump rhythm (length: #{num_pulses}, hop size: #{hop_size}, hop count: #{i})"]
-#       i = i + 1
-#     end
-#   end
-#
-#   output
-# end
-#
-# [6, 8, 12, 16, 24].each do |length|
-#   hop_and_jump_rhythms(length).each do |h_a_j_r|
-#     r = Rhythm.where(rhythm_str: h_a_j_r[0]).first_or_create!(creator_id: u1.id, rhythm_str: h_a_j_r[0])
-#     n = Name.where(name: h_a_j_r[1]).first_or_create!(name: h_a_j_r[1])
-#     g = Naming.create!(rhythm_id: r.id, name_id: n.id, namer_id: u1.id)
-#   end
-# end
-#
-# # puts "checkpoint 0"
-#
-# def maximally_even_rhythms(num_onsets, num_pulses)
-#   perfectly_even_division = num_pulses / num_onsets.to_f
-#   anchor = 0.0
-#   output = []
-#   until anchor >= perfectly_even_division
-#
-#     maximally_even_marks = []
-#     perfectly_even_marks = []
-#     i = anchor
-#     while i <= num_pulses
-#       maximally_even_marks << i.round % num_pulses
-#       perfectly_even_marks << i % num_pulses
-#       i += perfectly_even_division
-#     end
-#
-#     unless output.include?(maximally_even_marks.uniq.sort)
-#       output << maximally_even_marks.uniq.sort
-#     end
-#
-#     increment = num_pulses
-#     perfectly_even_marks.each do |perfectly_even_mark|
-#       maybe_smaller_increment = perfectly_even_mark.ceil - perfectly_even_mark
-#       next if maybe_smaller_increment == 0
-#       increment = maybe_smaller_increment if maybe_smaller_increment < increment
-#     end
-#     anchor += increment.to_f
-#
-#   end
-#
-#   output
-# end
-#
-# def rhythm_stringify(e_r, length)
-#   output = "-"*length
-#   e_r.each { |index| output[index] = "x" }
-#
-#   output
-# end
-#
-# [6, 8, 12, 16, 24].each do |length|
-#   (2...length).each do |num_onsets|
-#     maximally_even_rhythms(num_onsets, length).each do |m_e_r|
-#       rhythm_str = rhythm_stringify(m_e_r, length)
-#       r = Rhythm.where(rhythm_str: rhythm_str).first_or_create!(creator_id: u1.id, rhythm_str: rhythm_str)
-#       n = Name.where(name: "maximally even rhythm #{num_onsets}/#{length}").first_or_create!(name: "maximally even rhythm #{num_onsets}/#{length}")
-#       g = Naming.create!(rhythm_id: r.id, name_id: n.id, namer_id: u1.id)
-#     end
-#   end
-# end
-#
-# def almost_maximally_even_rhythms(num_onsets, num_pulses)
-#   perfectly_even_division = num_pulses / num_onsets.to_f
-#   anchor = 0.0
-#   output = []
-#   until anchor >= perfectly_even_division
-#     almost_maximally_even_rhythms = [[]]
-#     perfectly_even_marks = []
-#     i = anchor
-#     while i < num_pulses
-#       new_rhythms = []
-#       almost_maximally_even_rhythms.each do |a_m_e_r|
-#         if i.floor == i
-#           low = a_m_e_r.dup
-#           next_low = i - 1
-#           next_low += num_pulses if next_low < 0
-#           low << next_low
-#           new_rhythms << low
-#
-#           high = a_m_e_r.dup
-#           next_high = i + 1
-#           next_high -= num_pulses if next_high >= num_pulses
-#           high << next_high
-#           new_rhythms << high
-#         else
-#           low = a_m_e_r.dup
-#           low << i.floor
-#           new_rhythms << low
-#
-#           high = a_m_e_r.dup
-#           next_high = i.ceil
-#           next_high -= num_pulses if next_high >= num_pulses
-#           high << next_high
-#           new_rhythms << high
-#         end
-#       end
-#       almost_maximally_even_rhythms = new_rhythms.dup
-#       perfectly_even_marks << i % num_pulses
-#       i += perfectly_even_division
-#     end
-#     increment = num_pulses
-#     perfectly_even_marks.each do |perfectly_even_mark|
-#       maybe_smaller_increment = perfectly_even_mark.ceil - perfectly_even_mark
-#       next if maybe_smaller_increment == 0
-#       increment = maybe_smaller_increment if maybe_smaller_increment < increment
-#     end
-#     anchor += increment.to_f
-#     output += almost_maximally_even_rhythms
-#   end
-#   output = output.uniq
-#   output.map { |r| r.uniq.sort }
-# end
-#
-# # puts "checkpoint 1"
-#
-# def fctrs(n)
-#   output = []
-#   (2..n).each do |i|
-#     output << i if n % i == 0
-#   end
-#
-#   output
-# end
-#
-# def desirable_lesser_relative_primes(n)
-#   output = []
-#   (2...n-1).each do |i|
-#     output << i unless fctrs(i).any? { |fctr| fctrs(n).include?(fctr) }
-#   end
-#
-#   output
-# end
-#
-# def deep_rhythms(num_pulses)
-#   deep_rhythms = []
-#   num_pulses
-#   desirable_lesser_relative_primes(num_pulses).each do |d_l_r_p|
-#     new_rhythm = "-"*num_pulses
-#     (0...num_pulses - 1).each do |i|
-#       j = (i * d_l_r_p) % num_pulses
-#       new_rhythm[j] = "x"
-#       unless deep_rhythms.include?([new_rhythm, d_l_r_p, num_pulses, i + 1])
-#         deep_rhythms << [new_rhythm.dup, d_l_r_p, num_pulses, i + 1]
-#       end
-#     end
-#   end
-#
-#   deep_rhythms
-# end
-#
-# [6, 8, 12, 16, 24].each do |length|
-#   (0...length).each do |rotation|
-#     deep_rhythms(length).each do |deep_rhythm|
-#       r = Rhythm.where(rhythm_str: rotate(deep_rhythm[0], rotation)).first_or_create!(creator_id: u1.id, rhythm_str: rotate(deep_rhythm[0], rotation))
-#       n = Name.where(name: "deep rhythm (#{deep_rhythm[1]}:#{deep_rhythm[2]}), iteration #{deep_rhythm[3]}, rotation #{rotation}").first_or_create!(name: "deep rhythm (#{deep_rhythm[1]}:#{deep_rhythm[2]}), iteration #{deep_rhythm[3]}, rotation #{rotation}")
-#       g = Naming.create!(rhythm_id: r.id, name_id: n.id, namer_id: u1.id)
-#     end
-#   end
-# end
-#
-# puts "checkpoint 2"
-#
-# def toggle_rhythms
-#   output = []
-#   rhythm_str = "x--x"
-#   i = 0
-#   until rhythm_str.length > 32
-#     rhythm_str = "x-" + rhythm_str[0...-2] + "-x--"
-#     output << [rhythm_str, "toggle rhythm iteration #{i}"]
-#     i = i + 1
-#   end
-#
-#   rotated_rhythms = []
-#   output.each do |rhythm|
-#     p rhythm
-#     (1..rhythm[0].length).each do |rotation|
-#       p rotation
-#       rotated_rhythms << [rotate(rhythm[0], rotation),
-#                   rhythm[1] + " rotation #{rotation}"]
-#     end
-#   end
-#
-#   output + rotated_rhythms
-# end
-#
-# def sharp_toggle_rhythms
-#   rhythm_str = "x-x-xx-x"
-#   output = [
-#     ["-xx-", "sharp toggle rhythm iteration 0"],
-#     [rhythm_str, "sharp toggle rhythm iteration 1"]
-#   ]
-#   i = 2
-#   until rhythm_str.length > 32
-#     rhythm_str = "x-" + rhythm_str + "-x"
-#     output << [rhythm_str, "sharp toggle rhythm iteration #{i}"]
-#     i = i + 1
-#   end
-#
-#   rotated_rhythms = []
-#   output.each do |rhythm|
-#     (1..rhythm[0].length).each do |rotation|
-#       rotated_rhythms << [rotate(rhythm[0], rotation),
-#                   rhythm[1] + " rotation #{rotation}"]
-#     end
-#   end
-#
-#   output + rotated_rhythms
-# end
-#
-# toggle_rhythms.each do |rhythm|
-#   r = Rhythm.where(rhythm_str: rhythm[0]).first_or_create!(creator_id: u1.id, rhythm_str: rhythm[0])
-#   n = Name.where(name: rhythm[1]).first_or_create!(name: rhythm[1])
-#   g = Naming.create!(rhythm_id: r.id, name_id: n.id, namer_id: u1.id)
-# end
-#
-# sharp_toggle_rhythms.each do |rhythm|
-#   r = Rhythm.where(rhythm_str: rhythm[0]).first_or_create!(creator_id: u1.id, rhythm_str: rhythm[0])
-#   n = Name.where(name: rhythm[1]).first_or_create!(name: rhythm[1])
-#   g = Naming.create!(rhythm_id: r.id, name_id: n.id, namer_id: u1.id)
-# end
-#
-# puts "checkpoint 3"
+def euclid_rhythm(num_onsets, num_pulses)
+  return nil if num_pulses % num_onsets == 0
+  euclid_arr = Array.new(num_pulses) { ["-"] }
+  (0...num_onsets).each { |i| euclid_arr[i] = ["x"] }
+  until ( euclid_arr.all? { |el| el.count == euclid_arr[0].count } &&
+    euclid_arr[0].count != 1 ) || euclid_arr[-1].count != euclid_arr[-2].count
+    diff = euclid_arr.count - num_onsets
+    num_onsets = [diff, num_onsets].min
+    new_diff = euclid_arr.count - num_onsets
+    (0...num_onsets).each do |i|
+      euclid_arr[i].concat(euclid_arr[i + new_diff])
+    end
+    euclid_arr = euclid_arr.slice(0, new_diff)
+  end
+
+  euclid_arr.flatten.join("")
+end
+
+def euclid_rhythms_of_length(length)
+  output = {}
+  (0...length).each do |rotation|
+    (2...length).each do |num_onsets|
+      next if length % num_onsets == 0
+      if rotation == 0
+        output["Euclidean Algorithm e(#{num_onsets}/#{length})"] =
+          euclid_rhythm(num_onsets, length)
+      else
+        output["Euclidean Algorithm e(#{num_onsets}/#{length}) rotation #{rotation}"] =
+          rotate(euclid_rhythm(num_onsets, length), rotation)
+      end
+    end
+  end
+
+  output
+end
+
+def rotate(rhythm_str, amount)
+  len = rhythm_str.length
+  rhythm_str[(len - amount)...len] + rhythm_str[0...(len - amount)]
+end
+
+[6, 8, 12, 16, 24].each do |length|
+  euclid_rhythms_of_length(length).each do |e_r_o_l_name, e_r_o_l|
+    r = Rhythm.where(rhythm_str: e_r_o_l).first_or_create!(creator_id: u1.id, rhythm_str: e_r_o_l)
+    n = Name.where(name: e_r_o_l_name).first_or_create!(name: e_r_o_l_name)
+    g = Naming.create!(rhythm_id: r.id, name_id: n.id, namer_id: u1.id)
+  end
+end
+
+def hop_and_jump_rhythm(num_pulses, num_hops, hop_size)
+  new_rhythm = "-"*num_pulses
+  try_next_index = 0
+  (0...num_hops).each do |hop_i|
+    first_try_index = try_next_index
+    success = false
+    lapped = false
+    until success || (first_try_index == try_next_index && lapped)
+      if new_rhythm[try_next_index] != "x" &&
+        seed_antipode(new_rhythm, try_next_index) == "-"
+        new_rhythm[try_next_index] = "x"
+        success = true
+      else
+        try_next_index += 1
+        try_next_index = try_next_index % num_pulses
+      end
+      lapped = true if try_next_index == num_pulses - 1
+    end
+    return nil unless success
+    try_next_index += hop_size
+    try_next_index = try_next_index % num_pulses
+  end
+
+  new_rhythm
+end
+
+def seed_antipode(rhythm_str, index)
+  rhythm_str[(index + (rhythm_str.length / 2)) % rhythm_str.length]
+end
+
+def hop_and_jump_rhythms(num_pulses)
+  output  = []
+  (2...num_pulses-1).each do |hop_size| #exclude trivial cases
+    i = 2
+    while true
+      new_rhythm = hop_and_jump_rhythm(num_pulses, i, hop_size)
+      break if new_rhythm.nil?
+      output << [new_rhythm, "hop and jump rhythm (length: #{num_pulses}, hop size: #{hop_size}, hop count: #{i})"]
+      i = i + 1
+    end
+  end
+
+  output
+end
+
+[6, 8, 12, 16, 24].each do |length|
+  hop_and_jump_rhythms(length).each do |h_a_j_r|
+    r = Rhythm.where(rhythm_str: h_a_j_r[0]).first_or_create!(creator_id: u1.id, rhythm_str: h_a_j_r[0])
+    n = Name.where(name: h_a_j_r[1]).first_or_create!(name: h_a_j_r[1])
+    g = Naming.create!(rhythm_id: r.id, name_id: n.id, namer_id: u1.id)
+  end
+end
+
+def maximally_even_rhythms(num_onsets, num_pulses)
+  perfectly_even_division = num_pulses / num_onsets.to_f
+  anchor = 0.0
+  output = []
+  until anchor >= perfectly_even_division
+
+    maximally_even_marks = []
+    perfectly_even_marks = []
+    i = anchor
+    while i <= num_pulses
+      maximally_even_marks << i.round % num_pulses
+      perfectly_even_marks << i % num_pulses
+      i += perfectly_even_division
+    end
+
+    unless output.include?(maximally_even_marks.uniq.sort)
+      output << maximally_even_marks.uniq.sort
+    end
+
+    increment = num_pulses
+    perfectly_even_marks.each do |perfectly_even_mark|
+      maybe_smaller_increment = perfectly_even_mark.ceil - perfectly_even_mark
+      next if maybe_smaller_increment == 0
+      increment = maybe_smaller_increment if maybe_smaller_increment < increment
+    end
+    anchor += increment.to_f
+
+  end
+
+  output
+end
+
+def rhythm_stringify(e_r, length)
+  output = "-"*length
+  e_r.each { |index| output[index] = "x" }
+
+  output
+end
+
+[6, 8, 12, 16, 24].each do |length|
+  (2...length).each do |num_onsets|
+    maximally_even_rhythms(num_onsets, length).each do |m_e_r|
+      rhythm_str = rhythm_stringify(m_e_r, length)
+      r = Rhythm.where(rhythm_str: rhythm_str).first_or_create!(creator_id: u1.id, rhythm_str: rhythm_str)
+      n = Name.where(name: "maximally even rhythm #{num_onsets}/#{length}").first_or_create!(name: "maximally even rhythm #{num_onsets}/#{length}")
+      g = Naming.create!(rhythm_id: r.id, name_id: n.id, namer_id: u1.id)
+    end
+  end
+end
+
+def almost_maximally_even_rhythms(num_onsets, num_pulses)
+  perfectly_even_division = num_pulses / num_onsets.to_f
+  anchor = 0.0
+  output = []
+  until anchor >= perfectly_even_division
+    almost_maximally_even_rhythms = [[]]
+    perfectly_even_marks = []
+    i = anchor
+    while i < num_pulses
+      new_rhythms = []
+      almost_maximally_even_rhythms.each do |a_m_e_r|
+        if i.floor == i
+          low = a_m_e_r.dup
+          next_low = i - 1
+          next_low += num_pulses if next_low < 0
+          low << next_low
+          new_rhythms << low
+
+          high = a_m_e_r.dup
+          next_high = i + 1
+          next_high -= num_pulses if next_high >= num_pulses
+          high << next_high
+          new_rhythms << high
+        else
+          low = a_m_e_r.dup
+          low << i.floor
+          new_rhythms << low
+
+          high = a_m_e_r.dup
+          next_high = i.ceil
+          next_high -= num_pulses if next_high >= num_pulses
+          high << next_high
+          new_rhythms << high
+        end
+      end
+      almost_maximally_even_rhythms = new_rhythms.dup
+      perfectly_even_marks << i % num_pulses
+      i += perfectly_even_division
+    end
+    increment = num_pulses
+    perfectly_even_marks.each do |perfectly_even_mark|
+      maybe_smaller_increment = perfectly_even_mark.ceil - perfectly_even_mark
+      next if maybe_smaller_increment == 0
+      increment = maybe_smaller_increment if maybe_smaller_increment < increment
+    end
+    anchor += increment.to_f
+    output += almost_maximally_even_rhythms
+  end
+  output = output.uniq
+  output.map { |r| r.uniq.sort }
+end
+
+def fctrs(n)
+  output = []
+  (2..n).each do |i|
+    output << i if n % i == 0
+  end
+
+  output
+end
+
+def desirable_lesser_relative_primes(n)
+  output = []
+  (2...n-1).each do |i|
+    output << i unless fctrs(i).any? { |fctr| fctrs(n).include?(fctr) }
+  end
+
+  output
+end
+
+def deep_rhythms(num_pulses)
+  deep_rhythms = []
+  num_pulses
+  desirable_lesser_relative_primes(num_pulses).each do |d_l_r_p|
+    new_rhythm = "-"*num_pulses
+    (0...num_pulses - 1).each do |i|
+      j = (i * d_l_r_p) % num_pulses
+      new_rhythm[j] = "x"
+      unless deep_rhythms.include?([new_rhythm, d_l_r_p, num_pulses, i + 1])
+        deep_rhythms << [new_rhythm.dup, d_l_r_p, num_pulses, i + 1]
+      end
+    end
+  end
+
+  deep_rhythms
+end
+
+[6, 8, 12, 16, 24].each do |length|
+  (0...length).each do |rotation|
+    deep_rhythms(length).each do |deep_rhythm|
+      r = Rhythm.where(rhythm_str: rotate(deep_rhythm[0], rotation)).first_or_create!(creator_id: u1.id, rhythm_str: rotate(deep_rhythm[0], rotation))
+      n = Name.where(name: "deep rhythm (#{deep_rhythm[1]}:#{deep_rhythm[2]}), iteration #{deep_rhythm[3]}, rotation #{rotation}").first_or_create!(name: "deep rhythm (#{deep_rhythm[1]}:#{deep_rhythm[2]}), iteration #{deep_rhythm[3]}, rotation #{rotation}")
+      g = Naming.create!(rhythm_id: r.id, name_id: n.id, namer_id: u1.id)
+    end
+  end
+end
+
+def toggle_rhythms
+  output = []
+  rhythm_str = "x--x"
+  i = 0
+  until rhythm_str.length > 32
+    rhythm_str = "x-" + rhythm_str[0...-2] + "-x--"
+    output << [rhythm_str, "toggle rhythm iteration #{i}"]
+    i = i + 1
+  end
+
+  rotated_rhythms = []
+  output.each do |rhythm|
+    p rhythm
+    (1..rhythm[0].length).each do |rotation|
+      p rotation
+      rotated_rhythms << [rotate(rhythm[0], rotation),
+                  rhythm[1] + " rotation #{rotation}"]
+    end
+  end
+
+  output + rotated_rhythms
+end
+
+def sharp_toggle_rhythms
+  rhythm_str = "x-x-xx-x"
+  output = [
+    ["-xx-", "sharp toggle rhythm iteration 0"],
+    [rhythm_str, "sharp toggle rhythm iteration 1"]
+  ]
+  i = 2
+  until rhythm_str.length > 32
+    rhythm_str = "x-" + rhythm_str + "-x"
+    output << [rhythm_str, "sharp toggle rhythm iteration #{i}"]
+    i = i + 1
+  end
+
+  rotated_rhythms = []
+  output.each do |rhythm|
+    (1..rhythm[0].length).each do |rotation|
+      rotated_rhythms << [rotate(rhythm[0], rotation),
+                  rhythm[1] + " rotation #{rotation}"]
+    end
+  end
+
+  output + rotated_rhythms
+end
+
+toggle_rhythms.each do |rhythm|
+  r = Rhythm.where(rhythm_str: rhythm[0]).first_or_create!(creator_id: u1.id, rhythm_str: rhythm[0])
+  n = Name.where(name: rhythm[1]).first_or_create!(name: rhythm[1])
+  g = Naming.create!(rhythm_id: r.id, name_id: n.id, namer_id: u1.id)
+end
+
+sharp_toggle_rhythms.each do |rhythm|
+  r = Rhythm.where(rhythm_str: rhythm[0]).first_or_create!(creator_id: u1.id, rhythm_str: rhythm[0])
+  n = Name.where(name: rhythm[1]).first_or_create!(name: rhythm[1])
+  g = Naming.create!(rhythm_id: r.id, name_id: n.id, namer_id: u1.id)
+end
 
 #THESE TAKE A LOONNNNNNG TIME AND THERE ARE A SHIT TON OF THEM. WAIT TIL TONIGHT.
 # a_m_e_r_id = 0

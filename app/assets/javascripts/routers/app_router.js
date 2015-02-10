@@ -32,18 +32,14 @@ Geometrhythm.Routers.App = Backbone.Router.extend({
       dbRhythm = new Geometrhythm.Models.Rhythm();
     }
 
-    // Geometrhythm.Collections.rhythms.fetch();
     var rootView = new Geometrhythm.Views.Root({
       model: this.activeRhythm,
-      // collection: Geometrhythm.Collections.rhythms
     });
     this._swapView(rootView);
   },
 
   list: function() {
     Geometrhythm.Collections.rhythms.fetch( { data: { page: 1 } } );
-    // Geometrhythm.Collections.rhythms.fetch(this.activeRhythm)
-    // Geometrhythm.Collections.rhythms.fetch({ data: { page: 1 } }, { page: 1 });
     var listView = new Geometrhythm.Views.RhythmsList({
       collection: Geometrhythm.Collections.rhythms,
       potentialLikers: Geometrhythm.Collections.potentialLikers,

@@ -3,17 +3,9 @@
 <head>
   <title>geometrhythm</title>
   <link href='http://fonts.googleapis.com/css?family=Maven+Pro:400,900,700,500' rel='stylesheet' type='text/css'>
-  <%#= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
   <%= stylesheet_link_tag    'application', media: 'all' %>
-  <%#= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'application' %>
   <%= csrf_meta_tags %>
-  <!--<%#= paginate @rhythms %>-->
-
-  <!-- noooo! HAHAHAH ok i have to fix the above thien....
-  <link href="/assets/application.css" type="text/css">-->
-  <!-- yesss! -->
-  <!--<%#= stylesheet_link_tag "application" %>-->
 </head>
 <body>
 
@@ -28,7 +20,7 @@
   <nav class="navbar navbar-default" style="min-height: 80px">
     <div class="container-fluid">
       <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-        <a class="navbar-brand">
+        <a class="navbar-brand" href="/#">
           <%= image_tag "header_logo_dark.png", size: "292x45"%>
         </a>
 
@@ -36,9 +28,7 @@
           <span style="font-family: 'Glyphicons Halflings', Arial, sans-serif;"></span>
         </div>
 
-
         <i class="glyphicon glyphicon-show-thumbnails"></i>
-        <!--<i class="glyphicon glyphicon-log-in"></i>-->
         <ul class="nav navbar-nav navbar-right">
 
           <li>
@@ -87,9 +77,6 @@
 
 
 <%= yield %>
-
-<link href='http://fonts.googleapis.com/css?family=Roboto:400,300,500' rel='stylesheet' type='text/css'>
-<!-- <span class="d-tt" data-d-tooltip="Just click and hold to dismiss tooltip!">me<span> -->
 
 </body>
 </html>

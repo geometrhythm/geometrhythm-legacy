@@ -39,7 +39,6 @@ navbar-right li {
   position: absolute;
   top: 30px;
   padding: 0px 10px;
-  // margin: 0 10px
 }
 
 li .give-me-space {
@@ -82,15 +81,12 @@ navbar-right a {
 .TEDAS_sq {
   border: 1px solid #eee;
   background-color: #6da2d1;
-  // float: left;
-  // display: block;
   position: absolute;
-  // bottom: 0px;
+  border-radius: 4px;
 }
 
 .TEDAS_box {
   position: relative;
-  // background-color: gray;
   margin: 10px;
   float: left;
   width: 400px;
@@ -99,7 +95,6 @@ navbar-right a {
 
 .FIC_box {
   position: relative;
-  // background-color: red;
   margin: 10px;
   float: left;
   width: 300px;
@@ -112,12 +107,5 @@ navbar-right a {
   border: 1px solid #eee;
   height: 15px;
   width: 15px;
+  border-radius: 4px;
 }
-
-// navbar-right form {
-//   display: inline;
-// }
-//
-// navbar-right button {
-//   display: inline;
-// }
