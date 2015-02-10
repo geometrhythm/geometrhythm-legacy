@@ -7,7 +7,7 @@ Geometrhythm.Views.Info = Backbone.View.extend({
   templateSplash: JST['info/splash'],
 
   initialize: function(options) {
-    this.listenTo(this.model, 'sync', this.render); //change:play_count
+    this.listenTo(this.model, 'sync add change', this.render); //change:play_count
     this.template = this[options.template]; //this[options.template] || this.template;
   },
 
@@ -30,6 +30,7 @@ Geometrhythm.Views.Info = Backbone.View.extend({
   },
 
   render: function(options) {
+    // this.model.fetch(); //i'll fucking fetch it again!!!
     var earliestNameId = null;
     var primaryName = null;
     // var nameHash = {};
@@ -74,7 +75,32 @@ Geometrhythm.Views.Info = Backbone.View.extend({
     window.location.href = '/users/new'
   },
 
-  claimRhythm: function() {
+  // likeThisRhythm: function() {
+  //   // var dbRhythm = Geometrhythm.Collections.rhythms.find( function(rhythm){
+  //   //     return rhythm.get("rhythm_str") === $('#current-rhythm').val();
+  //   //   }
+  //   // );
+  //   // if (dbRhythm) {
+  //   //   $('#cur-rhythm-id').attr('value', dbRhythm.id);
+  //   // } else {
+  //   //   $('#cur-rhythm-id').attr('value', '');
+  //   // }
+  //
+  //   var that = this;
+  //   new Geometrhythm.Models.Like().save({
+  //     rhythm_id: $('#cur-rhythm-id').val()
+  //   }, {
+  //     success: function() {
+  //       // var dbRhythm = Geometrhythm.Collections.rhythms.find( function(rhythm){
+  //       //     return rhythm.get("rhythm_str") === $('#current-rhythm').val();
+  //       //   });
+  //       // dbRhythm.fetch();
+  //       that.model.fetch();
+  //     }
+  //   });
+  // },
+
+  claimRhythmOldWorkignButWithoutRefresh: function() {
     var rhythmToClaim = new Geometrhythm.Models.Rhythm();
 
     var dbRhythm = Geometrhythm.Collections.rhythms.find( function(rhythm){
@@ -86,15 +112,55 @@ Geometrhythm.Views.Info = Backbone.View.extend({
     } else {
       $('#cur-rhythm-id').attr('value', '');
     }
+    // var that = this;
 
     rhythmToClaim.set({
       creator_id: $('#cur-user-id').val(),
       rhythm_str: $('#current-rhythm').val()
     });
+    console.log("howdy");
     rhythmToClaim.save({}, {
       success: function() {
-        Geometrhythm.Collections.rhythms.add(rhythmToClaim);
-        Geometrhythm.Collections.rhythms.fetch();
+        console.log("made it all the way to success");
+        // Geometrhythm.Collections.rhythms.add(rhythmToClaim);
+        // Geometrhythm.Collections.rhythms.fetch();
+      }
+    });
+  },
+
+  claimRhythm: function() {
+    // this.model = new Geometrhythm.Models.Rhythm();
+
+    var dbRhythm = Geometrhythm.Collections.rhythms.find( function(rhythm){
+        return rhythm.get("rhythm_str") === $('#current-rhythm').val();
+      }
+    );
+    if (dbRhythm) {
+      $('#cur-rhythm-id').attr('value', dbRhythm.id);
+    } else {
+      $('#cur-rhythm-id').attr('value', '');
+    }
+    // var that = this;
+    var that = this;
+    this.model.set({
+      creator_id: $('#cur-user-id').val(),
+      rhythm_str: $('#current-rhythm').val()
+    });
+    console.log("howdy");
+    this.model.save({}, {
+      success: function() {
+        console.log("made it all the way to success");
+        // Geometrhythm.Collections.rhythms.add(rhythmToClaim);
+        // Geometrhythm.Collections.rhythms.fetch();
+        var demonstrative = that;
+        that.model.fetch({
+          success: function() {
+            console.log("and even to success of the fetch");
+            demonstrative.render();
+          }
+        });
+        // setTimeout(that.render, 0).bind(that); //for some reason simply rendering upon success is still not updating the info view!!!
+        //how many different ways can I tell this to actually re-render once it successfully saves the claiming?!?!?
       }
     });
   },
@@ -169,25 +235,26 @@ Geometrhythm.Views.Info = Backbone.View.extend({
   },
 
   likeThisRhythm: function() {
-    var dbRhythm = Geometrhythm.Collections.rhythms.find( function(rhythm){
-        return rhythm.get("rhythm_str") === $('#current-rhythm').val();
-      }
-    );
-    if (dbRhythm) {
-      $('#cur-rhythm-id').attr('value', dbRhythm.id);
-    } else {
-      $('#cur-rhythm-id').attr('value', '');
-    }
+    // var dbRhythm = Geometrhythm.Collections.rhythms.find( function(rhythm){
+    //     return rhythm.get("rhythm_str") === $('#current-rhythm').val();
+    //   }
+    // );
+    // if (dbRhythm) {
+    //   $('#cur-rhythm-id').attr('value', dbRhythm.id);
+    // } else {
+    //   $('#cur-rhythm-id').attr('value', '');
+    // }
 
     var that = this;
     new Geometrhythm.Models.Like().save({
       rhythm_id: $('#cur-rhythm-id').val()
     }, {
       success: function() {
-        var dbRhythm = Geometrhythm.Collections.rhythms.find( function(rhythm){
-            return rhythm.get("rhythm_str") === $('#current-rhythm').val();
-          });
-        dbRhythm.fetch();
+        // var dbRhythm = Geometrhythm.Collections.rhythms.find( function(rhythm){
+        //     return rhythm.get("rhythm_str") === $('#current-rhythm').val();
+        //   });
+        // dbRhythm.fetch();
+        that.model.fetch();
       }
     });
   },

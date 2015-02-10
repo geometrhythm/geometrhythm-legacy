@@ -14,7 +14,7 @@ Geometrhythm.Views.Root = Backbone.CompositeView.extend({
     // debugger
     // this.listenTo(this.model, 'sync', this.render);
     // this.listenTo(this.model, 'change:rhythm_str', this.renderInfoView);
-    this.listenTo(this.model, 'change sync add', this.renderInfoView);
+    this.listenTo(this.model, 'change sync', this.renderInfoView);
     // this.listenTo(this.model, 'change:id', this.renderInfoView);
     // this.listenTo(this.collection, 'sync', this.renderInfoView); //OKAY BIG EXPERIMENT
     // this.updateModel();
@@ -22,10 +22,10 @@ Geometrhythm.Views.Root = Backbone.CompositeView.extend({
     //this.renderInfoView();
     // debugger
     // this.listenTo(this.model, 'change:rhythm_str', this.renderAnalysisView);
-    this.listenTo(this.model, 'change sync add', this.renderAnalysisView);
+    this.listenTo(this.model, 'change sync', this.renderAnalysisView);
     // this.listenTo(this.collection, 'sync', this.renderAnalysisView);
 
-    //  setTimeout(this.renderInfoView, 0);
+    // setTimeout(this.renderInfoView, 0);
   },
 
   render: function() {
@@ -51,21 +51,21 @@ Geometrhythm.Views.Root = Backbone.CompositeView.extend({
   // },
 
   updateModel: function() {
-    console.log("update model is firing");
-    console.log("rhythm's id:");
-    console.log(this.model.get("id"));
-    console.log("rhythm's creator id:");
-    console.log(this.model.get("creator_id"));
+    // console.log("update model is firing");
+    // console.log("rhythm's id:");
+    // console.log(this.model.get("id"));
+    // console.log("rhythm's creator id:");
+    // console.log(this.model.get("creator_id"));
     this.model.set("rhythm_str", $('#current-rhythm').val());
-    // var dbRhythm = Geometrhythm.Collections.rhythms.find( function(rhythm){
-    //     return rhythm.get("rhythm_str") === $('#current-rhythm').val();
-    //   }
-    // );
-    // if (dbRhythm) {
-    //   $('#cur-rhythm-id').attr('value', dbRhythm.id);
-    // } else {
-    //   $('#cur-rhythm-id').attr('value', '');
-    // }
+    var dbRhythm = Geometrhythm.Collections.rhythms.find( function(rhythm){
+        return rhythm.get("rhythm_str") === $('#current-rhythm').val();
+      }
+    );
+    if (dbRhythm) {
+      $('#cur-rhythm-id').attr('value', dbRhythm.id);
+    } else {
+      $('#cur-rhythm-id').attr('value', '');
+    }
 
     // custom API route (BB)
     // send it rhythm_str
@@ -137,9 +137,9 @@ Geometrhythm.Views.Root = Backbone.CompositeView.extend({
     // debugger
     // template = "templateSignUpToClaim"
     // debugger
-    if (this.model.id != undefined) { //2 is the dummy user so charts can show
-      console.log("went in here");
-      console.log(this.model.id);
+    if (this.model && this.model.id != undefined) { //2 is the dummy user so charts can show
+      // console.log("went in here");
+      // console.log(this.model.id);
       $('#cur-rhythm-id').attr('value', this.model.id);
       if ($('#cur-user-id').val()
         && $('#cur-user-id').val() == this.model.get("creator_id")) {
@@ -151,7 +151,7 @@ Geometrhythm.Views.Root = Backbone.CompositeView.extend({
         var template = "templateShowLoggedOut";
       }
     } else {
-      console.log("MODEL NOT FOUND YAY");
+      // console.log("MODEL NOT FOUND YAY");
       // this.model = new Geometrhythm.Models.Rhythm({
       //   rhythm_str: $('#current-rhythm').val(),
       //   creator_id: 2
@@ -167,7 +167,7 @@ Geometrhythm.Views.Root = Backbone.CompositeView.extend({
     if ($.cookie('_Geometrhythm_stored_rhythm') === undefined ) {
       var template = "templateSplash";
     }
-
+    // this.model.fetch();
     var view = new Geometrhythm.Views.Info({
       // model: dbRhythm,
       model: this.model,

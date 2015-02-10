@@ -6,7 +6,7 @@ module Api
       @rhythm = current_user.rhythms.create(rhythm_params)
 
       if @rhythm.save
-        render json: @rhythm
+        render :show 
       else
         render json: @rhythm.errors.full_messages, status: :unprocessable_entity
       end
