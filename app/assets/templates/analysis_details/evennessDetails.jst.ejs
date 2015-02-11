@@ -1,0 +1,9 @@
+    <% if (rhythm.get("perfectly_even?")) { %>
+    <li>perfectly even</li>
+  <% } else if (rhythm.get("maximally_even?")) { %>
+    <li>maximally even</li>
+  <% } else if (rhythm.get("almost_maximally_even?")) { %>
+    <li>almost maximally even</li>
+  <% } %>
+
+    <li>unevenness: <%= rhythm.get("unevenness") %></li>

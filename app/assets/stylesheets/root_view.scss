@@ -79,10 +79,6 @@ navbar-right a {
   transform: scale(-1, 1);
 }
 
-.bb-analysis {
-  position: relative;
-}
-
 .TEDAS_sq {
   border: 1px solid #eee;
   background-color: #6da2d1;
@@ -251,7 +247,13 @@ div.bb-analysis {
   width: 100%;
   height: 200px;
   padding: 15px;
+  position: relative;
   // background-color: #ccc;
+}
+
+#bb-analysis-details {
+  position: relative;
+  height: 500px;
 }
 
 div#bb-info {
@@ -297,6 +299,7 @@ div.ui-tooltip {
 .analysis-title {
   // opacity: 0;
   visibility: hidden;
+  top: -10px;
   // transition: opacity 0.5s;
 }
 
@@ -307,6 +310,35 @@ div.bb-analysis:hover .analysis-title {
 
 div.bb-analysis:hover .glyphicon {
   visibility: visible;
+}
+
+.info-icon {
+  font-size: 24px;
+  font-family: 'Oleo Script Swash Caps', cursive;
+  position: absolute;
+  left: 95%;
+  top: 8%;
+  visibility: hidden;
+}
+
+.info-icon:hover {
+  color: #ff9800;
+  cursor: pointer;
+}
+
+div.bb-analysis:hover .info-icon {
+  visibility: visible;
+}
+
+div.fillErUp {
+  width: 100%;
+}
+
+#evenness-canvas {
+  background-color: #ddd;
+  border: 1px solid #eee;
+  position: absolute;
+  left: 5%;
 }
 
 // div.bb-analysis-basic span.contour:hover  {

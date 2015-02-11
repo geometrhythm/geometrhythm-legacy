@@ -39,20 +39,20 @@ Geometrhythm.Views.AnalysisBasic = Backbone.View.extend({
   },
 
   displayIntervals: function(event) {
-    console.log("hehhhhhh");
+    // console.log("hehhhhhh");
     $(this.canvas).css('display','inline')
     var ord = parseInt($(event.currentTarget).attr('ord'));
     var dur = parseInt($(event.currentTarget).attr('dur'));
-    console.log("wtf is dur? " + dur);
+    // console.log("wtf is dur? " + dur);
     // var linesToDraw = this.model.get("full_intervals_onset_pairs")[ord];
     // $('body').find(".FIC_sq[ord='" + ord + "']").addClass('columnHovered');
     this.ctx.clearRect(0,0,400,400);
     // var that = this;
     // linesToDraw.forEach( function(lineToDraw) {
-    console.log("NOW WHAT??? " + $('#current-rhythm').val().length);
+    // console.log("NOW WHAT??? " + $('#current-rhythm').val().length);
     // debugger
-    console.log("ord: " + ord);
-    console.log("((ord + dur)): " + ((ord + dur)));
+    // console.log("ord: " + ord);
+    // console.log("((ord + dur)): " + ((ord + dur)));
       var posParse1 = $('body').find(".cell[ord='" + ord + "']").position();
       var pos1 = [posParse1.left, posParse1.top];
       var posParse2 = $('body').find(".cell[ord='" + ((ord + dur) % $('#current-rhythm').val().length) + "']").position();
