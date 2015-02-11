@@ -114,24 +114,24 @@ $.RhythmRing.prototype.playRhythm2 = function() {
       //   dbRhythm.set("play_count", dbRhythm.get("play_count") + 1);
       //   dbRhythm.save();
       // }
-      var that = this;
-      $.ajax({
-        url: "api/rhythms/match",
-        type: "GET",
-        data: {
-          rhythm_str: $('#current-rhythm').val()
-        }, success: function(payload) {
-          $.ajax({
-            url: "api/rhythms/" + payload.id,
-            type: "PATCH",
-            data: {
-              rhythm: {
-                play_count: payload.play_count + 1
-              }
-            }
-          });
-        }
-      });
+      // var that = this;
+      // $.ajax({
+      //   url: "api/rhythms/match",
+      //   type: "GET",
+      //   data: {
+      //     rhythm_str: $('#current-rhythm').val()
+      //   }, success: function(payload) {
+      //     $.ajax({
+      //       url: "api/rhythms/" + payload.id,
+      //       type: "PATCH",
+      //       data: {
+      //         rhythm: {
+      //           play_count: payload.play_count + 1
+      //         }
+      //       }
+      //     });
+      //   }
+      // });
     }
 
     var fill = this.rhythmCells[this.playPos] ? 'orange' : 'cornsilk';

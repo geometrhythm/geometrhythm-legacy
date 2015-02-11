@@ -1,4 +1,4 @@
-<h5>time elements displayed as squares</h5>
+<span class='analysis-title TEDAS-tooltip'><h5>TEDAS</h5></span>
 
 <div class="TEDAS_box">
   <% sum = 0 %>
@@ -12,17 +12,17 @@
     </div>
 
     <% if (rhythm.get("contour")[index] === "+") { %>
-      <i class="glyphicon glyphicon-circle-arrow-up" ord="<%= sum %>"
+      <i class="contour glyphicon glyphicon-circle-arrow-up" ord="<%= sum %>"
             style="left: <%= (((sum) + interval_duration) * widthPercentageUnit) - 5 %>%;
                    top: <%= ((max_height * 1.414) - interval_duration) * heightPixelsUnit %>px;">
       </i>
     <% } else if (rhythm.get("contour")[index] === "-") { %>
-      <i class="glyphicon glyphicon-circle-arrow-down" ord="<%= sum %>"
+      <i class="contour glyphicon glyphicon-circle-arrow-down" ord="<%= sum %>"
             style="left: <%= (((sum) + interval_duration) * widthPercentageUnit) - 5 %>%;
                    top: <%= ((max_height * 1.414) - interval_duration) * heightPixelsUnit %>px;">
       </i>
     <% } else { %>
-      <i class="glyphicon glyphicon-record" ord="<%= sum %>"
+      <i class="contour glyphicon glyphicon-record" ord="<%= sum %>"
             style="left: <%= (((sum) + interval_duration) * widthPercentageUnit) - 5 %>%;
                    top: <%= ((max_height * 1.414) - interval_duration) * heightPixelsUnit %>px;">
       </i>

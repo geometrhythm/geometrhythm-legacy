@@ -23,16 +23,9 @@ Geometrhythm.Views.Analysis = Backbone.CompositeView.extend({
   },
 
   renderAnalysisBasicView: function(rhythm) {
-
-    // var that = this;
     var view = new Geometrhythm.Views.AnalysisBasic({
       model: rhythm,
-      // parentEl: that.$el
-      // $el: this.$('#bb-analysis-basic')
     });
-
-    // console.log("insano?");
-    // console.log(view.render().$el.width());
 
     this.currentAnalysisBasicView && this.currentAnalysisBasicView.remove();
     this.currentAnalysisBasicView = view;

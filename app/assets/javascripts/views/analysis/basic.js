@@ -5,12 +5,17 @@ Geometrhythm.Views.AnalysisBasic = Backbone.View.extend({
   events: {
     'mouseover .TEDAS_sq' : 'displayIntervals',
     'mouseout .TEDAS_sq' : 'hideIntervals'
+    // 'mouseover .contour' : 'displayIntervals',
+    // 'mouseout .contour' : 'hideIntervals'
   },
 
   initialize: function() {
     this.canvas = $('body').find('#polygon-analysis-canvas')
     this.ctx = this.canvas[0].getContext("2d");
     this.ctx.strokeStyle="#ff9800";
+    this.ctx.lineWidth=3;
+    this.ctx.shadowBlur=20;
+    this.ctx.shadowColor="#ff9800";
   },
 
   render: function() {
@@ -55,7 +60,7 @@ Geometrhythm.Views.AnalysisBasic = Backbone.View.extend({
       this.ctx.beginPath();
       this.ctx.moveTo(pos1[0] + 13, pos1[1] + 13);
       this.ctx.lineTo(pos2[0] + 13, pos2[1] + 13);
-      this.ctx.lineWidth = 2;
+      // this.ctx.lineWidth = 2;
       this.ctx.stroke();
     // })
   },
