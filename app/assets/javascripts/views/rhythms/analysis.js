@@ -87,17 +87,7 @@ Geometrhythm.Views.Analysis = Backbone.CompositeView.extend({
   },
 
   showDetailView: function(event) {
-    console.log("i'm back");
-    // if ($(event.currentTarget).attr('detailsViewName') === 'basic') {
-    //   // console.log("okay and i can use this");
-    //   var template = $(event.currentTarget).attr('detailsViewName')
-    // }
-
-    // console.log("okay i can get this to work");
-    // var view = "3";
-    // console.log($(event.currentTarget).attr('detailsViewName'));
-    // debugger
-    var template = $(event.currentTarget).attr('detailsViewName');
+    var template = $(event.currentTarget).data('detailsviewname');
     var view = new Geometrhythm.Views.AnalysisDetails({
       template: template,
       model: this.model
