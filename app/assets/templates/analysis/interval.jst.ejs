@@ -2,13 +2,11 @@
 
 <div class="FIC_box">
   <% rhythm.get("full_interval_content") && rhythm.get("full_interval_content").forEach(function(duration_count, h_index) { %>
-    <% console.log("h_index: " + h_index) %>
     <% for (v_index = 0; v_index < duration_count; v_index++ ) { %>
-      <% console.log("top: " + ((max_height - v_index) * heightPixelsUnit)) %>
-      <div class="FIC_sq" ord="<%= sum %>"
+      <div class="FIC_sq" ord="<%= h_index %>"
             style="height: <%= heightPixelsUnit %>px;
                   width: <%= widthPercentageUnit %>%;
-                  left: <%= (h_index * widthPercentageUnit) + 12 %>%;
+                  left: <%= (h_index * widthPercentageUnit) + 5 %>%;
                   bottom: <%= (v_index) * heightPixelsUnit %>px">
       </div>
     <% } %>

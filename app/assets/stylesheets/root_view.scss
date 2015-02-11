@@ -164,6 +164,22 @@ navbar-right a {
   border-radius: 4px;
 }
 
+.AIC_box {
+  position: absolute;
+  margin: 10px;
+  bottom: 0;
+  width: 100%;
+  min-height: 180px;
+}
+
+.AIC_sq {
+  position: absolute;
+  background-color: #6da2d1;
+  border: 1px solid #eee;
+  border-radius: 4px;
+}
+
+
 // .TEDAS_sq {
 //   border: 1px solid #eee;
 //   background-color: #6da2d1;
@@ -197,15 +213,23 @@ navbar-right a {
 
 .MH_sq {
   position: absolute;
-  background-color: #6da2d1;
+  //background-color: #6da2d1;
   border: 1px solid #eee;
   // height: 15px;
   // width: 15px;
   border-radius: 4px;
 }
 
-.columnHovered {
-  background-color: #3e4b60;
+.MH_sq.onset {
+  background-color: #6da2d1;
+}
+
+.MH_sq.rest {
+  background-color: #ddd;
+}
+
+.MH_sq.columnHovered {
+  background-color: #ff9800;
 }
 
 div.ui-tooltip {

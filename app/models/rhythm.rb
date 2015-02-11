@@ -36,6 +36,18 @@ class Rhythm < ActiveRecord::Base
     output
   end
 
+  def full_intervals_onset_pairs
+    full_intervals_onset_pairs = Array.new(len / 2) { [] }
+    (0...onset_count).each do |i|
+      (i + 1...onset_count).each do |j|
+        full_intervals_onset_pairs[geodesic_distance(i, j) - 1] <<
+          [onset_indices[i], onset_indices[j]]
+      end
+    end
+
+    full_intervals_onset_pairs
+  end
+
   def full_interval_content
     full_interval_content = Array.new(len / 2) { 0 }
     (0...onset_count).each do |i|

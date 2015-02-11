@@ -26,6 +26,7 @@ Geometrhythm.Views.AnalysisBasic = Backbone.View.extend({
       // }
       // debugger
       // console.log(heightPixelsUnit);
+      // console.log(widthPercentageUnit);
 
       var content = this.template({
         rhythm: this.model,

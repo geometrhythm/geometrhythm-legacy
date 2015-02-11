@@ -43,14 +43,14 @@ Geometrhythm.Views.AnalysisMeter = Backbone.View.extend({
       console.log(this.$el);
       // debugger
       $('body').find(".MH_sq[ord='" + ord + "']").addClass('columnHovered')
-    // debugger
+    //  debugger
   },
 
   unHighlightOnset: function(event) {
     var ord = $(event.currentTarget).attr('ord');
     $('body').find(".cell[ord='" + ord + "']")
       .css('box-shadow', '');
-      $('body').find(".MH_sq[ord='" + ord + "']").removeClass('columnHovered');
+       $('body').find(".MH_sq[ord='" + ord + "']").removeClass('columnHovered');
   }
 
 })

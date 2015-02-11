@@ -3,21 +3,19 @@
 <div class="MH_box">
   <% rhythm.get("metric_hierarchy") && rhythm.get("metric_hierarchy").forEach(function(duration_count, h_index) { %>
     <% if (rhythm.get("rhythm_str")[h_index] === "x") { %>
-      <% console.log("yay blue"); %>
-      <% var color = "#6da2d1" %>
+      <% var colorClass = "onset" %>
     <% } else { %>
-      <% var color = "#ddd" %>
+      <% var colorClass = "rest" %>
     <% } %>
 
     <% for (v_index = 0; v_index < duration_count; v_index++ ) { %>
 
 
-      <div class="MH_sq" ord="<%= h_index %>"
+      <div class="MH_sq <%= colorClass %>" ord="<%= h_index %>"
           style="left: <%= (h_index * widthPercentageUnit) + 10 %>%;
                                  bottom: <%= v_index * heightPixelsUnit %>px;
                                  height: <%= heightPixelsUnit %>px;
-                                 width: <%= widthPercentageUnit %>%;
-                                 background-color: <%= color %>">
+                                 width: <%= widthPercentageUnit %>%;">
 
       </div>
     <% } %>

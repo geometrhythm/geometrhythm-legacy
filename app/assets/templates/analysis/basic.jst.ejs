@@ -7,23 +7,24 @@
     <div class="TEDAS_sq" ord="<%= sum %>"
           style="height: <%= interval_duration * heightPixelsUnit %>px;
                 width: <%= interval_duration * widthPercentageUnit %>%;
-                left: <%= (sum ) * widthPercentageUnit %>%;
+                left: <%= (sum) * widthPercentageUnit %>%;
                 bottom: 0px">
     </div>
+
     <% if (rhythm.get("contour")[index] === "+") { %>
       <i class="glyphicon glyphicon-circle-arrow-up" ord="<%= sum %>"
-            style="left: <%= (((sum ) + interval_duration) * widthPercentageUnit) - 3 %>%;
-                   bottom: <%= interval_duration * heightPixelsUnit %>%">
+            style="left: <%= (((sum) + interval_duration) * widthPercentageUnit) - 5 %>%;
+                   top: <%= ((max_height * 1.414) - interval_duration) * heightPixelsUnit %>px;">
       </i>
     <% } else if (rhythm.get("contour")[index] === "-") { %>
       <i class="glyphicon glyphicon-circle-arrow-down" ord="<%= sum %>"
-            style="left: <%= (((sum ) + interval_duration) * widthPercentageUnit) - 3 %>%;
-                   bottom: <%= interval_duration * heightPixelsUnit %>%">
+            style="left: <%= (((sum) + interval_duration) * widthPercentageUnit) - 5 %>%;
+                   top: <%= ((max_height * 1.414) - interval_duration) * heightPixelsUnit %>px;">
       </i>
     <% } else { %>
       <i class="glyphicon glyphicon-record" ord="<%= sum %>"
-            style="left: <%= (((sum) + interval_duration) * widthPercentageUnit) - 3 %>%;
-                   bottom: <%= interval_duration * heightPixelsUnit %>%">
+            style="left: <%= (((sum) + interval_duration) * widthPercentageUnit) - 5 %>%;
+                   top: <%= ((max_height * 1.414) - interval_duration) * heightPixelsUnit %>px;">
       </i>
     <% } %>
 

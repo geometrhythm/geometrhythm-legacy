@@ -1,6 +1,14 @@
 <h5>Onset</h5>
 
-    <li>adjacent interval content entropy: <%= rhythm.get("adjacent_interval_content_entropy") %></li>
-  <li>onset_distinct_distance_complexity: <%= rhythm.get("onset_distinct_distance_complexity") %></li>
-  <li>shelling_count: <%= rhythm.get("shelling_count") %></li>
-  <li>adjacent interval content: <%= rhythm.get("adjacent_interval_content") %></li>
+<div class="AIC_box">
+  <% rhythm.get("adjacent_interval_content") && rhythm.get("adjacent_interval_content").forEach(function(duration_count, h_index) { %>
+    <% for (v_index = 0; v_index < duration_count; v_index++ ) { %>
+      <div class="AIC_sq" ord="<%= sum %>"
+            style="height: <%= heightPixelsUnit %>px;
+                  width: <%= widthPercentageUnit %>%;
+                  left: <%= (h_index * widthPercentageUnit) + 5 %>%;
+                  bottom: <%= (v_index) * heightPixelsUnit %>px">
+      </div>
+    <% } %>
+  <% }) %>
+</div>
