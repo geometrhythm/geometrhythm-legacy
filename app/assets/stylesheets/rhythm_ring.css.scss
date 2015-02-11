@@ -20,9 +20,15 @@ container {
   height: 300px;
 }
 
-.polygon-canvas {
+// .polygon-canvas {
+//   position: absolute;
+//   z-index: 2;
+// }
+
+#polygon-analysis-canvas {
   position: absolute;
-  z-index: 2;
+  top: 0px;
+  z-index: 3;
 }
 
 .rhythm-ring {

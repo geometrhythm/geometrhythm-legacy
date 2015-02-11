@@ -6,7 +6,13 @@ Geometrhythm.Views.AnalysisOnset = Backbone.View.extend({
     if (this.model) {
 
       // var windowWidth = 180; //$('#bb-analysis-basic').width();
-      var len = this.model.get("adjacent_interval_content").length;
+      var largestAdjacentInterval = 0;
+      this.model.get("adjacent_interval_content").forEach(function(duration, index) {
+        if (duration > 0) {
+          largestAdjacentInterval = index;
+        }
+      })
+      var len = largestAdjacentInterval;
       var max_height = Math.max.apply(null, this.model.get("adjacent_interval_content"))
       // var widthPercentageUnit = 100 / len;
       // var heightPixelsUnit = widthPercentageUnit * windowWidth / 100;
