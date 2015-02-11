@@ -16,13 +16,19 @@ Geometrhythm.Routers.App = Backbone.Router.extend({
     if ($.cookie('_Geometrhythm_stored_rhythm')) {
       this.activeRhythm.set("rhythm_str", $.cookie('_Geometrhythm_stored_rhythm'));
       $('#current-rhythm').attr('value', $.cookie('_Geometrhythm_stored_rhythm'));
+      var analysisDisplayed = true;
     } else {
       this.activeRhythm.set("rhythm_str", "x--x--x---x-x---");
       $('#current-rhythm').attr('value', "x--x--x---x-x---");
+      var analysisDisplayed = false;
+      var splashIt = true;
     }
-
+    // console.log("what about right here?");
+    // console.log(analysisDisplayed);
     var rootView = new Geometrhythm.Views.Root({
       model: this.activeRhythm,
+      analysisDisplayed: analysisDisplayed,
+      splashIt: splashIt
     });
     this._swapView(rootView);
   },

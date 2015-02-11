@@ -1,0 +1,19 @@
+tempo<br><input type="text" id="input-tempo" value="125"><br><br>
+<button class="btn btn-warning" id="play-pause"><i style="font-size: 12px" class="glyphicon glyphicon-play"></i>&nbsp;Play</button><br><br>
+<button class="btn btn-default btn-sm" id="invert"><i style="font-size: 12px" class="glyphicon glyphicon-adjust"></i>&nbsp;Invert</button>
+<button class="btn btn-default btn-sm" id="reverse">Reverse</button>
+<button class="btn btn-default btn-sm" id="clockwise">
+  <i style="font-size: 12px" class="glyphicon glyphicon-refresh"></i>
+</button>
+<button class="btn btn-default btn-sm" id="c-clockwise">
+  <i style="font-size: 12px" class="glyphicon glyphicon-refresh c-clockwise"></i>
+</button>
+<br><br>manual input<br><input type='text' id='current-rhythm-user-input' value=''>
+
+<br><br><br><br><br>
+<h4><strong>complexity analysis</strong></h4>
+<% if (analysisDisplayed) { %>
+  <span class="deets_link analysis_collapse">collapse</span>
+<% } else { %>
+  <span class="deets_link analysis_expand">expand</span>
+<% } %>

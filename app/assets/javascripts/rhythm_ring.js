@@ -14,7 +14,6 @@ $.RhythmRing = function (el, ctx) {
   this.refreshHandlesAndLabels();
   this.refreshPolygon();
   this.refreshWell();
-  //$('#bb-info').trigger('plugin-change');
 };
 
 $.RhythmRing.prototype.refreshWell = function() {

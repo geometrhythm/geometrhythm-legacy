@@ -4,20 +4,28 @@ Geometrhythm.Views.Root = Backbone.CompositeView.extend({
 
   events: {
     'plugin-change #bb-info' : 'updateModel',
-    'click .analysis_collapse' : 'collapseAnalysis'
+    'click .analysis_collapse' : 'collapseAnalysis',
+    'click .analysis_expand' : 'expandAnalysis'
   },
 
-  initialize: function() {
+  initialize: function(options) {
     this.listenTo(this.model, 'sync change', this.renderInfoView);
     this.listenTo(this.model, 'sync change', this.renderAnalysisView);
+    this.analysisDisplayed = options.analysisDisplayed;
+    this.splashIt = options.splashIt;
+    // console.log(this.analysisDisplayed);
   },
 
   render: function() {
+    // console.log("RIGHT before using the template");
+    // console.log(this.analysisDisplayed);
+    // debugger
     var content = this.template({
       rhythm: this.model,
-      analysisDisplayed: this.analaysisDisplayed
+      analysisDisplayed: this.analysisDisplayed
     })
     this.$el.html(content);
+    this.renderInterface();
     return this;
   },
 
@@ -44,38 +52,42 @@ Geometrhythm.Views.Root = Backbone.CompositeView.extend({
             }, success: function (payload) {
               that.model.set(payload);
               that.renderInfoView();
-              // that.renderAnalysisView();
             }
           })
         }
         that.renderInfoView();
-        // that.renderAnalysisView();
       }
     });
   },
 
   renderInfoView: function(event) {
-    if (this.model && this.model.id != undefined) {
-      $('#cur-rhythm-id').attr('value', this.model.id);
-      if ($('#cur-user-id').val()
-        && $('#cur-user-id').val() == this.model.get("creator_id")) {
-        var template = "templateShowYours";
-      } else if ($('#cur-user-id').val()
-        && $('#cur-user-id').val() != this.model.get("creator_id")) {
-        var template = "templateShowAnothers";
+    if (this.splashIt) {
+      console.log("welcome to zombo com");
+      var template = "templateSplash";
+      if (this.almostUnsplash) {
+        this.splashIt = false;
       } else {
-        var template = "templateShowLoggedOut";
+        this.almostUnsplash = true;
       }
     } else {
-      if ($('#cur-user-id').val()) {
-        var template = "templateClaim";
+      if (this.model && this.model.id != undefined) {
+        $('#cur-rhythm-id').attr('value', this.model.id);
+        if ($('#cur-user-id').val()
+          && $('#cur-user-id').val() == this.model.get("creator_id")) {
+          var template = "templateShowYours";
+        } else if ($('#cur-user-id').val()
+          && $('#cur-user-id').val() != this.model.get("creator_id")) {
+          var template = "templateShowAnothers";
+        } else {
+          var template = "templateShowLoggedOut";
+        }
       } else {
-        var template = "templateSignUpToClaim";
+        if ($('#cur-user-id').val()) {
+          var template = "templateClaim";
+        } else {
+          var template = "templateSignUpToClaim";
+        }
       }
-    }
-
-    if ($.cookie('_Geometrhythm_stored_rhythm') === undefined ) {
-      var template = "templateSplash";
     }
 
     var view = new Geometrhythm.Views.Info({
@@ -88,20 +100,36 @@ Geometrhythm.Views.Root = Backbone.CompositeView.extend({
   },
 
   renderAnalysisView: function(event) {
+    if (this.analysisDisplayed === false) { return; }
     var view = new Geometrhythm.Views.Analysis({
       model: this.model
     })
     this.currentAnalysisView && this.currentAnalysisView.remove();
     this.currentAnalysisView = view;
     this.$('#bb-analysis-main').html(view.render().$el)
-    // debugger //WE HAVE IT HERE!
   },
 
   collapseAnalysis: function() {
-    console.log("made it here");
     this.currentAnalysisView && this.currentAnalysisView.remove();
     this.$('#bb-analysis-main').empty();
     this.analysisDisplayed = false;
+    this.renderInterface();
+  },
+
+  expandAnalysis: function() {
+    this.analysisDisplayed = true;
+    this.renderAnalysisView();
+    this.renderInterface();
+  },
+
+  renderInterface: function() {
+    var view = new Geometrhythm.Views.Interface({
+      analysisDisplayed: this.analysisDisplayed
+    })
+    this.currentInterfaceView && this.currentInterfaceView.remove();
+    this.currentInterfaceView = view;
+    // debugger
+    this.$('interface').html(view.render().$el)
   }
 
 });
