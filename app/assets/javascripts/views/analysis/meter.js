@@ -42,7 +42,8 @@ Geometrhythm.Views.AnalysisMeter = Backbone.View.extend({
       .css('box-shadow', '0px 0px 10px #ff9800');
       console.log(this.$el);
       // debugger
-      $('body').find(".MH_sq[ord='" + ord + "']").addClass('columnHovered')
+
+    $('body').find(".MH_sq[ord='" + ord + "']").addClass('columnHovered')
     //  debugger
   },
 

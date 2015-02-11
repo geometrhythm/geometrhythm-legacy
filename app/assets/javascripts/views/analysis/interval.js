@@ -8,8 +8,8 @@ Geometrhythm.Views.AnalysisInterval = Backbone.View.extend({
   },
 
   initialize: function() {
-    var temp = $('body').find('#polygon-analysis-canvas')
-    this.ctx = temp[0].getContext("2d");
+    this.canvas = $('body').find('#polygon-analysis-canvas')
+    this.ctx = this.canvas[0].getContext("2d");
     // $('body').find('#polygon-analysis-canvas').css("position","absolute");
     this.ctx.strokeStyle="#ff9800";
   },
@@ -52,7 +52,8 @@ Geometrhythm.Views.AnalysisInterval = Backbone.View.extend({
   },
 
   displayIntervals: function(event) {
-    console.log("WTF??????");
+    // console.log("WTF??????");
+    $(this.canvas).css('display','inline')
     var ord = $(event.currentTarget).attr('ord');
     //  console.log("ord: " + ord);
     var linesToDraw = this.model.get("full_intervals_onset_pairs")[ord];
@@ -91,5 +92,6 @@ Geometrhythm.Views.AnalysisInterval = Backbone.View.extend({
   hideIntervals: function() {
     console.log("FTW");
     this.ctx.clearRect(0,0,400,400);
+    $(this.canvas).css('display','none')
   }
 })
