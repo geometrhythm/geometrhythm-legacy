@@ -107,6 +107,20 @@ Geometrhythm.Views.Root = Backbone.CompositeView.extend({
     this.currentAnalysisView && this.currentAnalysisView.remove();
     this.currentAnalysisView = view;
     this.$('#bb-analysis-main').html(view.render().$el)
+    // debugger
+    $('.syncopation').tooltip({
+      items: '.syncopation',
+      content: "<strong>metric syncopation</strong> the difference between the total metric weight of this rhythm's onsets and the maximum possible total metric weight of a rhythm with the same number of onsets and cells"
+    });
+    $('.irregularity').tooltip({
+      items: '.irregularity',
+      content: "<strong>irregularity</strong> an average of the edit distances between this rhythm and each perfectly even rhythm of this cell count oriented at the same initial onset (i.e. the rhythms which define the metrical hierarchy)"
+    });
+    $('.metrical-hierarchy').tooltip({
+      items: '.metrical-hierarchy',
+      content: "<strong>metrical hierarchy</strong> considers the rhythm in terms of its pulse count)"
+    });
+    // debugger
   },
 
   collapseAnalysis: function() {

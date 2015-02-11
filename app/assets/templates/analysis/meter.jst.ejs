@@ -1,17 +1,17 @@
-<h5>Meter</h5>
+<h5 class='metrical-hierarchy'>metrical hierarchy</h5>
 
 <div class="MH_box">
-  <% rhythm.get("metric_hierarchy") && rhythm.get("metric_hierarchy").forEach(function(duration_count, h_index) { %>
+  <% rhythm.get("metric_hierarchy") && rhythm.get("metric_hierarchy").forEach(function(beat_weight, h_index) { %>
     <% if (rhythm.get("rhythm_str")[h_index] === "x") { %>
       <% var colorClass = "onset" %>
     <% } else { %>
       <% var colorClass = "rest" %>
     <% } %>
 
-    <% for (v_index = 0; v_index < duration_count; v_index++ ) { %>
+    <% for (v_index = 0; v_index < beat_weight; v_index++ ) { %>
 
 
-      <div class="MH_sq <%= colorClass %>" ord="<%= h_index %>"
+      <div class="MH_sq <%= colorClass %>" ord="<%= h_index %>" count="<%= beat_weight %>"
           style="left: <%= (h_index * widthPercentageUnit) + 10 %>%;
                                  bottom: <%= v_index * heightPixelsUnit %>px;
                                  height: <%= heightPixelsUnit %>px;
@@ -21,4 +21,33 @@
     <% } %>
 
   <% }) %>
+</div>
+
+<div id='meter-text'>
+  <div class='.tooltip-wtf-syncopation'>
+    <span class='measurement-name syncopation'>
+      metric syncopation: <%= rhythm.get("metric_syncopation") %><br>
+    </span>
+  </div>
+
+  <span class='measurement-name offbeatness'>
+    offbeatness: <%= rhythm.get("offbeatness") %><br>
+  </span>
+
+  <span class='measurement-name strongbeatedness'>
+    strongbeatedness: <%= rhythm.get("strongbeatness") %><br>
+  </span>
+
+  <span class='measurement-name irregularity'>
+    irregularity: <%= rhythm.get("irregularity") %><br>
+  </span>
+</div>
+
+<div id='meter-props'>
+  <% if (rhythm.get("has_closure?")) { %>
+    <span class='measurement-name closure'>has closure</span>
+  <% } %>
+  <% if (rhythm.get("has_anacrusis?")) { %>
+    <span class='measurement-name anacrusis'>has anacrusis</span>
+  <% } %>
 </div>

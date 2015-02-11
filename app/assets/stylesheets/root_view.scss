@@ -90,6 +90,9 @@ navbar-right a {
   border-radius: 4px;
 }
 
+.TEDAS_sq:hover {
+  background-color: #ff9800;
+}
 // .TEDAS_sq_alt {
 //   border: 1px solid #eee;
 //   box-sizing: border-box;
@@ -240,10 +243,6 @@ navbar-right a {
   background-color: #ff9800;
 }
 
-div.ui-tooltip {
-  max-width: 400px;
-}
-
 div.bb-analysis {
   width: 100%;
   height: 200px;
@@ -255,6 +254,44 @@ div#bb-info {
   max-height: 400px;
   overflow: auto;
 }
+
+div#meter-text {
+  position: absolute;
+  left: 75%;
+  top: 5%;
+  text-align: right;
+  // visibility: hidden;
+}
+
+div#meter-props {
+  position: absolute;
+  left: 45%;
+  top: 5%;
+  text-align: right;
+  // visibility: hidden;
+}
+
+// #bb-analysis-meter:hover div#meter-props {
+//   visibility: visible;
+// }
+//
+// #bb-analysis-meter:hover div#meter-text {
+//   visibility: visible;
+// }
+
+div.ui-tooltip {
+  max-width: 400px;
+  padding: 15px;
+  border-radius: 4px;
+  background-color: Cornsilk;
+}
+
+.measurement-name:hover {
+  color: #ff9800;
+  // font-weight: bold;
+}
+
+
 
 // div.bb-analysis-basic span#contour:hover  {
 //

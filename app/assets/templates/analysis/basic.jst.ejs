@@ -1,10 +1,10 @@
-<h5>Basic</h5>
+<h5>time elements displayed as squares</h5>
 
 <div class="TEDAS_box">
   <% sum = 0 %>
   <% rhythm.get("durational_pattern") && rhythm.get("durational_pattern").forEach(function(interval_duration, index) { %>
 
-    <div class="TEDAS_sq" ord="<%= sum %>"
+    <div class="TEDAS_sq" ord="<%= sum %>" dur="<%= interval_duration %>"
           style="height: <%= interval_duration * heightPixelsUnit %>px;
                 width: <%= interval_duration * widthPercentageUnit %>%;
                 left: <%= (sum) * widthPercentageUnit %>%;
