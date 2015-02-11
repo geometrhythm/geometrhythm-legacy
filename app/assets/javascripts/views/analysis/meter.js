@@ -15,6 +15,15 @@ Geometrhythm.Views.AnalysisMeter = Backbone.View.extend({
     'mouseout .closure' : 'unHighlightClosure',
   },
 
+  initialize: function() {
+    this.canvas = $('body').find('#polygon-analysis-canvas')
+    this.ctx = this.canvas[0].getContext("2d");
+    this.ctx.strokeStyle="#ff9800";
+    this.ctx.lineWidth = 3;
+    this.ctx.shadowBlur=20;
+    this.ctx.shadowColor="#ff9800";
+  },
+
   render: function() {
     if (this.model) {
       var len = this.model.get("len");
@@ -44,6 +53,7 @@ Geometrhythm.Views.AnalysisMeter = Backbone.View.extend({
       return;
     }
     var that = this;
+    var linesToDraw = [];
     var alreadyHighlighted = false;
     this.factors(ord).forEach(function(factor) {
       if (alreadyHighlighted) { return; }
@@ -51,6 +61,7 @@ Geometrhythm.Views.AnalysisMeter = Backbone.View.extend({
         alreadyHighlighted = true;
         for (var i = 0; i < that.model.get("len"); i++) {
           if (i % factor === 0) {
+            linesToDraw.push(i);
             $('body').find(".MH_sq[ord='" + i + "']").addClass('columnHovered');
             $('body').find(".cell[ord='" + i + "']")
               .css('box-shadow', '0px 0px 10px #ff9800');
@@ -58,13 +69,36 @@ Geometrhythm.Views.AnalysisMeter = Backbone.View.extend({
         }
       }
     });
+
+    $(this.canvas).css('display','inline')
+    // var ord = $(event.currentTarget).attr('ord');
+    // var linesToDraw = this.model.get("full_intervals_onset_pairs")[ord];
+    // $('body').find(".FIC_sq[ord='" + ord + "']").addClass('columnHovered');
+    this.ctx.clearRect(0,0,400,400);
+    // var that = this;
+    linesToDraw.forEach(function(lineToDraw, index) {
+      var posParse1 = $('body').find(".cell[ord='" + lineToDraw + "']").position();
+      var pos1 = [posParse1.left, posParse1.top];
+      if (index === linesToDraw.length - 1) {
+        var posParse2 = $('body').find(".cell[ord='" + linesToDraw[0] + "']").position();
+      } else {
+        var posParse2 = $('body').find(".cell[ord='" + linesToDraw[index + 1] + "']").position();
+      }
+      var pos2 = [posParse2.left, posParse2.top];
+      that.ctx.beginPath();
+      that.ctx.moveTo(pos1[0] + 13, pos1[1] + 13);
+      that.ctx.lineTo(pos2[0] + 13, pos2[1] + 13);
+      that.ctx.stroke();
+    })
   },
 
   unHighlightOnset: function(event) {
-    // var ord = $(event.currentTarget).attr('ord');
     $('body').find(".cell")
       .css('box-shadow', '');
     $('body').find(".MH_sq").removeClass('columnHovered');
+
+    this.ctx.clearRect(0,0,400,400);
+    $(this.canvas).css('display','none')
   },
 
   factors: function(n) {
@@ -80,7 +114,6 @@ Geometrhythm.Views.AnalysisMeter = Backbone.View.extend({
 
   highlightOffbeatness: function() {
     $('body').find(".MH_sq[count='1']").addClass('columnHovered');
-    // console.log("in herhhrhehreh");
   },
 
   unHighlightOffbeatness: function() {

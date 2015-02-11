@@ -84,7 +84,7 @@ Further stretch goals:
 
 <b>Discover rhythms</b>
 - [ ] Find rhythms related by shared geometric properties
-- [ ] Investigate these properties using beautiful graphs/charts/histograms
+- [x] Investigate these properties using beautiful graphs/charts/histograms
 - [ ] Find rhythms based on popularity and recency
 - [ ] Tag rhythms and search by tag
 

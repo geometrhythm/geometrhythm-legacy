@@ -39,35 +39,21 @@ Geometrhythm.Views.AnalysisBasic = Backbone.View.extend({
   },
 
   displayIntervals: function(event) {
-    // console.log("hehhhhhh");
     $(this.canvas).css('display','inline')
     var ord = parseInt($(event.currentTarget).attr('ord'));
     var dur = parseInt($(event.currentTarget).attr('dur'));
-    // console.log("wtf is dur? " + dur);
-    // var linesToDraw = this.model.get("full_intervals_onset_pairs")[ord];
-    // $('body').find(".FIC_sq[ord='" + ord + "']").addClass('columnHovered');
     this.ctx.clearRect(0,0,400,400);
-    // var that = this;
-    // linesToDraw.forEach( function(lineToDraw) {
-    // console.log("NOW WHAT??? " + $('#current-rhythm').val().length);
-    // debugger
-    // console.log("ord: " + ord);
-    // console.log("((ord + dur)): " + ((ord + dur)));
-      var posParse1 = $('body').find(".cell[ord='" + ord + "']").position();
-      var pos1 = [posParse1.left, posParse1.top];
-      var posParse2 = $('body').find(".cell[ord='" + ((ord + dur) % $('#current-rhythm').val().length) + "']").position();
-      var pos2 = [posParse2.left, posParse2.top];
-      this.ctx.beginPath();
-      this.ctx.moveTo(pos1[0] + 13, pos1[1] + 13);
-      this.ctx.lineTo(pos2[0] + 13, pos2[1] + 13);
-      // this.ctx.lineWidth = 2;
-      this.ctx.stroke();
-    // })
+    var posParse1 = $('body').find(".cell[ord='" + ord + "']").position();
+    var pos1 = [posParse1.left, posParse1.top];
+    var posParse2 = $('body').find(".cell[ord='" + ((ord + dur) % $('#current-rhythm').val().length) + "']").position();
+    var pos2 = [posParse2.left, posParse2.top];
+    this.ctx.beginPath();
+    this.ctx.moveTo(pos1[0] + 13, pos1[1] + 13);
+    this.ctx.lineTo(pos2[0] + 13, pos2[1] + 13);
+    this.ctx.stroke();
   },
 
   hideIntervals: function() {
-    // console.log("FTW");
-    // $('body').find(".FIC_sq").removeClass('columnHovered');
     this.ctx.clearRect(0,0,400,400);
     $(this.canvas).css('display','none')
   }

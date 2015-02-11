@@ -1,9 +1,25 @@
-<div class="FIC_info_box">
-  <ul>
-    <li>full interval content entropy: <%= rhythm.get("full_interval_content_entropy") %></li>
-    <li>interval vector: <%= rhythm.get("interval_vector") %></li>
+<h5>Full Interval Content</h5>
 
-    <li id="f_i_c">full interval content: <%= rhythm.get("full_interval_content") %></li>
+<br><strong>full interval content histogram</strong>
+<br>all intervals, sorted by size.
+<br>the leftmost column stacks intervals of length 1.
+<br>the rightmost column stacks intervals that are half the rhythm's length.
+<br>it is not possible for an interval to be longer than half;
+<br>geodesic distances - i.e. the shortest possible distance, whether
+<br>clockwise or counterclockwise - are used.
+<br>
+<br><strong>interval vector <%= rhythm.get("interval_vector") %></strong>
+<br>the values of the histogram.
+<br>
+<br><strong>full interval content entropy <%= rhythm.get("full_interval_content_entropy").toFixed(2) %></strong>
+<br>a measure of the variation of interval sizes.
+<br>when every interval is the same size, H(P) is at its minimum.
+<br>when every interval is a different size, H(P) is at its maximum.
+<br>it is, more or less, the probability of guessing the size of an interval chosen at random.
+<br>
+<br><strong>tallness: <%= rhythm.get("tallness") %></strong>
+<br>
+
 
     <% if (rhythm.get("perfectly_flat?")) { %>
       <li>perfectly flat</li>
@@ -17,10 +33,9 @@
       <li>has all intervals</li>
     <% } %>
 
-    <li>tallness: <%= rhythm.get("tallness") %></li>
+
     <li>shallowness: <%= rhythm.get("shallowness") %></li>
     <li>distinct durations: <%= rhythm.get("distinct_durations") %></li>
     <li>onset_distinct_distance_complexity: <%= rhythm.get("onset_distinct_distance_complexity") %></li>
     <li>shelling_count: <%= rhythm.get("shelling_count") %></li>
   </ul>
-</div>

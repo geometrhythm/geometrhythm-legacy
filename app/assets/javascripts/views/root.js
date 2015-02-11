@@ -13,13 +13,9 @@ Geometrhythm.Views.Root = Backbone.CompositeView.extend({
     this.listenTo(this.model, 'sync change', this.renderAnalysisView);
     this.analysisDisplayed = options.analysisDisplayed;
     this.splashIt = options.splashIt;
-    // console.log(this.analysisDisplayed);
   },
 
   render: function() {
-    // console.log("RIGHT before using the template");
-    // console.log(this.analysisDisplayed);
-    // debugger
     var content = this.template({
       rhythm: this.model,
       analysisDisplayed: this.analysisDisplayed
@@ -128,7 +124,6 @@ Geometrhythm.Views.Root = Backbone.CompositeView.extend({
     })
     this.currentInterfaceView && this.currentInterfaceView.remove();
     this.currentInterfaceView = view;
-    // debugger
     this.$('interface').html(view.render().$el)
   },
 

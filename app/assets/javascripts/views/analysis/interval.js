@@ -51,13 +51,11 @@ Geometrhythm.Views.AnalysisInterval = Backbone.View.extend({
       that.ctx.beginPath();
       that.ctx.moveTo(pos1[0] + 13, pos1[1] + 13);
       that.ctx.lineTo(pos2[0] + 13, pos2[1] + 13);
-      // that.ctx.lineWidth = 2;
       that.ctx.stroke();
     })
   },
 
   hideIntervals: function() {
-    console.log("FTW");
     $('body').find(".FIC_sq").removeClass('columnHovered');
     this.ctx.clearRect(0,0,400,400);
     $(this.canvas).css('display','none')

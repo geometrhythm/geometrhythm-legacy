@@ -84,23 +84,11 @@ navbar-right a {
   background-color: #6da2d1;
   position: absolute;
   border-radius: 4px;
-  // transition: background-color 0.2s;
 }
 
 .TEDAS_sq:hover {
   background-color: #ff9800;
 }
-// .TEDAS_sq_alt {
-//   border: 1px solid #eee;
-//   box-sizing: border-box;
-//   background-color: #6da2d1;
-//   // position: absolute;
-//   border-radius: 4px;
-// }
-
-// .TEDAS_sq strong {
-//   vertical-align: text-bottom;
-// }
 
 .TEDAS_box .glyphicon {
   font-size: 15px;
@@ -109,61 +97,27 @@ navbar-right a {
   visibility: hidden;
 }
 
-// .TEDAS_box {
-//   position: relative;
-//   // background-color: #ddd;
-//   margin: 10px;
-//   float: left;
-//   min-width: 100%;
-//   min-height: 50px;
-// }
-
 .TEDAS_box {
   position: absolute;
-  // left: 20px;
-  // text-align: right;
   margin: 10px;
   bottom: 0;
-  // right: 0;
-  // background-color: #ddd;
-  // float: right;
-  // display: inline-block;
   width: 100%;
   min-height: 180px;
 }
 
 .FIC_box {
   position: absolute;
-  // left: 20px;
-  // text-align: right;
   margin: 10px;
   bottom: 0;
-  // right: 0;
-  // background-color: #ddd;
-  // float: right;
-  // display: inline-block;
   width: 100%;
   min-height: 180px;
 }
-
-// .FIC_info_box {
-//   position: relative;
-//   margin: 10px;
-//   background-color: orange;
-//   // float: left;
-//   display: inline-block;
-//   width: 40%;
-//   min-height: 120px;
-// }
 
 .FIC_sq {
   position: absolute;
   background-color: #6da2d1;
   border: 1px solid #eee;
-  // height: 15px;
-  // width: 15px;
   border-radius: 4px;
-  // transition: background-color 0.2s;
 }
 
 .AIC_box {
@@ -181,46 +135,19 @@ navbar-right a {
   border-radius: 4px;
 }
 
-
-// .TEDAS_sq {
-//   border: 1px solid #eee;
-//   background-color: #6da2d1;
-//   position: absolute;
-//   border-radius: 4px;
-// }
-
-// .MH_box {
-//   position: relative;
-//   margin: 10px;
-//   // background-color: #ddd;
-//   float: right;
-//   width: 100%;
-//   height: 180px;
-// }
-
 .MH_box {
   position: absolute;
-  // left: 20px;
   text-align: right;
   margin: 10px;
   bottom: 0;
-  // right: 0;
-  // background-color: #ddd;
-  // float: right;
-  // display: inline-block;
   width: 100%;
   min-height: 180px;
-  // right: -50px;
 }
 
 .MH_sq {
   position: absolute;
-  //background-color: #6da2d1;
   border: 1px solid #eee;
-  // height: 15px;
-  // width: 15px;
   border-radius: 4px;
-  // transition: background-color 0.2s;
 }
 
 .MH_sq.onset {
@@ -248,12 +175,13 @@ div.bb-analysis {
   height: 200px;
   padding: 15px;
   position: relative;
-  // background-color: #ccc;
 }
 
 #bb-analysis-details {
   position: relative;
   height: 500px;
+  overflow: auto;
+  text-size: 9px;
 }
 
 div#bb-info {
@@ -266,7 +194,6 @@ div#meter-text {
   left: 75%;
   top: 5%;
   text-align: right;
-  // visibility: hidden;
 }
 
 div#meter-props {
@@ -274,7 +201,6 @@ div#meter-props {
   left: 45%;
   top: 5%;
   text-align: right;
-  // visibility: hidden;
 }
 
 
@@ -289,7 +215,6 @@ div.ui-tooltip {
 
 .measurement-name:hover {
   color: #ff9800;
-  // font-weight: bold;
 }
 
 .TEDAS_box .glyphicon:hover {
@@ -297,14 +222,11 @@ div.ui-tooltip {
 }
 
 .analysis-title {
-  // opacity: 0;
   visibility: hidden;
   top: -10px;
-  // transition: opacity 0.5s;
 }
 
 div.bb-analysis:hover .analysis-title {
-  // opacity: 1;
   visibility: visible;
 }
 
@@ -341,6 +263,12 @@ div.fillErUp {
   left: 5%;
 }
 
-// div.bb-analysis-basic span.contour:hover  {
-//
-// }
+.evenness-point {
+  font-size: 32px; //changing this requires correcting the offset from 150
+  position: absolute;
+}
+
+.evenness-point:hover {
+  color: #ff9800;
+  cursor: pointer;
+}
