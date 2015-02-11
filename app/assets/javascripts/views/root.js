@@ -4,6 +4,7 @@ Geometrhythm.Views.Root = Backbone.CompositeView.extend({
 
   events: {
     'plugin-change #bb-info' : 'updateModel',
+    'click .analysis_collapse' : 'collapseAnalysis'
   },
 
   initialize: function() {
@@ -13,7 +14,8 @@ Geometrhythm.Views.Root = Backbone.CompositeView.extend({
 
   render: function() {
     var content = this.template({
-      rhythm: this.model
+      rhythm: this.model,
+      analysisDisplayed: this.analaysisDisplayed
     })
     this.$el.html(content);
     return this;
@@ -92,8 +94,14 @@ Geometrhythm.Views.Root = Backbone.CompositeView.extend({
     this.currentAnalysisView && this.currentAnalysisView.remove();
     this.currentAnalysisView = view;
     this.$('#bb-analysis-main').html(view.render().$el)
-    console.log("hey everybody");
-    console.log(view.render().$el);
+    // debugger //WE HAVE IT HERE!
+  },
+
+  collapseAnalysis: function() {
+    console.log("made it here");
+    this.currentAnalysisView && this.currentAnalysisView.remove();
+    this.$('#bb-analysis-main').empty();
+    this.analysisDisplayed = false;
   }
 
 });

@@ -10,14 +10,14 @@ Geometrhythm.Views.AnalysisBasic = Backbone.CompositeView.extend({
   render: function() {
     if (this.model) {
 
-      var windowWidth = $('#bb-analysis-basic').width();
-      // var windowHeightProportion = 150 / windowWidth;
-      var len = this.model.get("len")
+      // var windowWidth = this.$el.width();
+      // var windowWidth = this.$el.width();
+      var windowWidth = 300;
+      var len = this.model.get("len");
       var max_height = Math.max.apply(null, this.model.get("durational_pattern"))
 
       var widthPercentageUnit = 100 / len;
       var heightPixelsUnit = widthPercentageUnit * windowWidth / 100;
-      //var heightPercentageUnit =
 
       if (max_height * heightPixelsUnit > 50) {
         var tmp = heightPixelsUnit;
@@ -25,6 +25,8 @@ Geometrhythm.Views.AnalysisBasic = Backbone.CompositeView.extend({
         var proportion = heightPixelsUnit / tmp;
         widthPercentageUnit = widthPercentageUnit * proportion;
       }
+      // debugger
+      // console.log(heightPixelsUnit);
 
       var content = this.template({
         rhythm: this.model,
@@ -38,6 +40,7 @@ Geometrhythm.Views.AnalysisBasic = Backbone.CompositeView.extend({
     } else {
       this.$el.html("");
     }
+    // debugger
     return this;
   },
 

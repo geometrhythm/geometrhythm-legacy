@@ -72,6 +72,8 @@ Geometrhythm.Routers.App = Backbone.Router.extend({
     this.currentView && this.currentView.remove();
     this.currentView = view;
     this.$rootEl.html(view.render().$el);
+    view.afterRender && view.afterRender();
+    
     $('.rhythm-ring').rhythmRing();
   }
 });

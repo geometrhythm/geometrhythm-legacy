@@ -4,27 +4,32 @@ Geometrhythm.Views.AnalysisInterval = Backbone.CompositeView.extend({
 
   render: function() {
     if (this.model) {
-      var windowWidth = $('#bb-analysis-basic').width();
+
+      // var windowWidth = 180; //$('#bb-analysis-basic').width();
       var len = this.model.get("full_interval_content").length;
       var max_height = this.model.get("tallness");
-      var widthPercentageUnit = 100 / len;
-      var heightPixelsUnit = widthPercentageUnit * windowWidth / 100;
+      // var widthPercentageUnit = 100 / len;
+      // var heightPixelsUnit = widthPercentageUnit * windowWidth / 100;
 
-      if (max_height * heightPixelsUnit > 50) {
-        var tmp = heightPixelsUnit;
-        heightPixelsUnit = 50 / max_height;
-        var proportion = heightPixelsUnit / tmp;
-        widthPercentageUnit = widthPercentageUnit * proportion;
-      }
+      // if (max_height * heightPixelsUnit > 50) {
+      //   var tmp = heightPixelsUnit;
+      //   heightPixelsUnit = 50 / max_height;
+      //   var proportion = heightPixelsUnit / tmp;
+      //   widthPercentageUnit = widthPercentageUnit * proportion;
+      // }
+
+      var heightPixelsUnit = 120 / max_height;
+      var widthPercentageUnit = 85 / len; //85 so it doesn't take up the whole thing
 
       var content = this.template({
         rhythm: this.model,
-        windowWidth: windowWidth,
+        // windowWidth: windowWidth,
         widthPercentageUnit: widthPercentageUnit,
         heightPixelsUnit: heightPixelsUnit,
         len: len,
         max_height: max_height
       });
+
       this.$el.html(content);
     } else {
       this.$el.html("");

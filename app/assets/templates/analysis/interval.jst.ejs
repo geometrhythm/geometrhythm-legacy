@@ -1,4 +1,4 @@
-<h5>Interval</h5>
+<span style="z-index: 7; font-size: 20px">Interval</span>
 
 <div class="FIC_box">
   <% rhythm.get("full_interval_content") && rhythm.get("full_interval_content").forEach(function(duration_count, h_index) { %>
@@ -6,30 +6,9 @@
       <div class="FIC_sq" ord="<%= sum %>"
             style="height: <%= heightPixelsUnit %>px;
                   width: <%= widthPercentageUnit %>%;
-                  left: <%= (h_index - 0.5) * widthPercentageUnit %>%;
-                  top: <%= (max_height - v_index) * heightPixelsUnit %>px">
+                  left: <%= (h_index * widthPercentageUnit) + 12 %>%;
+                  top: <%= ((max_height - v_index) + 1) * heightPixelsUnit %>px">
       </div>
     <% } %>
   <% }) %>
 </div>
-
-  <li>full interval content entropy: <%= rhythm.get("full_interval_content_entropy") %></li>
-  <li>interval vector: <%= rhythm.get("interval_vector") %></li>
-
-<li id="f_i_c">full interval content: <%= rhythm.get("full_interval_content") %></li>
-
-<% if (rhythm.get("perfectly_flat?")) { %>
-  <li>perfectly flat</li>
-<% } else if (rhythm.get("flat?")) { %>
-  <li>flat</li>
-<% } %>
-
-<% if (rhythm.get("deep?")) { %>
-  <li>deep</li>
-<% } else if (rhythm.get("has_all_intervals?")) { %>
-  <li>has all intervals</li>
-<% } %>
-
-<li>tallness: <%= rhythm.get("tallness") %></li>
-<li>shallowness: <%= rhythm.get("shallowness") %></li>
-<li>distinct durations: <%= rhythm.get("distinct_durations") %></li>

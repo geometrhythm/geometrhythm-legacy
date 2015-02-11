@@ -4,11 +4,12 @@ Geometrhythm.Views.Analysis = Backbone.CompositeView.extend({
 
   render: function() {
     if (this.model) {
-      console.log("hehe yay");
       var content = this.template({
         rhythm: this.model,
       });
+
       this.$el.html(content);
+      // debugger
       this.renderAnalysisBasicView(this.model);
       this.renderAnalysisIntervalView(this.model);
       this.renderAnalysisMeterView(this.model);
@@ -16,16 +17,22 @@ Geometrhythm.Views.Analysis = Backbone.CompositeView.extend({
       this.renderAnalysisEvennessView(this.model);
       this.renderAnalysisSymmetryView(this.model);
     } else {
-      console.log("arrrggghhh sucks");
       this.$el.html("");
     }
     return this;
   },
 
   renderAnalysisBasicView: function(rhythm) {
+
+    // var that = this;
     var view = new Geometrhythm.Views.AnalysisBasic({
-      model: rhythm
+      model: rhythm,
+      // parentEl: that.$el
+      // $el: this.$('#bb-analysis-basic')
     });
+
+    // console.log("insano?");
+    // console.log(view.render().$el.width());
 
     this.currentAnalysisBasicView && this.currentAnalysisBasicView.remove();
     this.currentAnalysisBasicView = view;
