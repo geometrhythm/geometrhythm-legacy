@@ -1,4 +1,4 @@
-Geometrhythm.Views.AnalysisSymmetry = Backbone.CompositeView.extend({
+Geometrhythm.Views.AnalysisSymmetry = Backbone.View.extend({
 
   template: JST['analysis/symmetry'],
 

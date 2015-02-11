@@ -1,6 +1,11 @@
-Geometrhythm.Views.AnalysisMeter = Backbone.CompositeView.extend({
+Geometrhythm.Views.AnalysisMeter = Backbone.View.extend({
 
   template: JST['analysis/meter'],
+
+  events: {
+    'mouseover .MH_sq' : 'highlightOnset',
+    'mouseout .MH_sq' : 'unHighlightOnset'
+  },
 
   render: function() {
     if (this.model) {
@@ -27,5 +32,25 @@ Geometrhythm.Views.AnalysisMeter = Backbone.CompositeView.extend({
       this.$el.html("");
     }
     return this;
+  },
+
+  highlightOnset: function(event) {
+    // console.log("me me me");
+    // console.log($(event.currentTarget).attr('ord'));
+    var ord = $(event.currentTarget).attr('ord');
+    $('body').find(".cell[ord='" + ord + "']")
+      .css('box-shadow', '0px 0px 10px #ff9800');
+      console.log(this.$el);
+      // debugger
+      $('body').find(".MH_sq[ord='" + ord + "']").addClass('columnHovered')
+    // debugger
+  },
+
+  unHighlightOnset: function(event) {
+    var ord = $(event.currentTarget).attr('ord');
+    $('body').find(".cell[ord='" + ord + "']")
+      .css('box-shadow', '');
+      $('body').find(".MH_sq[ord='" + ord + "']").removeClass('columnHovered');
   }
+
 })

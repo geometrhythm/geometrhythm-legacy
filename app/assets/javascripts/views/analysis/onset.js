@@ -1,4 +1,4 @@
-Geometrhythm.Views.AnalysisOnset = Backbone.CompositeView.extend({
+Geometrhythm.Views.AnalysisOnset = Backbone.View.extend({
 
   template: JST['analysis/onset'],
 

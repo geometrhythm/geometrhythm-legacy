@@ -1,4 +1,4 @@
-Geometrhythm.Views.AnalysisEvenness = Backbone.CompositeView.extend({
+Geometrhythm.Views.AnalysisEvenness = Backbone.View.extend({
 
   template: JST['analysis/evenness'],
 

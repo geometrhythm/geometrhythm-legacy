@@ -7,23 +7,23 @@
     <div class="TEDAS_sq" ord="<%= sum %>"
           style="height: <%= interval_duration * heightPixelsUnit %>px;
                 width: <%= interval_duration * widthPercentageUnit %>%;
-                left: <%= (sum - 0.5) * widthPercentageUnit %>%;
-                top: <%= (max_height - interval_duration) * heightPixelsUnit %>px">
+                left: <%= (sum ) * widthPercentageUnit %>%;
+                bottom: 0px">
     </div>
     <% if (rhythm.get("contour")[index] === "+") { %>
       <i class="glyphicon glyphicon-circle-arrow-up" ord="<%= sum %>"
-            style="left: <%= (((sum - 0.5) + interval_duration) * widthPercentageUnit) - 3 %>%;
-                   top: <%= ((max_height - interval_duration) * heightPixelsUnit) - 13 %>px">
+            style="left: <%= (((sum ) + interval_duration) * widthPercentageUnit) - 3 %>%;
+                   bottom: <%= interval_duration * heightPixelsUnit %>%">
       </i>
     <% } else if (rhythm.get("contour")[index] === "-") { %>
       <i class="glyphicon glyphicon-circle-arrow-down" ord="<%= sum %>"
-            style="left: <%= (((sum - 0.5) + interval_duration) * widthPercentageUnit) - 3 %>%;
-                   top: <%= ((max_height - interval_duration) * heightPixelsUnit) - 13 %>px">
+            style="left: <%= (((sum ) + interval_duration) * widthPercentageUnit) - 3 %>%;
+                   bottom: <%= interval_duration * heightPixelsUnit %>%">
       </i>
     <% } else { %>
       <i class="glyphicon glyphicon-record" ord="<%= sum %>"
-            style="left: <%= (((sum - 0.5) + interval_duration) * widthPercentageUnit) - 3 %>%;
-                   top: <%= ((max_height - interval_duration) * heightPixelsUnit) - 13 %>px">
+            style="left: <%= (((sum) + interval_duration) * widthPercentageUnit) - 3 %>%;
+                   bottom: <%= interval_duration * heightPixelsUnit %>%">
       </i>
     <% } %>
 
@@ -31,5 +31,3 @@
 
   <% }) %>
 </div>
-durational pattern: (<%= rhythm.get("durational_pattern") %>)
-<br><span id="contour">contour: (<%= rhythm.get("contour") %>)<span id="contour">

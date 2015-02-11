@@ -1,24 +1,26 @@
 <h5>Meter</h5>
 
-metric hierarchy:
 <div class="MH_box">
   <% rhythm.get("metric_hierarchy") && rhythm.get("metric_hierarchy").forEach(function(duration_count, h_index) { %>
+    <% if (rhythm.get("rhythm_str")[h_index] === "x") { %>
+      <% console.log("yay blue"); %>
+      <% var color = "#6da2d1" %>
+    <% } else { %>
+      <% var color = "#ddd" %>
+    <% } %>
+
     <% for (v_index = 0; v_index < duration_count; v_index++ ) { %>
-      <div class="FIC_sq" style="left: <%= (h_index - 0.5) * widthPercentageUnit %>%;
-                                 top: <%= (max_height - v_index) * heightPixelsUnit %>px;
+
+
+      <div class="MH_sq" ord="<%= h_index %>"
+          style="left: <%= (h_index * widthPercentageUnit) + 10 %>%;
+                                 bottom: <%= v_index * heightPixelsUnit %>px;
                                  height: <%= heightPixelsUnit %>px;
-                                 width: <%= widthPercentageUnit %>%">
+                                 width: <%= widthPercentageUnit %>%;
+                                 background-color: <%= color %>">
+
       </div>
     <% } %>
+
   <% }) %>
 </div>
-
-  <li>metric syncopation: <%= rhythm.get("metric_syncopation") %></li>
-  <li>offbeatness: <%= rhythm.get("offbeatness") %></li>
-  <li>strongbeatedness: <%= rhythm.get("strongbeatness") %></li>
-  <li>irregularity: <%= rhythm.get("irregularity") %></li>
-
-    <% if (rhythm.get("has_closure?")) { %><li>has closure</li><% } %>
-    <% if (rhythm.get("has_anacrusis?")) { %><li>has anacrusis</li><% } %>
-
-      <li>irregularity: <%= rhythm.get("irregularity") %></li>

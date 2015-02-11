@@ -1,4 +1,4 @@
-Geometrhythm.Views.AnalysisInterval = Backbone.CompositeView.extend({
+Geometrhythm.Views.AnalysisInterval = Backbone.View.extend({
 
   template: JST['analysis/interval'],
 
@@ -20,6 +20,8 @@ Geometrhythm.Views.AnalysisInterval = Backbone.CompositeView.extend({
 
       var heightPixelsUnit = 120 / max_height;
       var widthPercentageUnit = 85 / len; //85 so it doesn't take up the whole thing
+
+      console.log(heightPixelsUnit);
 
       var content = this.template({
         rhythm: this.model,

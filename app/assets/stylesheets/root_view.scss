@@ -108,60 +108,104 @@ navbar-right a {
   z-index: 6;
 }
 
-.TEDAS_box {
-  position: relative;
-  // background-color: #ddd;
-  margin: 10px;
-  float: left;
-  min-width: 100%;
-  min-height: 50px;
-}
+// .TEDAS_box {
+//   position: relative;
+//   // background-color: #ddd;
+//   margin: 10px;
+//   float: left;
+//   min-width: 100%;
+//   min-height: 50px;
+// }
 
-.FIC_box {
-  position: relative;
+.TEDAS_box {
+  position: absolute;
+  // left: 20px;
+  // text-align: right;
   margin: 10px;
-  background-color: #ddd;
-  float: right;
+  bottom: 0;
+  // right: 0;
+  // background-color: #ddd;
+  // float: right;
   // display: inline-block;
   width: 100%;
   min-height: 180px;
 }
 
-.FIC_info_box {
-  position: relative;
+.FIC_box {
+  position: absolute;
+  // left: 20px;
+  // text-align: right;
   margin: 10px;
-  background-color: orange;
-  // float: left;
-  display: inline-block;
-  width: 40%;
-  min-height: 120px;
+  bottom: 0;
+  // right: 0;
+  // background-color: #ddd;
+  // float: right;
+  // display: inline-block;
+  width: 100%;
+  min-height: 180px;
 }
+
+// .FIC_info_box {
+//   position: relative;
+//   margin: 10px;
+//   background-color: orange;
+//   // float: left;
+//   display: inline-block;
+//   width: 40%;
+//   min-height: 120px;
+// }
 
 .FIC_sq {
   position: absolute;
   background-color: #6da2d1;
   border: 1px solid #eee;
-  height: 15px;
-  width: 15px;
+  // height: 15px;
+  // width: 15px;
   border-radius: 4px;
 }
 
+// .TEDAS_sq {
+//   border: 1px solid #eee;
+//   background-color: #6da2d1;
+//   position: absolute;
+//   border-radius: 4px;
+// }
+
+// .MH_box {
+//   position: relative;
+//   margin: 10px;
+//   // background-color: #ddd;
+//   float: right;
+//   width: 100%;
+//   height: 180px;
+// }
+
 .MH_box {
-  position: relative;
+  position: absolute;
+  // left: 20px;
+  text-align: right;
   margin: 10px;
-  background-color: #ddd;
-  float: right;
+  bottom: 0;
+  // right: 0;
+  // background-color: #ddd;
+  // float: right;
+  // display: inline-block;
   width: 100%;
-  height: 180px;
+  min-height: 180px;
+  // right: -50px;
 }
 
 .MH_sq {
   position: absolute;
   background-color: #6da2d1;
   border: 1px solid #eee;
-  height: 15px;
-  width: 15px;
+  // height: 15px;
+  // width: 15px;
   border-radius: 4px;
+}
+
+.columnHovered {
+  background-color: #3e4b60;
 }
 
 div.ui-tooltip {
