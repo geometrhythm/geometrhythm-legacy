@@ -14,6 +14,10 @@ $.SymmetryRhythmRing = function (el) {
   // debugger
   this.initializeRhythm(this.rhythmStr);
   this.refreshPolygon();
+
+  this.$el.on('mouseover', '.symmetry-cell', this.showCellDiameter.bind(this));
+  this.$el.on('mouseover', '.symmetry-intercell', this.showIntercellDiameter.bind(this));
+  // this.$el.find('.intercell')
 };
 
 $.fn.symmetryRhythmRing = function () {
@@ -40,6 +44,15 @@ $.SymmetryRhythmRing.prototype.placeCell = function(i, curAngle) {
 
 };
 
+$.SymmetryRhythmRing.prototype.placeIntercell = function(i, curAngle) {
+  var $newIntercell = $('<div class="symmetry-intercell">');
+  $newIntercell.css('transform',
+    'translateX(17px) translateY(-141px) rotate(' + curAngle + 'deg)');
+  $newIntercell.attr('ord', i);
+  // if (this.rhythmCells[i]) { $newIntercell.addClass("onset"); }
+  this.$el.append($newIntercell);
+};
+
 // $.SymmetryRhythmRing.prototype.placeMedCell = function(i, curAngle) {
 //   var $newCell = $('<div class="med-cell">');
 //   $newCell.css('transform',
@@ -58,7 +71,9 @@ $.SymmetryRhythmRing.prototype.loopApplyUpdates = function() {
     // } else {
       this.placeCell(i, curAngle);
     // }
-    curAngle += rhythmUnitInDegrees;
+    curAngle += rhythmUnitInDegrees / 2;
+    this.placeIntercell(i, curAngle);
+    curAngle += rhythmUnitInDegrees / 2;
   };
 };
 
@@ -100,3 +115,35 @@ $.SymmetryRhythmRing.prototype.drawSide = function(curPos, prevPos) {
   // }
   this.ctx.stroke();
 };
+
+$.SymmetryRhythmRing.prototype.showIntercellDiameter = function(event) {
+  this.ctx.clearRect(0, 0, SYMMETRY_CANVAS_DIM, SYMMETRY_CANVAS_DIM);
+  var ord = parseInt($(event.currentTarget).attr("ord"));
+  var curPosition = $(event.currentTarget).position();
+  var antipode = (ord + (this.rhythmStr.length / 2)) % this.rhythmStr.length
+  if (antipode % 1 === 0) {
+    var otherPosition = this.$el.find(".symmetry-intercell[ord='" + antipode + "']").position();
+  } else {
+    var otherPosition = this.$el.find(".symmetry-cell[ord='" + (Math.floor(antipode) + 1) + "']").position();
+  }
+  // console.log(antipode);
+  var curPos = [curPosition.left, curPosition.top];
+  var otherPos = [otherPosition.left, otherPosition.top];
+  this.drawSide(curPos, otherPos);
+}
+
+$.SymmetryRhythmRing.prototype.showCellDiameter = function(event) {
+  this.ctx.clearRect(0, 0, SYMMETRY_CANVAS_DIM, SYMMETRY_CANVAS_DIM);
+  var ord = parseInt($(event.currentTarget).attr("ord"));
+  var curPosition = $(event.currentTarget).position();
+  var antipode = (ord + (this.rhythmStr.length / 2)) % this.rhythmStr.length
+  if (antipode % 1 === 0) {
+    var otherPosition = this.$el.find(".symmetry-cell[ord='" + antipode + "']").position();
+  } else {
+    var otherPosition = this.$el.find(".symmetry-intercell[ord='" + Math.floor(antipode) + "']").position();
+  }
+  // console.log(antipode);
+  var curPos = [curPosition.left, curPosition.top];
+  var otherPos = [otherPosition.left, otherPosition.top];
+  this.drawSide(curPos, otherPos);
+}

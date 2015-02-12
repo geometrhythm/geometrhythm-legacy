@@ -3,7 +3,8 @@ Geometrhythm.Views.Analysis = Backbone.CompositeView.extend({
   template: JST['rhythms/analysis'],
 
   events: {
-    'mouseover .bb-analysis' : 'showDetailView',
+    // 'mouseover .bb-analysis' : 'showDetailView',
+    'mouseover .analysis-title' : 'showDetailView',
     'click .details-link' : 'toggleDetails',
     'mouseover .tallness' : 'highlightTallness',
     'mouseout .tallness' : 'unHighlightTallness',

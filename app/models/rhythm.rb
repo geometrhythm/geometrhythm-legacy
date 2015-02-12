@@ -379,15 +379,27 @@ class Rhythm < ActiveRecord::Base
 
   def symmetries_by_onset
     symmetries = []
-    (0..len/2).each do |i|
+    puts convenience_rhythm_str
+    (0...len/2).each do |i|
+      puts ""
       symmetrical = true
-      convenience_rhythm_str[(1 + i)...((len / 2) - 1 + i)].split("").each do |cell|
-        if convenience_rhythm_str[(len - 1) - i] != cell
+      puts "first half: #{convenience_rhythm_str[(1 + i)..((len / 2) - 1 + i)]}"
+      j = 0;
+      convenience_rhythm_str[(1 + i)..((len / 2) - 1 + i)].split("").each do |cell|
+        puts "comparing #{cell} to convstr idx #{((len - 1) + i) - j} which is #{convenience_rhythm_str[((len - 1) + i) - j]}"
+        if convenience_rhythm_str[((len - 1) + i) - j] != cell
+          puts "  WASNT EQUAL"
           symmetrical = false
           break
         end
+        j = j + 1;
       end
-      symmetries << i if symmetrical == true
+      if symmetrical == true
+        symmetries << i
+        puts "  JUST ADDED #{i} to symmetries!"
+      else
+        "  didn't add no non-symmetrical thang"
+      end
     end
 
     symmetries
@@ -395,15 +407,17 @@ class Rhythm < ActiveRecord::Base
 
   def symmetries_by_interonset
     symmetries = []
-    (0..len/2).each do |i|
+    (0...len/2).each do |i|
       symmetrical = true
-      convenience_rhythm_str[i...(len / 2) + i].split("").each do |cell|
-        if convenience_rhythm_str[(len - 1) - i] != cell
+      j = 0
+      convenience_rhythm_str[i..(len / 2) + i].split("").each do |cell|
+        if convenience_rhythm_str[((len - 1) + i) - j] != cell
           symmetrical = false
           break
         end
+        j = j + 1
       end
-      symmetries << i if symmetrical == true
+      symmetries << (i - 1) if symmetrical == true
     end
 
     symmetries

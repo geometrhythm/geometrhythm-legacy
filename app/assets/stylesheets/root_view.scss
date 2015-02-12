@@ -195,7 +195,7 @@ div.bb-analysis {
 }
 
 div#bb-info {
-  max-height: 440px;
+  max-height: 420px;
   overflow: auto;
 }
 
@@ -276,8 +276,17 @@ div.fillErUp {
 .details-link {
   color: DodgerBlue;
   cursor: pointer;
+  font-size: 12px;
 }
 
+.section-title:hover {
+  color: #ff9800;
+  cursor: pointer;
+}
+
+.analysis-title {
+  z-index: 2000;
+}
 
 .symmetry-rhythm-ring {
   position: absolute;
@@ -286,7 +295,7 @@ div.fillErUp {
   border: solid 1px;
   border-radius: 50%;
   z-index: 0;
-  left: 200px;
+  // left: 200px;
   top: 25px;
 }
 
@@ -301,6 +310,22 @@ div.fillErUp {
   transform-origin: 58px 58px;
 }
 
+.symmetry-intercell {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  border: solid 1px;
+  background-color: white;
+  color: #888;
+  position: absolute;
+  transform-origin: 58px 58px;
+  opacity: 0;
+}
+
 .symmetry-cell.onset {
-  background-color: #888;
+  background-color: #6da2d1;
+}
+
+.symmetry-cell.activated {
+  background-color: #ff9800;
 }
