@@ -17,6 +17,11 @@ Geometrhythm.Views.AnalysisInterval = Backbone.View.extend({
   },
 
   render: function() {
+    this.ctx.strokeStyle="#ff9800";
+    this.ctx.lineWidth=3;
+    this.ctx.shadowBlur=20;
+    this.ctx.shadowColor="#ff9800";
+    
     if (this.model) {
       var len = this.model.get("full_interval_content").length;
       var max_height = this.model.get("tallness");

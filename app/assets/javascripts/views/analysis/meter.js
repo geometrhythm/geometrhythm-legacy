@@ -90,6 +90,16 @@ Geometrhythm.Views.AnalysisMeter = Backbone.View.extend({
         var posParse2 = $('body').find(".cell[ord='" + linesToDraw[index + 1] + "']").position();
       }
       var pos2 = [posParse2.left, posParse2.top];
+
+      // debugger
+      if (that.model.get("rhythm_str")[lineToDraw] === "x") {
+        that.ctx.strokeStyle="#ff9800";
+        // that.ctx.shadowColor="#ff9800";
+      } else {
+        that.ctx.strokeStyle="#fff8dc";
+        // that.ctx.shadowColor="#fff8dc";
+      }
+
       that.ctx.beginPath();
       that.ctx.moveTo(pos1[0] + 13, pos1[1] + 13);
       that.ctx.lineTo(pos2[0] + 13, pos2[1] + 13);

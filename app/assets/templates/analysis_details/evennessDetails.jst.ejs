@@ -1,9 +1,50 @@
-    <% if (rhythm.get("perfectly_even?")) { %>
-    <li>perfectly even</li>
-  <% } else if (rhythm.get("maximally_even?")) { %>
-    <li>maximally even</li>
-  <% } else if (rhythm.get("almost_maximally_even?")) { %>
-    <li>almost maximally even</li>
-  <% } %>
+<h5>Evenness</h5>
 
-    <li>unevenness: <%= rhythm.get("unevenness") %></li>
+<br><strong>nPVI <%= rhythm.get("unevenness").toFixed(2) %></strong>
+<br>the normalized Pairwise Variability Index is a measurement of localized
+unevenness. it is essentially the shaded area of this graph: the extent to which
+onsets in this rhythm deviate from a steady (unquantized) stream.
+<br>
+<br>if your rhythm opens each bar with a salvo of onsets, you will get "ahead" of
+where you would be were your rhythm perfectly even. in other words, say, onset 2
+might be landing much sooner than it would if your rhythm had no variation.
+therefore some shaded area will be created above the line of perfect evenness.
+vice versa, if your onsets clustered toward the end of the rhythm, you'd get
+"behind" and the shaded area would appear below the line. only the absolute
+value of this area matters; area above and below does not cancel out.
+<br>
+
+<% if (rhythm.get("perfectly_even?")) { %>
+  <br><strong>perfectly even</strong>
+  <br>this rhythm is perfectly even, conforming exactly to a steady
+      stream of this many onsets in the timespan of this many cells. therefore
+      your nPVI is zero.
+  <br>
+<% } else if (rhythm.get("maximally_even?")) { %>
+  <br><strong>maximally even</strong>
+  <br>this rhythm is maximally even. this means it is as close as possible to
+      the perfectly even rhythm, considering the limitations of the quantization
+      of the cell grid. explained from the other direction, if each onset in the
+      perfectly even rhythm were rounded to the nearest whole number cell, it
+      would take the place of the corresponding onset in your rhythm.
+  <br>
+<% } else if (rhythm.get("almost_maximally_even?")) { %>
+  <br><strong>almost maximally even</strong>
+  <br>this rhythm is almost maximally even. this means that while each onset in
+      the perfectly even rhythm may not round to an onset in your rhythm, it at
+      least lays on the same horizontal line segment of the grid. in other words,
+      if we permit onsets in the perfectly even rhythm to quantize to either side
+      of the interval they land amid (earlier or later), your rhythm can be
+      produced.
+  <br>note that when the number of onsets is a divisor of the number of cells,
+      some of the perfectly even rhythm's onsets will fall exactly on cells. in
+      these cases, almost maximized rhythms are defined to include deviations in
+      either direction, for a total range two cells wide.
+  <br>
+<% } %>
+
+<% if (!rhythm.get("perfectly_even?")) { %>
+  <br>the nPVI of your rhythm is <%= rhythm.get("unevenness").toFixed(2) %>. for
+  comparison, the popular souskous rhythm has 70.5, while the bossa-nova has only
+  14.3.
+<% } %>

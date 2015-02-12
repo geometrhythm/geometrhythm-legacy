@@ -7,23 +7,23 @@
     <div class="TEDAS_sq" ord="<%= sum %>" dur="<%= interval_duration %>"
           style="height: <%= interval_duration * heightPixelsUnit %>px;
                 width: <%= interval_duration * widthPercentageUnit %>%;
-                left: <%= (sum) * widthPercentageUnit %>%;
+                left: <%= (sum - rhythm.get("onset_indices")[0]) * widthPercentageUnit %>%;
                 bottom: 0px">
     </div>
 
     <% if (rhythm.get("contour")[index] === "+") { %>
       <i class="contour glyphicon glyphicon-circle-arrow-up" ord="<%= sum %>"
-            style="left: <%= (((sum) + interval_duration) * widthPercentageUnit) - 4 %>%;
+            style="left: <%= (((sum) + interval_duration - rhythm.get("onset_indices")[0]) * widthPercentageUnit) - 4 %>%;
                    top: <%= (165 - (max_height * heightPixelsUnit)) + ((max_height) - interval_duration) * heightPixelsUnit %>px;">
       </i>
     <% } else if (rhythm.get("contour")[index] === "-") { %>
       <i class="contour glyphicon glyphicon-circle-arrow-down" ord="<%= sum %>"
-            style="left: <%= (((sum) + interval_duration) * widthPercentageUnit) - 4 %>%;
+            style="left: <%= (((sum) + interval_duration - rhythm.get("onset_indices")[0]) * widthPercentageUnit) - 4 %>%;
                    top: <%= (165 - (max_height * heightPixelsUnit)) + ((max_height) - interval_duration) * heightPixelsUnit %>px;">
       </i>
     <% } else { %>
       <i class="contour glyphicon glyphicon-record" ord="<%= sum %>"
-            style="left: <%= (((sum) + interval_duration) * widthPercentageUnit) - 4 %>%;
+            style="left: <%= (((sum) + interval_duration- rhythm.get("onset_indices")[0]) * widthPercentageUnit) - 4 %>%;
                    top: <%= (165 - (max_height * heightPixelsUnit)) + ((max_height) - interval_duration) * heightPixelsUnit %>px;">
       </i>
     <% } %>
@@ -33,4 +33,4 @@
   <% }) %>
 </div>
 
-<span class="info-icon" data-detailsviewname="templateBasic">i</span>
+<!--<span class="info-icon" data-detailsviewname="templateBasic">i</span>-->

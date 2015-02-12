@@ -3,7 +3,7 @@ Geometrhythm.Views.Analysis = Backbone.CompositeView.extend({
   template: JST['rhythms/analysis'],
 
   events: {
-    'mouseover .info-icon' : 'showDetailView',
+    'mouseover .bb-analysis' : 'showDetailView',
     'click .details-link' : 'toggleDetails'
   },
 
@@ -20,6 +20,7 @@ Geometrhythm.Views.Analysis = Backbone.CompositeView.extend({
       this.renderAnalysisOnsetView(this.model);
       this.renderAnalysisEvennessView(this.model);
       this.renderAnalysisSymmetryView(this.model);
+      //this.showDetailView();
     } else {
       this.$el.html("");
     }
@@ -87,10 +88,12 @@ Geometrhythm.Views.Analysis = Backbone.CompositeView.extend({
   },
 
   showDetailView: function(event) {
-    if ($(event.currentTarget).data('detailsviewname')) {
+    if (event && $(event.currentTarget).data('detailsviewname')) {
       var template = $(event.currentTarget).data('detailsviewname');
-    } else {
+    } else if (event && $(event.currentTarget).data('associatedtemplate')) {
       var template = $(event.currentTarget).data('associatedtemplate');
+    } else {
+      var template = 'templateGeneral'
     }
     var view = new Geometrhythm.Views.AnalysisDetails({
       template: template,

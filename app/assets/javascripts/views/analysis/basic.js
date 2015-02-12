@@ -43,6 +43,11 @@ Geometrhythm.Views.AnalysisBasic = Backbone.View.extend({
   },
 
   displayIntervals: function(event) {
+    this.ctx.strokeStyle="#ff9800";
+    this.ctx.lineWidth=3;
+    this.ctx.shadowBlur=20;
+    this.ctx.shadowColor="#ff9800";
+    
     $(this.canvas).css('display','inline')
     var ord = parseInt($(event.currentTarget).attr('ord'));
     var dur = parseInt($(event.currentTarget).attr('dur'));

@@ -1,10 +1,46 @@
-durational pattern: (<%= rhythm.get("durational_pattern") %>)
-<br><span id="contour">contour: (<%= rhythm.get("contour") %>)<span id="contour">
+<h5>Time Elements Displayed As Squares (TEDAS)</h5>
 
-Time Elements Displayed As Squares. presents interonset intervals simultaneously vertically and horizontally, allowing for perception relative both to context and to each other
+<br><strong>durational pattern (<%= rhythm.get("durational_pattern") %>)</strong>
+<% if (window.durationalpattern) { %>
+  <span class="details-link" data-detailsname="durationalpattern" data-associatedtemplate="templateBasic">collapse</span>
+  <br>the durational pattern of a rhythm is simply a list of the durations of each
+      of its adjacent intervals, in order from start to finish. it is a great,
+      concise way to uniquely identify a rhythm (as opposed to spelling the entire
+      thing out in x's and -'s for onsets and rests).
+  <br>TEDAS is a superior visualization of the durational pattern of a rhythm.
+      a simple bar graph of interval sizes would succeed in conveying the
+      difference in durations of each consecutive interval to its neighbors, but
+      fail to capture their relation to the horizontal timeline of the rhythm as
+      a whole. by displaying the duration in both dimensions, creating squares, we
+      have a way to perceive both simultaneously.
+  <br>
+<% } else { %>
+  <span class="details-link" data-detailsname="durationalpattern" data-associatedtemplate="templateBasic">expand</span>
+  <br>
+<% } %>
 
-<strong>contour</strong> expresses the change in consecutive interval size, either positive, negative, or no change
 
-<li>adjacent interval content entropy: <%= rhythm.get("adjacent_interval_content_entropy") %></li>
+<br><strong>contour (<%= rhythm.get("contour") %>)</strong>
+<% if (window.contour) { %>
+  <span class="details-link" data-detailsname="contour" data-associatedtemplate="templateBasic">collapse</span>
+  <br>the contour of a rhythm presents its adjacent intervals relatively, rather
+  than absolutely. it expresses only the change in interval size from one interval
+  to the next, either positive, negative, or no change. rhythms with the same
+  contour share certain properties, but can sound extremely different.
+  <br>
+<% } else { %>
+  <span class="details-link" data-detailsname="contour" data-associatedtemplate="templateBasic">expand</span>
+  <br>
+<% } %>
 
-<li>adjacent interval content: <%= rhythm.get("adjacent_interval_content") %></li>
+<br><strong>adjacent interval content entropy <%= rhythm.get("adjacent_interval_content_entropy").toFixed(2) %></strong>
+<br>a measure of the variation of interval sizes. when every interval is the
+    same size, H(P) is at its minimum. when every interval is a different size,
+    H(P) is at its maximum. it is, more or less, the probability of guessing the size of an interval chosen at random.
+<br>
+
+<br><strong>adjacent interval content (<%= rhythm.get("adjacent_interval_content") %>)</strong>
+simply a tally of adjacent intervals, by size. you could make a histogram out of
+this information, just as is shown for full interval content here. looking at
+only the external intervals or also the internal intervals can provide radically
+different impressions of your rhythm.

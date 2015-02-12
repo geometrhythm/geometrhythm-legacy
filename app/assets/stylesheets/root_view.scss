@@ -183,9 +183,10 @@ div.bb-analysis {
 
 #bb-analysis-details {
   position: relative;
-  height: 500px;
+  height: 550px;
   overflow: auto;
   text-size: 9px;
+  list-style-type: none;
 }
 
 div#bb-info {
@@ -225,14 +226,16 @@ div.ui-tooltip {
   color: #ff9800;
 }
 
-.analysis-title {
-  visibility: hidden;
-  top: -10px;
-}
+// .analysis-title {
+//   // visibility: hidden;
+//   top: 10px;
+//   left: 10px;
+//   //position: absolute;
+// }
 
-div.bb-analysis:hover .analysis-title {
-  visibility: visible;
-}
+// div.bb-analysis:hover .analysis-title {
+//   visibility: visible;
+// }
 
 div.bb-analysis:hover .glyphicon {
   visibility: visible;
@@ -281,3 +284,34 @@ div.fillErUp {
   color: DodgerBlue;
   cursor: pointer;
 }
+
+
+.symmetry-rhythm-ring {
+  position: absolute;
+  width: 150px;
+  height: 150px;
+  border: solid 1px;
+  border-radius: 50%;
+  z-index: 0;
+  left: 200px;
+  top: 25px;
+}
+
+.symmetry-cell {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  border: solid 1px;
+  background-color: white;
+  color: #888;
+  position: absolute;
+  transform-origin: 58px 58px;
+}
+
+.symmetry-cell.onset {
+  background-color: #888;
+}
+
+// blockquote {
+//   text-size: 10px;
+// }
