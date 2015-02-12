@@ -20,8 +20,13 @@ Geometrhythm.Views.AnalysisInterval = Backbone.View.extend({
     if (this.model) {
       var len = this.model.get("full_interval_content").length;
       var max_height = this.model.get("tallness");
-      var heightPixelsUnit = 120 / max_height;
+      // var heightPixelsUnit = 120 / max_height;
       var widthPercentageUnit = 85 / len; //85 so it doesn't take up the whole thing
+      var heightPixelsUnit = ((window.innerWidth / (3.666 * (4/3))) * 0.85) / len;
+      if (heightPixelsUnit * max_height > 120) {
+        widthPercentageUnit = widthPercentageUnit * (120 / (heightPixelsUnit * max_height));
+        heightPixelsUnit = 120 / max_height;
+      }
       var content = this.template({
         rhythm: this.model,
         widthPercentageUnit: widthPercentageUnit,
