@@ -148,3 +148,11 @@ div.rhythm i:hover {
 div.key-rhythm i:hover {
   color: DodgerBlue;
 }
+
+div.force-scroll {
+  position: absolute;
+  visibility: hidden;
+  min-height: 20px;
+  min-width: 20px;
+  top: 1500px;
+}

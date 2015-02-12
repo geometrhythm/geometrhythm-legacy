@@ -52,7 +52,9 @@ Geometrhythm.Views.RhythmsList = Backbone.CompositeView.extend({
 
     this.$el.find('.mini-rhythm-ring').miniRhythmRing();
     this.$el.find('.medium-rhythm-ring').miniRhythmRing(true);
-    // this.$el.find(".l1-distance").spinner();
+
+    var $forceOfScroll = $('<div class="force-scroll">')
+    this.$el.append($forceOfScroll)
 
     // console.log("");
     // console.log("collection: " + this.collection.length);

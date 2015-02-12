@@ -4,7 +4,9 @@ Geometrhythm.Views.Analysis = Backbone.CompositeView.extend({
 
   events: {
     'mouseover .bb-analysis' : 'showDetailView',
-    'click .details-link' : 'toggleDetails'
+    'click .details-link' : 'toggleDetails',
+    'mouseover .tallness' : 'highlightTallness',
+    'mouseout .tallness' : 'unHighlightTallness',
   },
 
   render: function() {
@@ -20,7 +22,7 @@ Geometrhythm.Views.Analysis = Backbone.CompositeView.extend({
       this.renderAnalysisOnsetView(this.model);
       this.renderAnalysisEvennessView(this.model);
       this.renderAnalysisSymmetryView(this.model);
-      //this.showDetailView();
+      this.showDetailView();
     } else {
       this.$el.html("");
     }
@@ -111,5 +113,15 @@ Geometrhythm.Views.Analysis = Backbone.CompositeView.extend({
       window[$(event.currentTarget).data('detailsname')] = true;
     }
     this.showDetailView(event);
-  }
+  },
+
+  highlightTallness: function() {
+    $('.FIC_box').find('.FIC_sq[count="' + this.model.get("tallness") + '"]')
+      .addClass("columnHovered");
+  },
+
+  unHighlightTallness: function() {
+    // var maxCount = Math.max.apply(this.model.get("full_interval_content")
+    $('.FIC_box').find('.FIC_sq').removeClass("columnHovered");
+  },
 })

@@ -32,10 +32,15 @@ interface button {
   margin: 5px 0px;
 }
 
-.bb-info {
-  overflow: scroll;
-  max-height: 400px;
-}
+// .bb-info {
+//   overflow: scroll;
+//   // max-height: 800px;
+// }
+
+// .well.scrollable {
+//   // overflow: scroll;
+//   max-height: 500px;
+// }
 
 *{font-family: 'Maven Pro', sans-serif;}
 
@@ -183,14 +188,14 @@ div.bb-analysis {
 
 #bb-analysis-details {
   position: relative;
-  height: 550px;
+  height: 450px;
   overflow: auto;
   text-size: 9px;
   list-style-type: none;
 }
 
 div#bb-info {
-  max-height: 400px;
+  max-height: 440px;
   overflow: auto;
 }
 
@@ -208,7 +213,6 @@ div#meter-props {
   text-align: right;
 }
 
-
 div.ui-tooltip {
   max-width: 400px;
   padding: 15px;
@@ -225,17 +229,6 @@ div.ui-tooltip {
 .TEDAS_box .glyphicon:hover {
   color: #ff9800;
 }
-
-// .analysis-title {
-//   // visibility: hidden;
-//   top: 10px;
-//   left: 10px;
-//   //position: absolute;
-// }
-
-// div.bb-analysis:hover .analysis-title {
-//   visibility: visible;
-// }
 
 div.bb-analysis:hover .glyphicon {
   visibility: visible;
@@ -311,7 +304,3 @@ div.fillErUp {
 .symmetry-cell.onset {
   background-color: #888;
 }
-
-// blockquote {
-//   text-size: 10px;
-// }

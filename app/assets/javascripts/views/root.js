@@ -58,7 +58,6 @@ Geometrhythm.Views.Root = Backbone.CompositeView.extend({
 
   renderInfoView: function(event) {
     if (this.splashIt) {
-      console.log("welcome to zombo com");
       var template = "templateSplash";
       if (this.almostUnsplash) {
         this.splashIt = false;

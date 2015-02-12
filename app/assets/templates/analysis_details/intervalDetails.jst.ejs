@@ -1,30 +1,54 @@
 <h5>Full Interval Content</h5>
 
-<br><strong>full interval content histogram</strong>
+<span style="font-size: 8px" class="glyphicons glyphicons-expand"></span>
+<span style="font-size: 8px" class="glyphicons glyphicons-collapse"></span>
+
+<br><strong>full interval vector&nbsp;<%= rhythm.get("interval_vector") %></strong>
 <% if (window.fichistogram) { %>
   <span class="details-link" data-detailsname="fichistogram" data-associatedtemplate="templateInterval">collapse</span>
-  <br>all intervals, sorted by size.
-  <br>the leftmost column stacks intervals of length 1.
-  <br>the rightmost column stacks intervals that are half the rhythm's length.
-  <br>it is not possible for an interval to be longer than half;
-  <br>geodesic distances - i.e. the shortest possible distance, whether
-  <br>clockwise or counterclockwise - are used.
+  <br>the chart at right is the full interval content histogram. it is a
+    visualization of the full interval vector, which is simply a tallying of all
+    a rhythm's intervals, sorted by size.
+  <br>
+  <br>the leftmost column stacks intervals of length 1. the rightmost column
+    stacks intervals that are half the rhythm's length. it is not possible
+    for an interval to be longer than half; geodesic distance - i.e. the
+    shortest possible distance, whether clockwise or counterclockwise - is used.
+  <br>
+  <br>full interval content - including not only the external / adjacent / inter-onset
+    intervals, but also all internal ones - gives a different impression of a rhythm.
+    there is reason to believe humans experience a "specious present" whereby all
+    internal rhythms are at least subconsciously heard, contributing to the "feel"
+    of a rhythm.
 <% } else { %>
   <span class="details-link" data-detailsname="fichistogram" data-associatedtemplate="templateInterval">expand</span>
 <% } %>
+<br>
 
-<br>
-<br><strong>interval vector <%= rhythm.get("interval_vector") %></strong>
-<br>the values of the histogram.
-<br>
 <br><strong>full interval content entropy <%= rhythm.get("full_interval_content_entropy").toFixed(2) %></strong>
-<br>a measure of the variation of interval sizes. when every interval is the
-    same size, H(P) is at its minimum. when every interval is a different size,
-    H(P) is at its maximum. it is, more or less, the probability of guessing the size of an interval chosen at random.
-<br>
-<br><strong>tallness: <%= rhythm.get("tallness") %></strong>
+<% if (window.fullentropy) { %>
+  <span class="details-link" data-detailsname="fullentropy" data-associatedtemplate="templateInterval">collapse</span>
+  <br>a measure of the variation of interval sizes. when every interval is the
+      same size, H(P) is at its minimum. when every interval is a different size,
+      H(P) is at its maximum. it is, more or less, the probability of guessing the size of an interval chosen at random.
+  <br>for comparison, the popular gahu rhythm has entropy of 2.72, while the
+      shiko has only 1.84.
+<% } else { %>
+  <span class="details-link" data-detailsname="fullentropy" data-associatedtemplate="templateInterval">expand</span>
+<% } %>
 <br>
 
+<span class="tallness">
+<br><strong>tallness: <%= rhythm.get("tallness") %></strong>
+<% if (window.tallness) { %>
+  <span class="details-link" data-detailsname="tallness" data-associatedtemplate="templateInterval">collapse</span>
+  <br>the height of the tallest column in the histogram. this measurement gives
+    some indication as to whether any single interval size dominates the rhythm.
+<% } else { %>
+  <span class="details-link" data-detailsname="tallness" data-associatedtemplate="templateInterval">expand</span>
+<% } %>
+<br>
+</span>
 
     <% if (rhythm.get("perfectly_flat?")) { %>
       <li>perfectly flat</li>
