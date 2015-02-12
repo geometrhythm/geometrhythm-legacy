@@ -117,9 +117,9 @@ Geometrhythm.Views.AnalysisEvenness = Backbone.View.extend({
       (ord / this.model.get("onset_indices").length) * this.windowWidth,
       120.0 - ((ord / this.model.get("onset_indices").length) * 120.0)
     );
-    console.log("just drew line from " + [(this.windowWidth / 25) + ((this.model.get("onset_indices")[ord] / this.model.get("len")) * this.windowWidth),
-      150.0 - ((ord) * (120.0 / this.model.get("onset_indices").length))] + " to " + [(ord / this.model.get("onset_indices").length) * this.windowWidth,
-      120.0 - ((ord / this.model.get("onset_indices").length) * 120.0)]);
+    // console.log("just drew line from " + [(this.windowWidth / 25) + ((this.model.get("onset_indices")[ord] / this.model.get("len")) * this.windowWidth),
+      // 150.0 - ((ord) * (120.0 / this.model.get("onset_indices").length))] + " to " + [(ord / this.model.get("onset_indices").length) * this.windowWidth,
+      // 120.0 - ((ord / this.model.get("onset_indices").length) * 120.0)]);
     this.ctx.stroke();
   },
 
