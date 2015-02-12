@@ -1,7 +1,7 @@
 <span class='analysis-title TEDAS-tooltip'><h5>TEDAS</h5></span>
 
 <div class="TEDAS_box">
-  <% sum = 0 %>
+  <% sum = rhythm.get("onset_indices")[0] %>
   <% rhythm.get("durational_pattern") && rhythm.get("durational_pattern").forEach(function(interval_duration, index) { %>
 
     <div class="TEDAS_sq" ord="<%= sum %>" dur="<%= interval_duration %>"
