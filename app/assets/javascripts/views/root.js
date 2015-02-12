@@ -47,10 +47,16 @@ Geometrhythm.Views.Root = Backbone.CompositeView.extend({
               }
             }, success: function (payload) {
               that.model.set(payload);
+              // $(window).on('beforeunload', function() {
+              //   $(window).scrollTop(0);
+              // });
               that.renderInfoView();
             }
           })
         }
+        // $(window).on('beforeunload', function() {
+        //   $(window).scrollTop(0);
+        // });
         that.renderInfoView();
       }
     });

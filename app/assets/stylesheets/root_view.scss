@@ -189,6 +189,8 @@ div.bb-analysis {
 #bb-analysis-details {
   position: relative;
   height: 450px;
+  // overflow-x: hidden;
+  // overflow-y: scroll;
   overflow: auto;
   text-size: 9px;
   list-style-type: none;
@@ -196,6 +198,8 @@ div.bb-analysis {
 
 div#bb-info {
   max-height: 420px;
+  // overflow-x: hidden;
+  // overflow-y: scroll;
   overflow: auto;
 }
 
@@ -228,6 +232,11 @@ div.ui-tooltip {
 
 .TEDAS_box .glyphicon:hover {
   color: #ff9800;
+}
+
+.TEDAS_box .glyphicon.activated {
+  color: #ff9800;
+  visibility: visible;
 }
 
 div.bb-analysis:hover .glyphicon {
@@ -281,7 +290,7 @@ div.fillErUp {
 
 .section-title:hover {
   color: #ff9800;
-  cursor: pointer;
+  // cursor: pointer;
 }
 
 .analysis-title {

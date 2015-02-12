@@ -125,6 +125,7 @@ class Rhythm < ActiveRecord::Base
   end
 
   def geodesic_distance(onset_1_idx, onset_2_idx)
+    onset_1_idx, onset_2_idx = onset_2_idx, onset_1_idx if onset_2_idx < onset_1_idx
     clockwise_d = durational_pattern[onset_1_idx...onset_2_idx].inject(:+)
     c_clockwise_d = len - clockwise_d
     return [clockwise_d, c_clockwise_d].min
@@ -379,27 +380,27 @@ class Rhythm < ActiveRecord::Base
 
   def symmetries_by_onset
     symmetries = []
-    puts convenience_rhythm_str
+    # puts convenience_rhythm_str
     (0...len/2).each do |i|
-      puts ""
+      # puts ""
       symmetrical = true
-      puts "first half: #{convenience_rhythm_str[(1 + i)..((len / 2) - 1 + i)]}"
+      # puts "first half: #{convenience_rhythm_str[(1 + i)..((len / 2) - 1 + i)]}"
       j = 0;
       convenience_rhythm_str[(1 + i)..((len / 2) - 1 + i)].split("").each do |cell|
-        puts "comparing #{cell} to convstr idx #{((len - 1) + i) - j} which is #{convenience_rhythm_str[((len - 1) + i) - j]}"
+        # puts "comparing #{cell} to convstr idx #{((len - 1) + i) - j} which is #{convenience_rhythm_str[((len - 1) + i) - j]}"
         if convenience_rhythm_str[((len - 1) + i) - j] != cell
-          puts "  WASNT EQUAL"
+          # puts "  WASNT EQUAL"
           symmetrical = false
           break
         end
         j = j + 1;
       end
-      if symmetrical == true
-        symmetries << i
-        puts "  JUST ADDED #{i} to symmetries!"
-      else
-        "  didn't add no non-symmetrical thang"
-      end
+      symmetries << i if symmetrical == true
+
+        # puts "  JUST ADDED #{i} to symmetries!"
+      # else
+        # "  didn't add no non-symmetrical thang"
+      # end
     end
 
     symmetries
@@ -427,7 +428,12 @@ class Rhythm < ActiveRecord::Base
     total = 0
     (0...onset_count).each do |i|
       this_onset_distinct_distances = []
-      (i + 1...onset_count).each do |j|
+      (0...onset_count).each do |j|
+        if i == j
+          # puts "i & j: #{i}"
+          next
+        end
+        # puts "i: #{i}, j: #{j}"
         unless this_onset_distinct_distances.include?(geodesic_distance(i, j))
           this_onset_distinct_distances << geodesic_distance(i, j)
         end
@@ -442,7 +448,8 @@ class Rhythm < ActiveRecord::Base
     total = 0
     (0...onset_count).each do |i|
       this_onset_distinct_distances = []
-      (i + 1...onset_count).each do |j|
+      (0...onset_count).each do |j|
+        next if i == j
         unless this_onset_distinct_distances.include?(geodesic_distance(i, j))
           this_onset_distinct_distances << geodesic_distance(i, j)
         end

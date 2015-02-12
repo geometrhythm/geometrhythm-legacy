@@ -8,6 +8,8 @@ Geometrhythm.Views.Analysis = Backbone.CompositeView.extend({
     'click .details-link' : 'toggleDetails',
     'mouseover .tallness' : 'highlightTallness',
     'mouseout .tallness' : 'unHighlightTallness',
+    'mouseover .contour-text' : 'highlightContour',
+    'mouseout .contour-text' : 'unHighlightContour',
   },
 
   render: function() {
@@ -125,4 +127,12 @@ Geometrhythm.Views.Analysis = Backbone.CompositeView.extend({
     // var maxCount = Math.max.apply(this.model.get("full_interval_content")
     $('.FIC_box').find('.FIC_sq').removeClass("columnHovered");
   },
+
+  highlightContour: function() {
+    $('.contour').addClass('activated');
+  },
+
+  highlightContour: function() {
+    $('.contour').removeClass('activated');
+  }
 })

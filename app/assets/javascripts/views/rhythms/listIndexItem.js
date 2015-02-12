@@ -95,7 +95,10 @@ Geometrhythm.Views.RhythmListItemView = Backbone.CompositeView.extend({
   likeIt: function(event) {
     event.stopPropagation();
     var that = this;
-    new Geometrhythm.Models.Like().save({rhythm_id: this.model.id});
+    new Geometrhythm.Models.Like().save({rhythm_id: this.model.id},{ success: function() {
+      // that.render();
+    }});
+
   },
 
 });
