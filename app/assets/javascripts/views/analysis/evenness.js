@@ -79,7 +79,7 @@ Geometrhythm.Views.AnalysisEvenness = Backbone.View.extend({
           var nextPosLeft = ((this.model.get("onset_indices")[i] / this.model.get("len")) * this.windowWidth);
           var nextPosTop = 120.0 - (i * (120.0 / this.model.get("onset_indices").length));
         }
-        console.log("drew a line to (" + nextPosLeft + "," + nextPosLeft + ")");
+        // console.log("drew a line to (" + nextPosLeft + "," + nextPosLeft + ")");
         this.ctx.lineTo(nextPosLeft, nextPosTop)
 
         var curPosLeft = nextPosLeft;

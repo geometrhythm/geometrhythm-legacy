@@ -30,6 +30,8 @@ Geometrhythm.Views.AnalysisInterval = Backbone.View.extend({
         max_height: max_height
       });
       this.$el.html(content);
+      // debugger
+      // this.$el.find('details-link').data('associatedtemplate', 'templateInterval');
     } else {
       this.$el.html("");
     }

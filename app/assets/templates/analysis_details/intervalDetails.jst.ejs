@@ -1,12 +1,18 @@
 <h5>Full Interval Content</h5>
 
 <br><strong>full interval content histogram</strong>
-<br>all intervals, sorted by size.
-<br>the leftmost column stacks intervals of length 1.
-<br>the rightmost column stacks intervals that are half the rhythm's length.
-<br>it is not possible for an interval to be longer than half;
-<br>geodesic distances - i.e. the shortest possible distance, whether
-<br>clockwise or counterclockwise - are used.
+<% if (window.fichistogram) { %>
+  <span class="details-link" data-detailsname="fichistogram" data-associatedtemplate="templateInterval">collapse</span>
+  <br>all intervals, sorted by size.
+  <br>the leftmost column stacks intervals of length 1.
+  <br>the rightmost column stacks intervals that are half the rhythm's length.
+  <br>it is not possible for an interval to be longer than half;
+  <br>geodesic distances - i.e. the shortest possible distance, whether
+  <br>clockwise or counterclockwise - are used.
+<% } else { %>
+  <span class="details-link" data-detailsname="fichistogram" data-associatedtemplate="templateInterval">expand</span>
+<% } %>
+
 <br>
 <br><strong>interval vector <%= rhythm.get("interval_vector") %></strong>
 <br>the values of the histogram.

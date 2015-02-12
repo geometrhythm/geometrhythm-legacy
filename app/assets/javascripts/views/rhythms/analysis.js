@@ -3,7 +3,8 @@ Geometrhythm.Views.Analysis = Backbone.CompositeView.extend({
   template: JST['rhythms/analysis'],
 
   events: {
-    'mouseover .info-icon' : 'showDetailView'
+    'mouseover .info-icon' : 'showDetailView',
+    'click .details-link' : 'toggleDetails'
   },
 
   render: function() {
@@ -13,7 +14,6 @@ Geometrhythm.Views.Analysis = Backbone.CompositeView.extend({
       });
 
       this.$el.html(content);
-      // debugger
       this.renderAnalysisBasicView(this.model);
       this.renderAnalysisIntervalView(this.model);
       this.renderAnalysisMeterView(this.model);
@@ -87,7 +87,11 @@ Geometrhythm.Views.Analysis = Backbone.CompositeView.extend({
   },
 
   showDetailView: function(event) {
-    var template = $(event.currentTarget).data('detailsviewname');
+    if ($(event.currentTarget).data('detailsviewname')) {
+      var template = $(event.currentTarget).data('detailsviewname');
+    } else {
+      var template = $(event.currentTarget).data('associatedtemplate');
+    }
     var view = new Geometrhythm.Views.AnalysisDetails({
       template: template,
       model: this.model
@@ -95,5 +99,14 @@ Geometrhythm.Views.Analysis = Backbone.CompositeView.extend({
     this.currentDetailView && this.currentDetailView.remove();
     this.currentDetailView = view;
     this.$('#bb-analysis-details').html(view.render().$el);
+  },
+
+  toggleDetails: function(event) {
+    if (window[$(event.currentTarget).data('detailsname')]) {
+      window[$(event.currentTarget).data('detailsname')] = false;
+    } else {
+      window[$(event.currentTarget).data('detailsname')] = true;
+    }
+    this.showDetailView(event);
   }
 })

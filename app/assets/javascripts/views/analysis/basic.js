@@ -23,7 +23,11 @@ Geometrhythm.Views.AnalysisBasic = Backbone.View.extend({
       var len = this.model.get("len");
       var max_height = Math.max.apply(null, this.model.get("durational_pattern"))
       var widthPercentageUnit = 85 / len;
-      var heightPixelsUnit = 120 / max_height;
+      var heightPixelsUnit = ((window.innerWidth / 3.666) * 0.85) / len;
+      if (heightPixelsUnit * max_height > 120) {
+        widthPercentageUnit = widthPercentageUnit * (120 / (heightPixelsUnit * max_height));
+        heightPixelsUnit = 120 / max_height;
+      }
       var content = this.template({
         rhythm: this.model,
         widthPercentageUnit: widthPercentageUnit,
