@@ -14,7 +14,7 @@ Geometrhythm.Views.AnalysisOnset = Backbone.View.extend({
       var max_height = Math.max.apply(null, this.model.get("adjacent_interval_content"))
       // var heightPixelsUnit = 120 / max_height;
       var widthPercentageUnit = 85 / len;
-      var heightPixelsUnit = ((window.innerWidth / (3.666 * (4/3))) * 0.85) / len;
+      var heightPixelsUnit = ((window.innerWidth / 4.25) * 0.85) / len;
       if (heightPixelsUnit * max_height > 120) {
         widthPercentageUnit = widthPercentageUnit * (120 / (heightPixelsUnit * max_height));
         heightPixelsUnit = 120 / max_height;
