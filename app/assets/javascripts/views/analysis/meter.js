@@ -127,54 +127,54 @@ Geometrhythm.Views.AnalysisMeter = Backbone.View.extend({
     return output;
   },
 
-  highlightOffbeatness: function() {
-    $('body').find(".MH_sq[count='1']").addClass('columnHovered');
-  },
+  // highlightOffbeatness: function() {
+  //   $('body').find(".MH_sq[count='1']").addClass('columnHovered');
+  // },
+  //
+  // unHighlightOffbeatness: function() {
+  //   $('body').find(".MH_sq[count='1']").removeClass('columnHovered');
+  // },
+  //
+  // highlightStrongbeatedness: function() {
+  //   var that = this;
+  //   console.log(this.factors(this.model.get("len")).sort().reverse().slice(0,2));
+  //   this.factors(this.model.get("len")).sort().reverse().slice(0,2)
+  //     .forEach(function(factor) {
+  //       for (var i = 0; i < that.model.get("len"); i++) {
+  //         if (i % factor === 0) {
+  //           $('body').find(".MH_sq[ord='" + i + "']").addClass('columnHovered');
+  //           $('body').find(".cell[ord='" + i + "']")
+  //             .css('box-shadow', '0px 0px 10px #ff9800');
+  //         }
+  //       }
+  //     }
+  //   );
+  // },
+  //
+  // unHighlightStrongbeatedness: function() {
+  //   $('body').find(".cell")
+  //     .css('box-shadow', '');
+  //   $('body').find(".MH_sq").removeClass('columnHovered');
+  // },
+  //
+  // highlightAnacrusis: function() {
+  //   $('body').find(".cell[ord='0']")
+  //     .css('box-shadow', '0px 0px 10px #ff9800');
+  //   $('body').find(".MH_sq[ord='0']").addClass('columnHovered');
+  // },
+  //
+  // unHighlightAnacrusis: function() {
+  //   $('body').find(".cell[ord='0']")
+  //     .css('box-shadow', '');
+  //   $('body').find(".MH_sq[ord='0']").removeClass('columnHovered');
+  // },
 
-  unHighlightOffbeatness: function() {
-    $('body').find(".MH_sq[count='1']").removeClass('columnHovered');
-  },
-
-  highlightStrongbeatedness: function() {
-    var that = this;
-    console.log(this.factors(this.model.get("len")).sort().reverse().slice(0,2));
-    this.factors(this.model.get("len")).sort().reverse().slice(0,2)
-      .forEach(function(factor) {
-        for (var i = 0; i < that.model.get("len"); i++) {
-          if (i % factor === 0) {
-            $('body').find(".MH_sq[ord='" + i + "']").addClass('columnHovered');
-            $('body').find(".cell[ord='" + i + "']")
-              .css('box-shadow', '0px 0px 10px #ff9800');
-          }
-        }
-      }
-    );
-  },
-
-  unHighlightStrongbeatedness: function() {
-    $('body').find(".cell")
-      .css('box-shadow', '');
-    $('body').find(".MH_sq").removeClass('columnHovered');
-  },
-
-  highlightAnacrusis: function() {
-    $('body').find(".cell[ord='0']")
-      .css('box-shadow', '0px 0px 10px #ff9800');
-    $('body').find(".MH_sq[ord='0']").addClass('columnHovered');
-  },
-
-  unHighlightAnacrusis: function() {
-    $('body').find(".cell[ord='0']")
-      .css('box-shadow', '');
-    $('body').find(".MH_sq[ord='0']").removeClass('columnHovered');
-  },
-
-  highlightClosure: function() {
-
-  },
-
-  unHighlightClosure: function() {
-
-  },
+  // highlightClosure: function() {
+  //
+  // },
+  //
+  // unHighlightClosure: function() {
+  //
+  // },
 
 })

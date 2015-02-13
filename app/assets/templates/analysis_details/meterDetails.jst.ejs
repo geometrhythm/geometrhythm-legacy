@@ -1,6 +1,23 @@
 <h5 class='section-title a-t-meter'>meter</h5>
 
-<br><strong class='section-title'>metric hierarchy (<%= rhythm.get("metric_hierarchy") %>)</strong>
+<br><strong class='section-title metric-hierarchy'>metric hierarchy </strong>(
+<% rhythm.get("metric_hierarchy").forEach(function(hierarchyEl, index) { %>
+  <% if (hierarchyEl != 1) { %>
+    <% if (index === rhythm.get("metric_hierarchy").length - 1) { %>
+      <strong class='mH' ord='<%= index %>'><%= hierarchyEl %></strong>
+    <% } else { %>
+      <strong class='mH' ord='<%= index %>'><%= hierarchyEl %>, </strong>
+    <% } %>
+  <% } else { %>
+    <% if (index === rhythm.get("metric_hierarchy").length - 1) { %>
+      <strong ord='<%= index %>'><%= hierarchyEl %></strong>
+    <% } else { %>
+      <strong ord='<%= index %>'><%= hierarchyEl %>, </strong>
+    <% } %>
+  <% } %>
+<% }); %>
+<strong>)</strong>
+
 <% if (window.metrichierarchy) { %>
   <span class="details-link" data-detailsname="metrichierarchy" data-associatedtemplate="templateMeter">collapse</span>
   <br>
@@ -48,7 +65,7 @@
   <span class="details-link" data-detailsname="syncopation" data-associatedtemplate="templateMeter">expand</span>
 <% } %>
 
-<br><strong class='section-title'>offbeatness <%= rhythm.get("offbeatness") %></strong>
+<br><strong class='section-title offbeat'>offbeatness <%= rhythm.get("offbeatness") %></strong>
 <% if (window.offbeatness) { %>
   <span class="details-link" data-detailsname="offbeatness" data-associatedtemplate="templateMeter">collapse</span>
   <br>
@@ -60,7 +77,7 @@
   <span class="details-link" data-detailsname="offbeatness" data-associatedtemplate="templateMeter">expand</span>
 <% } %>
 
-<br><strong class='section-title'>strongbeatedness <%= rhythm.get("strongbeatness") %></strong>
+<br><strong class='section-title strongbeatedness'>strongbeatedness <%= rhythm.get("strongbeatness") %></strong>
 <% if (window.strongbeatedness) { %>
   <span class="details-link" data-detailsname="strongbeatedness" data-associatedtemplate="templateMeter">collapse</span>
   <br>
@@ -73,7 +90,7 @@
 <% } %>
 
 <br><% if (rhythm.get("has_closure?")) { %>
-  <strong class='section-title'>has closure</strong>
+  <strong class='section-title closure'>has closure</strong>
   <% if (window.closure) { %>
     <span class="details-link" data-detailsname="closure" data-associatedtemplate="templateMeter">collapse</span>
     <br>
@@ -85,7 +102,7 @@
     <span class="details-link" data-detailsname="closure" data-associatedtemplate="templateMeter">expand</span>
   <% } %>
 <% } else { %>
-  <strong class='section-title'>no closure</strong>
+  <strong class='section-title closure'>no closure</strong>
   <% if (window.closure) { %>
     <span class="details-link" data-detailsname="closure" data-associatedtemplate="templateMeter">collapse</span>
     <br>
@@ -99,7 +116,7 @@
 <% } %>
 
 <br><% if (!rhythm.get("has_anacrusis?")) { %>
-  <strong class='section-title'>no anacrusis</strong>
+  <strong class='section-title anacrusis'>no anacrusis</strong>
   <% if (window.anacrusis) { %>
     <span class="details-link" data-detailsname="anacrusis" data-associatedtemplate="templateMeter">collapse</span>
     <br>
@@ -111,7 +128,7 @@
     <span class="details-link" data-detailsname="anacrusis" data-associatedtemplate="templateMeter">expand</span>
   <% } %>
 <% } else { %>
-  <strong class='section-title'>has anacrusis</strong>
+  <strong class='section-title anacrusis'>has anacrusis</strong>
   <% if (window.anacrusis) { %>
     <span class="details-link" data-detailsname="anacrusis" data-associatedtemplate="templateMeter">collapse</span>
     <br>

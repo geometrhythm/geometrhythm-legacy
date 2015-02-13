@@ -230,7 +230,44 @@ class Rhythm < ActiveRecord::Base
   end
 
   def has_closure?
-    factors.length > 2 && rhythm_str[factors[-2]] == "x"
+    # puts "factors: #{factors}"
+    # puts "checked factor: #{factors[-3]}"
+    # puts "closure el: #{((factors[-2] * (((rhythm_str.length / (factors[-2]))) - 1) - 1)}"
+    # puts  "lcosuer el is: #{rhythm_str[(factors[-2] * (((rhythm_str.length / (factors[-2]))) - 1) - 1]}"
+    # factors.length > 2 && rhythm_str[(factors[-2] * (((rhythm_str.length / (factors[-2]))) - 1) - 1] == "x"
+    # puts "much simpler?"
+    # puts factors[-3]
+    # puts rhythm_str[-factors[-3]]
+    # factors.length > 2 && rhythm_str[-factors[-3]] == "x"
+    i = len
+    while (i > 0)
+      i = i - 1
+      if metric_hierarchy[i] > 2
+        if rhythm_str[i] == "x"
+          return true
+        else
+          return false
+        end
+      end
+    end
+
+    false
+  end
+
+  def closure_index
+    i = len
+    while (i > 0)
+      i = i - 1
+      if metric_hierarchy[i] > 2
+        if rhythm_str[i] == "x"
+          return i
+        else
+          return nil
+        end
+      end
+    end
+
+    nil
   end
 
   def has_anacrusis?

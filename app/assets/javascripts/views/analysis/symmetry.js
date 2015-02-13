@@ -49,8 +49,11 @@ Geometrhythm.Views.AnalysisSymmetry = Backbone.View.extend({
       if (symmetries.indexOf(ord) != -1 || other_symmetries.indexOf(antipode) != -1) {
         var that = this;
         this.model.get("onset_indices").forEach(function(onsetIndex, fnIndex) {
+          // if (onsetIndex != ord
+          //   && onsetIndex != antipode) {
             that.$el.find('.symmetry-cell[ord="' + onsetIndex + '"]')
               .addClass('activated');
+          // }
         })
       }
     }
@@ -82,12 +85,12 @@ Geometrhythm.Views.AnalysisSymmetry = Backbone.View.extend({
       if (symmetries.indexOf(ord) != -1 || other_symmetries.indexOf(antipode) != -1) {
         var that = this;
         this.model.get("onset_indices").forEach(function(onsetIndex, fnIndex) {
-          if (onsetIndex != ord
-            && onsetIndex != antipode) {
+          // if (onsetIndex != ord
+          //   && onsetIndex != antipode) {
             that.$el.find('.symmetry-cell[ord="' + onsetIndex + '"]')
               .addClass('activated');
-          } else {
-          }
+          // } else {
+          // }
         })
 
       }
