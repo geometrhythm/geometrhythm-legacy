@@ -65,6 +65,7 @@ Geometrhythm.Views.AnalysisEvenness = Backbone.View.extend({
         $newPoint.css('left', (this.windowWidth / 25) + ((this.model.get("onset_indices")[i] / this.model.get("len")) * this.windowWidth))
           .css('top', 150.0 - ((i) * (120.0 / this.model.get("onset_indices").length)))
         $newPoint.attr('ord', this.model.get("onset_indices")[i]);
+        $newPoint.attr('idx', i);
         this.$el.append($newPoint);
 
       }
@@ -102,26 +103,29 @@ Geometrhythm.Views.AnalysisEvenness = Backbone.View.extend({
   },
 
   highlightOnset: function(event) {
-    var ord = $(event.currentTarget).attr('ord');
+    var ord = $(event.currentTarget).attr('idx');
     $('body').find(".cell[ord='" + ord + "']")
       .css('box-shadow', '0px 0px 10px #ff9800');
     this.renderPerfectlyEvenRhythm();
-    this.ctx.strokeStyle="#ff9800";
-    this.ctx.lineWidth=20;
+    this.ctx.strokeStyle="#5DA2D6";
+    this.ctx.lineWidth=2;
     this.ctx.shadowBlur=0;
-    this.ctx.moveTo(
-      (this.windowWidth / 25) + ((this.model.get("onset_indices")[ord] / this.model.get("len")) * this.windowWidth),
-      150.0 - ((ord) * (120.0 / this.model.get("onset_indices").length))
-    );
     this.ctx.beginPath();
+    this.ctx.moveTo(
+      -20 + (this.windowWidth / 25) + ((this.model.get("onset_indices")[ord] / this.model.get("len")) * this.windowWidth),
+      120.0 - ((ord / this.model.get("onset_indices").length) * 120.0)
+    );
+
     this.ctx.lineTo(
       (ord / this.model.get("onset_indices").length) * this.windowWidth,
       120.0 - ((ord / this.model.get("onset_indices").length) * 120.0)
     );
+    // debugger
     // console.log("just drew line from " + [(this.windowWidth / 25) + ((this.model.get("onset_indices")[ord] / this.model.get("len")) * this.windowWidth),
       // 150.0 - ((ord) * (120.0 / this.model.get("onset_indices").length))] + " to " + [(ord / this.model.get("onset_indices").length) * this.windowWidth,
       // 120.0 - ((ord / this.model.get("onset_indices").length) * 120.0)]);
     this.ctx.stroke();
+    // debugger
   },
 
   unHighlightOnset: function(event) {
@@ -142,9 +146,10 @@ Geometrhythm.Views.AnalysisEvenness = Backbone.View.extend({
     var prevAngleInRadians = curAngle * (Math.PI / 180);
     var prevPos = [139 + (152 * Math.cos(prevAngleInRadians)),
       139 + (152 * Math.sin(prevAngleInRadians))];
+    this.ctx2.beginPath();
     this.ctx2.moveTo(prevPos[0] + 13, prevPos[1] + 13);
     var sideArcLength = 360 / this.model.get("onset_indices").length;
-    this.ctx2.beginPath();
+
     for (var i = 0; i <= this.model.get("onset_indices").length; i++ ) {
       curAngle += sideArcLength;
       var nextAngleInRadians = curAngle * (Math.PI / 180);

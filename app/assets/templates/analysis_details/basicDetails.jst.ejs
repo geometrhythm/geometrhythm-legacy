@@ -1,4 +1,4 @@
-<h5 class='section-title'>time elements displayed as squares (TEDAS)</h5>
+<h5 class='section-title a-t-basic'>time elements displayed as squares (TEDAS)</h5>
 
 <br><strong class='section-title durational-pattern-words'>durational pattern </strong>(
 <% rhythm.get("durational_pattern").forEach(function(adjacentInterval, index) { %>
@@ -42,8 +42,15 @@
   <span class="details-link" data-detailsname="boxnotation" data-associatedtemplate="templateBasic">expand</span>
 <% } %>
 
-<span class="contour-text">
-<br><strong class='section-title'>contour (<%= rhythm.get("contour") %>)</strong>
+<br><strong class='section-title contour-text'>contour </strong>(
+<% rhythm.get("contour").forEach(function(contourEl, index) { %>
+  <% if (index === rhythm.get("contour").length - 1) { %>
+    <strong class='cE' ord='<%= index %>'><%= contourEl %></strong>
+  <% } else { %>
+    <strong class='cE' ord='<%= index %>'><%= contourEl %>, </strong>
+  <% } %>
+<% }); %>
+<strong>)</strong>
 <% if (window.contour) { %>
   <span class="details-link" data-detailsname="contour" data-associatedtemplate="templateBasic">collapse</span>
   <br>
@@ -56,7 +63,7 @@
 <% } else { %>
   <span class="details-link" data-detailsname="contour" data-associatedtemplate="templateBasic">expand</span>
 <% } %>
-</span>
+
 
 <br><strong class='section-title'>adjacent interval content entropy <%= rhythm.get("adjacent_interval_content_entropy").toFixed(2) %></strong>
 <% if (window.adjacententropy) { %>

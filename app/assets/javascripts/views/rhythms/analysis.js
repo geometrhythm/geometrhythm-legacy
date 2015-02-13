@@ -4,8 +4,21 @@ Geometrhythm.Views.Analysis = Backbone.CompositeView.extend({
 
   events: {
     // 'mouseover .bb-analysis' : 'showDetailView',
-    'mouseover .analysis-title' : 'showDetailView',
+    'click .analysis-title' : 'showDetailView',
     'click .details-link' : 'toggleDetails',
+    'click .general-link' : 'showDetailView',
+    'mouseover .a-t-basic' : 'highlightBasicTitle',
+    'mouseout .a-t-basic' : 'unHighlightBasicTitle',
+    'mouseover .a-t-interval' : 'highlightIntervalTitle',
+    'mouseout .a-t-interval' : 'unHighlightIntervalTitle',
+    'mouseover .a-t-meter' : 'highlightMeterTitle',
+    'mouseout .a-t-meter' : 'unHighlightMeterTitle',
+    'mouseover .a-t-evenness' : 'highlightEvennessTitle',
+    'mouseout .a-t-evenness' : 'unHighlightEvennessTitle',
+    'mouseover .a-t-symmetry' : 'highlightSymmetryTitle',
+    'mouseout .a-t-symmetry' : 'unHighlightSymmetryTitle',
+    'mouseover .a-t-onset' : 'highlightOnsetTitle',
+    'mouseout .a-t-onset' : 'unHighlightOnsetTitle',
 
     //TEDAS listeners
     'mouseover .contour-text' : 'highlightContour',
@@ -18,8 +31,12 @@ Geometrhythm.Views.Analysis = Backbone.CompositeView.extend({
     'mouseout .box-notation-words' : 'unHighlightEntireTEDAS',
     'mouseover .bN' : 'highlightBoxNotation',
     'mouseout .bN' : 'unHighlightBoxNotation',
+    'mouseover .cE' : 'highlightContourEl',
+    'mouseout .cE' : 'unHighlightContourEl',
 
     //FIC listeners
+    'mouseover .iV' : 'highlightIntervalVectorEl',
+    'mouseout .iV' : 'unHighlightIntervalVectorEl',
     'mouseover .tallness' : 'highlightTallness',
     'mouseout .tallness' : 'unHighlightTallness',
     'mouseover .flatness' : 'highlightFlatness',
@@ -39,6 +56,9 @@ Geometrhythm.Views.Analysis = Backbone.CompositeView.extend({
     'mouseover .npvi' : 'highlightNPVI',
     'mouseout .npvi' : 'unHighlightNPVI',
 
+    //Meter listeners
+    'mouseover .offbeat' : 'highlightOffbeat',
+    'mouseout .offbeat' : 'unHighlightOffbeat',
   },
 
   initialize: function() {
@@ -266,12 +286,14 @@ Geometrhythm.Views.Analysis = Backbone.CompositeView.extend({
     this.ctx.shadowColor="#ff9800";
 
     $(this.canvas).css('display','inline');
-    var ord = $('.TEDAS_box').find('.TEDAS_sq[idx="' +
-      parseInt($(event.currentTarget).attr('ord')) + '"]').attr('ord');
-    var dur = $('.TEDAS_box').find('.TEDAS_sq[idx="' +
-      parseInt($(event.currentTarget).attr('ord')) + '"]').attr('dur');
+    var ord = parseInt($('.TEDAS_box').find('.TEDAS_sq[idx="' +
+      parseInt($(event.currentTarget).attr('ord')) + '"]').attr('ord'));
+
+    var dur = parseInt($('.TEDAS_box').find('.TEDAS_sq[idx="' +
+      parseInt($(event.currentTarget).attr('ord')) + '"]').attr('dur'));
+      // debugger
     this.ctx.clearRect(0,0,400,400);
-    var posParse1 = $('body').find(".cell[ord='" + ord + "']").position();
+    var posParse1 = $('body').find(".cell[ord='" + (ord) + "']").position();
     var pos1 = [posParse1.left, posParse1.top];
     var posParse2 = $('body').find(".cell[ord='" + ((ord + dur) % $('#current-rhythm').val().length) + "']").position();
     var pos2 = [posParse2.left, posParse2.top];
@@ -304,11 +326,36 @@ Geometrhythm.Views.Analysis = Backbone.CompositeView.extend({
       $('.TEDAS_box').find('.TEDAS_sq[ord="' + parseInt($(event.currentTarget).attr('ord')) + '"]').addClass('activatedHoverStyle');
     }
     $('.box-notation-words').addClass('activated');
+
+    this.ctx.strokeStyle="#ff9800";
+    this.ctx.lineWidth=3;
+    this.ctx.shadowBlur=20;
+    this.ctx.shadowColor="#ff9800";
+
+    $(this.canvas).css('display','inline');
+    var ord = parseInt($('.TEDAS_box').find('.TEDAS_sq[idx="' +
+      parseInt($(event.currentTarget).attr('ord')) + '"]').attr('ord'));
+
+    var dur = parseInt($('.TEDAS_box').find('.TEDAS_sq[idx="' +
+      parseInt($(event.currentTarget).attr('ord')) + '"]').attr('dur'));
+      // debugger
+    this.ctx.clearRect(0,0,400,400);
+    var posParse1 = $('body').find(".cell[ord='" + (ord) + "']").position();
+    var pos1 = [posParse1.left, posParse1.top];
+    var posParse2 = $('body').find(".cell[ord='" + ((ord + dur) % $('#current-rhythm').val().length) + "']").position();
+    var pos2 = [posParse2.left, posParse2.top];
+    this.ctx.beginPath();
+    this.ctx.moveTo(pos1[0] + 13, pos1[1] + 13);
+    this.ctx.lineTo(pos2[0] + 13, pos2[1] + 13);
+    this.ctx.stroke();
   },
 
   unHighlightBoxNotation: function(event) {
     $('.TEDAS_sq').removeClass('activatedHoverStyle');
     $('.box-notation-words').removeClass('activated');
+
+    this.ctx.clearRect(0,0,400,400);
+    $(this.canvas).css('display','none')
   },
 
   highlightNPVI: function() {
@@ -483,6 +530,118 @@ Geometrhythm.Views.Analysis = Backbone.CompositeView.extend({
   highlightFullHistogramColumn: function(event) {
     $('.FIC_box').find('.FIC_sq[ord="' + $(event.currentTarget).attr("ord") + '"]')
       .removeClass("columnHovered");
-  }
+  },
+
+  highlightBasicTitle: function() {
+    // console.log("I DONT FUCKING HAVE TIME FOR THIS BULLSHIT RIGHT NOW");
+    $('body').find('.a-t-basic').addClass("highlighted");
+  },
+
+  unHighlightBasicTitle: function() {
+    $('body').find('.a-t-basic').removeClass("highlighted");
+  },
+
+  highlightIntervalTitle: function() {
+    // console.log("I DONT FUCKING HAVE TIME FOR THIS BULLSHIT RIGHT NOW");
+    $('body').find('.a-t-interval').addClass("highlighted");
+  },
+
+  unHighlightIntervalTitle: function() {
+    $('body').find('.a-t-interval').removeClass("highlighted");
+  },
+
+  highlightMeterTitle: function() {
+    // console.log("I DONT FUCKING HAVE TIME FOR THIS BULLSHIT RIGHT NOW");
+    $('body').find('.a-t-meter').addClass("highlighted");
+  },
+
+  unHighlightMeterTitle: function() {
+    $('body').find('.a-t-meter').removeClass("highlighted");
+  },
+
+  highlightEvennessTitle: function() {
+    // console.log("I DONT FUCKING HAVE TIME FOR THIS BULLSHIT RIGHT NOW");
+    $('body').find('.a-t-evenness').addClass("highlighted");
+  },
+
+  unHighlightEvennessTitle: function() {
+    $('body').find('.a-t-evenness').removeClass("highlighted");
+  },
+
+  highlightSymmetryTitle: function() {
+    // console.log("I DONT FUCKING HAVE TIME FOR THIS BULLSHIT RIGHT NOW");
+    $('body').find('.a-t-symmetry').addClass("highlighted");
+  },
+
+  unHighlightSymmetryTitle: function() {
+    $('body').find('.a-t-symmetry').removeClass("highlighted");
+  },
+
+  highlightOnsetTitle: function() {
+    // console.log("I DONT FUCKING HAVE TIME FOR THIS BULLSHIT RIGHT NOW");
+    $('body').find('.a-t-onset').addClass("highlighted");
+  },
+
+  unHighlightOnsetTitle: function() {
+    $('body').find('.a-t-onset').removeClass("highlighted");
+  },
+
+  highlightContourEl: function(event) {
+    var ord = parseInt($(event.currentTarget).attr('ord'));
+    $('.TEDAS_box').find('.contour').addClass('visibled');
+    $('.TEDAS_box').find('.contour[idx="' + ord + '"]').addClass('activated');
+    // if (this.model.get("rhythm_str")[ord] === 'x') {
+    //   $('.TEDAS_box').find('.TEDAS_sq[ord="' + parseInt($(event.currentTarget).attr('ord')) + '"]').addClass('activatedHoverStyle');
+    // }
+    // $('.box-notation-words').addClass('activated');
+  },
+
+  unHighlightContourEl: function(event) {
+    $('.TEDAS_box').find('.contour').removeClass('activated').removeClass('visibled');
+    // $('.TEDAS_sq').removeClass('activatedHoverStyle');
+    // $('.box-notation-words').removeClass('activated');
+  },
+
+  highlightIntervalVectorEl: function(event) {
+    var ord = parseInt($(event.currentTarget).attr('ord'));
+    $('.FIC_box').find('.FIC_sq[ord="' + ord + '"]')
+      .addClass("columnHovered");
+
+    this.ctx.strokeStyle="#ff9800";
+    this.ctx.lineWidth=3;
+    this.ctx.shadowBlur=20;
+    this.ctx.shadowColor="#ff9800";
+
+    $(this.canvas).css('display','inline')
+    // var ord = $('.FIC_box').find('.FIC_sq[ord="' + this.model.get("tallness") + '"]').attr('ord');
+    var linesToDraw = this.model.get("full_intervals_onset_pairs")[ord];
+    // $('body').find(".FIC_sq[ord='" + ord + "']").addClass('columnHovered');
+    this.ctx.clearRect(0,0,400,400);
+    var that = this;
+    linesToDraw.forEach( function(lineToDraw) {
+      var posParse1 = $('body').find(".cell[ord='" + lineToDraw[0] + "']").position();
+      var pos1 = [posParse1.left, posParse1.top];
+      var posParse2 = $('body').find(".cell[ord='" + lineToDraw[1] + "']").position();
+      var pos2 = [posParse2.left, posParse2.top];
+      that.ctx.beginPath();
+      that.ctx.moveTo(pos1[0] + 13, pos1[1] + 13);
+      that.ctx.lineTo(pos2[0] + 13, pos2[1] + 13);
+      that.ctx.stroke();
+    })
+  },
+
+  unHighlightIntervalVectorEl: function(event) {
+    $('.FIC_box').find('.FIC_sq').removeClass("columnHovered");
+    this.ctx.clearRect(0,0,400,400);
+    $(this.canvas).css('display','none')
+  },
+
+  highlightOffbeat: function() {
+
+  },
+
+  unHighlightOffbeat: function() {
+    
+  },
 
 })

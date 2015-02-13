@@ -1,7 +1,14 @@
-<h5 class='section-title'>full interval content</h5>
+<h5 class='section-title a-t-interval'>full interval content</h5>
 
-<span class="full-histogram">
-<br><strong class='section-title'>full interval vector&nbsp;<%= rhythm.get("interval_vector") %></strong>
+<br><strong class='section-title full-histogram'>full interval vector </strong>(
+<% rhythm.get("full_interval_content").forEach(function(intervalVectorEl, index) { %>
+  <% if (index === rhythm.get("full_interval_content").length - 1) { %>
+    <strong class='iV' ord='<%= index %>'><%= intervalVectorEl %></strong>
+  <% } else { %>
+    <strong class='iV' ord='<%= index %>'><%= intervalVectorEl %>, </strong>
+  <% } %>
+<% }); %>
+<strong>)</strong>
 <% if (window.fichistogram) { %>
   <span class="details-link" data-detailsname="fichistogram" data-associatedtemplate="templateInterval">collapse</span>
   <br>

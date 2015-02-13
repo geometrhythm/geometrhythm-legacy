@@ -904,17 +904,17 @@ sharp_toggle_rhythms.each do |rhythm|
   g = Naming.create!(rhythm_id: r.id, name_id: n.id, namer_id: u1.id)
 end
 
-a_m_e_r_id = 0
-[6, 8, 12, 16, 24].each do |length|
-  (2...length).each do |num_onsets|
-    almost_maximally_even_rhythms(num_onsets, length).each do |a_m_e_r|
-      rhythm_str = rhythm_stringify(a_m_e_r, length)
-      # p a_m_e_r_id
-      a_m_e_r_id = a_m_e_r_id + 1
-      # p rhythm_str
-      r = Rhythm.where(rhythm_str: rhythm_str).first_or_create!(creator_id: u1.id, rhythm_str: rhythm_str)
-      n = Name.where(name: "almost maximally even rhythm #{num_onsets}/#{length} ##{a_m_e_r_id}").first_or_create!(name: "almost maximally even rhythm #{num_onsets}/#{length} ##{a_m_e_r_id}")
-      g = Naming.create!(rhythm_id: r.id, name_id: n.id, namer_id: u1.id)
-    end
-  end
-end
+# a_m_e_r_id = 0
+# [6, 8, 12, 16, 24].each do |length|
+#   (2...length).each do |num_onsets|
+#     almost_maximally_even_rhythms(num_onsets, length).each do |a_m_e_r|
+#       rhythm_str = rhythm_stringify(a_m_e_r, length)
+#       # p a_m_e_r_id
+#       a_m_e_r_id = a_m_e_r_id + 1
+#       # p rhythm_str
+#       r = Rhythm.where(rhythm_str: rhythm_str).first_or_create!(creator_id: u1.id, rhythm_str: rhythm_str)
+#       n = Name.where(name: "almost maximally even rhythm #{num_onsets}/#{length} ##{a_m_e_r_id}").first_or_create!(name: "almost maximally even rhythm #{num_onsets}/#{length} ##{a_m_e_r_id}")
+#       g = Naming.create!(rhythm_id: r.id, name_id: n.id, namer_id: u1.id)
+#     end
+#   end
+# end

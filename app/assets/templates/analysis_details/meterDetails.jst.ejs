@@ -1,4 +1,4 @@
-<h5 class='section-title'>meter</h5>
+<h5 class='section-title a-t-meter'>meter</h5>
 
 <br><strong class='section-title'>metric hierarchy (<%= rhythm.get("metric_hierarchy") %>)</strong>
 <% if (window.metrichierarchy) { %>
@@ -99,7 +99,7 @@
 <% } %>
 
 <br><% if (!rhythm.get("has_anacrusis?")) { %>
-  <strong class='section-title'>has anacrusis</strong>
+  <strong class='section-title'>no anacrusis</strong>
   <% if (window.anacrusis) { %>
     <span class="details-link" data-detailsname="anacrusis" data-associatedtemplate="templateMeter">collapse</span>
     <br>
@@ -111,7 +111,7 @@
     <span class="details-link" data-detailsname="anacrusis" data-associatedtemplate="templateMeter">expand</span>
   <% } %>
 <% } else { %>
-  <strong class='section-title'>no anacrusis</strong>
+  <strong class='section-title'>has anacrusis</strong>
   <% if (window.anacrusis) { %>
     <span class="details-link" data-detailsname="anacrusis" data-associatedtemplate="templateMeter">collapse</span>
     <br>

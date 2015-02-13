@@ -1,4 +1,4 @@
-<span class='analysis-title TEDAS-tooltip' data-detailsviewname="templateBasic"><h5>TEDAS</h5></span>
+<span class='analysis-title TEDAS-tooltip' data-detailsviewname="templateBasic"><h5 class='a-t-basic'>TEDAS</h5></span>
 
 <div class="TEDAS_box">
   <% sum = rhythm.get("onset_indices")[0] %>
@@ -11,17 +11,17 @@
     </div>
 
     <% if (rhythm.get("contour")[index] === "+") { %>
-      <i class="contour glyphicon glyphicon-circle-arrow-up" ord="<%= sum %>"
+      <i class="contour glyphicon glyphicon-circle-arrow-up" ord="<%= sum %>" idx="<%= index %>"
             style="left: <%= (((sum) + interval_duration - rhythm.get("onset_indices")[0]) * widthPercentageUnit) - 4 %>%;
                    top: <%= (25 - (max_height * heightPixelsUnit)) + ((max_height) - interval_duration) * heightPixelsUnit %>px;">
       </i>
     <% } else if (rhythm.get("contour")[index] === "-") { %>
-      <i class="contour glyphicon glyphicon-circle-arrow-down" ord="<%= sum %>"
+      <i class="contour glyphicon glyphicon-circle-arrow-down" ord="<%= sum %>" idx="<%= index %>"
             style="left: <%= (((sum) + interval_duration - rhythm.get("onset_indices")[0]) * widthPercentageUnit) - 4 %>%;
                    top: <%= (25 - (max_height * heightPixelsUnit)) + ((max_height) - interval_duration) * heightPixelsUnit %>px;">
       </i>
     <% } else { %>
-      <i class="contour glyphicon glyphicon-record" ord="<%= sum %>"
+      <i class="contour glyphicon glyphicon-record" ord="<%= sum %>" idx="<%= index %>"
             style="left: <%= (((sum) + interval_duration- rhythm.get("onset_indices")[0]) * widthPercentageUnit) - 4 %>%;
                    top: <%= (25 - (max_height * heightPixelsUnit)) + ((max_height) - interval_duration) * heightPixelsUnit %>px;">
       </i>

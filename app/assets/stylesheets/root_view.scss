@@ -114,6 +114,14 @@ navbar-right a:hover {
   color: #ff9800;
 }
 
+.cE:hover {
+  color: #ff9800;
+}
+
+.iV:hover {
+  color: #ff9800;
+}
+
 fH:hover {
   color: #ff9800;
 }
@@ -237,8 +245,36 @@ div.bb-analysis {
   position: relative;
 }
 
-.well:hover h5 {
+div.bb-analysis:hover h5 {
+  color: #58846B;
+}
+
+div.bb-analysis h5:hover {
   color: #57CD4A;
+}
+
+.a-t-basic.highlighted {
+  color: #ff9800;
+}
+
+.a-t-interval.highlighted {
+  color: #ff9800;
+}
+
+.a-t-meter.highlighted {
+  color: #ff9800;
+}
+
+.a-t-evenness.highlighted {
+  color: #ff9800;
+}
+
+.a-t-symmetry.highlighted {
+  color: #ff9800;
+}
+
+.a-t-onset.highlighted {
+  color: #ff9800;
 }
 
 #bb-analysis-details {
@@ -294,6 +330,10 @@ div.ui-tooltip {
   visibility: visible;
 }
 
+.TEDAS_box .contour.visibled {
+  visibility: visible;
+}
+
 div.bb-analysis:hover .contour {
   visibility: visible;
 }
@@ -333,7 +373,7 @@ div.fillErUp {
 }
 
 .evenness-point:hover {
-  color: #57CD4A;
+  color: #5DA2D6;
   cursor: pointer;
 }
 
@@ -354,7 +394,7 @@ div.fillErUp {
 }
 
 .details-link {
-  color: #439a46;
+  color: #58846B;
   cursor: pointer;
   font-size: 12px;
 }
@@ -369,6 +409,18 @@ div.fillErUp {
 
 .analysis-title {
   z-index: 2000;
+  cursor: pointer;
+  color: #58846B;
+}
+
+.general-link {
+  cursor: pointer;
+  color: #58846B;
+}
+
+.general-link:hover {
+  cursor: pointer;
+  color: #57CD4A;
 }
 
 .symmetry-rhythm-ring {
@@ -417,9 +469,13 @@ div.fillErUp {
   background-color: #5DA2D6;
 }
 
-.playcursor {
-  min-height: 200px;
-  min-width: 200px;
-  position: absolute;
-  background-color: red;
+// .playcursor {
+//   min-height: 200px;
+//   min-width: 200px;
+//   position: absolute;
+//   background-color: red;
+// }
+
+.analysis-title.highlighted {
+  color: #ff9800;
 }
