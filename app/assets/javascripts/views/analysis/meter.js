@@ -96,7 +96,7 @@ Geometrhythm.Views.AnalysisMeter = Backbone.View.extend({
         that.ctx.strokeStyle="#ff9800";
         // that.ctx.shadowColor="#ff9800";
       } else {
-        that.ctx.strokeStyle="#fff8dc";
+        that.ctx.strokeStyle="rgb(235,198,143)";
         // that.ctx.shadowColor="#fff8dc";
       }
 

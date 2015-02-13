@@ -32,7 +32,7 @@
         <ul class="nav navbar-nav navbar-right">
 
           <li>
-            <a href="#/rhythms" style="margin: 10px 0px">
+            <a style="margin: 10px 0px; cursor: hover">
               browse rhythms
               <%= image_tag "thumbnail_icon.png" %>
             </a>
@@ -56,7 +56,7 @@
             <li>
               <br>
               <%= button_to "Sign Up", new_user_url, method: :get,
-                class: "btn btn-primary btn-sm give-me-space" %>
+                class: "btn btn-success btn-sm give-me-space" %>
             </li>
           <% end %>
 

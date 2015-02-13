@@ -72,11 +72,11 @@ $.RhythmRing.prototype.initializeRhythm = function(rhythmStr) {
 
 $.RhythmRing.prototype.highlightCell = function(event) {
   if (this.grabbing) {
-    this.$el.find(".grabbed").css('box-shadow', '0px 0px 5px DodgerBlue');
+    this.$el.find(".grabbed").css('box-shadow', '0px 0px 5px #ff9800');
   } else {
     this.$el.find(".cell[ord='"
       + parseInt($(event.currentTarget).attr("ord")) + "']")
-    .css('box-shadow', '0px 0px 5px DodgerBlue');
+    .css('box-shadow', '0px 0px 5px #ff9800');
   }
 };
 

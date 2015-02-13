@@ -10,6 +10,17 @@ Geometrhythm.Views.Analysis = Backbone.CompositeView.extend({
     'mouseout .tallness' : 'unHighlightTallness',
     'mouseover .contour-text' : 'highlightContour',
     'mouseout .contour-text' : 'unHighlightContour',
+    'mouseover .flatness' : 'highlightFlatness',
+    'mouseout .flatness' : 'unHighlightFlatness',
+  },
+
+  initialize: function() {
+    this.canvas = $('body').find('#polygon-analysis-canvas')
+    this.ctx = this.canvas[0].getContext("2d");
+    this.ctx.strokeStyle="#ff9800";
+    this.ctx.lineWidth = 3;
+    this.ctx.shadowBlur=20;
+    this.ctx.shadowColor="#ff9800";
   },
 
   render: function() {
@@ -121,11 +132,35 @@ Geometrhythm.Views.Analysis = Backbone.CompositeView.extend({
   highlightTallness: function() {
     $('.FIC_box').find('.FIC_sq[count="' + this.model.get("tallness") + '"]')
       .addClass("columnHovered");
+
+    this.ctx.strokeStyle="#ff9800";
+    this.ctx.lineWidth=3;
+    this.ctx.shadowBlur=20;
+    this.ctx.shadowColor="#ff9800";
+
+    $(this.canvas).css('display','inline')
+    var ord = this.model.get("tallness");
+    var linesToDraw = this.model.get("full_intervals_onset_pairs")[ord];
+    $('body').find(".FIC_sq[ord='" + ord + "']").addClass('columnHovered');
+    this.ctx.clearRect(0,0,400,400);
+    var that = this;
+    linesToDraw.forEach( function(lineToDraw) {
+      var posParse1 = $('body').find(".cell[ord='" + lineToDraw[0] + "']").position();
+      var pos1 = [posParse1.left, posParse1.top];
+      var posParse2 = $('body').find(".cell[ord='" + lineToDraw[1] + "']").position();
+      var pos2 = [posParse2.left, posParse2.top];
+      that.ctx.beginPath();
+      that.ctx.moveTo(pos1[0] + 13, pos1[1] + 13);
+      that.ctx.lineTo(pos2[0] + 13, pos2[1] + 13);
+      that.ctx.stroke();
+    })
   },
 
   unHighlightTallness: function() {
     // var maxCount = Math.max.apply(this.model.get("full_interval_content")
     $('.FIC_box').find('.FIC_sq').removeClass("columnHovered");
+    this.ctx.clearRect(0,0,400,400);
+    $(this.canvas).css('display','none')
   },
 
   highlightContour: function() {
@@ -134,5 +169,13 @@ Geometrhythm.Views.Analysis = Backbone.CompositeView.extend({
 
   highlightContour: function() {
     $('.contour').removeClass('activated');
+  },
+
+  highlightFlatness: function() {
+
+  },
+
+  unHighlightFlatness: function() {
+    
   }
 })

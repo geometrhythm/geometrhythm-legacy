@@ -1,12 +1,89 @@
+<h5 class='section-title'>symmetry</h5>
+
 <% if (rhythm.get("symmetries_by_onset")) { %>
-  symmetries by onset (<% rhythm.get("symmetries_by_onset") %>)
+  <br><strong class='section-title'>symmetries by onset (<%= rhythm.get("symmetries_by_onset") %>)</strong>
+  <% if (window.onsetsymmetries) { %>
+    <span class="details-link" data-detailsname="onsetsymmetries" data-associatedtemplate="templateSymmetry">collapse</span>
+    <br>
+    <br><span style="margin-left: 1em;">this rhythm has
+      <%= rhythm.get("symmetries_by_onset").count %>
+      <%= rhythm.get("symmetries_by_onset").count > 1 ? "lines" : "line" %>
+      of symmetry connecting onsets on opposite sides of the rhythm ring.
+      symmetries by inter-onset are also possible.</span>
+    <br>
+  <% } else { %>
+    <span class="details-link" data-detailsname="onsetsymmetries" data-associatedtemplate="templateSymmetry">expand</span>
+  <% } %>
+<% } else { %>
+  <br><strong class='section-title'>no symmetries by onset</strong>
+  <% if (window.onsetsymmetries) { %>
+    <span class="details-link" data-detailsname="onsetsymmetries" data-associatedtemplate="templateSymmetry">collapse</span>
+    <br>
+    <br><span style="margin-left: 1em;">this rhythm has
+      no lines of symmetry connecting onsets on opposite sides of the rhythm
+      ring. symmetries by inter-onset are also possible.</span>
+    <br>
+  <% } else { %>
+    <span class="details-link" data-detailsname="onsetsymmetries" data-associatedtemplate="templateSymmetry">expand</span>
+  <% } %>
 <% } %>
 
 <% if (rhythm.get("symmetries_by_interonset")) { %>
-  symmetries by inter-onset (<% rhythm.get("symmetries_by_interonset") %>)
+  <br><strong class='section-title'>symmetries by interonset (<%= rhythm.get("symmetries_by_interonset") %>)</strong>
+  <% if (window.interonsetsymmetries) { %>
+    <span class="details-link" data-detailsname="interonsetsymmetries" data-associatedtemplate="templateSymmetry">collapse</span>
+    <br>
+    <br><span style="margin-left: 1em;">this rhythm has
+      <%= rhythm.get("symmetries_by_interonset").count %>
+      <%= rhythm.get("symmetries_by_interonset").count > 1 ? "lines" : "line" %>
+      of symmetry connecting intervals between onsets (inter-onsets) on opposite sides of the rhythm ring.
+      symmetries by onset are also possible.</span>
+    <br>
+  <% } else { %>
+    <span class="details-link" data-detailsname="interonsetsymmetries" data-associatedtemplate="templateSymmetry">expand</span>
+  <% } %>
+<% } else { %>
+  <br><strong class='section-title'>no symmetries by interonset</strong>
+  <% if (window.interonsetsymmetries) { %>
+    <span class="details-link" data-detailsname="interonsetsymmetries" data-associatedtemplate="templateSymmetry">collapse</span>
+    <br>
+    <br><span style="margin-left: 1em;">this rhythm has
+      no lines of symmetry connecting intervals between onsets (inter-onsets) on opposite sides of the rhythm
+      ring. symmetries by onset are also possible.</span>
+    <br>
+  <% } else { %>
+    <span class="details-link" data-detailsname="interonsetsymmetries" data-associatedtemplate="templateSymmetry">expand</span>
+  <% } %>
 <% } %>
 
-imbalance <%= rhythm.get("imbalance") %>
+<% if (rhythm.get("imbalance") > 0) { %>
+  <br><strong class='section-title'>imbalance <%= rhythm.get("imbalance") %></strong>
+  <% if (window.imbalance) { %>
+    <span class="details-link" data-detailsname="imbalance" data-associatedtemplate="templateSymmetry">collapse</span>
+    <br>
+    <br><span style="margin-left: 1em;">a rhythm is balanced if
+      you can draw any diameter across its ring and the number of onsets on either side
+      of it are either equal or different by only one.
+    <br>
+    <br>this rhythm is imbalanced. its imbalance measurement is a totaling of
+      violations of the off-by-no-more-than-one rule for each diameter.</span>
+    <br>
+  <% } else { %>
+    <span class="details-link" data-detailsname="imbalance" data-associatedtemplate="templateSymmetry">expand</span>
+  <% } %>
+<% } else { %>
+  <br><strong class='section-title'>balanced</strong>
+  <% if (window.imbalance) { %>
+    <span class="details-link" data-detailsname="imbalance" data-associatedtemplate="templateSymmetry">collapse</span>
+    <br>
+    <br><span style="margin-left: 1em;">this rhythm is balanced, meaning that if
+      you draw any diameter across its ring, the number of onsets on either side
+      of it are guaranteed to be either equal or different by only one.</span>
+    <br>
+  <% } else { %>
+    <span class="details-link" data-detailsname="imbalance" data-associatedtemplate="templateSymmetry">expand</span>
+  <% } %>
+<% } %>
 
 <% if (rhythm.get("odd?")) { %>
   is odd

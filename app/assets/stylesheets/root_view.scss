@@ -1,31 +1,31 @@
 span.deets_link {
-  color: DodgerBlue;
+  color: #439a46;
   font-size: 12px;
 }
 
 span.deets_link:hover {
   cursor: pointer;
-  color: #2196F3;
+  color: #57CD4A;
 }
 
 span.view-creations {
-  color: DodgerBlue;
+  color: #439a46;
   font-size: 12px;
 }
 
 span.view-creations:hover {
   cursor: pointer;
-  color: #2196F3;
+  color: #57CD4A;
 }
 
 span.view-likes {
-  color: DodgerBlue;
+  color: #58846B;
   font-size: 12px;
 }
 
 span.view-likes:hover {
   cursor: pointer;
-  color: #2196F3;
+  color: #57CD4A;
 }
 
 interface button {
@@ -49,6 +49,7 @@ navbar-right li {
   position: absolute;
   top: 30px;
   padding: 0px 10px;
+  cursor: pointer;
 }
 
 li .give-me-space {
@@ -57,10 +58,20 @@ li .give-me-space {
 
 navbar-right ul {
   position: relative;
+
+}
+
+navbar-right:hover {
+  cursor: pointer;
 }
 
 navbar-right a {
-  padding-top: 25px
+  padding-top: 25px;
+  cursor: pointer;
+}
+
+navbar-right a:hover {
+  cursor: pointer;
 }
 
 .who-you-are {
@@ -77,7 +88,7 @@ navbar-right a {
 }
 
 .what-you-are:hover {
-  color: DodgerBlue;
+  color: #57CD4A;
 }
 
 .c-clockwise {
@@ -86,13 +97,17 @@ navbar-right a {
 
 .TEDAS_sq {
   border: 1px solid #eee;
-  background-color: #6da2d1;
+  background-color: #456B87;
   position: absolute;
   border-radius: 4px;
 }
 
 .TEDAS_sq.activated {
-  background-color: DodgerBlue;
+  background-color: #5DA2D6;
+}
+
+.FIC_sq.activated {
+  background-color: #5DA2D6;
 }
 
 .TEDAS_sq:hover {
@@ -124,7 +139,7 @@ navbar-right a {
 
 .FIC_sq {
   position: absolute;
-  background-color: #6da2d1;
+  background-color: #456B87;
   border: 1px solid #eee;
   border-radius: 4px;
 }
@@ -139,10 +154,14 @@ navbar-right a {
 
 .AIC_sq {
   position: absolute;
-  background-color: #6da2d1;
+  background-color: #456B87;
   border: 1px solid #eee;
   border-radius: 4px;
 }
+
+// .AIC_sq.activated {
+//   background-color: #5DA2D6;
+// }
 
 .MH_box {
   position: absolute;
@@ -160,7 +179,11 @@ navbar-right a {
 }
 
 .MH_sq.onset {
-  background-color: #6da2d1;
+  background-color: #456B87;
+}
+
+.MH_sq.onset.activated {
+  background-color: #5DA2D6;
 }
 
 .MH_sq.rest {
@@ -172,7 +195,7 @@ navbar-right a {
 }
 
 .MH_sq.rest.columnHovered {
-  background-color: Cornsilk;
+  background-color: rgb(235,198,143);
 }
 
 .FIC_sq.columnHovered {
@@ -184,6 +207,10 @@ div.bb-analysis {
   height: 200px;
   padding: 15px;
   position: relative;
+}
+
+.well:hover h5 {
+  color: #57CD4A;
 }
 
 #bb-analysis-details {
@@ -221,7 +248,7 @@ div.ui-tooltip {
   max-width: 400px;
   padding: 15px;
   border-radius: 4px;
-  background-color: Cornsilk;
+  background-color: rgb(235,198,143);
   position: absolute;
   z-index: 3000;
 }
@@ -278,14 +305,22 @@ div.fillErUp {
 }
 
 .evenness-point:hover {
-  color: #ff9800;
+  color: #57CD4A;
   cursor: pointer;
 }
 
+.evenness-point.activatedForPlaying {
+  color: #5DA2D6;
+}
+
 .details-link {
-  color: DodgerBlue;
+  color: #439a46;
   cursor: pointer;
   font-size: 12px;
+}
+
+.details-link:hover {
+  color: #439a46;
 }
 
 .section-title:hover {
@@ -332,9 +367,20 @@ div.fillErUp {
 }
 
 .symmetry-cell.onset {
-  background-color: #6da2d1;
+  background-color: #456B87;
 }
 
 .symmetry-cell.activated {
   background-color: #ff9800;
+}
+
+.symmetry-cell.activatedForPlaying {
+  background-color: #5DA2D6;
+}
+
+.playcursor {
+  min-height: 200px;
+  min-width: 200px;
+  position: absolute;
+  background-color: red;
 }

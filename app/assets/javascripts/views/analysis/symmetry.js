@@ -52,7 +52,6 @@ Geometrhythm.Views.AnalysisSymmetry = Backbone.View.extend({
             that.$el.find('.symmetry-cell[ord="' + onsetIndex + '"]')
               .addClass('activated');
         })
-
       }
     }
   },

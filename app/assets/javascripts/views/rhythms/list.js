@@ -8,7 +8,7 @@ Geometrhythm.Views.RhythmsList = Backbone.CompositeView.extend({
     "change .creator" : "filterByCreator",
     "change .liker" : "filterByLiker",
     "change .rhythm-str" : "filterByRhythmStr",
-    "click #return-to-root" : "returnToRoot"
+    // "click #return-to-root" : "returnToRoot"
   },
 
   initialize: function(options) {
@@ -158,8 +158,10 @@ Geometrhythm.Views.RhythmsList = Backbone.CompositeView.extend({
     }
   },
 
-  returnToRoot: function() {
-    Backbone.history.navigate("/", {trigger: true})
-  }
+  // returnToRoot: function() {
+  //   Geometrhythm.curPlayingRhythm = null;
+  //   clearInterval(Geometrhythm.playingRhythm);
+  //   Backbone.history.navigate("/", {trigger: true})
+  // }
 
 });

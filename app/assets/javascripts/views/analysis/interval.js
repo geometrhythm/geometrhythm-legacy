@@ -21,7 +21,7 @@ Geometrhythm.Views.AnalysisInterval = Backbone.View.extend({
     this.ctx.lineWidth=3;
     this.ctx.shadowBlur=20;
     this.ctx.shadowColor="#ff9800";
-    
+
     if (this.model) {
       var len = this.model.get("full_interval_content").length;
       var max_height = this.model.get("tallness");
@@ -49,6 +49,11 @@ Geometrhythm.Views.AnalysisInterval = Backbone.View.extend({
   },
 
   displayIntervals: function(event) {
+    this.ctx.strokeStyle="#ff9800";
+    this.ctx.lineWidth=3;
+    this.ctx.shadowBlur=20;
+    this.ctx.shadowColor="#ff9800";
+
     $(this.canvas).css('display','inline')
     var ord = $(event.currentTarget).attr('ord');
     var linesToDraw = this.model.get("full_intervals_onset_pairs")[ord];

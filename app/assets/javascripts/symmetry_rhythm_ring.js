@@ -125,13 +125,17 @@ $.SymmetryRhythmRing.prototype.showAllSymmetries = function() {
 $.SymmetryRhythmRing.prototype.showIntercellDiameter = function(event) {
   this.showAllSymmetries();
   var ord = parseInt($(event.currentTarget).attr("ord"));
+  if (ord < 0) {
+    ord += this.rhythmStr.length;
+  }
   var curPosition = $(event.currentTarget).position();
   var antipode = (ord + (this.rhythmStr.length / 2)) % this.rhythmStr.length
   if (antipode % 1 === 0) {
-    var otherPosition = this.$el.find(".symmetry-intercell[ord='" + antipode + "']").position();
+    var otherPosition = this.$el.find(".symmetry-intercell[ord='" + (antipode % this.rhythmStr.length) + "']").position();
   } else {
-    var otherPosition = this.$el.find(".symmetry-cell[ord='" + (Math.floor(antipode) + 1) + "']").position();
+    var otherPosition = this.$el.find(".symmetry-cell[ord='" + ((Math.floor(antipode) + 1) % this.rhythmStr.length) + "']").position();
   }
+  // debugger
   var curPos = [curPosition.left, curPosition.top];
   var otherPos = [otherPosition.left, otherPosition.top];
   if (this.rhythmStr.length % 2 === 0) {
@@ -153,12 +157,15 @@ $.SymmetryRhythmRing.prototype.showIntercellDiameter = function(event) {
 $.SymmetryRhythmRing.prototype.showCellDiameter = function(event) {
   this.showAllSymmetries();
   var ord = parseInt($(event.currentTarget).attr("ord"));
+  if (ord < 0) {
+    ord += this.rhythmStr.length;
+  }
   var curPosition = $(event.currentTarget).position();
   var antipode = (ord + (this.rhythmStr.length / 2)) % this.rhythmStr.length
   if (antipode % 1 === 0) {
-    var otherPosition = this.$el.find(".symmetry-cell[ord='" + antipode + "']").position();
+    var otherPosition = this.$el.find(".symmetry-cell[ord='" + (antipode % this.rhythmStr.length) + "']").position();
   } else {
-    var otherPosition = this.$el.find(".symmetry-intercell[ord='" + Math.floor(antipode) + "']").position();
+    var otherPosition = this.$el.find(".symmetry-intercell[ord='" + (Math.floor(antipode) % this.rhythmStr.length) + "']").position();
   }
   var curPos = [curPosition.left, curPosition.top];
   var otherPos = [otherPosition.left, otherPosition.top];

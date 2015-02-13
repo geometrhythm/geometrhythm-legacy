@@ -3,7 +3,7 @@
 <div class="FIC_box">
   <% rhythm.get("full_interval_content") && rhythm.get("full_interval_content").forEach(function(duration_count, h_index) { %>
     <% for (v_index = 0; v_index < duration_count; v_index++ ) { %>
-      <div class="FIC_sq" ord="<%= h_index %>" count="<%= duration_count %>"
+      <div class="FIC_sq" ord="<%= h_index %>" count="<%= duration_count %>" v_ord="<%= v_index %>"
             style="height: <%= heightPixelsUnit %>px;
                   width: <%= widthPercentageUnit %>%;
                   left: <%= (h_index * widthPercentageUnit) + 5 %>%;

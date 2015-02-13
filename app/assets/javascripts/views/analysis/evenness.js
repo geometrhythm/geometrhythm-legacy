@@ -91,7 +91,7 @@ Geometrhythm.Views.AnalysisEvenness = Backbone.View.extend({
       }
       this.ctx.closePath();
       this.ctx.lineWidth = 1;
-      this.ctx.fillStyle="#6da2d1";
+      this.ctx.fillStyle="#456B87";
       this.ctx.fill();
       this.ctx.strokeStyle = '#eee';
       this.ctx.stroke();
@@ -158,7 +158,7 @@ Geometrhythm.Views.AnalysisEvenness = Backbone.View.extend({
       this.ctx.fillStyle="#ff9800";
       this.ctx.arc((i / this.model.get("onset_indices").length) * this.windowWidth,
         120.0 - ((i / this.model.get("onset_indices").length) * 120.0),
-        5, 0, 2*Math.PI);
+        4, 0, 2*Math.PI);
       this.ctx.fill();
     }
   },

@@ -80,7 +80,7 @@ container {
 
 .cell:hover {
   cursor: pointer;
-  box-shadow: 0px 0px 5px #3e4b60;
+  box-shadow: 0px 0px 5px #ff9800;
 }
 
 .intercell:hover {
@@ -92,11 +92,11 @@ container {
 }
 
 .onset:not(.grabbed){
-  background-color: #333;
+  background-color: #456B87;
 }
 
 .onset {
-  background-color: #333;
+  background-color: #456B87;
 }
 
 .intercell {
@@ -175,17 +175,17 @@ interface {
 }
 
 .cell-handle.onset.activated {
-  background-color: DodgerBlue;
+  background-color: #5DA2D6;
 }
 
 .cell-handle.activated {
-  background-color: Cornsilk;
+  background-color: #C4DDF0;
 }
 
 .cell.onset.activated {
-  background-color: DodgerBlue;
+  background-color: #5DA2D6;
 }
 
 .cell.activated {
-  background-color: Cornsilk;
+  background-color: #C4DDF0;
 }

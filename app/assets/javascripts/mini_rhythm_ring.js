@@ -15,7 +15,14 @@ $.MiniRhythmRing = function (el, superSizeMe) {
   this.rhythmStr = this.$el.attr("rhythm-str");
   this.initializeRhythm(this.rhythmStr);
   this.refreshPolygon();
+  $('body').on('click', '#return-to-root', this.returnToRoot);
 };
+
+$.MiniRhythmRing.prototype.returnToRoot = function() {
+    Geometrhythm.curPlayingRhythm = null;
+    clearInterval(Geometrhythm.playingRhythm);
+    Backbone.history.navigate("/", {trigger: true})
+}
 
 $.fn.miniRhythmRing = function (superSizeMe) {
   return this.each(function () {

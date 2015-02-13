@@ -58,21 +58,21 @@ Geometrhythm.Views.RhythmListItemView = Backbone.CompositeView.extend({
       $(event.currentTarget).removeClass('glyphicon-play').addClass('glyphicon-pause');
     } else {
       Geometrhythm.curPlayingRhythm = null;
-      clearInterval(this.playingRhythm);
+      clearInterval(Geometrhythm.playingRhythm);
       $(event.currentTarget).removeClass('glyphicon-pause').addClass('glyphicon-play');
     }
   },
 
   playRhythm: function() {
-    this.playingRhythm = setInterval(function () {
+    Geometrhythm.playingRhythm = setInterval(function () {
       if (Geometrhythm.curPlayingRhythm === this.rhythmStr) {
-        var fill = this.rhythmCells[this.playPos] ? '#333' : 'white';
+        var fill = this.rhythmCells[this.playPos] ? '#456B87' : 'white';
         this.$el.find(".mini-cell[ord='" + this.playPos + "']")
           .css('background-color', fill);
         this.$el.find(".med-cell[ord='" + this.playPos + "']")
           .css('background-color', fill);
         this.playPos += this.playPos >= this.rhythmCells.length - 1 ? -(this.rhythmCells.length - 1) : 1
-        var fill = this.rhythmCells[this.playPos] ? 'orange' : 'cornsilk';
+        var fill = this.rhythmCells[this.playPos] ? 'orange' : 'rgb(235,198,143)';
         this.$el.find(".mini-cell[ord='" + this.playPos + "']")
           .css('background-color', fill);
         this.$el.find(".med-cell[ord='" + this.playPos + "']")
@@ -85,7 +85,7 @@ Geometrhythm.Views.RhythmListItemView = Backbone.CompositeView.extend({
           }
         }
       } else {
-        clearInterval(this.playingRhythm);
+        clearInterval(Geometrhythm.playingRhythm);
         this.$el.find('i').removeClass('glyphicon-pause').addClass('glyphicon-play');
       }
 
