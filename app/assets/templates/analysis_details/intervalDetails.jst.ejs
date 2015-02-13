@@ -9,7 +9,7 @@
   <% } %>
 <% }); %>
 <strong>)</strong>
-<% if (window.fichistogram) { %>
+<% if (Geometrhythm.fichistogram) { %>
   <span class="details-link" data-detailsname="fichistogram" data-associatedtemplate="templateInterval">collapse</span>
   <br>
   <br><span style="margin-left: 1em;">the chart at right is the full interval content histogram. it is a
@@ -33,7 +33,7 @@
 </span>
 
 <br><strong class='section-title'>full interval content entropy <%= rhythm.get("full_interval_content_entropy").toFixed(2) %></strong>
-<% if (window.fullentropy) { %>
+<% if (Geometrhythm.fullentropy) { %>
   <span class="details-link" data-detailsname="fullentropy" data-associatedtemplate="templateInterval">collapse</span>
   <br>
   <br><span style="margin-left: 1em;">a measure of the variation of interval sizes. when every interval is the
@@ -49,7 +49,7 @@
 
 <span class="tallness">
 <br><strong class='section-title'>tallness <%= rhythm.get("tallness") %></strong>
-<% if (window.tallness) { %>
+<% if (Geometrhythm.tallness) { %>
   <span class="details-link" data-detailsname="tallness" data-associatedtemplate="templateInterval">collapse</span>
   <br>
   <br><span style="margin-left: 1em;">the height of the tallest column in the histogram. this measurement gives
@@ -63,7 +63,7 @@
 <span class="flatness">
 <% if (rhythm.get("perfectly_flat?")) { %>
   <br><strong class='section-title'>perfectly flat</strong>
-  <% if (window.flatness) { %>
+  <% if (Geometrhythm.flatness) { %>
     <span class="details-link" data-detailsname="flatness" data-associatedtemplate="templateInterval">collapse</span>
     <br>
     <br><span style="margin-left: 1em;">this rhythm is perfectly flat. every possible interval size has the same count.
@@ -75,7 +75,7 @@
   <% } %>
 <% } else if (rhythm.get("flat?")) { %>
   <br><strong class='section-title'>flat</strong>
-  <% if (window.flatness) { %>
+  <% if (Geometrhythm.flatness) { %>
     <span class="details-link" data-detailsname="flatness" data-associatedtemplate="templateInterval">collapse</span>
     <br>
     <br><span style="margin-left: 1em;">this rhythm is flat. every present interval size has the same count.
@@ -89,7 +89,7 @@
   <% } %>
 <% } else { %>
   <br><strong class='section-title'>not flat</strong>
-  <% if (window.flatness) { %>
+  <% if (Geometrhythm.flatness) { %>
     <span class="details-link" data-detailsname="flatness" data-associatedtemplate="templateInterval">collapse</span>
     <br>
     <br><span style="margin-left: 1em;">flatness is the rhythmic property of having the same count of each
@@ -106,7 +106,7 @@
 <span class="deepness">
 <% if (rhythm.get("deep?")) { %>
   <br><strong class='section-title'>deep</strong>
-  <% if (window.deepness) { %>
+  <% if (Geometrhythm.deepness) { %>
     <span class="details-link" data-detailsname="deepness" data-associatedtemplate="templateInterval">collapse</span>
     <br>
     <br><span style="margin-left: 1em;">this rhythm is deep. as can be seen in the full interval content histogram,
@@ -119,7 +119,7 @@
   <% } %>
 <% } else { %>
   <br><strong class='section-title'>shallowness&nbsp;<%= rhythm.get("shallowness") %></strong>
-  <% if (window.deepness) { %>
+  <% if (Geometrhythm.deepness) { %>
     <span class="details-link" data-detailsname="deepness" data-associatedtemplate="templateInterval">collapse</span>
     <br>
     <br><span style="margin-left: 1em;">a deep rhythm has a different count for each interval size. in other words,
@@ -140,7 +140,7 @@
 <span class='has-intervals'>
 <% if (rhythm.get("has_all_intervals?")) { %>
   <br><strong class='section-title'>has all intervals</strong>
-  <% if (window.intervalspectrum) { %>
+  <% if (Geometrhythm.intervalspectrum) { %>
     <span class="details-link" data-detailsname="intervalspectrum" data-associatedtemplate="templateInterval">collapse</span>
     <br>
     <br><span style="margin-left: 1em;">this rhythm has at least one of each possible interval size, lending it
@@ -151,7 +151,7 @@
   <% } %>
 <% } else { %>
   <br><strong class='section-title'>missing intervals</strong>
-  <% if (window.intervalspectrum) { %>
+  <% if (Geometrhythm.intervalspectrum) { %>
     <span class="details-link" data-detailsname="intervalspectrum" data-associatedtemplate="templateInterval">collapse</span>
     <br>
     <br><span style="margin-left: 1em;">this rhythm is missing at least one possible interval size (there's an
@@ -165,7 +165,7 @@
 
 <span class="distinct-durations">
 <br><strong class='section-title'>distinct durations <%= rhythm.get("distinct_durations") %></strong>
-<% if (window.distinctdurations) { %>
+<% if (Geometrhythm.distinctdurations) { %>
   <span class="details-link" data-detailsname="distinctdurations" data-associatedtemplate="templateInterval">collapse</span>
   <br>
   <br><span style="margin-left: 1em;">the number of different sizes of interval in the rhythm (the number of columns

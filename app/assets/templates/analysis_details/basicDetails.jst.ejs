@@ -9,7 +9,7 @@
   <% } %>
 <% }); %>
 <strong>)</strong>
-<% if (window.durationalpattern) { %>
+<% if (Geometrhythm.durationalpattern) { %>
   <span class="details-link" data-detailsname="durationalpattern" data-associatedtemplate="templateBasic">collapse</span>
   <br>
   <br><span style="margin-left: 1em;">the durational pattern of a rhythm is simply a list of the durations of each
@@ -33,7 +33,7 @@
   <strong class='bN' ord='<%= i %>'><%= rhythm.get("rhythm_str")[i] %></strong>
 <% } %>
 <strong>)</strong>
-<% if (window.boxnotation) { %>
+<% if (Geometrhythm.boxnotation) { %>
   <span class="details-link" data-detailsname="boxnotation" data-associatedtemplate="templateBasic">collapse</span>
   <br>
   <br><span style="margin-left: 1em;">another method of uniquely identifying the rhythm. x's are onsets, -'s rests.</span>
@@ -51,7 +51,7 @@
   <% } %>
 <% }); %>
 <strong>)</strong>
-<% if (window.contour) { %>
+<% if (Geometrhythm.contour) { %>
   <span class="details-link" data-detailsname="contour" data-associatedtemplate="templateBasic">collapse</span>
   <br>
   <br><span style="margin-left: 1em;">the contour of a rhythm presents its adjacent intervals relatively, rather
@@ -66,7 +66,7 @@
 
 
 <br><strong class='section-title'>adjacent interval content entropy <%= rhythm.get("adjacent_interval_content_entropy").toFixed(2) %></strong>
-<% if (window.adjacententropy) { %>
+<% if (Geometrhythm.adjacententropy) { %>
   <span class="details-link" data-detailsname="adjacententropy" data-associatedtemplate="templateBasic">collapse</span>
   <br>
   <br><span style="margin-left: 1em;">a measure of the variation of interval sizes. when every interval is the
@@ -82,7 +82,7 @@
   <% rhythm.get("adjacent_interval_content").pop(); %>
 <% } %>
 <br><strong class='section-title'>adjacent interval content (<%= rhythm.get("adjacent_interval_content") %>)</strong>
-<% if (window.adjacenthistogram) { %>
+<% if (Geometrhythm.adjacenthistogram) { %>
   <span class="details-link" data-detailsname="adjacenthistogram" data-associatedtemplate="templateBasic">collapse</span>
   <br>
   <br><span style="margin-left: 1em;">simply a tally of adjacent intervals, by size. you could make a histogram out of

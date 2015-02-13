@@ -3,7 +3,7 @@
 <% if (rhythm.get("len") % 2 == 0) { %>
   <% if (rhythm.get("symmetries_by_onset").count > 0) { %>
     <br><strong class='section-title'>symmetries by onset (<%= rhythm.get("symmetries_by_onset") %>)</strong>
-    <% if (window.onsetsymmetries) { %>
+    <% if (Geometrhythm.onsetsymmetries) { %>
       <span class="details-link" data-detailsname="onsetsymmetries" data-associatedtemplate="templateSymmetry">collapse</span>
       <br>
       <br><span style="margin-left: 1em;">this rhythm has
@@ -17,7 +17,7 @@
     <% } %>
   <% } else { %>
     <br><strong class='section-title'>no symmetries by onset</strong>
-    <% if (window.onsetsymmetries) { %>
+    <% if (Geometrhythm.onsetsymmetries) { %>
       <span class="details-link" data-detailsname="onsetsymmetries" data-associatedtemplate="templateSymmetry">collapse</span>
       <br>
       <br><span style="margin-left: 1em;">this rhythm has
@@ -30,7 +30,7 @@
   <% } %>
   <% if (rhythm.get("symmetries_by_interonset").count > 0) { %>
     <br><strong class='section-title'>symmetries by interonset (<%= rhythm.get("symmetries_by_interonset") %>)</strong>
-    <% if (window.interonsetsymmetries) { %>
+    <% if (Geometrhythm.interonsetsymmetries) { %>
       <span class="details-link" data-detailsname="interonsetsymmetries" data-associatedtemplate="templateSymmetry">collapse</span>
       <br>
       <br><span style="margin-left: 1em;">this rhythm has
@@ -44,7 +44,7 @@
     <% } %>
   <% } else { %>
     <br><strong class='section-title'>no symmetries by interonset</strong>
-    <% if (window.interonsetsymmetries) { %>
+    <% if (Geometrhythm.interonsetsymmetries) { %>
       <span class="details-link" data-detailsname="interonsetsymmetries" data-associatedtemplate="templateSymmetry">collapse</span>
       <br>
       <br><span style="margin-left: 1em;">this rhythm has
@@ -58,7 +58,7 @@
 <% } else { %>
   <% if (rhythm.get("symmetries_for_odd_rhythm").count > 0) { %>
     <br><strong class='section-title'>symmetries(<%= rhythm.get("symmetries_for_odd_rhythm") %>)</strong>
-    <% if (window.oddrhythmsymmetries) { %>
+    <% if (Geometrhythm.oddrhythmsymmetries) { %>
       <span class="details-link" data-detailsname="oddrhythmsymmetries" data-associatedtemplate="templateSymmetry">collapse</span>
       <br>
       <br><span style="margin-left: 1em;">this rhythm has
@@ -72,7 +72,7 @@
     <% } %>
   <% } else { %>
     <br><strong class='section-title'>no symmetries</strong>
-    <% if (window.oddrhythmsymmetries) { %>
+    <% if (Geometrhythm.oddrhythmsymmetries) { %>
       <span class="details-link" data-detailsname="oddrhythmsymmetries" data-associatedtemplate="templateSymmetry">collapse</span>
       <br>
       <br><span style="margin-left: 1em;">this rhythm has
@@ -88,7 +88,7 @@
 
 <% if (rhythm.get("imbalance") > 0) { %>
   <br><strong class='section-title'>imbalance <%= rhythm.get("imbalance") %></strong>
-  <% if (window.imbalance) { %>
+  <% if (Geometrhythm.imbalance) { %>
     <span class="details-link" data-detailsname="imbalance" data-associatedtemplate="templateSymmetry">collapse</span>
     <br>
     <br><span style="margin-left: 1em;">a rhythm is balanced if
@@ -103,7 +103,7 @@
   <% } %>
 <% } else { %>
   <br><strong class='section-title'>balanced</strong>
-  <% if (window.imbalance) { %>
+  <% if (Geometrhythm.imbalance) { %>
     <span class="details-link" data-detailsname="imbalance" data-associatedtemplate="templateSymmetry">collapse</span>
     <br>
     <br><span style="margin-left: 1em;">this rhythm is balanced, meaning that if

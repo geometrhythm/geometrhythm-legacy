@@ -18,7 +18,7 @@
 <% }); %>
 <strong>)</strong>
 
-<% if (window.metrichierarchy) { %>
+<% if (Geometrhythm.metrichierarchy) { %>
   <span class="details-link" data-detailsname="metrichierarchy" data-associatedtemplate="templateMeter">collapse</span>
   <br>
   <br><span style="margin-left: 1em;">the resolution of a rhythm is important. when we hear a rhythm, we - at
@@ -48,7 +48,7 @@
 
 
 <br><strong class='section-title'>metric syncopation&nbsp;<%= rhythm.get("metric_syncopation") %></strong>
-<% if (window.syncopation) { %>
+<% if (Geometrhythm.syncopation) { %>
   <span class="details-link" data-detailsname="syncopation" data-associatedtemplate="templateMeter">collapse</span>
   <br>
   <br><span style="margin-left: 1em;">the difference between the total metric weight of this rhythm's onsets
@@ -66,7 +66,7 @@
 <% } %>
 
 <br><strong class='section-title offbeat'>offbeatness <%= rhythm.get("offbeatness") %></strong>
-<% if (window.offbeatness) { %>
+<% if (Geometrhythm.offbeatness) { %>
   <span class="details-link" data-detailsname="offbeatness" data-associatedtemplate="templateMeter">collapse</span>
   <br>
   <br><span style="margin-left: 1em;">simply the count of onsets which lie on the metrically weakest cells: those with
@@ -78,7 +78,7 @@
 <% } %>
 
 <br><strong class='section-title strongbeatedness'>strongbeatedness <%= rhythm.get("strongbeatness") %></strong>
-<% if (window.strongbeatedness) { %>
+<% if (Geometrhythm.strongbeatedness) { %>
   <span class="details-link" data-detailsname="strongbeatedness" data-associatedtemplate="templateMeter">collapse</span>
   <br>
   <br><span style="margin-left: 1em;">the opposite of offbeatness. it is the count of onsets which lie on the
@@ -91,7 +91,7 @@
 
 <br><% if (rhythm.get("has_closure?")) { %>
   <strong class='section-title closure'>has closure</strong>
-  <% if (window.closure) { %>
+  <% if (Geometrhythm.closure) { %>
     <span class="details-link" data-detailsname="closure" data-associatedtemplate="templateMeter">collapse</span>
     <br>
     <br><span style="margin-left: 1em;">a rhythm is said to have closure if there is an onset on its final strong beat.
@@ -103,7 +103,7 @@
   <% } %>
 <% } else { %>
   <strong class='section-title closure'>no closure</strong>
-  <% if (window.closure) { %>
+  <% if (Geometrhythm.closure) { %>
     <span class="details-link" data-detailsname="closure" data-associatedtemplate="templateMeter">collapse</span>
     <br>
     <br><span style="margin-left: 1em;">a rhythm is said to have closure if there is an onset on its final strong beat.
@@ -117,7 +117,7 @@
 
 <br><% if (!rhythm.get("has_anacrusis?")) { %>
   <strong class='section-title anacrusis'>no anacrusis</strong>
-  <% if (window.anacrusis) { %>
+  <% if (Geometrhythm.anacrusis) { %>
     <span class="details-link" data-detailsname="anacrusis" data-associatedtemplate="templateMeter">collapse</span>
     <br>
     <br><span style="margin-left: 1em;">anacrusis occurs when the initial cell of a rhythm is not an onset, which
@@ -129,7 +129,7 @@
   <% } %>
 <% } else { %>
   <strong class='section-title anacrusis'>has anacrusis</strong>
-  <% if (window.anacrusis) { %>
+  <% if (Geometrhythm.anacrusis) { %>
     <span class="details-link" data-detailsname="anacrusis" data-associatedtemplate="templateMeter">collapse</span>
     <br>
     <br><span style="margin-left: 1em;">this rhythm has anacrusis, meaning that the initial cell is not an onset.
@@ -141,7 +141,7 @@
 <% } %>
 
 <br><strong class='section-title'>irregularity&nbsp;<%= rhythm.get("irregularity") %></strong>
-<% if (window.irregularity) { %>
+<% if (Geometrhythm.irregularity) { %>
   <span class="details-link" data-detailsname="irregularity" data-associatedtemplate="templateMeter">collapse</span>
   <br>
   <br><span style="margin-left: 1em;">an advanced measurement. this is the average of the edit distances between
