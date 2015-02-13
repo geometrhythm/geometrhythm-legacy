@@ -12,11 +12,8 @@ Geometrhythm.Views.AnalysisSymmetry = Backbone.View.extend({
   },
 
   render: function() {
-    console.log(this.model.get("symmetries_for_odd_rhythm"));
-    if (this.model.id === undefined) {
-      this.$el.html("");
-      return this;
-    } else {
+    // console.log(this.model.get("symmetries_for_odd_rhythm"));
+    if (this.model) {
       var content = this.template({
         rhythm: this.model,
       });
@@ -27,8 +24,11 @@ Geometrhythm.Views.AnalysisSymmetry = Backbone.View.extend({
       );
       this.$el.find('.symmetry-rhythm-ring').css('left',
         (window.innerWidth / 8));
-      return this;
+    } else {
+      this.$el.html("");
+
     }
+    return this;
   },
 
   showIntercellSymmetries: function(event) {

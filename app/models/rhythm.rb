@@ -464,24 +464,56 @@ class Rhythm < ActiveRecord::Base
   end
 
   def symmetries_for_odd_rhythm
-    return [] if len % 2 != 0
+    #ARGH!!! HAVE TO GO THROUGH TWICE, ONCE: FIRST HALF'S ONSETS, TWICE: FIRST HALF'S INTERONSETS
+    return [] if len % 2 == 0
     symmetries = []
+    (0...len/2).each do |i|
+      puts "i is now #{i}"
+      symmetrical = true
+      j = 1
+      puts "first half is #{convenience_rhythm_str[i...(len / 2) + i]}"
+
+      convenience_rhythm_str[i...(len / 2) + i].split("").each do |cell|
+        puts "this second half index is #{(((len - 1) + i) - j)}"
+        puts "this second half el is #{convenience_rhythm_str[((len - 1) + i) - j]}"
+        if convenience_rhythm_str[((len - 1) + i) - j] != cell
+          symmetrical = false
+          puts "nope not match"
+          break
+        end
+        puts "matched, moving on"
+        j = j + 1
+      end
+      if symmetrical == true
+        symmetries << (i - 1)
+        puts "ADDED THIS ONE!"
+      end
+    end
+    puts "symmetries_for_odd_rhythm_after_checking_only_by_onset_yet: #{symmetries}"
+
     (0...len/2).each do |i|
       puts "i is now #{i}"
       symmetrical = true
       j = 0
       puts "first half is #{convenience_rhythm_str[i...(len / 2) + i]}"
-      puts "second half is #{convenience_rhythm_str[((len - 1) + i) - j]}"
+
       convenience_rhythm_str[i...(len / 2) + i].split("").each do |cell|
+        puts "this second half index is #{(((len - 1) + i) - j)}"
+        puts "this second half el is #{convenience_rhythm_str[((len - 1) + i) - j]}"
         if convenience_rhythm_str[((len - 1) + i) - j] != cell
           symmetrical = false
+          puts "nope not match"
           break
         end
+        puts "matched, moving on"
         j = j + 1
       end
-      symmetries << (i - 1) if symmetrical == true
+      if symmetrical == true
+        symmetries << (i - 1)
+        puts "ADDED THIS ONE!"
+      end
     end
-    puts "symmetries_for_odd_rhythm: #{symmetries}"
+    puts "all symmetries including the ones found by checking interonsets in the first half: #{symmetries}"
     symmetries
   end
 
@@ -537,6 +569,48 @@ class Rhythm < ActiveRecord::Base
 
     output
   end
+
+  def onset_complexity_interval_durations
+    output = []
+    (0...onset_count).each do |i|
+      output << []
+      (0...onset_count).each do |j|
+        next if i == j
+        output[i] << (onset_indices[i] - onset_indices[j]).abs % len
+      end
+    end
+
+    output
+  end
+
+  def whatever_onsets
+    output = []
+    (0...onset_count).each do |i|
+      output << Array.new(len / 2) { false }
+      (0...onset_count).each do |j|
+        next if i == j
+        puts "onset_index[i]: #{onset_indices[i]}"
+        puts "  onset_index[j]: #{onset_indices[j]}"
+        puts "geodesic_distance(i, j): #{geodesic_distance(i, j)}"
+        output[i][geodesic_distance(i, j) - 1] = true;
+      end
+    end
+
+    output
+  end
+
+  # def onset_complexity_display_data
+  #   output = []
+  #   (0...onset_count).each do |i|
+  #     output << Array.new(durational_pattern.max - durational_pattern.min)
+  #     (0...onset_count).each do |j|
+  #       next if i == j
+  #       output[i] << (i - j).abs % len
+  #     end
+  #   end
+  #
+  #   output
+  # end
 
   def shelling_count
     total = 0

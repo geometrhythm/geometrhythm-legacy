@@ -7,7 +7,7 @@ Geometrhythm.Views.AnalysisDetails = Backbone.View.extend({
   templateOnset: JST['analysis_details/onsetDetails'],
   templateEvenness: JST['analysis_details/evennessDetails'],
   templateSymmetry: JST['analysis_details/symmetryDetails'],
-  
+
   initialize: function(options) {
     this.template = this[options.template];
   },
@@ -21,6 +21,8 @@ Geometrhythm.Views.AnalysisDetails = Backbone.View.extend({
     } else {
       this.$el.html("");
     }
+    console.log("ok it's actually here we're concerned about");
+    console.log(this.$el.html());
     return this;
   },
 

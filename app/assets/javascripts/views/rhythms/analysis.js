@@ -55,6 +55,8 @@ Geometrhythm.Views.Analysis = Backbone.CompositeView.extend({
     //Evenness listeners
     'mouseover .npvi' : 'highlightNPVI',
     'mouseout .npvi' : 'unHighlightNPVI',
+    'mouseover .kind-of-evenness' : 'highlightAllDiffs',
+    'mouseout .kind-of-evenness' : 'unHighlightAllDiffs',
 
     //Meter listeners
     'mouseover .offbeat' : 'highlightOffbeat',
@@ -96,6 +98,15 @@ Geometrhythm.Views.Analysis = Backbone.CompositeView.extend({
       this.$el.html("");
     }
     return this;
+  },
+
+  toggleDetails: function(event) {
+    if (window[$(event.currentTarget).data('detailsname')]) {
+      window[$(event.currentTarget).data('detailsname')] = false;
+    } else {
+      window[$(event.currentTarget).data('detailsname')] = true;
+    }
+    this.showDetailView(event);
   },
 
   renderAnalysisBasicView: function(rhythm) {
@@ -166,22 +177,17 @@ Geometrhythm.Views.Analysis = Backbone.CompositeView.extend({
     } else {
       var template = 'templateGeneral'
     }
+    console.log(template);
     var view = new Geometrhythm.Views.AnalysisDetails({
       template: template,
       model: this.model
-    })
+    });
+    console.log("and here's the view one moment later");
+    console.log(view.render().$el);
     this.currentDetailView && this.currentDetailView.remove();
     this.currentDetailView = view;
     this.$('#bb-analysis-details').html(view.render().$el);
-  },
-
-  toggleDetails: function(event) {
-    if (window[$(event.currentTarget).data('detailsname')]) {
-      window[$(event.currentTarget).data('detailsname')] = false;
-    } else {
-      window[$(event.currentTarget).data('detailsname')] = true;
-    }
-    this.showDetailView(event);
+    //console.log(this.$('#bb-analysis-details').html());
   },
 
   highlightTallness: function() {
@@ -367,7 +373,7 @@ Geometrhythm.Views.Analysis = Backbone.CompositeView.extend({
   },
 
   highlightNPVI: function() {
-    console.log("welcoem grh");
+    // console.log("welcoem grh");
     this.windowWidth = window.innerWidth/4;
     // if (this.model.id === undefined) {
     //   this.$el.html("");
@@ -450,7 +456,7 @@ Geometrhythm.Views.Analysis = Backbone.CompositeView.extend({
   },
 
   unHighlightNPVI: function() {
-    console.log("welcoem grh");
+    // console.log("welcoem grh");
     this.windowWidth = window.innerWidth/4;
     // if (this.model.id === undefined) {
     //   this.$el.html("");
@@ -779,5 +785,203 @@ Geometrhythm.Views.Analysis = Backbone.CompositeView.extend({
     this.ctx.clearRect(0,0,400,400);
     $(this.canvas).css('display','none')
   },
+
+  highlightAllDiffs: function() {
+    //$('evenness-point').addClass("activatedForPlaying");
+    this.windowWidth = window.innerWidth/4;
+    // if (this.model.id === undefined) {
+    //   this.$el.html("");
+    //   return this;
+    // } else {
+      // var content = this.template({
+      //   rhythm: this.model,
+      //   windowWidth: this.windowWidth
+      // });
+      // this.$el.html(content);
+    this.canvas2 = $('body').find('#evenness-canvas');
+    // debugger
+    this.$el = $('#bb-analysis-evenness div');
+    this.ctx2 = this.canvas2[0].getContext("2d");
+    this.ctx2.strokeStyle="#eee";
+    this.ctx2.lineWidth = 1;
+
+    //line of evenness
+    this.ctx2.beginPath();
+    this.ctx2.moveTo(0, 120);
+    this.ctx2.lineTo(this.windowWidth, 0);
+    this.ctx2.stroke();
+
+    //columns
+    for (var i = 0; i < this.model.get("len"); i++) {
+      this.ctx2.beginPath();
+      this.ctx2.moveTo((i / this.model.get("len")) * this.windowWidth, 0);
+      this.ctx2.lineTo((i / this.model.get("len")) * this.windowWidth, 120);
+      this.ctx2.stroke();
+    }
+
+    //rows
+    for (var i = 0; i < this.model.get("onset_indices").length; i++) {
+      this.ctx2.beginPath();
+      this.ctx2.moveTo(0, (i / this.model.get("onset_indices").length) * 120.0);
+      this.ctx2.lineTo(this.windowWidth, (i / this.model.get("onset_indices").length) * 120.0);
+      this.ctx2.stroke();
+    }
+
+    //onset points
+    for (var i = 0; i < this.model.get("onset_indices").length; i++) {
+      var $newPoint = $('<span class="evenness-point">&#149;</span>');
+      $newPoint.css('left', (this.windowWidth / 25) + ((this.model.get("onset_indices")[i] / this.model.get("len")) * this.windowWidth))
+        .css('top', 150.0 - ((i) * (120.0 / this.model.get("onset_indices").length)))
+      $newPoint.attr('ord', this.model.get("onset_indices")[i]);
+      $newPoint.addClass('activatedForPlaying');
+      this.$el.append($newPoint);
+
+    }
+
+    // area of nPVI
+    var curPosLeft = 0;
+    var curPosTop = 120;
+
+    this.ctx2.beginPath();
+    this.ctx2.moveTo(curPosLeft, curPosTop);
+    for (var i = 0; i <= this.model.get("onset_indices").length; i++) {
+      // this.ctx2.beginPath()
+      if (i === this.model.get("onset_indices").length) {
+        var nextPosLeft = this.windowWidth;
+        var nextPosTop = 0;
+      } else {
+        var nextPosLeft = ((this.model.get("onset_indices")[i] / this.model.get("len")) * this.windowWidth);
+        var nextPosTop = 120.0 - (i * (120.0 / this.model.get("onset_indices").length));
+      }
+      this.ctx2.lineTo(nextPosLeft, nextPosTop)
+
+      var curPosLeft = nextPosLeft;
+      var curPosTop = nextPosTop;
+
+    }
+    this.ctx2.closePath();
+    this.ctx2.lineWidth = 1;
+    this.ctx2.fillStyle="#456B87";
+    this.ctx2.fill();
+    this.ctx2.strokeStyle = '#eee';
+    this.ctx2.stroke();
+
+    for (var i = 0; i <= this.model.get("onset_indices").length; i++) {
+      this.ctx2.beginPath();
+      this.ctx2.fillStyle="#ff9800";
+      this.ctx2.arc((i / this.model.get("onset_indices").length) * this.windowWidth,
+        120.0 - ((i / this.model.get("onset_indices").length) * 120.0),
+        4, 0, 2*Math.PI);
+      this.ctx2.fill();
+    }
+
+    this.ctx2.strokeStyle="#5DA2D6";
+    this.ctx2.lineWidth=2;
+    this.ctx2.shadowBlur=0;
+
+    for (var i = 0; i < this.model.get("onset_indices").length; i++ ) {
+      // console.log("supposedly drew the line for " + i);
+      // $('body').find(".cell[ord='" + i + "']")
+      //   .css('box-shadow', '0px 0px 10px #ff9800');
+
+      this.ctx2.beginPath();
+      this.ctx2.moveTo(
+        -20 + (this.windowWidth / 25) + ((this.model.get("onset_indices")[i] / this.model.get("len")) * this.windowWidth),
+        120.0 - ((i / this.model.get("onset_indices").length) * 120.0)
+      );
+
+      this.ctx2.lineTo(
+        (i / this.model.get("onset_indices").length) * this.windowWidth,
+        120.0 - ((i / this.model.get("onset_indices").length) * 120.0)
+      );
+      this.ctx2.stroke();
+      // debugger
+    }
+
+    // var ord = $(event.currentTarget).attr('idx');
+
+
+  },
+
+  unHighlightAllDiffs: function() {
+    this.ctx2.clearRect(0,0,400,400);
+    $('evenness-point').removeClass("activatedForPlaying");
+    this.windowWidth = window.innerWidth/4;
+    // if (this.model.id === undefined) {
+    //   this.$el.html("");
+    //   return this;
+    // } else {
+      // var content = this.template({
+      //   rhythm: this.model,
+      //   windowWidth: this.windowWidth
+      // });
+      // this.$el.html(content);
+    this.canvas2 = $('body').find('#evenness-canvas');
+    // debugger
+    this.$el = $('#bb-analysis-evenness div');
+    this.ctx2 = this.canvas2[0].getContext("2d");
+    this.ctx2.strokeStyle="#eee";
+    this.ctx2.lineWidth = 1;
+
+    //line of evenness
+    this.ctx2.beginPath();
+    this.ctx2.moveTo(0, 120);
+    this.ctx2.lineTo(this.windowWidth, 0);
+    this.ctx2.stroke();
+
+    //columns
+    for (var i = 0; i < this.model.get("len"); i++) {
+      this.ctx2.beginPath();
+      this.ctx2.moveTo((i / this.model.get("len")) * this.windowWidth, 0);
+      this.ctx2.lineTo((i / this.model.get("len")) * this.windowWidth, 120);
+      this.ctx2.stroke();
+    }
+
+    //rows
+    for (var i = 0; i < this.model.get("onset_indices").length; i++) {
+      this.ctx2.beginPath();
+      this.ctx2.moveTo(0, (i / this.model.get("onset_indices").length) * 120.0);
+      this.ctx2.lineTo(this.windowWidth, (i / this.model.get("onset_indices").length) * 120.0);
+      this.ctx2.stroke();
+    }
+
+    //onset points
+    for (var i = 0; i < this.model.get("onset_indices").length; i++) {
+      var $newPoint = $('<span class="evenness-point">&#149;</span>');
+      $newPoint.css('left', (this.windowWidth / 25) + ((this.model.get("onset_indices")[i] / this.model.get("len")) * this.windowWidth))
+        .css('top', 150.0 - ((i) * (120.0 / this.model.get("onset_indices").length)))
+      $newPoint.attr('ord', this.model.get("onset_indices")[i]);
+      this.$el.append($newPoint);
+
+    }
+
+    // area of nPVI
+    var curPosLeft = 0;
+    var curPosTop = 120;
+
+    this.ctx2.beginPath();
+    this.ctx2.moveTo(curPosLeft, curPosTop);
+    for (var i = 0; i <= this.model.get("onset_indices").length; i++) {
+      // this.ctx2.beginPath()
+      if (i === this.model.get("onset_indices").length) {
+        var nextPosLeft = this.windowWidth;
+        var nextPosTop = 0;
+      } else {
+        var nextPosLeft = ((this.model.get("onset_indices")[i] / this.model.get("len")) * this.windowWidth);
+        var nextPosTop = 120.0 - (i * (120.0 / this.model.get("onset_indices").length));
+      }
+      this.ctx2.lineTo(nextPosLeft, nextPosTop)
+
+      var curPosLeft = nextPosLeft;
+      var curPosTop = nextPosTop;
+
+    }
+    this.ctx2.closePath();
+    this.ctx2.lineWidth = 1;
+    this.ctx2.fillStyle="#456B87";
+    this.ctx2.fill();
+    this.ctx2.strokeStyle = '#eee';
+    this.ctx2.stroke();
+  }
 
 })

@@ -12,21 +12,18 @@ Geometrhythm.Views.AnalysisEvenness = Backbone.View.extend({
     this.ctx2.lineWidth = 3;
     this.ctx2.shadowBlur=20;
     this.ctx2.shadowColor="#ff9800";
-
+    console.log("did i survive this far?");
   },
 
   events: {
     'mouseover .evenness-point' : 'highlightOnset',
     'mouseout .evenness-point' : 'unHighlightOnset',
     'mouseover #evenness-canvas' : 'renderPerfectlyEvenRhythm',
-    'mouseout #evenness-canvas' : 'clearPerfectlyEvenRhythm'
+    'mouseout #evenness-canvas' : 'clearPerfectlyEvenRhythm',
   },
 
   render: function() {
-    if (this.model.id === undefined) {
-      this.$el.html("");
-      return this;
-    } else {
+    if (this.model) {
       var content = this.template({
         rhythm: this.model,
         windowWidth: this.windowWidth
@@ -98,8 +95,12 @@ Geometrhythm.Views.AnalysisEvenness = Backbone.View.extend({
       this.ctx.strokeStyle = '#eee';
       this.ctx.stroke();
 
-      return this;
+    } else {
+      this.$el.html("");
     }
+    console.log("hey what's up?");
+    console.log(this.$el.html());
+    return this;
   },
 
   highlightOnset: function(event) {
@@ -173,6 +174,6 @@ Geometrhythm.Views.AnalysisEvenness = Backbone.View.extend({
     this.ctx2.clearRect(0,0,400,400);
     $(this.canvas2).css('display','none')
     this.render();
-  }
+  },
 
 })

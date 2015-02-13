@@ -20,12 +20,13 @@
   <br><span style="margin-left: 1em;">the nPVI of your rhythm is <%= rhythm.get("unevenness").toFixed(2) %>. for
     comparison, the popular souskous rhythm has 70.5, while the bossa-nova has only
     14.3.</span>
+  <br>
 <% } else { %>
   <span class="details-link" data-detailsname="npvi" data-associatedtemplate="templateEvenness">expand</span>
 <% } %>
 
 <% if (rhythm.get("perfectly_even?")) { %>
-  <br><strong class='section-title'>perfectly even</strong>
+  <br><strong class='section-title kind-of-evenness'>perfectly even</strong>
   <% if (window.even) { %>
     <span class="details-link" data-detailsname="even" data-associatedtemplate="templateEvenness">collapse</span>
     <br>
@@ -37,7 +38,7 @@
     <span class="details-link" data-detailsname="even" data-associatedtemplate="templateEvenness">expand</span>
   <% } %>
 <% } else if (rhythm.get("maximally_even?")) { %>
-  <br><strong class='section-title'>maximally even</strong>
+  <br><strong class='section-title kind-of-evenness'>maximally even</strong>
   <% if (window.even) { %>
     <span class="details-link" data-detailsname="even" data-associatedtemplate="templateEvenness">collapse</span>
     <br>
@@ -51,7 +52,7 @@
     <span class="details-link" data-detailsname="even" data-associatedtemplate="templateEvenness">expand</span>
   <% } %>
 <% } else if (rhythm.get("almost_maximally_even?")) { %>
-  <br><strong class='section-title'>almost maximally even</strong>
+  <br><strong class='section-title kind-of-evenness'>almost maximally even</strong>
   <% if (window.even) { %>
     <span class="details-link" data-detailsname="even" data-associatedtemplate="templateEvenness">collapse</span>
     <br>
@@ -70,7 +71,7 @@
     <span class="details-link" data-detailsname="even" data-associatedtemplate="templateEvenness">expand</span>
   <% } %>
 <% } else { %>
-  <br><strong class='section-title'>not maximally even</strong>
+  <br><strong class='section-title kind-of-evenness'>not maximally even</strong>
   <% if (window.even) { %>
     <span class="details-link" data-detailsname="even" data-associatedtemplate="templateEvenness">collapse</span>
     <br>

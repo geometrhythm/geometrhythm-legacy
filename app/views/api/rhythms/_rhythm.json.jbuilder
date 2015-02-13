@@ -10,7 +10,8 @@ json.extract! rhythm, :rhythm_str, :play_count, :creator_id, :id,
   :shelling_count, :perfectly_even?, :maximally_even?, :almost_maximally_even?,
   :imbalance, :metric_hierarchy, :len, :full_intervals_onset_pairs,
   :onset_indices, :closure_index, :symmetries_for_odd_rhythm,
-  :complexity_by_onset, :onset_complexity_onset_pairs
+  :complexity_by_onset, :onset_complexity_onset_pairs,
+  :onset_complexity_interval_durations, :whatever_onsets
 
 if rhythm.id
   json.creator rhythm.user.email
