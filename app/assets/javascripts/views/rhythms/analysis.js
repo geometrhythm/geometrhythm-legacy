@@ -6,12 +6,39 @@ Geometrhythm.Views.Analysis = Backbone.CompositeView.extend({
     // 'mouseover .bb-analysis' : 'showDetailView',
     'mouseover .analysis-title' : 'showDetailView',
     'click .details-link' : 'toggleDetails',
-    'mouseover .tallness' : 'highlightTallness',
-    'mouseout .tallness' : 'unHighlightTallness',
+
+    //TEDAS listeners
     'mouseover .contour-text' : 'highlightContour',
     'mouseout .contour-text' : 'unHighlightContour',
+    'mouseover .aI' : 'highlightAdjacentInterval',
+    'mouseout .aI' : 'unHighlightAdjacentInterval',
+    'mouseover .durational-pattern-words' : 'highlightEntireTEDAS',
+    'mouseout .durational-pattern-words' : 'unHighlightEntireTEDAS',
+    'mouseover .box-notation-words' : 'highlightEntireTEDAS',
+    'mouseout .box-notation-words' : 'unHighlightEntireTEDAS',
+    'mouseover .bN' : 'highlightBoxNotation',
+    'mouseout .bN' : 'unHighlightBoxNotation',
+
+    //FIC listeners
+    'mouseover .tallness' : 'highlightTallness',
+    'mouseout .tallness' : 'unHighlightTallness',
     'mouseover .flatness' : 'highlightFlatness',
     'mouseout .flatness' : 'unHighlightFlatness',
+    'mouseover .distinct-durations' : 'highlightDistinctDurations',
+    'mouseout .distinct-durations' : 'unHighlightDistinctDurations',
+    'mouseover .full-histogram' : 'highlightFullHistogram',
+    'mouseout .full-histogram' : 'unHighlightFullHistogram',
+    'mouseover .has-intervals' : 'highlightHasIntervals',
+    'mouseout .has-intervals' : 'unHighlightHasIntervals',
+    'mouseover .deepness' : 'highlightDeepness',
+    'mouseout .deepness' : 'unHighlightDeepness',
+    'mouseover .fH' : 'highlightFullHistogramColumn',
+    'mouseout .fH' : 'unHighlightFullHistogramColumn',
+
+    //Evenness listeners
+    'mouseover .npvi' : 'highlightNPVI',
+    'mouseout .npvi' : 'unHighlightNPVI',
+
   },
 
   initialize: function() {
@@ -131,17 +158,17 @@ Geometrhythm.Views.Analysis = Backbone.CompositeView.extend({
 
   highlightTallness: function() {
     $('.FIC_box').find('.FIC_sq[count="' + this.model.get("tallness") + '"]')
-      .addClass("columnHovered");
+      .addClass("semiHovered");
 
-    this.ctx.strokeStyle="#ff9800";
+    this.ctx.strokeStyle="#5DA2D6";
     this.ctx.lineWidth=3;
     this.ctx.shadowBlur=20;
-    this.ctx.shadowColor="#ff9800";
+    this.ctx.shadowColor="#5DA2D6";
 
     $(this.canvas).css('display','inline')
-    var ord = this.model.get("tallness");
+    var ord = $('.FIC_box').find('.FIC_sq[count="' + this.model.get("tallness") + '"]').attr('ord');
     var linesToDraw = this.model.get("full_intervals_onset_pairs")[ord];
-    $('body').find(".FIC_sq[ord='" + ord + "']").addClass('columnHovered');
+    // $('body').find(".FIC_sq[ord='" + ord + "']").addClass('columnHovered');
     this.ctx.clearRect(0,0,400,400);
     var that = this;
     linesToDraw.forEach( function(lineToDraw) {
@@ -158,7 +185,7 @@ Geometrhythm.Views.Analysis = Backbone.CompositeView.extend({
 
   unHighlightTallness: function() {
     // var maxCount = Math.max.apply(this.model.get("full_interval_content")
-    $('.FIC_box').find('.FIC_sq').removeClass("columnHovered");
+    $('.FIC_box').find('.FIC_sq').removeClass("semiHovered");
     this.ctx.clearRect(0,0,400,400);
     $(this.canvas).css('display','none')
   },
@@ -167,15 +194,295 @@ Geometrhythm.Views.Analysis = Backbone.CompositeView.extend({
     $('.contour').addClass('activated');
   },
 
-  highlightContour: function() {
+  unHighlightContour: function() {
     $('.contour').removeClass('activated');
   },
 
   highlightFlatness: function() {
-
+    if (this.model.get("flat?")) {
+      $('.FIC_box').find('.top-shelf').addClass('columnHovered');
+    } else {
+      $('.FIC_box').find('.top-shelf').addClass('semiHovered');
+    }
   },
 
   unHighlightFlatness: function() {
-    
+    $('.FIC_box').find('.top-shelf').removeClass('columnHovered').removeClass('semiHovered');
+  },
+
+  highlightDistinctDurations: function() {
+    $('.FIC_box').find('.FIC_sq[v_ord="0"]').addClass('semiHovered');
+  },
+
+  unHighlightDistinctDurations: function() {
+    $('.FIC_box').find('.FIC_sq[v_ord="0"]').removeClass('semiHovered');
+  },
+
+  highlightFullHistogram: function() {
+    $('.FIC_sq').addClass('semiHovered');
+  },
+
+  unHighlightFullHistogram: function() {
+    $('.FIC_sq').removeClass('semiHovered');
+  },
+
+  highlightHasIntervals: function() {
+    if (this.model.get("has_all_intervals?")) {
+      $('.FIC_box').find('.FIC_sq[v_ord="0"]').addClass('columnHovered');
+    } else {
+      $('.FIC_sq_secret').css('visibility','visible');
+    }
+  },
+
+  unHighlightHasIntervals: function() {
+    if (this.model.get("has_all_intervals?")) {
+      $('.FIC_box').find('.FIC_sq[v_ord="0"]').removeClass('columnHovered');
+    } else {
+      $('.FIC_sq_secret').css('visibility','hidden');
+    }
+  },
+
+  highlightDeepness: function() {
+    if (this.model.get("deep?")) {
+      $('.FIC_box').find('.top-shelf').addClass('columnHovered');
+    } else {
+      $('.FIC_box').find('.top-shelf').addClass('semiHovered');
+    }
+  },
+
+  unHighlightDeepness: function() {
+    $('.FIC_box').find('.top-shelf').removeClass('semiHovered').removeClass('columnHovered');
+  },
+
+  highlightAdjacentInterval: function(event) {
+    $('.TEDAS_box').find('.TEDAS_sq[idx="' +
+      parseInt($(event.currentTarget).attr('ord')) + '"]')
+      .addClass('activatedHoverStyle');
+    $('.durational-pattern-words').addClass('activated');
+
+    this.ctx.strokeStyle="#ff9800";
+    this.ctx.lineWidth=3;
+    this.ctx.shadowBlur=20;
+    this.ctx.shadowColor="#ff9800";
+
+    $(this.canvas).css('display','inline');
+    var ord = $('.TEDAS_box').find('.TEDAS_sq[idx="' +
+      parseInt($(event.currentTarget).attr('ord')) + '"]').attr('ord');
+    var dur = $('.TEDAS_box').find('.TEDAS_sq[idx="' +
+      parseInt($(event.currentTarget).attr('ord')) + '"]').attr('dur');
+    this.ctx.clearRect(0,0,400,400);
+    var posParse1 = $('body').find(".cell[ord='" + ord + "']").position();
+    var pos1 = [posParse1.left, posParse1.top];
+    var posParse2 = $('body').find(".cell[ord='" + ((ord + dur) % $('#current-rhythm').val().length) + "']").position();
+    var pos2 = [posParse2.left, posParse2.top];
+    this.ctx.beginPath();
+    this.ctx.moveTo(pos1[0] + 13, pos1[1] + 13);
+    this.ctx.lineTo(pos2[0] + 13, pos2[1] + 13);
+    this.ctx.stroke();
+  },
+
+  unHighlightAdjacentInterval: function(event) {
+    $('.TEDAS_box').find('.TEDAS_sq[idx="'
+      + parseInt($(event.currentTarget).attr('ord')) + '"]')
+      .removeClass('activatedHoverStyle');
+    $('.durational-pattern-words').removeClass('activated');
+    this.ctx.clearRect(0,0,400,400);
+    $(this.canvas).css('display','none')
+  },
+
+  highlightEntireTEDAS: function() {
+    $('.TEDAS_sq').addClass('activatedHoverStyle');
+  },
+
+  unHighlightEntireTEDAS: function() {
+    $('.TEDAS_sq').removeClass('activatedHoverStyle');
+  },
+
+  highlightBoxNotation: function(event) {
+    var ord = parseInt($(event.currentTarget).attr('ord'));
+    if (this.model.get("rhythm_str")[ord] === 'x') {
+      $('.TEDAS_box').find('.TEDAS_sq[ord="' + parseInt($(event.currentTarget).attr('ord')) + '"]').addClass('activatedHoverStyle');
+    }
+    $('.box-notation-words').addClass('activated');
+  },
+
+  unHighlightBoxNotation: function(event) {
+    $('.TEDAS_sq').removeClass('activatedHoverStyle');
+    $('.box-notation-words').removeClass('activated');
+  },
+
+  highlightNPVI: function() {
+    console.log("welcoem grh");
+    this.windowWidth = window.innerWidth/4;
+    // if (this.model.id === undefined) {
+    //   this.$el.html("");
+    //   return this;
+    // } else {
+      // var content = this.template({
+      //   rhythm: this.model,
+      //   windowWidth: this.windowWidth
+      // });
+      // this.$el.html(content);
+    this.canvas2 = $('body').find('#evenness-canvas');
+    // debugger
+    this.$el = $('#bb-analysis-evenness div');
+    this.ctx2 = this.canvas2[0].getContext("2d");
+    this.ctx2.strokeStyle="#eee";
+    this.ctx2.lineWidth = 1;
+
+    //line of evenness
+    this.ctx2.beginPath();
+    this.ctx2.moveTo(0, 120);
+    this.ctx2.lineTo(this.windowWidth, 0);
+    this.ctx2.stroke();
+
+    //columns
+    for (var i = 0; i < this.model.get("len"); i++) {
+      this.ctx2.beginPath();
+      this.ctx2.moveTo((i / this.model.get("len")) * this.windowWidth, 0);
+      this.ctx2.lineTo((i / this.model.get("len")) * this.windowWidth, 120);
+      this.ctx2.stroke();
+    }
+
+    //rows
+    for (var i = 0; i < this.model.get("onset_indices").length; i++) {
+      this.ctx2.beginPath();
+      this.ctx2.moveTo(0, (i / this.model.get("onset_indices").length) * 120.0);
+      this.ctx2.lineTo(this.windowWidth, (i / this.model.get("onset_indices").length) * 120.0);
+      this.ctx2.stroke();
+    }
+
+    //onset points
+    for (var i = 0; i < this.model.get("onset_indices").length; i++) {
+      var $newPoint = $('<span class="evenness-point">&#149;</span>');
+      $newPoint.css('left', (this.windowWidth / 25) + ((this.model.get("onset_indices")[i] / this.model.get("len")) * this.windowWidth))
+        .css('top', 150.0 - ((i) * (120.0 / this.model.get("onset_indices").length)))
+      $newPoint.attr('ord', this.model.get("onset_indices")[i]);
+      this.$el.append($newPoint);
+
+    }
+
+    // area of nPVI
+    var curPosLeft = 0;
+    var curPosTop = 120;
+
+    this.ctx2.beginPath();
+    this.ctx2.moveTo(curPosLeft, curPosTop);
+    for (var i = 0; i <= this.model.get("onset_indices").length; i++) {
+      // this.ctx2.beginPath()
+      if (i === this.model.get("onset_indices").length) {
+        var nextPosLeft = this.windowWidth;
+        var nextPosTop = 0;
+      } else {
+        var nextPosLeft = ((this.model.get("onset_indices")[i] / this.model.get("len")) * this.windowWidth);
+        var nextPosTop = 120.0 - (i * (120.0 / this.model.get("onset_indices").length));
+      }
+      this.ctx2.lineTo(nextPosLeft, nextPosTop)
+
+      var curPosLeft = nextPosLeft;
+      var curPosTop = nextPosTop;
+
+    }
+    this.ctx2.closePath();
+    this.ctx2.lineWidth = 1;
+    this.ctx2.fillStyle="#ff9800";
+    this.ctx2.fill();
+    this.ctx2.strokeStyle = '#eee';
+    this.ctx2.stroke();
+
+    // return this;
+
+  },
+
+  unHighlightNPVI: function() {
+    console.log("welcoem grh");
+    this.windowWidth = window.innerWidth/4;
+    // if (this.model.id === undefined) {
+    //   this.$el.html("");
+    //   return this;
+    // } else {
+      // var content = this.template({
+      //   rhythm: this.model,
+      //   windowWidth: this.windowWidth
+      // });
+      // this.$el.html(content);
+    this.canvas2 = $('body').find('#evenness-canvas');
+    // debugger
+    this.$el = $('#bb-analysis-evenness div');
+    this.ctx2 = this.canvas2[0].getContext("2d");
+    this.ctx2.strokeStyle="#eee";
+    this.ctx2.lineWidth = 1;
+
+    //line of evenness
+    this.ctx2.beginPath();
+    this.ctx2.moveTo(0, 120);
+    this.ctx2.lineTo(this.windowWidth, 0);
+    this.ctx2.stroke();
+
+    //columns
+    for (var i = 0; i < this.model.get("len"); i++) {
+      this.ctx2.beginPath();
+      this.ctx2.moveTo((i / this.model.get("len")) * this.windowWidth, 0);
+      this.ctx2.lineTo((i / this.model.get("len")) * this.windowWidth, 120);
+      this.ctx2.stroke();
+    }
+
+    //rows
+    for (var i = 0; i < this.model.get("onset_indices").length; i++) {
+      this.ctx2.beginPath();
+      this.ctx2.moveTo(0, (i / this.model.get("onset_indices").length) * 120.0);
+      this.ctx2.lineTo(this.windowWidth, (i / this.model.get("onset_indices").length) * 120.0);
+      this.ctx2.stroke();
+    }
+
+    //onset points
+    for (var i = 0; i < this.model.get("onset_indices").length; i++) {
+      var $newPoint = $('<span class="evenness-point">&#149;</span>');
+      $newPoint.css('left', (this.windowWidth / 25) + ((this.model.get("onset_indices")[i] / this.model.get("len")) * this.windowWidth))
+        .css('top', 150.0 - ((i) * (120.0 / this.model.get("onset_indices").length)))
+      $newPoint.attr('ord', this.model.get("onset_indices")[i]);
+      this.$el.append($newPoint);
+
+    }
+
+    // area of nPVI
+    var curPosLeft = 0;
+    var curPosTop = 120;
+
+    this.ctx2.beginPath();
+    this.ctx2.moveTo(curPosLeft, curPosTop);
+    for (var i = 0; i <= this.model.get("onset_indices").length; i++) {
+      // this.ctx2.beginPath()
+      if (i === this.model.get("onset_indices").length) {
+        var nextPosLeft = this.windowWidth;
+        var nextPosTop = 0;
+      } else {
+        var nextPosLeft = ((this.model.get("onset_indices")[i] / this.model.get("len")) * this.windowWidth);
+        var nextPosTop = 120.0 - (i * (120.0 / this.model.get("onset_indices").length));
+      }
+      this.ctx2.lineTo(nextPosLeft, nextPosTop)
+
+      var curPosLeft = nextPosLeft;
+      var curPosTop = nextPosTop;
+
+    }
+    this.ctx2.closePath();
+    this.ctx2.lineWidth = 1;
+    this.ctx2.fillStyle="#456B87";
+    this.ctx2.fill();
+    this.ctx2.strokeStyle = '#eee';
+    this.ctx2.stroke();
+
+  },
+
+  highlightFullHistogramColumn: function(event) {
+    $('.FIC_box').find('.FIC_sq[ord="' + $(event.currentTarget).attr("ord") + '"]')
+      .addClass("columnHovered");
+  },
+
+  highlightFullHistogramColumn: function(event) {
+    $('.FIC_box').find('.FIC_sq[ord="' + $(event.currentTarget).attr("ord") + '"]')
+      .removeClass("columnHovered");
   }
+
 })

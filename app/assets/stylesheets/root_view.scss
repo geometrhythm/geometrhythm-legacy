@@ -106,11 +106,27 @@ navbar-right a:hover {
   background-color: #5DA2D6;
 }
 
+.aI:hover {
+  color: #ff9800;
+}
+
+.bN:hover {
+  color: #ff9800;
+}
+
+fH:hover {
+  color: #ff9800;
+}
+
 .FIC_sq.activated {
   background-color: #5DA2D6;
 }
 
 .TEDAS_sq:hover {
+  background-color: #ff9800;
+}
+
+.TEDAS_sq.activatedHoverStyle {
   background-color: #ff9800;
 }
 
@@ -142,6 +158,14 @@ navbar-right a:hover {
   background-color: #456B87;
   border: 1px solid #eee;
   border-radius: 4px;
+}
+
+.FIC_sq_secret {
+  position: absolute;
+  background-color: rgb(235,198,143);
+  border: 1px solid #eee;
+  border-radius: 4px;
+  visibility: hidden;
 }
 
 .AIC_box {
@@ -202,6 +226,10 @@ navbar-right a:hover {
   background-color: #ff9800;
 }
 
+.FIC_sq.semiHovered {
+  background-color: #5DA2D6;
+}
+
 div.bb-analysis {
   width: 100%;
   height: 200px;
@@ -257,16 +285,16 @@ div.ui-tooltip {
   color: #ff9800;
 }
 
-.TEDAS_box .glyphicon:hover {
+.TEDAS_box .contour:hover {
   color: #ff9800;
 }
 
-.TEDAS_box .glyphicon.activated {
+.TEDAS_box .contour.activated {
   color: #ff9800;
   visibility: visible;
 }
 
-div.bb-analysis:hover .glyphicon {
+div.bb-analysis:hover .contour {
   visibility: visible;
 }
 
@@ -313,6 +341,18 @@ div.fillErUp {
   color: #5DA2D6;
 }
 
+.box-notation-words.activated {
+  color: #ff9800;
+}
+
+.durational-pattern-words.activated {
+  color: #ff9800;
+}
+
+.npvi:hover {
+  color: #ff9800;
+}
+
 .details-link {
   color: #439a46;
   cursor: pointer;
@@ -325,7 +365,6 @@ div.fillErUp {
 
 .section-title:hover {
   color: #ff9800;
-  // cursor: pointer;
 }
 
 .analysis-title {

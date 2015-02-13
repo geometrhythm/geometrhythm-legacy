@@ -2,13 +2,31 @@
 
 <div class="FIC_box">
   <% rhythm.get("full_interval_content") && rhythm.get("full_interval_content").forEach(function(duration_count, h_index) { %>
-    <% for (v_index = 0; v_index < duration_count; v_index++ ) { %>
-      <div class="FIC_sq" ord="<%= h_index %>" count="<%= duration_count %>" v_ord="<%= v_index %>"
+    <% if (duration_count === 0) { %>
+      <div class="FIC_sq_secret" ord="<%= h_index %>" count="<%= duration_count %>" v_ord="0"
             style="height: <%= heightPixelsUnit %>px;
                   width: <%= widthPercentageUnit %>%;
                   left: <%= (h_index * widthPercentageUnit) + 5 %>%;
-                  bottom: <%= (v_index) * heightPixelsUnit %>px">
+                  bottom: 0px">
       </div>
+    <% } %>
+
+    <% for (v_index = 0; v_index < duration_count; v_index++ ) { %>
+      <% if (v_index === duration_count - 1) { %>
+        <div class="FIC_sq top-shelf" ord="<%= h_index %>" count="<%= duration_count %>" v_ord="<%= v_index %>"
+              style="height: <%= heightPixelsUnit %>px;
+                    width: <%= widthPercentageUnit %>%;
+                    left: <%= (h_index * widthPercentageUnit) + 5 %>%;
+                    bottom: <%= (v_index) * heightPixelsUnit %>px">
+        </div>
+      <% } else { %>
+        <div class="FIC_sq" ord="<%= h_index %>" count="<%= duration_count %>" v_ord="<%= v_index %>"
+              style="height: <%= heightPixelsUnit %>px;
+                    width: <%= widthPercentageUnit %>%;
+                    left: <%= (h_index * widthPercentageUnit) + 5 %>%;
+                    bottom: <%= (v_index) * heightPixelsUnit %>px">
+        </div>
+      <% } %>
     <% } %>
   <% }) %>
 </div>

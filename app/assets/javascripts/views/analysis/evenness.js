@@ -12,6 +12,7 @@ Geometrhythm.Views.AnalysisEvenness = Backbone.View.extend({
     this.ctx2.lineWidth = 3;
     this.ctx2.shadowBlur=20;
     this.ctx2.shadowColor="#ff9800";
+
   },
 
   events: {

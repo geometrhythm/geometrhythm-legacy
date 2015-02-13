@@ -8,7 +8,7 @@ $.RhythmRing.prototype.initializeAudio = function() {
   this.playPos = -1;
   this.curBus = 0;
   this.paused = true;
-  $('body').on('click', 'a', this.stopPlayingBecauseNavigatingAway.bind(this));
+  $('body').on('click', 'a.browse', this.stopPlayingBecauseNavigatingAway.bind(this));
 };
 
 $.RhythmRing.prototype.stopPlayingBecauseNavigatingAway = function() {

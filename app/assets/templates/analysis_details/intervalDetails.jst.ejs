@@ -1,5 +1,6 @@
 <h5 class='section-title'>full interval content</h5>
 
+<span class="full-histogram">
 <br><strong class='section-title'>full interval vector&nbsp;<%= rhythm.get("interval_vector") %></strong>
 <% if (window.fichistogram) { %>
   <span class="details-link" data-detailsname="fichistogram" data-associatedtemplate="templateInterval">collapse</span>
@@ -22,6 +23,7 @@
 <% } else { %>
   <span class="details-link" data-detailsname="fichistogram" data-associatedtemplate="templateInterval">expand</span>
 <% } %>
+</span>
 
 <br><strong class='section-title'>full interval content entropy <%= rhythm.get("full_interval_content_entropy").toFixed(2) %></strong>
 <% if (window.fullentropy) { %>
@@ -51,6 +53,7 @@
 <% } %>
 </span>
 
+<span class="flatness">
 <% if (rhythm.get("perfectly_flat?")) { %>
   <br><strong class='section-title'>perfectly flat</strong>
   <% if (window.flatness) { %>
@@ -91,8 +94,9 @@
     <span class="details-link" data-detailsname="flatness" data-associatedtemplate="templateInterval">expand</span>
   <% } %>
 <% } %>
+</span>
 
-
+<span class="deepness">
 <% if (rhythm.get("deep?")) { %>
   <br><strong class='section-title'>deep</strong>
   <% if (window.deepness) { %>
@@ -124,8 +128,9 @@
     <span class="details-link" data-detailsname="deepness" data-associatedtemplate="templateInterval">expand</span>
   <% } %>
 <% } %>
+</span>
 
-
+<span class='has-intervals'>
 <% if (rhythm.get("has_all_intervals?")) { %>
   <br><strong class='section-title'>has all intervals</strong>
   <% if (window.intervalspectrum) { %>
@@ -149,8 +154,9 @@
     <span class="details-link" data-detailsname="intervalspectrum" data-associatedtemplate="templateInterval">expand</span>
   <% } %>
 <% } %>
+</span>
 
-
+<span class="distinct-durations">
 <br><strong class='section-title'>distinct durations <%= rhythm.get("distinct_durations") %></strong>
 <% if (window.distinctdurations) { %>
   <span class="details-link" data-detailsname="distinctdurations" data-associatedtemplate="templateInterval">collapse</span>
@@ -161,7 +167,7 @@
 <% } else { %>
   <span class="details-link" data-detailsname="distinctdurations" data-associatedtemplate="templateInterval">expand</span>
 <% } %>
-
+</span>
 
 <br><strong class='section-title'>onset distinct distance complexity <%= rhythm.get("onset_distinct_distance_complexity") %></strong>
 <% if (window.onsetcomplexity) { %>
@@ -174,7 +180,6 @@
 <% } else { %>
   <span class="details-link" data-detailsname="onsetcomplexity" data-associatedtemplate="templateInterval">expand</span>
 <% } %>
-
 
 <br><strong class='section-title'>shelling count <%= rhythm.get("shelling_count") %></strong>
 <% if (window.shellingcount) { %>

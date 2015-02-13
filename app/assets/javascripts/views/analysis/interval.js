@@ -32,6 +32,7 @@ Geometrhythm.Views.AnalysisInterval = Backbone.View.extend({
         widthPercentageUnit = widthPercentageUnit * (120 / (heightPixelsUnit * max_height));
         heightPixelsUnit = 120 / max_height;
       }
+      debugger
       var content = this.template({
         rhythm: this.model,
         widthPercentageUnit: widthPercentageUnit,
