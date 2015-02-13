@@ -45,15 +45,17 @@ $.RhythmRing.prototype.playRhythm2 = function() {
     data: {
       rhythm_str: $('#current-rhythm').val()
     }, success: function(payload) {
-      $.ajax({
-        url: "api/rhythms/" + payload.id,
-        type: "PATCH",
-        data: {
-          rhythm: {
-            play_count: payload.play_count + 1
+      if (payload) {
+        $.ajax({
+          url: "api/rhythms/" + payload.id,
+          type: "PATCH",
+          data: {
+            rhythm: {
+              play_count: payload.play_count + 1
+            }
           }
-        }
-      });
+        });
+      }
     }
   });
 

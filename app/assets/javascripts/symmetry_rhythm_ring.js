@@ -89,6 +89,9 @@ $.SymmetryRhythmRing.prototype.showAllSymmetries = function() {
   color = "#ddd";
   this.onsetSymmetries.forEach(function(onsetIndex) {
     var ord = onsetIndex;
+    if (ord < 0) {
+      ord += that.rhythmStr.length;
+    }
     var curPosition = that.$el.find(".symmetry-cell[ord='" + ord + "']").position();
     var antipode = (ord + (that.rhythmStr.length / 2)) % that.rhythmStr.length
     if (antipode % 1 === 0) {
@@ -102,13 +105,17 @@ $.SymmetryRhythmRing.prototype.showAllSymmetries = function() {
   });
   this.interonsetSymmetries.forEach(function(interonsetIndex) {
     var ord = interonsetIndex;
+    if (ord < 0) {
+      ord += that.rhythmStr.length;
+    }
     var curPosition = that.$el.find(".symmetry-intercell[ord='" + ord + "']").position();
     var antipode = (ord + (that.rhythmStr.length / 2)) % that.rhythmStr.length
     if (antipode % 1 === 0) {
       var otherPosition = that.$el.find(".symmetry-intercell[ord='" + antipode + "']").position();
     } else {
-      var otherPosition = that.$el.find(".symmetry-cell[ord='" + (Math.floor(antipode) + 1) + "']").position();
+      var otherPosition = that.$el.find(".symmetry-cell[ord='" + ((Math.floor(antipode) + 1) % that.rhythmStr.length) + "']").position();
     }
+    // debugger
     var curPos = [curPosition.left, curPosition.top];
     var otherPos = [otherPosition.left, otherPosition.top];
     that.drawSide(curPos, otherPos, color);

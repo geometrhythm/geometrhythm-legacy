@@ -96,12 +96,12 @@ $.RhythmRing.prototype.toggleCell = function(cellId, dontRefresh) {
   if (this.rhythmCells[cellId]) {
     this.rhythmCells[cellId] = false;
     this.$el.find(".cell[ord='" + cellId + "']").removeClass("onset")
-      .css('background-color', "white");
+      // .css('background-color', "white");
     this.$el.find(".cell-handle[ord='" + cellId + "']").removeClass("onset");
   } else {
     this.rhythmCells[cellId] = true;
     this.$el.find(".cell[ord='" + cellId + "']").addClass("onset")
-      .css('background-color', "#333");
+      // .css('background-color', "#333");
     this.$el.find(".cell-handle[ord='" + cellId + "']").addClass("onset");
   }
   this.refreshPolygon();

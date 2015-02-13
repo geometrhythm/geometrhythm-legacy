@@ -1,24 +1,17 @@
-    <li>imbalance: <%= rhythm.get("imbalance") %></li>
+<% if (rhythm.get("symmetries_by_onset")) { %>
+  symmetries by onset (<% rhythm.get("symmetries_by_onset") %>)
+<% } %>
 
-    <% if (rhythm.get("odd?")) { %>
-    <li>is odd,
-  <% } else { %>
-    <li>not odd,
-  <% } %>
-    oddity: <%= rhythm.get("oddity") %></li>
+<% if (rhythm.get("symmetries_by_interonset")) { %>
+  symmetries by inter-onset (<% rhythm.get("symmetries_by_interonset") %>)
+<% } %>
 
+imbalance <%= rhythm.get("imbalance") %>
 
-      <% if (rhythm.get("symmetries_by_onset")) { %>
-        <li>symmetries by onset:
-          <% rhythm.get("symmetries_by_onset").forEach(function(symmetry) { %>
-            <li><%= symmetry %></li>
-          <% }) %>
-        </li>
-      <% } %>
-      <% if (rhythm.get("symmetries_by_interonset")) { %>
-        <li>symmetries by inter-onset:
-          <% rhythm.get("symmetries_by_interonset").forEach(function(symmetry) { %>
-            <li><%= symmetry %></li>
-          <% }) %>
-        </li>
-      <% } %>
+<% if (rhythm.get("odd?")) { %>
+  is odd
+<% } else { %>
+  not odd
+<% } %>
+
+oddity <%= rhythm.get("oddity") %>

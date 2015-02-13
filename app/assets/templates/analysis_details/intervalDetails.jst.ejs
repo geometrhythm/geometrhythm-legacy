@@ -1,60 +1,65 @@
-<h5>Full Interval Content</h5>
+<h5>full interval content</h5>
 
-<br><strong>full interval vector&nbsp;<%= rhythm.get("interval_vector") %></strong>
+<br><strong class='section-title'>full interval vector&nbsp;<%= rhythm.get("interval_vector") %></strong>
 <% if (window.fichistogram) { %>
   <span class="details-link" data-detailsname="fichistogram" data-associatedtemplate="templateInterval">collapse</span>
-  <br>the chart at right is the full interval content histogram. it is a
-    visualization of the full interval vector, which is simply a tallying of all
-    a rhythm's intervals, sorted by size.
   <br>
-  <br>the leftmost column stacks intervals of length 1. the rightmost column
+  <br><span style="margin-left: 1em;">the chart at right is the full interval content histogram. it is a
+    visualization of the full interval vector, which is simply a tallying of all
+    a rhythm's intervals, sorted by size.</span>
+  <br>
+  <br><span style="margin-left: 1em;">the leftmost column stacks intervals of length 1. the rightmost column
     stacks intervals that are half the rhythm's length. it is not possible
     for an interval to be longer than half; geodesic distance - i.e. the
-    shortest possible distance, whether clockwise or counterclockwise - is used.
+    shortest possible distance, whether clockwise or counterclockwise - is used.</span>
   <br>
-  <br>full interval content - including not only the external / adjacent / inter-onset
+  <br><span style="margin-left: 1em;">full interval content - including not only the external / adjacent / inter-onset
     intervals, but also all internal ones - gives a different impression of a rhythm.
     there is reason to believe humans experience a "specious present" whereby all
     internal rhythms are at least subconsciously heard, contributing to the "feel"
-    of a rhythm.
+    of a rhythm.</span>
+  <br>
 <% } else { %>
   <span class="details-link" data-detailsname="fichistogram" data-associatedtemplate="templateInterval">expand</span>
 <% } %>
-<br>
 
 <br><strong class='section-title'>full interval content entropy <%= rhythm.get("full_interval_content_entropy").toFixed(2) %></strong>
 <% if (window.fullentropy) { %>
   <span class="details-link" data-detailsname="fullentropy" data-associatedtemplate="templateInterval">collapse</span>
-  <br>a measure of the variation of interval sizes. when every interval is the
-      same size, H(P) is at its minimum. when every interval is a different size,
-      H(P) is at its maximum. it is, more or less, the probability of guessing the size of an interval chosen at random.
   <br>
-  <br>for comparison, the popular gahu rhythm has entropy of 2.72, while the
-      shiko has only 1.84.
+  <br><span style="margin-left: 1em;">a measure of the variation of interval sizes. when every interval is the
+      same size, H(P) is at its minimum. when every interval is a different size,
+      H(P) is at its maximum. it is, more or less, the probability of guessing the size of an interval chosen at random.</span>
+  <br>
+  <br><span style="margin-left: 1em;">for comparison, the popular gahu rhythm has entropy of 2.72, while the
+      shiko has only 1.84.</span>
+  <br>
 <% } else { %>
   <span class="details-link" data-detailsname="fullentropy" data-associatedtemplate="templateInterval">expand</span>
 <% } %>
-<br>
 
 <span class="tallness">
 <br><strong class='section-title'>tallness <%= rhythm.get("tallness") %></strong>
 <% if (window.tallness) { %>
   <span class="details-link" data-detailsname="tallness" data-associatedtemplate="templateInterval">collapse</span>
-  <br>the height of the tallest column in the histogram. this measurement gives
-    some indication as to whether any single interval size dominates the rhythm.
+  <br>
+  <br><span style="margin-left: 1em;">the height of the tallest column in the histogram. this measurement gives
+    some indication as to whether any single interval size dominates the rhythm.</span>
+  <br>
 <% } else { %>
   <span class="details-link" data-detailsname="tallness" data-associatedtemplate="templateInterval">expand</span>
 <% } %>
-<br>
 </span>
 
 <% if (rhythm.get("perfectly_flat?")) { %>
   <br><strong class='section-title'>perfectly flat</strong>
   <% if (window.flatness) { %>
     <span class="details-link" data-detailsname="flatness" data-associatedtemplate="templateInterval">collapse</span>
-    <br>this rhythm is perfectly flat. every possible interval size has the same count.
+    <br>
+    <br><span style="margin-left: 1em;">this rhythm is perfectly flat. every possible interval size has the same count.
       while there may be a great number of different intervals and a wide range of sizes,
-      no one interval size seems to dominate.
+      no one interval size seems to dominate.</span>
+    <br>
   <% } else { %>
     <span class="details-link" data-detailsname="flatness" data-associatedtemplate="templateInterval">expand</span>
   <% } %>
@@ -62,11 +67,13 @@
   <br><strong class='section-title'>flat</strong>
   <% if (window.flatness) { %>
     <span class="details-link" data-detailsname="flatness" data-associatedtemplate="templateInterval">collapse</span>
-    <br>this rhythm is flat. every present interval size has the same count.
+    <br>
+    <br><span style="margin-left: 1em;">this rhythm is flat. every present interval size has the same count.
       while there may be a great number of different intervals and a wide range of sizes,
       no one interval size seems to dominate. however, the full interval content
       does contain gaps - missing interval sizes - if these were present and
-      also had the same count, this rhythm would be perfectly flat.
+      also had the same count, this rhythm would be perfectly flat.</span>
+    <br>
   <% } else { %>
     <span class="details-link" data-detailsname="flatness" data-associatedtemplate="templateInterval">expand</span>
   <% } %>
@@ -74,24 +81,28 @@
   <br><strong class='section-title'>not flat</strong>
   <% if (window.flatness) { %>
     <span class="details-link" data-detailsname="flatness" data-associatedtemplate="templateInterval">collapse</span>
-    <br>flatness is the rhythmic property of having the same count of each
+    <br>
+    <br><span style="margin-left: 1em;">flatness is the rhythmic property of having the same count of each
       interval size. that is, while a rhythm may have a great number of different
       intervals and a wide range of sizes, no one interval size dominates. this
-      rhythm is not flat.
+      rhythm is not flat.</span>
+    <br>
   <% } else { %>
     <span class="details-link" data-detailsname="flatness" data-associatedtemplate="templateInterval">expand</span>
   <% } %>
 <% } %>
-<br>
+
 
 <% if (rhythm.get("deep?")) { %>
   <br><strong class='section-title'>deep</strong>
   <% if (window.deepness) { %>
     <span class="details-link" data-detailsname="deepness" data-associatedtemplate="templateInterval">collapse</span>
-    <br>this rhythm is deep. as can be seen in the full interval content histogram,
+    <br>
+    <br><span style="margin-left: 1em;">this rhythm is deep. as can be seen in the full interval content histogram,
       each interval size has a different count. this indicates a balance between
       tallness and flatness: no one interval size seems to dominate, but neither
-      do all interval sizes feel equally common.
+      do all interval sizes feel equally common.</span>
+    <br>
   <% } else { %>
     <span class="details-link" data-detailsname="deepness" data-associatedtemplate="templateInterval">expand</span>
   <% } %>
@@ -99,26 +110,30 @@
   <br><strong class='section-title'>shallowness&nbsp;<%= rhythm.get("shallowness") %></strong>
   <% if (window.deepness) { %>
     <span class="details-link" data-detailsname="deepness" data-associatedtemplate="templateInterval">collapse</span>
-    <br>a deep rhythm has a different count for each interval size. in other words,
-      each column of the full interval content histogram would have a different height.
-      this rhythm is not deep.
     <br>
-    <br>shallowness, naturally, measures how far from being deep a rhythm is. it
+    <br><span style="margin-left: 1em;">a deep rhythm has a different count for each interval size. in other words,
+      each column of the full interval content histogram would have a different height.
+      this rhythm is not deep.</span>
+    <br>
+    <br><span style="margin-left: 1em;">shallowness, naturally, measures how far from being deep a rhythm is. it
       counts the number of transformations required to turn a rhythm's full
       interval content histogram into a deep one, i.e. the number of squares that
-      would need to be moved.
+      would need to be moved.</span>
+    <br>
   <% } else { %>
     <span class="details-link" data-detailsname="deepness" data-associatedtemplate="templateInterval">expand</span>
   <% } %>
 <% } %>
-<br>
+
 
 <% if (rhythm.get("has_all_intervals?")) { %>
   <br><strong class='section-title'>has all intervals</strong>
   <% if (window.intervalspectrum) { %>
     <span class="details-link" data-detailsname="intervalspectrum" data-associatedtemplate="templateInterval">collapse</span>
-    <br>this rhythm has at least one of each possible interval size, lending it
-      an interesting variety of durations to appreciate.
+    <br>
+    <br><span style="margin-left: 1em;">this rhythm has at least one of each possible interval size, lending it
+      an interesting variety of durations to appreciate.</span>
+  <br>
   <% } else { %>
     <span class="details-link" data-detailsname="intervalspectrum" data-associatedtemplate="templateInterval">expand</span>
   <% } %>
@@ -126,46 +141,53 @@
   <br><strong class='section-title'>missing intervals</strong>
   <% if (window.intervalspectrum) { %>
     <span class="details-link" data-detailsname="intervalspectrum" data-associatedtemplate="templateInterval">collapse</span>
-    <br>this rhythm is missing at least one possible interval size (there's an
-      empty column in the histogram)
+    <br>
+    <br><span style="margin-left: 1em;">this rhythm is missing at least one possible interval size (there's an
+      empty column in the histogram)</span>
+  <br>
   <% } else { %>
     <span class="details-link" data-detailsname="intervalspectrum" data-associatedtemplate="templateInterval">expand</span>
   <% } %>
 <% } %>
-<br>
+
 
 <br><strong class='section-title'>distinct durations <%= rhythm.get("distinct_durations") %></strong>
 <% if (window.distinctdurations) { %>
   <span class="details-link" data-detailsname="distinctdurations" data-associatedtemplate="templateInterval">collapse</span>
-  <br>the number of different sizes of interval in the rhythm (the number of columns
-    in the histogram)
+  <br>
+  <br><span style="margin-left: 1em;">the number of different sizes of interval in the rhythm (the number of columns
+    in the histogram)</span>
+  <br>
 <% } else { %>
   <span class="details-link" data-detailsname="distinctdurations" data-associatedtemplate="templateInterval">expand</span>
 <% } %>
-<br>
+
 
 <br><strong class='section-title'>onset distinct distance complexity <%= rhythm.get("onset_distinct_distance_complexity") %></strong>
 <% if (window.onsetcomplexity) { %>
   <span class="details-link" data-detailsname="onsetcomplexity" data-associatedtemplate="templateInterval">collapse</span>
-  <br>another perspective on intervallic variety is to consider it per onset.
+  <br>
+  <br><span style="margin-left: 1em;">another perspective on intervallic variety is to consider it per onset.
     this measurement takes, for each onset, its count of distinct intervals it
-    begins or ends, and then sums them all up.
+    begins or ends, and then sums them all up.</span>
+  <br>
 <% } else { %>
   <span class="details-link" data-detailsname="onsetcomplexity" data-associatedtemplate="templateInterval">expand</span>
 <% } %>
-<br>
+
 
 <br><strong class='section-title'>shelling count <%= rhythm.get("shelling_count") %></strong>
 <% if (window.shellingcount) { %>
   <span class="details-link" data-detailsname="shellingcount" data-associatedtemplate="templateInterval">collapse</span>
-  <br>this is the number of onsets you could possibly delete while preserving deepness.
+  <br>
+  <br><span style="margin-left: 1em;">this is the number of onsets you could possibly delete while preserving deepness.
     the first step is to find an onset which contains the full spectrum of intervals -
     one which adds exactly one square to each column in the histogram. that gives
     a shelling count of 1. next, delete that onset from the rhythm to create a new
     rhythm. if in that new rhythm you can also find an onset with the new (smaller)
     full interval spectrum, the shelling count is 2. repeat the process until you
-    can no longer find such an onset.
+    can no longer find such an onset.</span>
+  <br>
 <% } else { %>
   <span class="details-link" data-detailsname="shellingcount" data-associatedtemplate="templateInterval">expand</span>
 <% } %>
-<br>

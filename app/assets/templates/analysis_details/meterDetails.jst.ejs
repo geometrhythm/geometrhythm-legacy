@@ -1,35 +1,139 @@
-<strong>irregularity</strong> an average of the edit distances between this rhythm and each perfectly even rhythm of this cell count oriented at the same initial onset (i.e. the rhythms which define the metrical hierarchy)
+<h5>meter</h5>
 
- and factors thereof
+<br><strong class='section-title'>metric hierarchy (<%= rhythm.get("metric_hierarchy") %>)</strong>
+<% if (window.metrichierarchy) { %>
+  <span class="details-link" data-detailsname="metrichierarchy" data-associatedtemplate="templateMeter">collapse</span>
+  <br>
+  <br><span style="margin-left: 1em;">the resolution of a rhythm is important. when we hear a rhythm, we - at
+    least unconsciously - recognize how many total cells the onsets and rests
+    quantize to. if this number of cells is divided evenly by any numbers, we
+    psychoacoustically feel those even division in the background.</span>
+  <br>
+  <br><span style="margin-left: 1em;">onsets that coincide with these phantom divisions feel stronger, or more
+    "on beat". onsets that fall between them feel "off beat", or "syncopated".</span>
+  <br>
+  <br><span style="margin-left: 1em;">the metric hierarchy is a visualization of the phantom divisions. each factor
+    of the rhythm's total pulse count is repeatedly applied, adding metric weight to the
+    beats which are its multiples. in the end, each cell has a weight value. the
+    higher the weight, the more important it is for there to be an onset on that
+    cell - that is, if the rhythm intends to sound on-beat (definitely not always
+    the case).</span>
+  <br>
+  <br><span style="margin-left: 1em;">if a rhythm has a prime number of pulses, it has no metrical weight in this
+    sense. since it has no factors, no perfectly even phantom pulse could fall
+    on its cell grid. thus, metric weight is irrelevant, and the rhythm feels more
+    freed up. if a rhythm is highly composite, however, such as one of length 12,
+    meter becomes a prominent consideration.</span>
+  <br>
+<% } else { %>
+  <span class="details-link" data-detailsname="metrichierarchy" data-associatedtemplate="templateMeter">expand</span>
+<% } %>
 
-<strong>metric syncopation</strong> the difference between the total metric weight of this rhythm's onsets and the maximum possible total metric weight of a rhythm with the same number of onsets and cells
 
+<br><strong class='section-title'>metric syncopation&nbsp;<%= rhythm.get("metric_syncopation") %></strong>
+<% if (window.syncopation) { %>
+  <span class="details-link" data-detailsname="syncopation" data-associatedtemplate="templateMeter">collapse</span>
+  <br>
+  <br><span style="margin-left: 1em;">the difference between the total metric weight of this rhythm's onsets
+    and the maximum possible total metric weight of a rhythm with the same number
+    of onsets and cells.</span>
+  <br>
+  <br><span style="margin-left: 1em;">to determine this maximum possible metric weight, imagine starting with a
+    blank rhythm, then placing onsets one by one in the cells with the tallest
+    columns, until you have placed as many onsets as there are in your rhythm.</span>
+  <br><span style="margin-left: 1em;">"syncopation" is a vague word that gets tossed around a lot. "metric syncopation"
+    here is intended to distinguish the usage and make it more objective.</span>
+  <br>
+<% } else { %>
+  <span class="details-link" data-detailsname="syncopation" data-associatedtemplate="templateMeter">expand</span>
+<% } %>
 
-<div id='meter-text'>
-  <div class='.tooltip-wtf-syncopation'>
-    <span class='measurement-name syncopation'>
-      metric syncopation: <%= rhythm.get("metric_syncopation") %><br>
-    </span>
-  </div>
+<br><strong class='section-title'>offbeatness <%= rhythm.get("offbeatness") %></strong>
+<% if (window.offbeatness) { %>
+  <span class="details-link" data-detailsname="offbeatness" data-associatedtemplate="templateMeter">collapse</span>
+  <br>
+  <br><span style="margin-left: 1em;">simply the count of onsets which lie on the metrically weakest cells: those with
+    metric weight of 1, the ones which are multiples of no factor of the total
+    pulse count.</span>
+  <br>
+<% } else { %>
+  <span class="details-link" data-detailsname="offbeatness" data-associatedtemplate="templateMeter">expand</span>
+<% } %>
 
-  <span class='measurement-name offbeatness'>
-    offbeatness: <%= rhythm.get("offbeatness") %><br>
-  </span>
+<br><strong class='section-title'>strongbeatedness <%= rhythm.get("strongbeatness") %></strong>
+<% if (window.strongbeatedness) { %>
+  <span class="details-link" data-detailsname="strongbeatedness" data-associatedtemplate="templateMeter">collapse</span>
+  <br>
+  <br><span style="margin-left: 1em;">the opposite of offbeatness. it is the count of onsets which lie on the
+    metrically strongest cells (here, this includes cells which are multiples
+    of any of the pulse count's largest three factors).</span>
+  <br>
+<% } else { %>
+  <span class="details-link" data-detailsname="strongbeatedness" data-associatedtemplate="templateMeter">expand</span>
+<% } %>
 
-  <span class='measurement-name strongbeatedness'>
-    strongbeatedness: <%= rhythm.get("strongbeatness") %><br>
-  </span>
-
-  <span class='measurement-name irregularity'>
-    irregularity: <%= rhythm.get("irregularity") %><br>
-  </span>
-</div>
-
-<div id='meter-props'>
-  <% if (rhythm.get("has_closure?")) { %>
-    <span class='measurement-name closure'>has closure</span>
+<br><% if (rhythm.get("has_closure?")) { %>
+  <strong class='section-title'>has closure</strong>
+  <% if (window.closure) { %>
+    <span class="details-link" data-detailsname="closure" data-associatedtemplate="templateMeter">collapse</span>
+    <br>
+    <br><span style="margin-left: 1em;">a rhythm is said to have closure if there is an onset on its final strong beat.
+      this critical beat can make or break the metrical strength of a rhythm.
+      this rhythm has closure.</span>
+    <br>
+  <% } else { %>
+    <span class="details-link" data-detailsname="closure" data-associatedtemplate="templateMeter">expand</span>
   <% } %>
-  <% if (rhythm.get("has_anacrusis?")) { %>
-    <span class='measurement-name anacrusis'>has anacrusis</span>
+<% } else { %>
+  <strong class='section-title'>no closure</strong>
+  <% if (window.closure) { %>
+    <span class="details-link" data-detailsname="closure" data-associatedtemplate="templateMeter">collapse</span>
+    <br>
+    <br><span style="margin-left: 1em;">a rhythm is said to have closure if there is an onset on its final strong beat.
+      this critical beat can make or break the metrical strength of a rhythm.
+      this rhythm does not have closure, dramatically increasing its syncopation.</span>
+    <br>
+  <% } else { %>
+    <span class="details-link" data-detailsname="closure" data-associatedtemplate="templateMeter">expand</span>
   <% } %>
-</div>
+<% } %>
+
+<br><% if (!rhythm.get("has_anacrusis?")) { %>
+  <strong class='section-title'>has anacrusis</strong>
+  <% if (window.anacrusis) { %>
+    <span class="details-link" data-detailsname="anacrusis" data-associatedtemplate="templateMeter">collapse</span>
+    <br>
+    <br><span style="margin-left: 1em;">anacrusis occurs when the initial cell of a rhythm is not an onset, which
+      dramatically increases the perceived syncopation. this rhythm, like most,
+      begins with an onset, and thus does not exhibit anacrusis.</span>
+    <br>
+  <% } else { %>
+    <span class="details-link" data-detailsname="anacrusis" data-associatedtemplate="templateMeter">expand</span>
+  <% } %>
+<% } else { %>
+  <strong class='section-title'>no anacrusis</strong>
+  <% if (window.anacrusis) { %>
+    <span class="details-link" data-detailsname="anacrusis" data-associatedtemplate="templateMeter">collapse</span>
+    <br>
+    <br><span style="margin-left: 1em;">this rhythm has anacrusis, meaning that the initial cell is not an onset.
+      this dramatically increases its perceived syncopation.</span>
+    <br>
+  <% } else { %>
+    <span class="details-link" data-detailsname="anacrusis" data-associatedtemplate="templateMeter">expand</span>
+  <% } %>
+<% } %>
+
+<br><strong class='section-title'>irregularity&nbsp;<%= rhythm.get("irregularity") %></strong>
+<% if (window.irregularity) { %>
+  <span class="details-link" data-detailsname="irregularity" data-associatedtemplate="templateMeter">collapse</span>
+  <br>
+  <br><span style="margin-left: 1em;">an advanced measurement. this is the average of the edit distances between
+    this rhythm and each perfectly
+    even rhythm of this cell count which is oriented at the same initial onset.
+    said another way, each of the perfectly even rhythms which define the metrical hierarchy
+    are compared with the rhythm individually, the differences are summed up, and
+    then divided by the total number of perfectly even rhythms.</span>
+  <br>
+<% } else { %>
+  <span class="details-link" data-detailsname="irregularity" data-associatedtemplate="templateMeter">expand</span>
+<% } %>

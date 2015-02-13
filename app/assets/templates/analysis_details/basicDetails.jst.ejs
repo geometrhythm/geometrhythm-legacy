@@ -1,65 +1,77 @@
-<h5 class='section-title'>Time Elements Displayed As Squares (TEDAS)</h5>
+<h5 class='section-title'>time elements displayed as squares (TEDAS)</h5>
 
 <br><strong class='section-title'>durational pattern (<%= rhythm.get("durational_pattern") %>)</strong>
 <% if (window.durationalpattern) { %>
   <span class="details-link" data-detailsname="durationalpattern" data-associatedtemplate="templateBasic">collapse</span>
-  <br><cite>the durational pattern of a rhythm is simply a list of the durations of each
+  <br>
+  <br><span style="margin-left: 1em;">the durational pattern of a rhythm is simply a list of the durations of each
       of its adjacent intervals, in order from start to finish. it is a great,
       concise way to uniquely identify a rhythm (as opposed to spelling the entire
-      thing out in x's and -'s for onsets and rests).
+      thing out in x's and -'s for onsets and rests).</span>
   <br>
-  <br>TEDAS is a superior visualization of the durational pattern of a rhythm.
+  <br><span style="margin-left: 1em;">TEDAS is a superior visualization of the durational pattern of a rhythm.
       a simple bar graph of interval sizes would succeed in conveying the
       difference in durations of each consecutive interval to its neighbors, but
       fail to capture their relation to the horizontal timeline of the rhythm as
       a whole. by displaying the duration in both dimensions, creating squares, we
-      have a way to perceive both simultaneously.</cite>
+      have a way to perceive both simultaneously.</span>
+  <br>
 <% } else { %>
   <span class="details-link" data-detailsname="durationalpattern" data-associatedtemplate="templateBasic">expand</span>
 <% } %>
-<br>
 
 <br><strong class='section-title'>box notation (<%= rhythm.get("rhythm_str") %>)</strong>
 <% if (window.boxnotation) { %>
   <span class="details-link" data-detailsname="boxnotation" data-associatedtemplate="templateBasic">collapse</span>
-  <br>another method of uniquely identifying the rhythm. x's are onsets, -'s rests.
+  <br>
+  <br><span style="margin-left: 1em;">another method of uniquely identifying the rhythm. x's are onsets, -'s rests.</span>
+  <br>
 <% } else { %>
   <span class="details-link" data-detailsname="boxnotation" data-associatedtemplate="templateBasic">expand</span>
 <% } %>
-<br>
+
 
 <span class="contour-text">
 <br><strong class='section-title'>contour (<%= rhythm.get("contour") %>)</strong>
 <% if (window.contour) { %>
   <span class="details-link" data-detailsname="contour" data-associatedtemplate="templateBasic">collapse</span>
-  <br>the contour of a rhythm presents its adjacent intervals relatively, rather
+  <br>
+  <br><span style="margin-left: 1em;">the contour of a rhythm presents its adjacent intervals relatively, rather
   than absolutely. it expresses only the change in interval size from one interval
-  to the next, either positive, negative, or no change. rhythms with the same
-  contour share certain properties, but can sound extremely different.
+  to the next, either positive, negative, or no change. the contour
+  does not uniquely identify a rhythm. rhythms with the same
+  contour share certain properties, but can sound extremely different.</span>
+  <br>
 <% } else { %>
   <span class="details-link" data-detailsname="contour" data-associatedtemplate="templateBasic">expand</span>
 <% } %>
-<br>
 </span>
 
 <br><strong class='section-title'>adjacent interval content entropy <%= rhythm.get("adjacent_interval_content_entropy").toFixed(2) %></strong>
 <% if (window.adjacententropy) { %>
   <span class="details-link" data-detailsname="adjacententropy" data-associatedtemplate="templateBasic">collapse</span>
-  <br>a measure of the variation of interval sizes. when every interval is the
+  <br>
+  <br><span style="margin-left: 1em;">a measure of the variation of interval sizes. when every interval is the
       same size, H(P) is at its minimum. when every interval is a different size,
-      H(P) is at its maximum. it is, more or less, the probability of guessing the size of an interval chosen at random.
+      H(P) is at its maximum. it is, more or less, the probability of guessing the size of an interval chosen at random.</span>
+  <br>
 <% } else { %>
   <span class="details-link" data-detailsname="adjacententropy" data-associatedtemplate="templateBasic">expand</span>
 <% } %>
-<br>
 
+
+<% while(rhythm.get("adjacent_interval_content")[rhythm.get("adjacent_interval_content").length-1] === 0) { %>
+  <% rhythm.get("adjacent_interval_content").pop(); %>
+<% } %>
 <br><strong class='section-title'>adjacent interval content (<%= rhythm.get("adjacent_interval_content") %>)</strong>
 <% if (window.adjacenthistogram) { %>
   <span class="details-link" data-detailsname="adjacenthistogram" data-associatedtemplate="templateBasic">collapse</span>
-  <br>simply a tally of adjacent intervals, by size. you could make a histogram out of
+  <br>
+  <br><span style="margin-left: 1em;">simply a tally of adjacent intervals, by size. you could make a histogram out of
       this information, just as is shown for full interval content here. looking at
       only the external intervals or also the internal intervals can provide radically
-      different impressions of your rhythm.
+      different impressions of your rhythm.</span>
+  <br>
 <% } else { %>
   <span class="details-link" data-detailsname="adjacenthistogram" data-associatedtemplate="templateBasic">expand</span>
 <% } %>

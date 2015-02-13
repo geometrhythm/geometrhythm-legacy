@@ -5,6 +5,7 @@ $.RhythmRing.prototype.placeCell = function(id, curAngle, temp, isGrabbedOnset) 
   $newCell.attr("ord", id);
   $newCell.css('transform',
     'translateX(32px) translateY(32px) rotate(' + curAngle + 'deg)');
+  // debugger
   $newCell.droppable();
   if (temp) $newCell.css('opacity', 0.5);
   if (this.rhythmCells[id] || isGrabbedOnset) { $newCell.addClass("onset"); }
