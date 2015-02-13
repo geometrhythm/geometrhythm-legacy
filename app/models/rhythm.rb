@@ -416,6 +416,7 @@ class Rhythm < ActiveRecord::Base
   end
 
   def symmetries_by_onset
+    return [] if len % 2 != 0
     symmetries = []
     # puts convenience_rhythm_str
     (0...len/2).each do |i|
@@ -444,6 +445,7 @@ class Rhythm < ActiveRecord::Base
   end
 
   def symmetries_by_interonset
+    return [] if len % 2 != 0
     symmetries = []
     (0...len/2).each do |i|
       symmetrical = true
@@ -458,6 +460,28 @@ class Rhythm < ActiveRecord::Base
       symmetries << (i - 1) if symmetrical == true
     end
 
+    symmetries
+  end
+
+  def symmetries_for_odd_rhythm
+    return [] if len % 2 != 0
+    symmetries = []
+    (0...len/2).each do |i|
+      puts "i is now #{i}"
+      symmetrical = true
+      j = 0
+      puts "first half is #{convenience_rhythm_str[i...(len / 2) + i]}"
+      puts "second half is #{convenience_rhythm_str[((len - 1) + i) - j]}"
+      convenience_rhythm_str[i...(len / 2) + i].split("").each do |cell|
+        if convenience_rhythm_str[((len - 1) + i) - j] != cell
+          symmetrical = false
+          break
+        end
+        j = j + 1
+      end
+      symmetries << (i - 1) if symmetrical == true
+    end
+    puts "symmetries_for_odd_rhythm: #{symmetries}"
     symmetries
   end
 
@@ -479,6 +503,39 @@ class Rhythm < ActiveRecord::Base
     end
 
     total
+  end
+
+  def complexity_by_onset
+    output = []
+    (0...onset_count).each do |i|
+      this_onset_distinct_distances = []
+      (0...onset_count).each do |j|
+        if i == j
+          # puts "i & j: #{i}"
+          next
+        end
+        # puts "i: #{i}, j: #{j}"
+        unless this_onset_distinct_distances.include?(geodesic_distance(i, j))
+          this_onset_distinct_distances << geodesic_distance(i, j)
+        end
+      end
+      output << this_onset_distinct_distances.count
+    end
+
+    output
+  end
+
+  def onset_complexity_onset_pairs
+    output = []
+    (0...onset_count).each do |i|
+      output << []
+      (0...onset_count).each do |j|
+        next if i == j
+        output[i] << [ onset_indices[i] , onset_indices[j] ]
+      end
+    end
+
+    output
   end
 
   def shelling_count

@@ -12,6 +12,7 @@ Geometrhythm.Views.AnalysisSymmetry = Backbone.View.extend({
   },
 
   render: function() {
+    console.log(this.model.get("symmetries_for_odd_rhythm"));
     if (this.model.id === undefined) {
       this.$el.html("");
       return this;

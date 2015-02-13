@@ -98,8 +98,10 @@ $.RhythmRing.prototype.playRhythm2 = function() {
 
     if (this.rhythmCells[this.playPos]) {
       $('.TEDAS_sq').removeClass('activated');
-      // $('.AIC_sq').removeClass('activated')
+      $('.AIC_sq').removeClass('activated')
       $('body').find(".TEDAS_sq[ord='" + this.playPos + "']")
+        .addClass('activated');
+      $('body').find(".AIC_sq[ord='" + this.playPos + "']")
         .addClass('activated');
       $('.MH_sq.onset').removeClass('activated');
       $('body').find(".MH_sq.onset[ord='" + this.playPos + "']")

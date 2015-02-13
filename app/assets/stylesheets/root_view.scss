@@ -195,9 +195,13 @@ fH:hover {
   border-radius: 4px;
 }
 
-// .AIC_sq.activated {
-//   background-color: #5DA2D6;
-// }
+.AIC_sq.activated {
+  background-color: #5DA2D6;
+}
+
+.AIC_sq.columnHovered {
+  background-color: #ff9800;
+}
 
 .MH_box {
   position: absolute;

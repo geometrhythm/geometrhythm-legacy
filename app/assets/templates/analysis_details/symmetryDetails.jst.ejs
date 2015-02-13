@@ -1,60 +1,90 @@
 <h5 class='section-title a-t-symmetry'>symmetry</h5>
 
-<% if (rhythm.get("symmetries_by_onset").count > 0) { %>
-  <br><strong class='section-title'>symmetries by onset (<%= rhythm.get("symmetries_by_onset") %>)</strong>
-  <% if (window.onsetsymmetries) { %>
-    <span class="details-link" data-detailsname="onsetsymmetries" data-associatedtemplate="templateSymmetry">collapse</span>
-    <br>
-    <br><span style="margin-left: 1em;">this rhythm has
-      <%= rhythm.get("symmetries_by_onset").count %>
-      <%= rhythm.get("symmetries_by_onset").count > 1 ? "lines" : "line" %>
-      of symmetry connecting onsets on opposite sides of the rhythm ring.
-      symmetries by inter-onset are also possible.</span>
-    <br>
+<% if (rhythm.get("len") % 2 == 0) { %>
+  <% if (rhythm.get("symmetries_by_onset").count > 0) { %>
+    <br><strong class='section-title'>symmetries by onset (<%= rhythm.get("symmetries_by_onset") %>)</strong>
+    <% if (window.onsetsymmetries) { %>
+      <span class="details-link" data-detailsname="onsetsymmetries" data-associatedtemplate="templateSymmetry">collapse</span>
+      <br>
+      <br><span style="margin-left: 1em;">this rhythm has
+        <%= rhythm.get("symmetries_by_onset").count %>
+        <%= rhythm.get("symmetries_by_onset").count > 1 ? "lines" : "line" %>
+        of symmetry connecting onsets on opposite sides of the rhythm ring.
+        symmetries by inter-onset are also possible.</span>
+      <br>
+    <% } else { %>
+      <span class="details-link" data-detailsname="onsetsymmetries" data-associatedtemplate="templateSymmetry">expand</span>
+    <% } %>
   <% } else { %>
-    <span class="details-link" data-detailsname="onsetsymmetries" data-associatedtemplate="templateSymmetry">expand</span>
+    <br><strong class='section-title'>no symmetries by onset</strong>
+    <% if (window.onsetsymmetries) { %>
+      <span class="details-link" data-detailsname="onsetsymmetries" data-associatedtemplate="templateSymmetry">collapse</span>
+      <br>
+      <br><span style="margin-left: 1em;">this rhythm has
+        no lines of symmetry connecting onsets on opposite sides of the rhythm
+        ring. symmetries by inter-onset are also possible.</span>
+      <br>
+    <% } else { %>
+      <span class="details-link" data-detailsname="onsetsymmetries" data-associatedtemplate="templateSymmetry">expand</span>
+    <% } %>
+  <% } %>
+  <% if (rhythm.get("symmetries_by_interonset").count > 0) { %>
+    <br><strong class='section-title'>symmetries by interonset (<%= rhythm.get("symmetries_by_interonset") %>)</strong>
+    <% if (window.interonsetsymmetries) { %>
+      <span class="details-link" data-detailsname="interonsetsymmetries" data-associatedtemplate="templateSymmetry">collapse</span>
+      <br>
+      <br><span style="margin-left: 1em;">this rhythm has
+        <%= rhythm.get("symmetries_by_interonset").count %>
+        <%= rhythm.get("symmetries_by_interonset").count > 1 ? "lines" : "line" %>
+        of symmetry connecting intervals between onsets (inter-onsets) on opposite sides of the rhythm ring.
+        symmetries by onset are also possible.</span>
+      <br>
+    <% } else { %>
+      <span class="details-link" data-detailsname="interonsetsymmetries" data-associatedtemplate="templateSymmetry">expand</span>
+    <% } %>
+  <% } else { %>
+    <br><strong class='section-title'>no symmetries by interonset</strong>
+    <% if (window.interonsetsymmetries) { %>
+      <span class="details-link" data-detailsname="interonsetsymmetries" data-associatedtemplate="templateSymmetry">collapse</span>
+      <br>
+      <br><span style="margin-left: 1em;">this rhythm has
+        no lines of symmetry connecting intervals between onsets (inter-onsets) on opposite sides of the rhythm
+        ring. symmetries by onset are also possible.</span>
+      <br>
+    <% } else { %>
+      <span class="details-link" data-detailsname="interonsetsymmetries" data-associatedtemplate="templateSymmetry">expand</span>
+    <% } %>
   <% } %>
 <% } else { %>
-  <br><strong class='section-title'>no symmetries by onset</strong>
-  <% if (window.onsetsymmetries) { %>
-    <span class="details-link" data-detailsname="onsetsymmetries" data-associatedtemplate="templateSymmetry">collapse</span>
-    <br>
-    <br><span style="margin-left: 1em;">this rhythm has
-      no lines of symmetry connecting onsets on opposite sides of the rhythm
-      ring. symmetries by inter-onset are also possible.</span>
-    <br>
+  <% if (rhythm.get("symmetries_for_odd_rhythm").count > 0) { %>
+    <br><strong class='section-title'>symmetries(<%= rhythm.get("symmetries_for_odd_rhythm") %>)</strong>
+    <% if (window.oddrhythmsymmetries) { %>
+      <span class="details-link" data-detailsname="oddrhythmsymmetries" data-associatedtemplate="templateSymmetry">collapse</span>
+      <br>
+      <br><span style="margin-left: 1em;">this rhythm has
+        <%= rhythm.get("symmetries_for_odd_rhythm").count %>
+        <%= rhythm.get("symmetries_for_odd_rhythm").count > 1 ? "lines" : "line" %>
+        of symmetry connecting intervals between onsets (inter-onsets) with onsets on opposite sides of the rhythm ring.
+        </span>
+      <br>
+    <% } else { %>
+      <span class="details-link" data-detailsname="oddrhythmsymmetries" data-associatedtemplate="templateSymmetry">expand</span>
+    <% } %>
   <% } else { %>
-    <span class="details-link" data-detailsname="onsetsymmetries" data-associatedtemplate="templateSymmetry">expand</span>
+    <br><strong class='section-title'>no symmetries</strong>
+    <% if (window.oddrhythmsymmetries) { %>
+      <span class="details-link" data-detailsname="oddrhythmsymmetries" data-associatedtemplate="templateSymmetry">collapse</span>
+      <br>
+      <br><span style="margin-left: 1em;">this rhythm has
+        no lines of symmetry connecting intervals between onsets (inter-onsets) with onsets on opposite sides of the rhythm
+        ring.</span>
+      <br>
+    <% } else { %>
+      <span class="details-link" data-detailsname="oddrhythmsymmetries" data-associatedtemplate="templateSymmetry">expand</span>
+    <% } %>
   <% } %>
 <% } %>
 
-<% if (rhythm.get("symmetries_by_interonset").count > 0) { %>
-  <br><strong class='section-title'>symmetries by interonset (<%= rhythm.get("symmetries_by_interonset") %>)</strong>
-  <% if (window.interonsetsymmetries) { %>
-    <span class="details-link" data-detailsname="interonsetsymmetries" data-associatedtemplate="templateSymmetry">collapse</span>
-    <br>
-    <br><span style="margin-left: 1em;">this rhythm has
-      <%= rhythm.get("symmetries_by_interonset").count %>
-      <%= rhythm.get("symmetries_by_interonset").count > 1 ? "lines" : "line" %>
-      of symmetry connecting intervals between onsets (inter-onsets) on opposite sides of the rhythm ring.
-      symmetries by onset are also possible.</span>
-    <br>
-  <% } else { %>
-    <span class="details-link" data-detailsname="interonsetsymmetries" data-associatedtemplate="templateSymmetry">expand</span>
-  <% } %>
-<% } else { %>
-  <br><strong class='section-title'>no symmetries by interonset</strong>
-  <% if (window.interonsetsymmetries) { %>
-    <span class="details-link" data-detailsname="interonsetsymmetries" data-associatedtemplate="templateSymmetry">collapse</span>
-    <br>
-    <br><span style="margin-left: 1em;">this rhythm has
-      no lines of symmetry connecting intervals between onsets (inter-onsets) on opposite sides of the rhythm
-      ring. symmetries by onset are also possible.</span>
-    <br>
-  <% } else { %>
-    <span class="details-link" data-detailsname="interonsetsymmetries" data-associatedtemplate="templateSymmetry">expand</span>
-  <% } %>
-<% } %>
 
 <% if (rhythm.get("imbalance") > 0) { %>
   <br><strong class='section-title'>imbalance <%= rhythm.get("imbalance") %></strong>
