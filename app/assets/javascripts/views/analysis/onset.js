@@ -25,21 +25,24 @@ Geometrhythm.Views.AnalysisOnset = Backbone.View.extend({
         }
       })
       var len = largestAdjacentInterval;
-      var max_height = Math.max.apply(null, this.model.get("complexity_by_onset"))
+      var max_height = this.model.get("longest_interval")
       // var heightPixelsUnit = 120 / max_height;
       var widthPercentageUnit = 85 / len;
       var heightPixelsUnit = ((window.innerWidth / 4.25) * 0.85) / len;
       if (heightPixelsUnit * max_height > 120) {
-        widthPercentageUnit = widthPercentageUnit * (100 / (heightPixelsUnit * max_height));
-        heightPixelsUnit = 100 / max_height;
+        widthPercentageUnit = widthPercentageUnit * (120 / (heightPixelsUnit * max_height));
+        heightPixelsUnit = 120 / max_height;
+
       }
+      var windowWidth = ((window.innerWidth / 4.25) * 0.85);
       // console.log(this.model.get("onset_complexity_interval_durations"));
       var content = this.template({
         rhythm: this.model,
         widthPercentageUnit: widthPercentageUnit,
         heightPixelsUnit: heightPixelsUnit,
         len: len,
-        max_height: max_height
+        max_height: max_height,
+        windowWidth: windowWidth
       });
       this.$el.html(content);
     } else {

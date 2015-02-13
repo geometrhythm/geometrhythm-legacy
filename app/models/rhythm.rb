@@ -97,6 +97,17 @@ class Rhythm < ActiveRecord::Base
     onset_count * (onset_count - 1) / 2
   end
 
+  def longest_interval
+    longest_interval = 0
+    (0...onset_count).each do |i|
+      (i + 1...onset_count).each do |j|
+        longest_interval = geodesic_distance(i, j) if geodesic_distance(i, j) > longest_interval
+      end
+    end
+
+    longest_interval
+  end
+
   def adjacent_interval_content
     output = Array.new(len) { 0 }
     durational_pattern.each do |duration|
@@ -586,12 +597,14 @@ class Rhythm < ActiveRecord::Base
   def whatever_onsets
     output = []
     (0...onset_count).each do |i|
-      output << Array.new(len / 2) { false }
+      puts "working on #{i}"
+      output << Array.new(len) { false }
       (0...onset_count).each do |j|
         next if i == j
         # puts "onset_index[i]: #{onset_indices[i]}"
         # puts "  onset_index[j]: #{onset_indices[j]}"
         # puts "geodesic_distance(i, j): #{geodesic_distance(i, j)}"
+        puts "  found #{geodesic_distance(i, j)}"
         output[i][geodesic_distance(i, j) - 1] = true;
       end
     end

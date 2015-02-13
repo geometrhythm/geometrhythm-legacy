@@ -1,14 +1,14 @@
 <span class="analysis-title a-t-onset" data-detailsviewname="templateOnset"><h5 class='a-t-onset'>onset complexity</h5></span>
 
 <div class="AIC_box">
-  <% rhythm.get("complexity_by_onset") && rhythm.get("complexity_by_onset").forEach(function(onset_complexity, h_index) { %>
-    <% for (v_index = 0; v_index < rhythm.get("whatever_onsets").length; v_index++ ) { %>
-      <% if (rhythm.get("whatever_onsets")[h_index][v_index]) {  %>
+  <% rhythm.get("whatever_onsets") && rhythm.get("whatever_onsets").forEach(function(whatever, h_index) { %>
+    <% for (v_index = 0; v_index < whatever.length; v_index++ ) { %>
+      <% if (whatever[v_index]) {  %>
         <div class="AIC_sq" idx="<%= h_index %>" ord="<%= rhythm.get("onset_indices")[h_index] %>"
               style="height: <%= heightPixelsUnit %>px;
                     width: <%= widthPercentageUnit %>%;
                     left: <%= ((h_index - 1) * widthPercentageUnit) + 5 %>%;
-                    bottom: <%= (v_index) * heightPixelsUnit %>px">
+                    bottom: <%= (v_index - 1) * heightPixelsUnit %>px">
         </div>
       <% } %>
 
