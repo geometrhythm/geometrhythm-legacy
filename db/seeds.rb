@@ -1,8 +1,8 @@
 u1 = User.where(email: "seed@geometrhythm.com")
-  .first_or_create!(email: 'seed@geometrhythm.com', password_digest: '1')
+  .first_or_create!(email: 'seed@geometrhythm.com', password: 'password')
 
 u2 = User.where(email: "guest@geometrhythm.com")
-  .first_or_create!(email: 'guest@geometrhythm.com', password_digest: '2')
+  .first_or_create!(email: 'guest@geometrhythm.com', password: 'password')
 
 r01 = Rhythm.where(rhythm_str: "x--x--x---x-x---").first_or_create!(creator_id: u1.id, rhythm_str: "x--x--x---x-x---")
 n01 = Name.where(name: "clave son").first_or_create!(name: "clave son")

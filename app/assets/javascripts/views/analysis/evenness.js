@@ -12,7 +12,7 @@ Geometrhythm.Views.AnalysisEvenness = Backbone.View.extend({
     this.ctx2.lineWidth = 3;
     this.ctx2.shadowBlur=20;
     this.ctx2.shadowColor="#ff9800";
-    console.log("did i survive this far?");
+    // console.log("did i survive this far?");
   },
 
   events: {
@@ -96,10 +96,11 @@ Geometrhythm.Views.AnalysisEvenness = Backbone.View.extend({
       this.ctx.stroke();
 
     } else {
+      // console.log("is this happening?");
       this.$el.html("");
     }
-    console.log("hey what's up?");
-    console.log(this.$el.html());
+    // console.log("hey what's up?");
+    // console.log(this.$el.html());
     return this;
   },
 

@@ -33,7 +33,7 @@ Geometrhythm.Views.AnalysisOnset = Backbone.View.extend({
         widthPercentageUnit = widthPercentageUnit * (100 / (heightPixelsUnit * max_height));
         heightPixelsUnit = 100 / max_height;
       }
-      console.log(this.model.get("onset_complexity_interval_durations"));
+      // console.log(this.model.get("onset_complexity_interval_durations"));
       var content = this.template({
         rhythm: this.model,
         widthPercentageUnit: widthPercentageUnit,

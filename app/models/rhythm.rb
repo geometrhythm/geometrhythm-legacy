@@ -589,9 +589,9 @@ class Rhythm < ActiveRecord::Base
       output << Array.new(len / 2) { false }
       (0...onset_count).each do |j|
         next if i == j
-        puts "onset_index[i]: #{onset_indices[i]}"
-        puts "  onset_index[j]: #{onset_indices[j]}"
-        puts "geodesic_distance(i, j): #{geodesic_distance(i, j)}"
+        # puts "onset_index[i]: #{onset_indices[i]}"
+        # puts "  onset_index[j]: #{onset_indices[j]}"
+        # puts "geodesic_distance(i, j): #{geodesic_distance(i, j)}"
         output[i][geodesic_distance(i, j) - 1] = true;
       end
     end

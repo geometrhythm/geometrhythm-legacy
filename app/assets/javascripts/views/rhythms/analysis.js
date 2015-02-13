@@ -69,6 +69,10 @@ Geometrhythm.Views.Analysis = Backbone.CompositeView.extend({
     'mouseout .closure' : 'unHighlightClosure',
     'mouseover .mH' : 'highlightMetricHierarchyFactor',
     'mouseout .mH' : 'unHighlightMetricHierarchyFactor',
+
+    //Onset listeners
+    'mouseover .onset-ddc' : 'highlightAllOnsetDDCs',
+    'mouseout .onset-ddc' : 'unHighlightAllOnsetDDCs',
   },
 
   initialize: function() {
@@ -101,11 +105,14 @@ Geometrhythm.Views.Analysis = Backbone.CompositeView.extend({
   },
 
   toggleDetails: function(event) {
-    if (window[$(event.currentTarget).data('detailsname')]) {
-      window[$(event.currentTarget).data('detailsname')] = false;
+    if (Geometrhythm[$(event.currentTarget).data('detailsname')]) {
+      Geometrhythm[$(event.currentTarget).data('detailsname')] = false;
     } else {
-      window[$(event.currentTarget).data('detailsname')] = true;
+      Geometrhythm[$(event.currentTarget).data('detailsname')] = true;
     }
+    console.log("what's going on HERE?");
+    console.log($(event.currentTarget).data('detailsname'));
+    console.log(Geometrhythm[$(event.currentTarget).data('detailsname')]);
     this.showDetailView(event);
   },
 
@@ -177,13 +184,13 @@ Geometrhythm.Views.Analysis = Backbone.CompositeView.extend({
     } else {
       var template = 'templateGeneral'
     }
-    console.log(template);
+    // console.log(template);
     var view = new Geometrhythm.Views.AnalysisDetails({
       template: template,
       model: this.model
     });
-    console.log("and here's the view one moment later");
-    console.log(view.render().$el);
+    // console.log("and here's the view one moment later");
+    // console.log(view.render().$el);
     this.currentDetailView && this.currentDetailView.remove();
     this.currentDetailView = view;
     this.$('#bb-analysis-details').html(view.render().$el);
@@ -668,7 +675,7 @@ Geometrhythm.Views.Analysis = Backbone.CompositeView.extend({
 
   highlightStrongbeatedness: function() {
     var that = this;
-    console.log(this.factors(this.model.get("len")).sort().reverse().slice(0,2));
+    // console.log(this.factors(this.model.get("len")).sort().reverse().slice(0,2));
     this.factors(this.model.get("len")).sort().reverse().slice(0,2)
       .forEach(function(factor) {
         for (var i = 0; i < that.model.get("len"); i++) {
@@ -982,6 +989,14 @@ Geometrhythm.Views.Analysis = Backbone.CompositeView.extend({
     this.ctx2.fill();
     this.ctx2.strokeStyle = '#eee';
     this.ctx2.stroke();
+  },
+
+  highlightAllOnsetDDCs: function() {
+    $('.AIC_sq').addClass('activated');
+  },
+
+  unHighlightAllOnsetDDCs: function() {
+    $('.AIC_sq').removeClass('activated');
   }
 
 })
