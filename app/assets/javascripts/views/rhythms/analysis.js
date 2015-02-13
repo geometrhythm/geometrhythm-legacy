@@ -193,6 +193,7 @@ Geometrhythm.Views.Analysis = Backbone.CompositeView.extend({
     // console.log(view.render().$el);
     this.currentDetailView && this.currentDetailView.remove();
     this.currentDetailView = view;
+    this.$('#bb-analysis-details').html(view.render().$el);
     $('#bb-analysis-details').html(view.render().$el);
     //console.log(this.$('#bb-analysis-details').html());
   },
@@ -992,11 +993,11 @@ Geometrhythm.Views.Analysis = Backbone.CompositeView.extend({
   },
 
   highlightAllOnsetDDCs: function() {
-    $('.AIC_sq').addClass('activated');
+    $('.AIC_sq').addClass('columnHovered');
   },
 
   unHighlightAllOnsetDDCs: function() {
-    $('.AIC_sq').removeClass('activated');
+    $('.AIC_sq').removeClass('columnHovered');
   }
 
 })
