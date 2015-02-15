@@ -2,7 +2,7 @@ module Api
   class UsersController < ApplicationController
 
     def index
-      @users = User.all
+      @users = User.all.includes(:rhythms).includes(:liked_rhythms)
 
       if params[:creator_id]
         @users = @users.joins('LEFT OUTER JOIN likes
@@ -28,7 +28,7 @@ module Api
     end
 
     def show
-      @user = User.find(params[:id])
+      @user = User.find(params[:id]).includes(:rhythms).includes(:liked_rhythms)
       render :show
     end
   end

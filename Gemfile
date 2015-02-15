@@ -65,7 +65,7 @@ group :development, :test do
   gem 'rspec-rails'
   gem 'factory_girl_rails'
   gem 'faker'
-
+  gem 'rack-mini-profiler'
 
 
 
@@ -74,6 +74,7 @@ end
 group :development do
   gem 'better_errors'
   gem 'binding_of_caller'
+  gem 'bullet'
 end
 
 group :test do
