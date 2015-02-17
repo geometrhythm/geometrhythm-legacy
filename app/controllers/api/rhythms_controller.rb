@@ -34,8 +34,8 @@ module Api
       page_number = params[:page] || 1
 
 
-      @rhythms = @rhythms.includes(:user).includes(:likers) #
-        .includes(:comments).includes(:names).includes(:namers) #argh, bullet says "unused eager loading" with these in, but says n+1 query if i leave them out!!!
+      @rhythms = @rhythms.includes(:user).includes(:likers)
+        .includes(:names).includes(:namers).includes(:comments)
         .page(page_number).per(25)
 
         # page_number = params[:page]
@@ -59,9 +59,6 @@ module Api
     def match
       @rhythm = Rhythm.find_by_rhythm_str(params[:rhythm_str])
       if @rhythm
-        # WHAT DO YOU WANT FROM ME BULLET? HOW AM I SUPPOSED TO INCLUDES NAME AND NAMER HERE?
-        # @rhythm = @rhythm
-        # @rhythm = Rhythm.find(@rhythm.id).includes(:name).includes(:namer)
         render :show
       else
         render json: nil #, status: 404
@@ -69,7 +66,7 @@ module Api
     end
 
     def show
-      @rhythm = Rhythm.find(params[:id]).includes(:name).includes(:namer)
+      @rhythm = Rhythm.find(params[:id])
       render :show
     end
 

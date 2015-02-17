@@ -597,14 +597,14 @@ class Rhythm < ActiveRecord::Base
   def whatever_onsets
     output = []
     (0...onset_count).each do |i|
-      # puts "working on #{i}"
+      puts "working on #{i}"
       output << Array.new(len) { false }
       (0...onset_count).each do |j|
         next if i == j
         # puts "onset_index[i]: #{onset_indices[i]}"
         # puts "  onset_index[j]: #{onset_indices[j]}"
         # puts "geodesic_distance(i, j): #{geodesic_distance(i, j)}"
-        # puts "  found #{geodesic_distance(i, j)}"
+        puts "  found #{geodesic_distance(i, j)}"
         output[i][geodesic_distance(i, j) - 1] = true;
       end
     end
