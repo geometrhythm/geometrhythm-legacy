@@ -47,10 +47,6 @@ gem 'draper'
 gem 'bcrypt'
 gem 'compass-rails'
 
-group :production do
-  gem 'heroku-deflater'
-end
-
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug'
@@ -69,7 +65,7 @@ group :development, :test do
   gem 'rspec-rails'
   gem 'factory_girl_rails'
   gem 'faker'
-  gem 'rack-mini-profiler', require: false
+  gem 'rack-mini-profiler'
 
 
 
