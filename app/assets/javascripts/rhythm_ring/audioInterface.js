@@ -8,10 +8,11 @@ $.RhythmRing.prototype.initializeAudio = function() {
   this.playPos = -1;
   this.curBus = 0;
   this.paused = true;
-  $('body').on('click', 'a.browse', this.stopPlayingBecauseNavigatingAway.bind(this));
+  $('body').on('click', '.browse', this.stopPlayingBecauseNavigatingAway.bind(this));
 };
 
-$.RhythmRing.prototype.stopPlayingBecauseNavigatingAway = function() {
+$.RhythmRing.prototype.stopPlayingBecauseNavigatingAway = function(event) {
+  event.preventDefault();
   this.paused = true;
   clearInterval(this.curPlaying);
   $('#play-pause').removeClass("active").html('<i style="font-size: 12px" class="glyphicon glyphicon-play"></i>&nbsp;Play');

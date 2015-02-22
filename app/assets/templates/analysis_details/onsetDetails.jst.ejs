@@ -11,19 +11,3 @@
 <% } else { %>
   <span class="details-link" data-detailsname="onsetcomplexity" data-associatedtemplate="templateOnset">expand</span>
 <% } %>
-
-<br><strong class='section-title'>shelling count <%= rhythm.get("shelling_count") %></strong>
-<% if (Geometrhythm.shellingcount) { %>
-  <span class="details-link" data-detailsname="shellingcount" data-associatedtemplate="templateOnset">collapse</span>
-  <br>
-  <br><span style="margin-left: 1em;">this is the number of onsets you could possibly delete while preserving deepness.
-    the first step is to find an onset which contains the full spectrum of intervals -
-    one which adds exactly one square to each column in the histogram. that gives
-    a shelling count of 1. next, delete that onset from the rhythm to create a new
-    rhythm. if in that new rhythm you can also find an onset with the new (smaller)
-    full interval spectrum, the shelling count is 2. repeat the process until you
-    can no longer find such an onset.</span>
-  <br>
-<% } else { %>
-  <span class="details-link" data-detailsname="shellingcount" data-associatedtemplate="templateOnset">expand</span>
-<% } %>

@@ -32,10 +32,18 @@
         <ul class="nav navbar-nav navbar-right">
 
           <li>
-            <a class='browse' style="margin: 10px 0px; cursor: hover">
-              browse rhythms
-              <%= image_tag "thumbnail_icon.png" %>
-            </a>
+            <a href="#" style="margin: 14px 0px; cursor: hover" class="js-modal-open">video tutorial</a>
+
+          </li>
+
+          <li style="cursor: hover" class='browse'>
+            <!-- <span style="cursor: hover"> -->
+            <!-- <a class='browse' style="margin: 10px 0px; cursor: hover"> -->
+            <a href="#" style="margin: 14px 0px; cursor: hover">browse rhythms</a>
+
+              <!-- <%#= image_tag "thumbnail_icon.png" %> -->
+            <!-- </a> -->
+            <!-- </span> -->
           </li>
 
           <% if logged_in? %>
@@ -77,6 +85,30 @@
 
 
 <%= yield %>
+
+<div class="modal">
+    <form class="modal-form">
+
+      <span class="modal-close js-modal-close">&times;</span>
+      <br><br>
+      <iframe src="//player.vimeo.com/video/120308828" width="500" height="313" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
+
+    </form>
+    <div class="modal-screen js-modal-close"></div>
+  </div>
+
+  <script>
+  $(function(){
+    $("body").on("click", ".js-modal-open", function(event){
+      event.preventDefault();
+      $(".modal").addClass("is-open");
+    });
+    $("body").on("click", ".js-modal-close", function(event){
+      event.preventDefault();
+      $(".modal").removeClass("is-open");
+    });
+  });
+  </script>
 
 </body>
 </html>

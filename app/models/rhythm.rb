@@ -479,52 +479,52 @@ class Rhythm < ActiveRecord::Base
     return [] if len % 2 == 0
     symmetries = []
     (0...len/2).each do |i|
-      puts "i is now #{i}"
+      # puts "i is now #{i}"
       symmetrical = true
       j = 1
-      puts "first half is #{convenience_rhythm_str[i...(len / 2) + i]}"
+      # puts "first half is #{convenience_rhythm_str[i...(len / 2) + i]}"
 
       convenience_rhythm_str[i...(len / 2) + i].split("").each do |cell|
-        puts "this second half index is #{(((len - 1) + i) - j)}"
-        puts "this second half el is #{convenience_rhythm_str[((len - 1) + i) - j]}"
+        # puts "this second half index is #{(((len - 1) + i) - j)}"
+        # puts "this second half el is #{convenience_rhythm_str[((len - 1) + i) - j]}"
         if convenience_rhythm_str[((len - 1) + i) - j] != cell
           symmetrical = false
-          puts "nope not match"
+          # puts "nope not match"
           break
         end
-        puts "matched, moving on"
+        # puts "matched, moving on"
         j = j + 1
       end
       if symmetrical == true
         symmetries << (i - 1)
-        puts "ADDED THIS ONE!"
+        # puts "ADDED THIS ONE!"
       end
     end
-    puts "symmetries_for_odd_rhythm_after_checking_only_by_onset_yet: #{symmetries}"
+    # puts "symmetries_for_odd_rhythm_after_checking_only_by_onset_yet: #{symmetries}"
 
     (0...len/2).each do |i|
-      puts "i is now #{i}"
+      # puts "i is now #{i}"
       symmetrical = true
       j = 0
-      puts "first half is #{convenience_rhythm_str[i...(len / 2) + i]}"
+      # puts "first half is #{convenience_rhythm_str[i...(len / 2) + i]}"
 
       convenience_rhythm_str[i...(len / 2) + i].split("").each do |cell|
-        puts "this second half index is #{(((len - 1) + i) - j)}"
-        puts "this second half el is #{convenience_rhythm_str[((len - 1) + i) - j]}"
+        # puts "this second half index is #{(((len - 1) + i) - j)}"
+        # puts "this second half el is #{convenience_rhythm_str[((len - 1) + i) - j]}"
         if convenience_rhythm_str[((len - 1) + i) - j] != cell
           symmetrical = false
-          puts "nope not match"
+          # puts "nope not match"
           break
         end
-        puts "matched, moving on"
+        # puts "matched, moving on"
         j = j + 1
       end
       if symmetrical == true
         symmetries << (i - 1)
-        puts "ADDED THIS ONE!"
+        # puts "ADDED THIS ONE!"
       end
     end
-    puts "all symmetries including the ones found by checking interonsets in the first half: #{symmetries}"
+    # puts "all symmetries including the ones found by checking interonsets in the first half: #{symmetries}"
     symmetries
   end
 
@@ -597,14 +597,14 @@ class Rhythm < ActiveRecord::Base
   def whatever_onsets
     output = []
     (0...onset_count).each do |i|
-      puts "working on #{i}"
+      # puts "working on #{i}"
       output << Array.new(len) { false }
       (0...onset_count).each do |j|
         next if i == j
         # puts "onset_index[i]: #{onset_indices[i]}"
         # puts "  onset_index[j]: #{onset_indices[j]}"
         # puts "geodesic_distance(i, j): #{geodesic_distance(i, j)}"
-        puts "  found #{geodesic_distance(i, j)}"
+        # puts "  found #{geodesic_distance(i, j)}"
         output[i][geodesic_distance(i, j) - 1] = true;
       end
     end
