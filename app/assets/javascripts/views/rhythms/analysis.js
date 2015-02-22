@@ -110,9 +110,9 @@ Geometrhythm.Views.Analysis = Backbone.CompositeView.extend({
     } else {
       Geometrhythm[$(event.currentTarget).data('detailsname')] = true;
     }
-    console.log("what's going on HERE?");
-    console.log($(event.currentTarget).data('detailsname'));
-    console.log(Geometrhythm[$(event.currentTarget).data('detailsname')]);
+    // console.log("what's going on HERE?");
+    // console.log($(event.currentTarget).data('detailsname'));
+    // console.log(Geometrhythm[$(event.currentTarget).data('detailsname')]);
     this.showDetailView(event);
   },
 
