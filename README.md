@@ -27,14 +27,38 @@ Users can:
 
 Geometrhythm might seem like a subset of Soundcloud, being only for rhythms. But not exactly! The set of possible rhythms is many orders of magnitude smaller than the set of possible audio waveforms, so in that sense Geomerhythm is maybe more like a cross between Soundcloud and the OEIS.
 
-## Design Docs
+## Guide to the code
+
+Geometrhythm uses these core technologies:
+- Backbone.js
+- Ruby on Rails
+- jQuery
+
+User authentication is handled through Rails, while the rhythmic analyses, information displays, and index are Backbone views within views within views, making extensive use of listeners.
+
+The algorithms behind the seeding of the database with 3000+ quality rhythms are written in Ruby, as are the algorithms behind the complexity measurements rendered in my data visualizations. The soon-to-come search algorithms will also be built in Ruby.
+
+The central "rhythm ring" widget is powered by a combination of:
+- HTML5 Canvas
+- CSS transitions
+- jQuery UI
+
+Building Geometrhythm has been exhilarating from start to finish, but building the rhythm ring may have been my favorite part.
+
+I chose CSS transitions to achieve the animation of the rhythmic cells - stretching, squeezing, and switching as the user mutates the rhythm - because they are lightweight and the Bézier curves used in the timing functions make for attractive motion easing effects; I used a spiffy trick where I set the transform origin of the cells to the center of the ring, so that all I need to do is change their rotation to cause orbiting.
+
+Unfortunately, however, jQuery UI's draggable and droppable functionality does not play well with CSS transitions; upon start of a drag, transitions are re-applied, resulting in dragging the object not under your cursor, but floating out somewhere to the side. I considered coding my own version of draggable and droppable from scratch, but ultimately decided to trust the craftsmanship of jQuery UI and find a means to incorporate it despite this obstacle. So, the cells you interact with on Geometrhythm are actually hybrids: visible cells animated using CSS transitions, and zero-opacity "handle" cells which take their place whenever the user initiates a drag-and-drop. The CSS cells are placed using angles, while the jQuery handle cells are placed by absolute coordinates.
+
+Finally, the polygon that appears in the center of the ring, connecting the onsets of the rhythm, was a perfect job for HTML5 Canvas. It overlays on top of the CSS+jQuery elements, and draws lines that keep up with the rhythm whenever it's animating, by tracking coordinates of the CSS cells.
+
+## Original Design Docs
 * [View Wireframes][views]
 * [DB schema][schema]
 
 [views]: ./docs/views.md
 [schema]: ./docs/schema.md
 
-## Implementation Timeline
+## Implementation Records
 
 ### Phase 1: Splash (~2 days)
 
