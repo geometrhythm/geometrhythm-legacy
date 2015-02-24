@@ -18,6 +18,7 @@ Users can:
 <b>Discover rhythms</b>
 - [x] Sign up, log in
 - [x] Analyze rhythms with dynamic data visualizations of complexity measurements
+- [x] Browse a collection of 3000+ algorithmically generated quality rhythms
 
 <b>Discuss rhythms</b>
 - [x] Like a rhythm
