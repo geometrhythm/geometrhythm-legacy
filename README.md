@@ -1,27 +1,30 @@
 # Geometrhythm
 
-[Heroku link][heroku]
+## Summary
 
-[heroku]: https://geometrhythm.herokuapp.com/
+Geometrhythm is a network for exploring musical rhythms.
 
-## Minimum Viable Product
-Geometrhythm is a network inspired by Soundcloud, but specifically for rhythms.
+The highlight of Geometrhythm is the data visualizations of rhythmic complexity measurements which dynamically update as you modify the rhythm. It was a blast to show off my CS/math/algorithm skills creating these measurements, as well as testing the limits of my front-end skills to build responsive, attractive, expressive charts.
+
+I am already getting a ton of utility out of Geometrhythm myself as a composer. Building beautiful and functional tools like this is why I got into writing code.
 
 Users can:
 
 <b>Design rhythms</b>
 - [x] Use a visual tool to create a rhythm
-- [x] Listen to the rhythm
+- [x] Listen to the rhythm while modifying it
 - [x] Name the rhythm and save it
 
 <b>Discover rhythms</b>
-- [x] Sign up, log in, and create a profile
-- [x] Browse other users' created & liked rhythms
+- [x] Sign up, log in
+- [x] Analyze rhythms with dynamic data visualizations of complexity measurements
 
 <b>Discuss rhythms</b>
 - [x] Like a rhythm
-- [x] Comment on a rhythm
+- [x] Comment on a rhythm or other comments
 - [x] See play counts of rhythms
+
+Geometrhythm might seem like a subset of Soundcloud, being only for rhythms. But not exactly! The set of possible rhythms is many orders of magnitude smaller than the set of possible audio waveforms, so in that sense Geomerhythm is maybe more like a cross between Soundcloud and the OEIS.
 
 ## Design Docs
 * [View Wireframes][views]
@@ -34,32 +37,21 @@ Users can:
 
 ### Phase 1: Splash (~2 days)
 
-Having an account is not necessary to get started with Geometrhythm: the splash page is ready to go with a rhythm to play, and an interactive, animated tool you can use to play around with it. This bit is of paramount importance to have working first.
-
-The good news is that I pretty much have this working already - been hacking away at it for the last week during breaks, before lectures, and whenever I've finished the evening's work with time to spare. This will free up my time to focus on the important Rails/Backbone stuff.
-
-Right... no tool tips up yet:
-* Drag cells out of the circle to discard
-* Click between cells to insert a new one
-* Right-click on a cell to toggle whether it's on or now
-* Right-click between cells to switch them
-
-Also, please enjoy what my Asteroids project became: http://rainbowbbles.com.s3-website-us-west-1.amazonaws.com/
-I own the domain rainbowbbles.com but whatever I did to redirect AWS apparently did not work...
+Having an account is not necessary to get started with Geometrhythm: the splash page is ready to go with a rhythm to play, and an interactive, animated tool you can use to play around with it.
 
 [Details][phase-one]
 
 ### Phase 2: Accounts & Show (~2 days)
 
-When the current rhythm already exists in the database, a teasingly small amount of info about it is displayed out to the side. When the rhythm hasn't been "discovered" yet, it is possible to claim it. This is the hook that will make users want to join. I'll need to have a working way to sign up/in and reach the show page for a rhythm, probably from a dropdown from a navbar up top or modal form - no separate page necessary.
+When the current rhythm already exists in the database, a teasingly small amount of info about it is displayed out to the side. When the rhythm hasn't been "discovered" yet, it is possible to claim it. This is the hook that will make users want to join.
 
-For now, the show page won't be significantly different than the splash page. The rhythm will be playable but not interactive like the splash page. It will show its name, creator, likers, comments, and play count. You will be able to like the rhythm, tag it, or comment on it. This is a vertical slice; navigation will still be manual from the URL bar until...
+Once logged in, the page will show the rhythm's full set of names, its creator, likers, comments, and play count. You will be able to like the rhythm, tag it, or comment on it.
 
 [Details][phase-two]
 
 ### Phase 3: List (~2 days)
 
-The index view is dominated by a paginated collection of rhythms, and its right-hand sidebar allows filtering by creator, liker, or tag. Visiting the index from different contexts pre-sets these filters, making it multipurpose, and thus very important for me to get working. Like the show view, the rhythm will be playable but not interactive.
+The index view is dominated by a paginated collection of rhythms, and its right-hand sidebar allows filtering by creator, liker, or tag. Visiting the index from different contexts pre-sets these filters, making it multipurpose.
 
 [Details][phase-three]
 
@@ -71,9 +63,7 @@ Because the user can return to the splash/root page to create and save new rhyth
 
 ### Phase 5: Stretch Goals
 
-My most important stretch goal is to be able to turn on edit mode for a rhythm from the show page, so that as the rhythm changed the surrounding subviews would update to reflect. That is, if I switched a couple beats around and the new rhythm was already in the database, its info would show; or if it was a new rhythm, I'd be able to name it right away. I expect this would be a challenge to implement, but impressive to employers!
-
-[Details][phase-five]
+My most important stretch goal is to be able to turn on edit mode for a rhythm from the show page, so that as the rhythm changed the surrounding subviews would update to reflect. That is, if I switched a couple beats around and the new rhythm was already in the database, its info would show; or if it was a new rhythm, I'd be able to name it right away.
 
 Further stretch goals:
 
@@ -84,21 +74,16 @@ Further stretch goals:
 
 <b>Discover rhythms</b>
 - [ ] Find rhythms related by shared geometric properties
-- [x] Investigate these properties using beautiful graphs/charts/histograms
 - [ ] Find rhythms based on popularity and recency
 - [ ] Tag rhythms and search by tag
 
 <b>Discuss rhythms</b>
-- [ ] Reference specific pulses of a rhythms in a comment
 - [ ] Share relevant external links for rhythms (recordings)
 - [ ] Share a bit of info about yourself on a profile
 - [ ] Up/down vote names
-- [x] Comment on comments
 - [ ] Wiki-style article body for rhythm
 
-At first glance, being "a Soundcloud for rhythms", Geometrhythm might seem like a subset. But not exactly! The set of possible rhythms is many orders of magnitude smaller than the set of possible audio waveforms, so in that sense Geomerhythm is maybe more like a cross between Soundcloud and the OEIS.
-
-I'd love to show off my algorithm skills by getting to the stretch goal of coding the geometric analyses of the rhythms. I do see Geometrhythm as a project which will go on to provide value to many people, but don't kid myself that I'll get all the way there in 2 weeks. As a musician and recreational mathematician I am passionate about this project and can't wait to use it myself! Building tools like this is why I write code.
+[Details][phase-five]
 
 [phase-one]: ./docs/phases/phase1.md
 [phase-two]: ./docs/phases/phase2.md
