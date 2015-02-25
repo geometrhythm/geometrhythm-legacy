@@ -1,5 +1,5 @@
-<strong><%= comment.body %></strong>
-&nbsp<span style="font-size: 12px"><%= comment.commenter %></span>
+<strong><%- comment.body %></strong>
+&nbsp<span style="font-size: 12px"><%- comment.commenter %></span>
 <ul>
   <% comment.comments.forEach(function(subcomment) { %>
     <li>

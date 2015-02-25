@@ -6,7 +6,7 @@
       <% rhythm.get("likers").forEach(function(liker) { %>
         <li>
           <span class="view-likes" value="<%= liker.id %>">
-            <%= liker.email %>
+            <%- liker.email %>
           </span>
         </li>
       <% }) %>

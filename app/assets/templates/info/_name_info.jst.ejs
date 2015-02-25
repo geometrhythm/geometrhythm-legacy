@@ -9,7 +9,7 @@
     also known as:
     <ul>
       <% additionalNames.forEach(function(naming) { %>
-          <li><%= naming.name.name %></li>
+          <li><%- naming.name.name %></li>
       <% }) %>
     </ul>
     <% if (enabled) { %>

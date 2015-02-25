@@ -80,7 +80,7 @@ Geometrhythm.Views.Info = Backbone.View.extend({
     event.preventDefault();
     var attrs = $(event.currentTarget).serializeJSON();
     var dbName = Geometrhythm.Collections.names.find( function(name){
-        return name.get("name") === attrs["name"].name;
+        return name.escape("name") === attrs["name"].name;
       }
     );
     if (!dbName) {

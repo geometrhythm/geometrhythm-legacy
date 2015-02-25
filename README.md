@@ -1,5 +1,8 @@
 # Geometrhythm
 
+[Check it out live here.][live-link]
+[live-link]: http://www.geometrhythm.com
+
 ## Summary
 
 Geometrhythm is a network for exploring musical rhythms.
