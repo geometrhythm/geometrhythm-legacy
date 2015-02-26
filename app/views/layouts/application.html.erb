@@ -3,17 +3,16 @@
 <head>
   <title>geometrhythm</title>
   <%= favicon_link_tag 'geometrhythm.ico' %>
-  <link href='https://fonts.googleapis.com/css?family=Maven+Pro:400,900,700,500' rel='stylesheet' type='text/css'>
+  <%= stylesheet_link_tag 'https://fonts.googleapis.com/css?family=Maven+Pro:400,900,700,500', type: 'text/css' %>
   <%= stylesheet_link_tag    'application', media: 'all' %>
   <%= javascript_include_tag 'application' %>
   <%= csrf_meta_tags %>
 </head>
 <body>
 
-  <%= audio_tag "clave.wav" %>
-  <%= audio_tag "clave.wav" %>
-  <%= audio_tag "clave.wav" %>
-  <%= audio_tag "clave.wav" %>
+  <% 4.times do %>
+    <%= audio_tag "clave.wav" %>
+  <% end %>
 
   <input type='hidden' id='cur-rhythm-id' value=''>
   <input type='hidden' id='current-rhythm' value=''>
@@ -26,25 +25,25 @@
         </a>
 
         <div class="font_preload" style="opacity: 0">
-          <span style="font-family: 'Glyphicons Halflings', Arial, sans-serif;"></span>
+          <span style="font-family: 'Glyphicons Halflings', Arial, sans-serif;">
+          </span>
         </div>
 
         <i class="glyphicon glyphicon-show-thumbnails"></i>
+
         <ul class="nav navbar-nav navbar-right">
 
           <li>
-            <a href="#" style="margin: 14px 0px; cursor: hover" class="js-modal-open">video tutorial</a>
-
+            <a href="#" style="margin: 14px 0px; cursor: hover"
+               class="js-modal-open">
+               video tutorial
+            </a>
           </li>
 
           <li style="cursor: hover" class='browse'>
-            <!-- <span style="cursor: hover"> -->
-            <!-- <a class='browse' style="margin: 10px 0px; cursor: hover"> -->
-            <a href="#" style="margin: 14px 0px; cursor: hover">browse rhythms</a>
-
-              <!-- <%#= image_tag "thumbnail_icon.png" %> -->
-            <!-- </a> -->
-            <!-- </span> -->
+            <a href="#" style="margin: 14px 0px; cursor: hover">
+              browse rhythms
+            </a>
           </li>
 
           <% if logged_in? %>
@@ -78,22 +77,24 @@
           </li>
 
         <ul>
+
       </div>
     </div>
   </nav>
 
 <%= render "layouts/flash_notices" %>
 
-
 <%= yield %>
 
 <div class="modal">
     <form class="modal-form">
-
       <span class="modal-close js-modal-close">&times;</span>
       <br><br>
-      <iframe src="//player.vimeo.com/video/120308828" width="1000" height="626" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
-
+      <iframe src="//player.vimeo.com/video/120308828"
+              width="1000" height="626"
+              frameborder="0"
+              webkitallowfullscreen mozallowfullscreen allowfullscreen>
+      </iframe>
     </form>
     <div class="modal-screen js-modal-close"></div>
   </div>
