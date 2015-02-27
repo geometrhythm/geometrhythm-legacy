@@ -17,7 +17,6 @@ class SessionsController < ApplicationController
       render :new
     else
       login!(@user)
-      # flash[:notices] = ["Welcome back!"]
       redirect_to root_url
     end
 
@@ -25,7 +24,6 @@ class SessionsController < ApplicationController
 
   def destroy
     logout!
-    # flash[:notices] = ["See you again soon!"]
     redirect_to root_url
   end
 end

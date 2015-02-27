@@ -6,7 +6,7 @@ Rails.application.routes.draw do
       get :match, on: :collection
       get :present, on: :collection
     end
-    resources :rhythms, only: [:index, :show, :create, :update] #, :rhythms_all]
+    resources :rhythms, only: [:index, :show, :create, :update]
     resources :likes, only: [:show, :create, :destroy, :index]
     resources :comments, only: [:show, :create, :destroy, :index, :update]
     resources :names, only: [:show, :create, :destroy, :index]

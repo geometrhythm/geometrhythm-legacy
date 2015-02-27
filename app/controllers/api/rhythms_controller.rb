@@ -18,42 +18,15 @@ module Api
 
     def index
       @rhythms = Rhythm.all
-
-      if params[:creator_id]
-        @rhythms = Rhythm.where(creator_id: params[:creator_id])
-      end
-
-      if params[:rhythm_str]
-        @rhythms = @rhythms.where(rhythm_str: params[:rhythm_str])
-      end
-
-      if params[:liker_id]
-        @rhythms = @rhythms.where(id: User.find(params[:liker_id]).liked_rhythms)
-      end
-
+      filter_rhythms
       page_number = params[:page] || 1
-
-
-      @rhythms = @rhythms.includes(:user).includes(:likers)
-        .includes(:names).includes(:namers).includes(:comments)
-        .page(page_number).per(25)
-
-        # page_number = params[:page]
+      eager_load
 
       render partial: 'api/rhythms/all', locals: {
         models: @rhythms,
         page_number: page_number,
         total_pages: @rhythms.total_pages
       }
-      # else
-      #   @rhythms = @rhythms.page(1).per(25)
-      #   page_number = 1
-      #   render partial: 'api/rhythms/all', locals: {
-      #     models: @rhythms,
-      #     page_number: page_number,
-      #     total_pages: @rhythms.total_pages
-      #   }
-      # end
     end
 
     def match
@@ -61,7 +34,7 @@ module Api
       if @rhythm
         render :show
       else
-        render json: nil #, status: 404
+        render json: nil
       end
     end
 
@@ -75,15 +48,33 @@ module Api
       render :show
     end
 
-    def rhythms_all
-      @rhythms = Rhythm.all
-      render :all
-    end
-
     private
 
     def rhythm_params
       params.require(:rhythm).permit(:rhythm_str, :play_count, :creator_id)
+    end
+
+    def filter_rhythms
+      if params[:creator_id]
+        @rhythms = @rhythms.where(
+          creator_id: params[:creator_id])
+      end
+
+      if params[:rhythm_str]
+        @rhythms = @rhythms.where(
+          rhythm_str: params[:rhythm_str])
+      end
+
+      if params[:liker_id]
+        @rhythms = @rhythms.where(
+          id: User.find(params[:liker_id]).liked_rhythms)
+      end
+    end
+
+    def eager_load
+      @rhythms = @rhythms.includes(:user).includes(:likers)
+        .includes(:names).includes(:namers).includes(:comments)
+        .page(page_number).per(25)
     end
   end
 end
