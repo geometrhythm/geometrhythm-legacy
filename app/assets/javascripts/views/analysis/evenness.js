@@ -177,7 +177,7 @@ Geometrhythm.Views.AnalysisEvenness = Backbone.View.extend({
 
   clearPerfectlyEvenRhythm: function(event) {
     this.ctx2.clearRect(0,0,400,400);
-    $(this.canvas2).css('display','none')
+    $(this.canvas2).css('display','none');
     this.render();
   }
 

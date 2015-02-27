@@ -49,7 +49,7 @@ Geometrhythm.Views.AnalysisBasic = Backbone.View.extend({
     this.ctx.shadowBlur=20;
     this.ctx.shadowColor="#ff9800";
 
-    $(this.canvas).css('display','inline')
+    $(this.canvas).css('display','inline');
     var ord = parseInt($(event.currentTarget).attr('ord'));
     var dur = parseInt($(event.currentTarget).attr('dur'));
     this.ctx.clearRect(0,0,400,400);
@@ -65,6 +65,6 @@ Geometrhythm.Views.AnalysisBasic = Backbone.View.extend({
 
   hideIntervals: function() {
     this.ctx.clearRect(0,0,400,400);
-    $(this.canvas).css('display','none')
+    $(this.canvas).css('display','none');
   }
 })

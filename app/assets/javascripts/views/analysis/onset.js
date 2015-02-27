@@ -61,7 +61,7 @@ Geometrhythm.Views.AnalysisOnset = Backbone.View.extend({
 
     var idx = $('body').find(".AIC_sq[ord='" + ord + "']").attr('idx')
 
-    $(this.canvas).css('display','inline')
+    $(this.canvas).css('display','inline');
     var linesToDraw = this.model.get("onset_complexity_onset_pairs")[idx];
     this.ctx.clearRect(0,0,400,400);
     var that = this;
@@ -80,6 +80,6 @@ Geometrhythm.Views.AnalysisOnset = Backbone.View.extend({
   unHighlightColumn: function(event) {
     $('body').find(".AIC_sq").removeClass('columnHovered');
     this.ctx.clearRect(0,0,400,400);
-    $(this.canvas).css('display','none')
+    $(this.canvas).css('display','none');
   }
 })
