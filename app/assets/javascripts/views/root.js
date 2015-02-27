@@ -1,3 +1,5 @@
+//This file has a couple monster methods that require refactoring.
+
 Geometrhythm.Views.Root = Backbone.CompositeView.extend({
 
   template: JST['root'],

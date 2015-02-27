@@ -25,8 +25,8 @@ Geometrhythm.Views.RhythmsList = Backbone.CompositeView.extend({
     this.listenTo(this.potentialCreators, 'sync', this.render);
     this.listenTo(this.potentialLikers, 'sync', this.render);
     this.listenTo(this.collection, 'add', this.addRhythmListItemView);
-    this.listenTo(this.collection, 'remove', this.removeRhythmListItemView)
-
+    this.listenTo(this.collection, 'remove',
+      this.removeRhythmListItemView)
   },
 
   render: function() {
@@ -44,7 +44,8 @@ Geometrhythm.Views.RhythmsList = Backbone.CompositeView.extend({
     this.attachSubviews();
 
     if (this.subviews('div.subview-version').length == 0) {
-      this.$el.find('div.subview-version').append("No rhythms matched these constraints.")
+      this.$el.find('div.subview-version')
+      .append("No rhythms matched these constraints.")
     }
 
     this.$el.find('.mini-rhythm-ring').miniRhythmRing();
@@ -58,7 +59,9 @@ Geometrhythm.Views.RhythmsList = Backbone.CompositeView.extend({
 
   addRhythmListItemView: function(rhythm) {
     var superSizeMe = false;
-    if (this.subviews('div.subview-version').length == 0) { superSizeMe = true }
+    if (this.subviews('div.subview-version').length == 0) {
+      superSizeMe = true
+    }
     var rhythmListItemView = new Geometrhythm.Views.RhythmListItemView({
       model: rhythm,
       superSizeMe: superSizeMe
@@ -118,7 +121,9 @@ Geometrhythm.Views.RhythmsList = Backbone.CompositeView.extend({
   selectRhythm: function(event){
     event.preventDefault();
     Backbone.View.prototype.remove.call(this)
-    $.cookie('_Geometrhythm_stored_rhythm', $(event.currentTarget).attr('rhythm-str'), { expires: 7, path: '/' });
+    $.cookie('_Geometrhythm_stored_rhythm',
+      $(event.currentTarget).attr('rhythm-str'),
+      { expires: 7, path: '/' });
     Backbone.history.navigate('/', { trigger: true } )
   },
 
@@ -130,10 +135,11 @@ Geometrhythm.Views.RhythmsList = Backbone.CompositeView.extend({
 
   nextPage: function () {
     var view = this;
-    if ($(window).scrollTop() > $(document).height() - $(window).height() - 50) {
+    if ($(window).scrollTop() >
+      $(document).height() - $(window).height() - 50) {
       if (view.collection.page_number < view.collection.total_pages) {
         view.collection.filter.page = view.collection.page_number + 1;
-        view.collection.fetchByFilter(true); 
+        view.collection.fetchByFilter(true);
       }
     }
   }

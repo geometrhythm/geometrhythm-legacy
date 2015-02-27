@@ -1,3 +1,6 @@
+//Like most of my analysis-related files, this was rushed and
+//does not reflect my best coding practices.
+
 Geometrhythm.Views.AnalysisOnset = Backbone.View.extend({
 
   template: JST['analysis/onset'],

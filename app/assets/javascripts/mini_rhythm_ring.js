@@ -6,7 +6,6 @@ MED_CANVAS_DIMENSION = 6;
 $.MiniRhythmRing = function (el, superSizeMe) {
   this.$el = $(el);
   this.superSizeMe = superSizeMe;
-  // debugger
   if (this.superSizeMe) {
     this.ctx = this.$el.find('.medium-polygon-canvas')[0].getContext("2d");
   } else {
@@ -94,12 +93,16 @@ $.MiniRhythmRing.prototype.refreshPolygon = function() {
 $.MiniRhythmRing.prototype.drawSide = function(curPos, prevPos) {
   this.ctx.beginPath();
   if (this.superSizeMe) {
-    this.ctx.moveTo(prevPos[0] + MED_POLYGON_OFFSET, prevPos[1] + MED_CANVAS_DIMENSION);
-    this.ctx.lineTo(curPos[0] + MED_POLYGON_OFFSET, curPos[1] + MED_CANVAS_DIMENSION);
+    this.ctx.moveTo(prevPos[0] + MED_POLYGON_OFFSET,
+      prevPos[1] + MED_CANVAS_DIMENSION);
+    this.ctx.lineTo(curPos[0] + MED_POLYGON_OFFSET,
+      curPos[1] + MED_CANVAS_DIMENSION);
     this.ctx.lineWidth = 1;
   } else {
-    this.ctx.moveTo(prevPos[0] + MINI_POLYGON_OFFSET, prevPos[1] + MINI_POLYGON_OFFSET);
-    this.ctx.lineTo(curPos[0] + MINI_POLYGON_OFFSET, curPos[1] + MINI_POLYGON_OFFSET);
+    this.ctx.moveTo(prevPos[0] + MINI_POLYGON_OFFSET,
+      prevPos[1] + MINI_POLYGON_OFFSET);
+    this.ctx.lineTo(curPos[0] + MINI_POLYGON_OFFSET,
+      curPos[1] + MINI_POLYGON_OFFSET);
     this.ctx.lineWidth = 1;
   }
   this.ctx.stroke();

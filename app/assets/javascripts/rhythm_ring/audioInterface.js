@@ -8,14 +8,16 @@ $.RhythmRing.prototype.initializeAudio = function() {
   this.playPos = -1;
   this.curBus = 0;
   this.paused = true;
-  $('body').on('click', '.browse', this.stopPlayingBecauseNavigatingAway.bind(this));
+  $('body').on('click', '.browse',
+    this.stopPlayingBecauseNavigatingAway.bind(this));
 };
 
 $.RhythmRing.prototype.stopPlayingBecauseNavigatingAway = function(event) {
   event.preventDefault();
   this.paused = true;
   clearInterval(this.curPlaying);
-  $('#play-pause').removeClass("active").html('<i style="font-size: 12px" class="glyphicon glyphicon-play"></i>&nbsp;Play');
+  $('#play-pause').removeClass("active")
+    .html('<i style="font-size: 12px" class="glyphicon glyphicon-play"></i>&nbsp;Play');
   Backbone.history.navigate("#/rhythms", { trigger: true} );
 };
 
@@ -32,11 +34,13 @@ $.RhythmRing.prototype.togglePlay = function() {
   if (this.paused) {
     this.paused = false;
     this.playRhythm2();
-    $('#play-pause').addClass("active").html('<i style="font-size: 12px" class="glyphicon glyphicon-pause"></i>&nbsp;Pause');
+    $('#play-pause').addClass("active")
+      .html('<i style="font-size: 12px" class="glyphicon glyphicon-pause"></i>&nbsp;Pause');
   } else {
     this.paused = true;
     clearInterval(this.curPlaying);
-    $('#play-pause').removeClass("active").html('<i style="font-size: 12px" class="glyphicon glyphicon-play"></i>&nbsp;Play');
+    $('#play-pause').removeClass("active")
+      .html('<i style="font-size: 12px" class="glyphicon glyphicon-play"></i>&nbsp;Play');
   }
 }
 
@@ -112,8 +116,10 @@ $.RhythmRing.prototype.playRhythm2 = function() {
       }
     }
 
-    this.curPlaying = setTimeout(this.playingRhythm2.bind(this), (this.pulseDuration - diff));
+    this.curPlaying = setTimeout(this.playingRhythm2.bind(this),
+                                  (this.pulseDuration - diff));
   }.bind(this);
 
-  this.curPlaying = setTimeout(this.playingRhythm2.bind(this), (this.pulseDuration));
+  this.curPlaying = setTimeout(this.playingRhythm2.bind(this),
+                                (this.pulseDuration));
 }

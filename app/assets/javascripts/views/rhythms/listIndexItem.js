@@ -22,9 +22,12 @@ Geometrhythm.Views.RhythmListItemView = Backbone.CompositeView.extend({
     Geometrhythm.curPlayingRhythm = null;
   },
 
+  //needs refactoring
   render: function() {
     var yetUnliked = false;
-    if ( _(this.model.get("likers")).pluck("id").indexOf(parseInt($('#cur-user-id').val())) == -1 ) {
+    if ( _(this.model.get("likers")).pluck("id")
+      .indexOf(parseInt($('#cur-user-id')
+      .val())) == -1 ) {
       yetUnliked = true;
     }
     var loggedIn = false;
@@ -52,17 +55,22 @@ Geometrhythm.Views.RhythmListItemView = Backbone.CompositeView.extend({
 
   togglePlay: function(event) {
     event.stopPropagation();
-    if (Geometrhythm.curPlayingRhythm !== $(event.currentTarget).attr('rhythm-str')) {
-      Geometrhythm.curPlayingRhythm = $(event.currentTarget).attr('rhythm-str');
+    if (Geometrhythm.curPlayingRhythm !==
+      $(event.currentTarget).attr('rhythm-str')) {
+      Geometrhythm.curPlayingRhythm =
+        $(event.currentTarget).attr('rhythm-str');
       this.playRhythm();
-      $(event.currentTarget).removeClass('glyphicon-play').addClass('glyphicon-pause');
+      $(event.currentTarget).removeClass('glyphicon-play')
+        .addClass('glyphicon-pause');
     } else {
       Geometrhythm.curPlayingRhythm = null;
       clearInterval(Geometrhythm.playingRhythm);
-      $(event.currentTarget).removeClass('glyphicon-pause').addClass('glyphicon-play');
+      $(event.currentTarget).removeClass('glyphicon-pause')
+        .addClass('glyphicon-play');
     }
   },
 
+  //old version of function; needs to be updated with version used on front page
   playRhythm: function() {
     Geometrhythm.playingRhythm = setInterval(function () {
       if (Geometrhythm.curPlayingRhythm === this.rhythmStr) {
@@ -71,8 +79,12 @@ Geometrhythm.Views.RhythmListItemView = Backbone.CompositeView.extend({
           .css('background-color', fill);
         this.$el.find(".med-cell[ord='" + this.playPos + "']")
           .css('background-color', fill);
-        this.playPos += this.playPos >= this.rhythmCells.length - 1 ? -(this.rhythmCells.length - 1) : 1
-        var fill = this.rhythmCells[this.playPos] ? 'orange' : 'rgb(235,198,143)';
+        if (this.playPos >= this.rhythmCells.length - 1) {
+          this.playPos += -(this.rhythmCells.length - 1)
+        } else {
+          this.playPos += 1
+        }
+        var fill = this.rhythmCells[this.playPos] ? '#f60' : 'rgb(235,198,143)';
         this.$el.find(".mini-cell[ord='" + this.playPos + "']")
           .css('background-color', fill);
         this.$el.find(".med-cell[ord='" + this.playPos + "']")
@@ -86,7 +98,8 @@ Geometrhythm.Views.RhythmListItemView = Backbone.CompositeView.extend({
         }
       } else {
         clearInterval(Geometrhythm.playingRhythm);
-        this.$el.find('i').removeClass('glyphicon-pause').addClass('glyphicon-play');
+        this.$el.find('i').removeClass('glyphicon-pause')
+          .addClass('glyphicon-play');
       }
 
     }.bind(this), this.pulseDuration);
@@ -95,10 +108,7 @@ Geometrhythm.Views.RhythmListItemView = Backbone.CompositeView.extend({
   likeIt: function(event) {
     event.stopPropagation();
     var that = this;
-    new Geometrhythm.Models.Like().save({rhythm_id: this.model.id},{ success: function() {
-      // that.render();
-    }});
-
+    new Geometrhythm.Models.Like().save( { rhythm_id: this.model.id } );
   },
 
 });

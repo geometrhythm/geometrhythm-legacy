@@ -29,11 +29,13 @@ Geometrhythm.Views.Info = Backbone.View.extend({
     'click span.instruction_deets_link' : 'expandInstructions',
   },
 
+  //this could use refactoring.
   render: function(options) {
     var earliestNameId = null;
     var primaryName = null;
     var firstPassAdditionalNames = [];
-    this.model.get("namings") && this.model.get("namings").forEach(function(naming) {
+    this.model.get("namings") &&
+      this.model.get("namings").forEach(function(naming) {
       if (earliestNameId == undefined || naming.name.id <= earliestNameId) {
         earliestNameId = naming.name.id;
         primaryName = naming.name.name;
@@ -151,12 +153,14 @@ Geometrhythm.Views.Info = Backbone.View.extend({
   },
 
   viewCreations: function(event) {
-    Backbone.history.navigate("/creations/" + $(event.currentTarget).attr("value"),
+    Backbone.history.navigate("/creations/" +
+      $(event.currentTarget).attr("value"),
       {trigger: true});
   },
 
   viewLikes: function(event) {
-    Backbone.history.navigate("/likes/" + $(event.currentTarget).attr("value"),
+    Backbone.history.navigate("/likes/" +
+      $(event.currentTarget).attr("value"),
       {trigger: true});
   },
 

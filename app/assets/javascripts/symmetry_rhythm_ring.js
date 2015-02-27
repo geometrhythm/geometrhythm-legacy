@@ -1,3 +1,5 @@
+//This file could use some work. Rushed, it came out quite wet and smelly.
+
 SYMMETRY_POLYGON_OFFSET = 7;
 SYMMETRY_CANVAS_DIM = 150;
 
@@ -10,7 +12,8 @@ $.SymmetryRhythmRing = function (el, onsetSymmetries, interonsetSymmetries) {
   this.initializeRhythm(this.rhythmStr);
   this.refreshPolygon();
   this.$el.on('mouseover', '.symmetry-cell', this.showCellDiameter.bind(this));
-  this.$el.on('mouseover', '.symmetry-intercell', this.showIntercellDiameter.bind(this));
+  this.$el.on('mouseover', '.symmetry-intercell',
+    this.showIntercellDiameter.bind(this));
 };
 
 $.fn.symmetryRhythmRing = function (onsetSymmetries, interonsetSymmetries) {
@@ -64,7 +67,8 @@ $.SymmetryRhythmRing.prototype.refreshPolygon = function() {
   for (var i = 0; i <= this.rhythmCells.length * 2; i++ ) {
     j = i % this.rhythmCells.length;
     if (i > this.rhythmCells.length && j > firstPos) break;
-    var curPosition = this.$el.find(".symmetry-cell[ord='" + j + "']").position();
+    var curPosition = this.$el.find(".symmetry-cell[ord='" + j + "']")
+      .position();
     var curPos = [curPosition.left, curPosition.top];
     if (this.rhythmCells[j]) {
       if (prevPos) this.drawSide(curPos, prevPos);
@@ -77,8 +81,10 @@ $.SymmetryRhythmRing.prototype.refreshPolygon = function() {
 $.SymmetryRhythmRing.prototype.drawSide = function(curPos, prevPos, color) {
   this.ctx.strokeStyle = color;
   this.ctx.beginPath();
-  this.ctx.moveTo(prevPos[0] + SYMMETRY_POLYGON_OFFSET, prevPos[1] + SYMMETRY_POLYGON_OFFSET);
-  this.ctx.lineTo(curPos[0] + SYMMETRY_POLYGON_OFFSET, curPos[1] + SYMMETRY_POLYGON_OFFSET);
+  this.ctx.moveTo(prevPos[0] + SYMMETRY_POLYGON_OFFSET,
+    prevPos[1] + SYMMETRY_POLYGON_OFFSET);
+  this.ctx.lineTo(curPos[0] + SYMMETRY_POLYGON_OFFSET,
+    curPos[1] + SYMMETRY_POLYGON_OFFSET);
   this.ctx.lineWidth = 1;
   this.ctx.stroke();
 };
@@ -92,12 +98,15 @@ $.SymmetryRhythmRing.prototype.showAllSymmetries = function() {
     if (ord < 0) {
       ord += that.rhythmStr.length;
     }
-    var curPosition = that.$el.find(".symmetry-cell[ord='" + ord + "']").position();
+    var curPosition = that.$el.find(".symmetry-cell[ord='" + ord + "']")
+      .position();
     var antipode = (ord + (that.rhythmStr.length / 2)) % that.rhythmStr.length
     if (antipode % 1 === 0) {
-      var otherPosition = that.$el.find(".symmetry-cell[ord='" + antipode + "']").position();
+      var otherPosition = that.$el.find(".symmetry-cell[ord='" + antipode + "']")
+        .position();
     } else {
-      var otherPosition = that.$el.find(".symmetry-intercell[ord='" + Math.floor(antipode) + "']").position();
+      var otherPosition = that.$el.find(".symmetry-intercell[ord='"
+        + Math.floor(antipode) + "']").position();
     }
     var curPos = [curPosition.left, curPosition.top];
     var otherPos = [otherPosition.left, otherPosition.top];
@@ -108,14 +117,18 @@ $.SymmetryRhythmRing.prototype.showAllSymmetries = function() {
     if (ord < 0) {
       ord += that.rhythmStr.length;
     }
-    var curPosition = that.$el.find(".symmetry-intercell[ord='" + ord + "']").position();
+    var curPosition = that.$el.find(".symmetry-intercell[ord='" + ord + "']")
+      .position();
     var antipode = (ord + (that.rhythmStr.length / 2)) % that.rhythmStr.length
     if (antipode % 1 === 0) {
-      var otherPosition = that.$el.find(".symmetry-intercell[ord='" + antipode + "']").position();
+      var otherPosition = that.$el.find(".symmetry-intercell[ord='"
+        + antipode + "']").position();
     } else {
-      var otherPosition = that.$el.find(".symmetry-cell[ord='" + ((Math.floor(antipode) + 1) % that.rhythmStr.length) + "']").position();
+      var otherPosition = that.$el.find(".symmetry-cell[ord='"
+        + ((Math.floor(antipode) + 1) % that.rhythmStr.length) + "']")
+        .position();
     }
-    // debugger
+
     var curPos = [curPosition.left, curPosition.top];
     var otherPos = [otherPosition.left, otherPosition.top];
     that.drawSide(curPos, otherPos, color);
@@ -131,21 +144,25 @@ $.SymmetryRhythmRing.prototype.showIntercellDiameter = function(event) {
   var curPosition = $(event.currentTarget).position();
   var antipode = (ord + (this.rhythmStr.length / 2)) % this.rhythmStr.length
   if (antipode % 1 === 0) {
-    var otherPosition = this.$el.find(".symmetry-intercell[ord='" + (antipode % this.rhythmStr.length) + "']").position();
+    var otherPosition = this.$el.find(".symmetry-intercell[ord='"
+      + (antipode % this.rhythmStr.length) + "']").position();
   } else {
-    var otherPosition = this.$el.find(".symmetry-cell[ord='" + ((Math.floor(antipode) + 1) % this.rhythmStr.length) + "']").position();
+    var otherPosition = this.$el.find(".symmetry-cell[ord='"
+      + ((Math.floor(antipode) + 1) % this.rhythmStr.length) + "']").position();
   }
 
   var curPos = [curPosition.left, curPosition.top];
   var otherPos = [otherPosition.left, otherPosition.top];
   if (this.rhythmStr.length % 2 === 0) {
-    if (this.interonsetSymmetries.indexOf(ord) != -1 || this.interonsetSymmetries.indexOf(antipode) != -1) {
+    if (this.interonsetSymmetries.indexOf(ord) != -1
+      || this.interonsetSymmetries.indexOf(antipode) != -1) {
       color = "#ff9800";
     } else {
       color = "#888";
     }
   } else {
-    if (this.interonsetSymmetries.indexOf(ord) != -1 || this.onsetSymmetries.indexOf(antipode) != -1) {
+    if (this.interonsetSymmetries.indexOf(ord) != -1
+      || this.onsetSymmetries.indexOf(antipode) != -1) {
       color = "#ff9800";
     } else {
       color = "#888";
@@ -163,20 +180,24 @@ $.SymmetryRhythmRing.prototype.showCellDiameter = function(event) {
   var curPosition = $(event.currentTarget).position();
   var antipode = (ord + (this.rhythmStr.length / 2)) % this.rhythmStr.length
   if (antipode % 1 === 0) {
-    var otherPosition = this.$el.find(".symmetry-cell[ord='" + (antipode % this.rhythmStr.length) + "']").position();
+    var otherPosition = this.$el.find(".symmetry-cell[ord='"
+      + (antipode % this.rhythmStr.length) + "']").position();
   } else {
-    var otherPosition = this.$el.find(".symmetry-intercell[ord='" + (Math.floor(antipode) % this.rhythmStr.length) + "']").position();
+    var otherPosition = this.$el.find(".symmetry-intercell[ord='"
+      + (Math.floor(antipode) % this.rhythmStr.length) + "']").position();
   }
   var curPos = [curPosition.left, curPosition.top];
   var otherPos = [otherPosition.left, otherPosition.top];
   if (this.rhythmStr.length % 2 === 0) {
-    if (this.onsetSymmetries.indexOf(ord) != -1 || this.onsetSymmetries.indexOf(antipode) != -1) {
+    if (this.onsetSymmetries.indexOf(ord) != -1
+      || this.onsetSymmetries.indexOf(antipode) != -1) {
       color = "#ff9800";
     } else {
       color = "#888";
     }
   } else {
-    if (this.onsetSymmetries.indexOf(ord) != -1 || this.interonsetSymmetries.indexOf(antipode) != -1) {
+    if (this.onsetSymmetries.indexOf(ord) != -1
+      || this.interonsetSymmetries.indexOf(antipode) != -1) {
       color = "#ff9800";
     } else {
       color = "#888";

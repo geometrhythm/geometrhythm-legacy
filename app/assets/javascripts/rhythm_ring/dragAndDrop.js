@@ -1,6 +1,8 @@
 $.RhythmRing.prototype.hideCellItself = function(event) {
-  this.$el.find(".cell[ord='" + parseInt($(event.currentTarget).attr("ord"))
-    + "']").css('opacity', 0);
+  this.$el.find(".cell[ord='"
+    + parseInt($(event.currentTarget).attr("ord"))
+    + "']")
+    .css('opacity', 0);
   $(event.currentTarget).css('opacity', 1);
 };
 
@@ -9,9 +11,16 @@ $.RhythmRing.prototype.expandForCellAt = function (intercellId) {
   this.yankedId = intercellId + 1;
   this.rhythmCells.splice(intercellId + 1, 0, this.isGrabbedOnset);
   this.updateLaterIds(intercellId);
-  this.placeIntercell(intercellId + 1, this.rhythmIntercellAngles[intercellId]);
-  this.placeCell(intercellId + 1, this.rhythmIntercellAngles[intercellId],
-    true, this.isGrabbedOnset);
+  this.placeIntercell(
+    intercellId + 1,
+    this.rhythmIntercellAngles[intercellId]
+  );
+  this.placeCell(
+    intercellId + 1, 
+    this.rhythmIntercellAngles[intercellId],
+    true,
+    this.isGrabbedOnset
+  );
 };
 
 $.RhythmRing.prototype.recollapse = function (event) {
@@ -33,7 +42,8 @@ $.RhythmRing.prototype.yankCellFromRing = function(event) {
       this.actionAt("delete", id);
       this.yankedId = id;
       setTimeout(function() {
-        this.$el.find(".cell-handle[ord='" + id + "']").addClass("grabbed")
+        this.$el.find(".cell-handle[ord='" + id + "']")
+        .addClass("grabbed")
         .css("opacity", 1)
         .draggable("option", "revert", false);
       }.bind(this), 0);
@@ -55,9 +65,14 @@ $.RhythmRing.prototype.squeezeCellIntoRing = function(event) {
 $.RhythmRing.prototype.letGoOfCell = function(event) {
   if ($(event.currentTarget).hasClass("grabbed") === true) {
     if (this.squeezing) {
-      var curPosition = $(".cell[ord='" + this.yankedId + "']").position();
+      var curPosition = $(".cell[ord='" + this.yankedId + "']")
+        .position();
       var curPos = [curPosition.left, curPosition.top];
-      $(event.currentTarget).animate({left: curPos[0], top: curPos[1], opacity: 0}, 100);
+      $(event.currentTarget).animate({
+        left: curPos[0],
+        top: curPos[1],
+        opacity: 0
+      }, 100);
     } else {
       $(event.currentTarget).hide("puff");
     }

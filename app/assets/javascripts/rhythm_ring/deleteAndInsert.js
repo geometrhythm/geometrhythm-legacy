@@ -1,11 +1,10 @@
 CSS_EL_ANGLE_OFFSET = 45;
 
-$.RhythmRing.prototype.placeCell = function(id, curAngle, temp, isGrabbedOnset) {
+$.RhythmRing.prototype.placeCell = function(id, curAngle, temp, isGrabbedOnset){
   var $newCell = $('<div class="cell">');
   $newCell.attr("ord", id);
   $newCell.css('transform',
     'translateX(32px) translateY(32px) rotate(' + curAngle + 'deg)');
-  // debugger
   $newCell.droppable();
   if (temp) $newCell.css('opacity', 0.5);
   if (this.rhythmCells[id] || isGrabbedOnset) { $newCell.addClass("onset"); }
@@ -62,8 +61,10 @@ $.RhythmRing.prototype.actionOptions = function(action, id) {
   } else if (action === "expand") {
     options.beforeLoopFn = this.expandForCellAt.bind(this);
   }
-  options.cellFn = options.cellFn || this.updateCellAngle.bind(this);
-  options.intercellFn = options.intercellFn || this.updateIntercellAngle.bind(this);
+  options.cellFn = options.cellFn ||
+    this.updateCellAngle.bind(this);
+  options.intercellFn = options.intercellFn ||
+    this.updateIntercellAngle.bind(this);
 
   return options;
 };

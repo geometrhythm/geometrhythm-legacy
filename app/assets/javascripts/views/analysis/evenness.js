@@ -1,3 +1,6 @@
+//Like most of my analysis-related files, this was rushed and
+//does not reflect my best coding practices.
+
 Geometrhythm.Views.AnalysisEvenness = Backbone.View.extend({
 
   template: JST['analysis/evenness'],
@@ -42,24 +45,31 @@ Geometrhythm.Views.AnalysisEvenness = Backbone.View.extend({
       //columns
       for (var i = 0; i < this.model.get("len"); i++) {
         this.ctx.beginPath();
-        this.ctx.moveTo((i / this.model.get("len")) * this.windowWidth, 0);
-        this.ctx.lineTo((i / this.model.get("len")) * this.windowWidth, 120);
+        this.ctx.moveTo(
+          (i / this.model.get("len")) * this.windowWidth, 0);
+        this.ctx.lineTo(
+          (i / this.model.get("len")) * this.windowWidth, 120);
         this.ctx.stroke();
       }
 
       //rows
-      for (var i = 0; i < this.model.get("onset_indices").length; i++) {
+      for (var i = 0; i < this.model.get("onset_indices").length; i++){
         this.ctx.beginPath();
-        this.ctx.moveTo(0, (i / this.model.get("onset_indices").length) * 120.0);
-        this.ctx.lineTo(this.windowWidth, (i / this.model.get("onset_indices").length) * 120.0);
+        this.ctx.moveTo(0,
+          (i / this.model.get("onset_indices").length) * 120.0);
+        this.ctx.lineTo(this.windowWidth,
+          (i / this.model.get("onset_indices").length) * 120.0);
         this.ctx.stroke();
       }
 
       //onset points
-      for (var i = 0; i < this.model.get("onset_indices").length; i++) {
+      for (var i = 0; i < this.model.get("onset_indices").length; i++){
         var $newPoint = $('<span class="evenness-point">&#149;</span>');
-        $newPoint.css('left', (this.windowWidth / 25) + ((this.model.get("onset_indices")[i] / this.model.get("len")) * this.windowWidth))
-          .css('top', 150.0 - ((i) * (120.0 / this.model.get("onset_indices").length)))
+        $newPoint.css('left', (this.windowWidth / 25)
+          + ((this.model.get("onset_indices")[i]
+            / this.model.get("len")) * this.windowWidth))
+          .css('top', 150.0 - ((i) * (120.0
+            / this.model.get("onset_indices").length)))
         $newPoint.attr('ord', this.model.get("onset_indices")[i]);
         $newPoint.attr('idx', i);
         this.$el.append($newPoint);
@@ -77,8 +87,10 @@ Geometrhythm.Views.AnalysisEvenness = Backbone.View.extend({
           var nextPosLeft = this.windowWidth;
           var nextPosTop = 0;
         } else {
-          var nextPosLeft = ((this.model.get("onset_indices")[i] / this.model.get("len")) * this.windowWidth);
-          var nextPosTop = 120.0 - (i * (120.0 / this.model.get("onset_indices").length));
+          var nextPosLeft = ((this.model.get("onset_indices")[i]
+            / this.model.get("len")) * this.windowWidth);
+          var nextPosTop = 120.0 -
+            (i * (120.0 / this.model.get("onset_indices").length));
         }
         this.ctx.lineTo(nextPosLeft, nextPosTop)
 
@@ -109,7 +121,9 @@ Geometrhythm.Views.AnalysisEvenness = Backbone.View.extend({
     this.ctx.shadowBlur=0;
     this.ctx.beginPath();
     this.ctx.moveTo(
-      -20 + (this.windowWidth / 25) + ((this.model.get("onset_indices")[ord] / this.model.get("len")) * this.windowWidth),
+      -20 + (this.windowWidth / 25)
+      + ((this.model.get("onset_indices")[ord]
+      / this.model.get("len")) * this.windowWidth),
       120.0 - ((ord / this.model.get("onset_indices").length) * 120.0)
     );
     this.ctx.lineTo(
@@ -141,7 +155,7 @@ Geometrhythm.Views.AnalysisEvenness = Backbone.View.extend({
     this.ctx2.moveTo(prevPos[0] + 13, prevPos[1] + 13);
     var sideArcLength = 360 / this.model.get("onset_indices").length;
 
-    for (var i = 0; i <= this.model.get("onset_indices").length; i++ ) {
+    for (var i = 0; i <= this.model.get("onset_indices").length; i++ ){
       curAngle += sideArcLength;
       var nextAngleInRadians = curAngle * (Math.PI / 180);
       var nextPos = [137 + (150 * Math.cos(nextAngleInRadians)),
@@ -153,7 +167,8 @@ Geometrhythm.Views.AnalysisEvenness = Backbone.View.extend({
     for (var i = 0; i <= this.model.get("onset_indices").length; i++) {
       this.ctx.beginPath();
       this.ctx.fillStyle="#ff9800";
-      this.ctx.arc((i / this.model.get("onset_indices").length) * this.windowWidth,
+      this.ctx.arc((i
+        / this.model.get("onset_indices").length) * this.windowWidth,
         120.0 - ((i / this.model.get("onset_indices").length) * 120.0),
         4, 0, 2*Math.PI);
       this.ctx.fill();

@@ -40,26 +40,43 @@ $.RhythmRing.prototype.rhythmAsStr = function() {
 }
 
 $.RhythmRing.prototype.initializeEventHandlers = function() {
-  $('body').on('click', '#play-pause', this.togglePlay.bind(this));
-  $('body').on('click', '#invert', this.invertRhythm.bind(this));
-  $('body').on('click', '#reverse', this.reverseRhythm.bind(this));
-  $('body').on('mousedown', '#clockwise', this.rotateRhythmClockwise.bind(this));
-  $('body').on('mousedown', '#c-clockwise', this.rotateRhythmCounterClockwise.bind(this));
-  $('body').on('change', '#input-tempo', this.changeTempo.bind(this));
-  $('body').on('change', '#input-rhythm', this.manualOverrideRhythm.bind(this));
-  $('body').on('dbl-click', '#clockwise', this.rotateRhythmClockwise.bind(this));
+  $('body').on('click', '#play-pause',
+    this.togglePlay.bind(this));
+  $('body').on('click', '#invert',
+    this.invertRhythm.bind(this));
+  $('body').on('click', '#reverse',
+    this.reverseRhythm.bind(this));
+  $('body').on('mousedown', '#clockwise',
+    this.rotateRhythmClockwise.bind(this));
+  $('body').on('mousedown', '#c-clockwise',
+    this.rotateRhythmCounterClockwise.bind(this));
+  $('body').on('change', '#input-tempo',
+    this.changeTempo.bind(this));
+  $('body').on('change', '#input-rhythm',
+    this.manualOverrideRhythm.bind(this));
+  $('body').on('dbl-click', '#clockwise',
+    this.rotateRhythmClockwise.bind(this));
 
   this.$el.on('transitionend', '.intercell',
     this.cleanupMergedIntercell.bind(this));
-  this.$el.on('transitionend', '.cell', this.endAnimation.bind(this));
-  this.$el.on("mousedown", ".cell-handle", this.maybeToggle.bind(this));
-  this.$el.on("mousedown", ".intercell", this.handleIntercellClick.bind(this));
-  this.$el.on('dropout', '.cell', this.yankCellFromRing.bind(this));
-  this.$el.on('dragstart', '.cell-handle', this.hideCellItself.bind(this));
-  this.$el.on('dragstop', '.cell-handle', this.letGoOfCell.bind(this));
-  this.$el.on('mouseover', '.cell-handle', this.highlightCell.bind(this));
-  this.$el.on('mouseleave', '.cell-handle', this.highlightOffCell.bind(this));
-  this.$el.on('transitionend', '.cell-label', this.maybeRemoveLabel.bind(this));
+  this.$el.on('transitionend', '.cell',
+    this.endAnimation.bind(this));
+  this.$el.on("mousedown", ".cell-handle",
+    this.maybeToggle.bind(this));
+  this.$el.on("mousedown", ".intercell",
+    this.handleIntercellClick.bind(this));
+  this.$el.on('dropout', '.cell',
+    this.yankCellFromRing.bind(this));
+  this.$el.on('dragstart', '.cell-handle',
+    this.hideCellItself.bind(this));
+  this.$el.on('dragstop', '.cell-handle',
+    this.letGoOfCell.bind(this));
+  this.$el.on('mouseover', '.cell-handle',
+    this.highlightCell.bind(this));
+  this.$el.on('mouseleave', '.cell-handle',
+    this.highlightOffCell.bind(this));
+  this.$el.on('transitionend', '.cell-label',
+    this.maybeRemoveLabel.bind(this));
 };
 
 $.RhythmRing.prototype.initializeRhythm = function(rhythmStr) {
@@ -119,7 +136,8 @@ $.RhythmRing.prototype.invertRhythm = function() {
 $.RhythmRing.prototype.reverseRhythm = function() {
   var tempRhythmCells = this.rhythmCells.slice(0);
   for (var i = 0; i < this.rhythmCells.length; i++) {
-    if (this.rhythmCells[i] != tempRhythmCells[(this.rhythmCells.length - i) - 1]) {
+    if (this.rhythmCells[i] !=
+      tempRhythmCells[(this.rhythmCells.length - i) - 1]) {
       this.toggleCell(i, true);
     }
   }
@@ -198,7 +216,8 @@ $.RhythmRing.prototype.rotateRhythmCounterClockwiseByOnset = function() {
   var tempCells = this.rhythmCells.slice(0);
   for (var i = 0; i < this.rhythmCells.length; i++) {
     var thisIndex = i + firstOnsetDiff;
-    if (thisIndex >= this.rhythmCells.length ) thisIndex -= this.rhythmCells.length;
+    if (thisIndex >= this.rhythmCells.length ) thisIndex -=
+      this.rhythmCells.length;
     if (this.rhythmCells[i] != tempCells[thisIndex]) {
       this.toggleCell(i, true);
     }

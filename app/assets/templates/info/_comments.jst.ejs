@@ -1,8 +1,13 @@
 <br>
+
 <% if (commentDeets) { %>
+
   <br>
+
   <% if (rhythm.get("comments") && rhythm.get("comments").length > 0) { %>
+
     <strong>comments</strong>
+
     <ul>
       <% rhythm.get("comments").forEach(function(comment) {  %>
         <li>
@@ -10,20 +15,28 @@
         </li>
       <% }) %>
     </ul>
+
   <% } %>
 
   <% if (enabled) { %>
+
     <form class="add-comment">
       <input type="text" name="comment[body]">
       <button class="btn btn-default btn-xs" type="submit">Comment</button>
     </form>
+
   <% } %>
 
   <span class="deets_link comment_deets_collapse">collapse</span>
+
 <% } else if ( rhythm.get("comments") && rhythm.get("comments").length > 0) { %>
+
   <i style="font-size: 18px" class="glyphicon glyphicon-comments"></i>&nbsp;
   <span class="deets_link comment_deets_link"><br>view comments</span>
-<% } else if (enabled){ %>
+
+<% } else if (enabled) { %>
+
   <i style="font-size: 18px" class="glyphicon glyphicon-comments"></i>&nbsp;
   <span class="deets_link comment_deets_link"><br>add comment</span>
+
 <% } %>

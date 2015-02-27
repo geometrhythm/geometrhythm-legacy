@@ -1,12 +1,11 @@
 <% if (superSizeMe) { %>
   <div class="key-rhythm"
+
     rhythm-str="<%= rhythm.get("rhythm_str") %>">
 
-
-      <div class="medium-rhythm-ring"
-        rhythm-str="<%= rhythm.get("rhythm_str") %>">
-        <canvas class='medium-polygon-canvas' height='195' width='195'></canvas>
-
+    <div class="medium-rhythm-ring"
+      rhythm-str="<%= rhythm.get("rhythm_str") %>">
+      <canvas class='medium-polygon-canvas' height='195' width='195'></canvas>
     </div>
 
     <i class="glyphicon glyphicon-play"
@@ -19,15 +18,18 @@
         <span style="color: #ff9800">liked</span>
       <% } %>
     <% } %>
+
   </div>
+
 <% } else { %>
+
   <div class="rhythm"
+
     rhythm-str="<%= rhythm.get("rhythm_str") %>">
 
-      <div class="mini-rhythm-ring"
-        rhythm-str="<%= rhythm.get("rhythm_str") %>">
-        <canvas class='mini-polygon-canvas' height='89' width='89'></canvas>
-
+    <div class="mini-rhythm-ring"
+      rhythm-str="<%= rhythm.get("rhythm_str") %>">
+      <canvas class='mini-polygon-canvas' height='89' width='89'></canvas>
     </div>
 
     <i class="glyphicon glyphicon-play"
@@ -40,5 +42,7 @@
         <span style="color: #ff9800">liked</span>
       <% } %>
     <% } %>
+
   </div>
+
 <% } %>
