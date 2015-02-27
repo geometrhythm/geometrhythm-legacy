@@ -110,11 +110,6 @@ GEM
     debug_inspector (0.0.2)
     debugger-linecache (1.2.0)
     diff-lcs (1.2.5)
-    draper (1.4.0)
-      actionpack (>= 3.0)
-      activemodel (>= 3.0)
-      activesupport (>= 3.0)
-      request_store (~> 1.0)
     eco (1.0.0)
       coffee-script
       eco-source
@@ -234,7 +229,6 @@ GEM
       ffi (>= 0.5.0)
     rdoc (4.2.0)
       json (~> 1.4)
-    request_store (1.1.0)
     rest-client (1.7.3)
       mime-types (>= 1.16, < 3.0)
       netrc (~> 0.7)
@@ -259,7 +253,7 @@ GEM
       rspec-mocks (~> 3.2.0)
       rspec-support (~> 3.2.0)
     rspec-support (3.2.2)
-    sass (3.4.12)
+    sass (3.4.13)
     sass-rails (5.0.1)
       railties (>= 4.0.0, < 5.0)
       sass (~> 3.1)
@@ -317,7 +311,6 @@ DEPENDENCIES
   capybara
   coffee-rails (~> 4.1.0)
   compass-rails
-  draper
   factory_girl_rails
   faker
   friendly_id
