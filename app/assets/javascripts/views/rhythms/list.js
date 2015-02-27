@@ -8,7 +8,6 @@ Geometrhythm.Views.RhythmsList = Backbone.CompositeView.extend({
     "change .creator" : "filterByCreator",
     "change .liker" : "filterByLiker",
     "change .rhythm-str" : "filterByRhythmStr",
-    // "click #return-to-root" : "returnToRoot"
   },
 
   initialize: function(options) {
@@ -17,8 +16,6 @@ Geometrhythm.Views.RhythmsList = Backbone.CompositeView.extend({
     this.creatorId = options.creator;
     this.likerId = options.liker;
     this.rootLink = $('.navbar-brand');
-
-    // this.addRhythmListItemView(this.model); should only do this if there's no filter!
 
     this.collection.each(function(rhythm) {
       this.addRhythmListItemView(rhythm);
@@ -56,17 +53,6 @@ Geometrhythm.Views.RhythmsList = Backbone.CompositeView.extend({
     var $forceOfScroll = $('<div class="force-scroll">')
     this.$el.append($forceOfScroll)
 
-    // console.log("");
-    // console.log("collection: " + this.collection.length);
-    // console.log("");
-    // console.log("ptntl creators: " + this.potentialCreators.length);
-    // console.log("creators filter: ");
-    // console.log(this.potentialCreators.filter);
-    // console.log("");
-    // console.log("ptntl likers: " + this.potentialLikers.length);
-    // console.log("likers filter: ");
-    // console.log(this.potentialLikers.filter);
-
     return this;
   },
 
@@ -101,7 +87,6 @@ Geometrhythm.Views.RhythmsList = Backbone.CompositeView.extend({
       this.potentialLikers.fetchByFilter();
     }
     this.collection.fetchByFilter();
-    // this.potentialCreators.fetchByFilter();
   },
 
   filterByLiker: function(event) {
@@ -117,7 +102,6 @@ Geometrhythm.Views.RhythmsList = Backbone.CompositeView.extend({
       this.potentialCreators.fetchByFilter();
     }
     this.collection.fetchByFilter();
-    // this.potentialLikers.fetchByFilter();
   },
 
   filterByRhythmStr: function(event) {
@@ -149,19 +133,9 @@ Geometrhythm.Views.RhythmsList = Backbone.CompositeView.extend({
     if ($(window).scrollTop() > $(document).height() - $(window).height() - 50) {
       if (view.collection.page_number < view.collection.total_pages) {
         view.collection.filter.page = view.collection.page_number + 1;
-        view.collection.fetchByFilter(true); // here's the "dontRemove part, my attempt to replicate the commented out below but including my filters"
-        // view.collection.fetch({
-        //   data: { page: view.collection.page_number + 1 },
-        //   remove: false
-        // });
+        view.collection.fetchByFilter(true); 
       }
     }
-  },
-
-  // returnToRoot: function() {
-  //   Geometrhythm.curPlayingRhythm = null;
-  //   clearInterval(Geometrhythm.playingRhythm);
-  //   Backbone.history.navigate("/", {trigger: true})
-  // }
+  }
 
 });

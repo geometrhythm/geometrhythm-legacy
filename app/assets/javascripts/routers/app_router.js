@@ -14,8 +14,10 @@ Geometrhythm.Routers.App = Backbone.Router.extend({
 
   root: function() {
     if ($.cookie('_Geometrhythm_stored_rhythm')) {
-      this.activeRhythm.set("rhythm_str", $.cookie('_Geometrhythm_stored_rhythm'));
-      $('#current-rhythm').attr('value', $.cookie('_Geometrhythm_stored_rhythm'));
+      this.activeRhythm.set("rhythm_str",
+        $.cookie('_Geometrhythm_stored_rhythm'));
+      $('#current-rhythm').attr('value',
+        $.cookie('_Geometrhythm_stored_rhythm'));
       var analysisDisplayed = true;
     } else {
       this.activeRhythm.set("rhythm_str", "x--x--x---x-x---");
@@ -23,8 +25,6 @@ Geometrhythm.Routers.App = Backbone.Router.extend({
       var analysisDisplayed = false;
       var splashIt = true;
     }
-    // console.log("what about right here?");
-    // console.log(analysisDisplayed);
     var rootView = new Geometrhythm.Views.Root({
       model: this.activeRhythm,
       analysisDisplayed: analysisDisplayed,
@@ -48,7 +48,7 @@ Geometrhythm.Routers.App = Backbone.Router.extend({
     var likesCollection = new Geometrhythm.Collections.Rhythms();
     likesCollection.filter = {};
     likesCollection.filter.liker_id = id;
-    likesCollection.fetchByFilter(); //would prefer to fetch only the first page here, too
+    likesCollection.fetchByFilter();
     var listView = new Geometrhythm.Views.RhythmsList({
       collection: likesCollection,
       potentialLikers: Geometrhythm.Collections.potentialLikers,
@@ -63,7 +63,7 @@ Geometrhythm.Routers.App = Backbone.Router.extend({
     var creationsCollection = new Geometrhythm.Collections.Rhythms();
     creationsCollection.filter = {};
     creationsCollection.filter.creator_id = id;
-    creationsCollection.fetchByFilter(); //would prefer to fetch only the first page here, too
+    creationsCollection.fetchByFilter();
     var listView = new Geometrhythm.Views.RhythmsList({
       collection: creationsCollection,
       potentialLikers: Geometrhythm.Collections.potentialLikers,
@@ -78,8 +78,6 @@ Geometrhythm.Routers.App = Backbone.Router.extend({
     this.currentView && this.currentView.remove();
     this.currentView = view;
     this.$rootEl.html(view.render().$el);
-    // view.afterRender && view.afterRender();
-
     $('.rhythm-ring').rhythmRing();
   }
 });

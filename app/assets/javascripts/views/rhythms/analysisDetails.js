@@ -21,8 +21,6 @@ Geometrhythm.Views.AnalysisDetails = Backbone.View.extend({
     } else {
       this.$el.html("");
     }
-    // console.log("ok it's actually here we're concerned about");
-    // console.log(this.$el.html());
     return this;
   },
 

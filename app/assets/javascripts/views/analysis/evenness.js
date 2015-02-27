@@ -12,7 +12,6 @@ Geometrhythm.Views.AnalysisEvenness = Backbone.View.extend({
     this.ctx2.lineWidth = 3;
     this.ctx2.shadowBlur=20;
     this.ctx2.shadowColor="#ff9800";
-    // console.log("did i survive this far?");
   },
 
   events: {
@@ -74,7 +73,6 @@ Geometrhythm.Views.AnalysisEvenness = Backbone.View.extend({
       this.ctx.beginPath();
       this.ctx.moveTo(curPosLeft, curPosTop);
       for (var i = 0; i <= this.model.get("onset_indices").length; i++) {
-        // this.ctx.beginPath()
         if (i === this.model.get("onset_indices").length) {
           var nextPosLeft = this.windowWidth;
           var nextPosTop = 0;
@@ -96,11 +94,8 @@ Geometrhythm.Views.AnalysisEvenness = Backbone.View.extend({
       this.ctx.stroke();
 
     } else {
-      // console.log("is this happening?");
       this.$el.html("");
     }
-    // console.log("hey what's up?");
-    // console.log(this.$el.html());
     return this;
   },
 
@@ -117,17 +112,11 @@ Geometrhythm.Views.AnalysisEvenness = Backbone.View.extend({
       -20 + (this.windowWidth / 25) + ((this.model.get("onset_indices")[ord] / this.model.get("len")) * this.windowWidth),
       120.0 - ((ord / this.model.get("onset_indices").length) * 120.0)
     );
-
     this.ctx.lineTo(
       (ord / this.model.get("onset_indices").length) * this.windowWidth,
       120.0 - ((ord / this.model.get("onset_indices").length) * 120.0)
     );
-    // debugger
-    // console.log("just drew line from " + [(this.windowWidth / 25) + ((this.model.get("onset_indices")[ord] / this.model.get("len")) * this.windowWidth),
-      // 150.0 - ((ord) * (120.0 / this.model.get("onset_indices").length))] + " to " + [(ord / this.model.get("onset_indices").length) * this.windowWidth,
-      // 120.0 - ((ord / this.model.get("onset_indices").length) * 120.0)]);
     this.ctx.stroke();
-    // debugger
   },
 
   unHighlightOnset: function(event) {
@@ -175,6 +164,6 @@ Geometrhythm.Views.AnalysisEvenness = Backbone.View.extend({
     this.ctx2.clearRect(0,0,400,400);
     $(this.canvas2).css('display','none')
     this.render();
-  },
+  }
 
 })

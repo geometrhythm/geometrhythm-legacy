@@ -4,11 +4,7 @@ Geometrhythm.Views.AnalysisBasic = Backbone.View.extend({
 
   events: {
     'mouseover .TEDAS_sq' : 'displayIntervals',
-    'mouseout .TEDAS_sq' : 'hideIntervals',
-    // 'mouseover h5' : 'highlightTitle',
-    // 'mouseout h5' : 'unHighlightTitle'
-    // 'mouseover .contour' : 'displayIntervals',
-    // 'mouseout .contour' : 'hideIntervals'
+    'mouseout .TEDAS_sq' : 'hideIntervals'
   },
 
   initialize: function() {
@@ -67,16 +63,5 @@ Geometrhythm.Views.AnalysisBasic = Backbone.View.extend({
   hideIntervals: function() {
     this.ctx.clearRect(0,0,400,400);
     $(this.canvas).css('display','none')
-  },
-
-  // highlightTitle: function() {
-  //   // console.log("this works");
-  //   // debugger
-  //   debugger
-  //   $('body').find('.a-t-basic h5').addClass("highlighted");
-  // },
-  //
-  // unHighlightTitle: function() {
-  //   $('body').find('.a-t-basic h5').removeClass("highlighted");
-  // },
+  }
 })

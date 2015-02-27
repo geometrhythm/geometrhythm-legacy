@@ -3,8 +3,6 @@ Geometrhythm.Views.AnalysisSymmetry = Backbone.View.extend({
   template: JST['analysis/symmetry'],
 
   events: {
-    // 'mousedown .symmetry-rhythm-ring' : 'rotateSymmetryRing',
-    // 'mouseup' : 'endRotateSymmetryRing',
     'mouseover .symmetry-intercell' : 'showIntercellSymmetries',
     'mouseout .symmetry-intercell' : 'hideIntercellSymmetries',
     'mouseover .symmetry-cell' : 'showCellSymmetries',
@@ -12,7 +10,6 @@ Geometrhythm.Views.AnalysisSymmetry = Backbone.View.extend({
   },
 
   render: function() {
-    // console.log(this.model.get("symmetries_for_odd_rhythm"));
     if (this.model) {
       var content = this.template({
         rhythm: this.model,
@@ -50,11 +47,8 @@ Geometrhythm.Views.AnalysisSymmetry = Backbone.View.extend({
       if (symmetries.indexOf(ord) != -1 || other_symmetries.indexOf(antipode) != -1) {
         var that = this;
         this.model.get("onset_indices").forEach(function(onsetIndex, fnIndex) {
-          // if (onsetIndex != ord
-          //   && onsetIndex != antipode) {
-            that.$el.find('.symmetry-cell[ord="' + onsetIndex + '"]')
-              .addClass('activated');
-          // }
+          that.$el.find('.symmetry-cell[ord="' + onsetIndex + '"]')
+            .addClass('activated');
         })
       }
     }
@@ -86,14 +80,9 @@ Geometrhythm.Views.AnalysisSymmetry = Backbone.View.extend({
       if (symmetries.indexOf(ord) != -1 || other_symmetries.indexOf(antipode) != -1) {
         var that = this;
         this.model.get("onset_indices").forEach(function(onsetIndex, fnIndex) {
-          // if (onsetIndex != ord
-          //   && onsetIndex != antipode) {
-            that.$el.find('.symmetry-cell[ord="' + onsetIndex + '"]')
-              .addClass('activated');
-          // } else {
-          // }
+          that.$el.find('.symmetry-cell[ord="' + onsetIndex + '"]')
+            .addClass('activated');
         })
-
       }
     }
   },

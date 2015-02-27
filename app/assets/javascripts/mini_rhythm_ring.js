@@ -77,13 +77,11 @@ $.MiniRhythmRing.prototype.refreshPolygon = function() {
   for (var i = 0; i <= this.rhythmCells.length * 2; i++ ) {
     j = i % this.rhythmCells.length;
     if (i > this.rhythmCells.length && j > firstPos) break;
-    //debugger
     if (this.superSizeMe) {
       var curPosition = this.$el.find(".med-cell[ord='" + j + "']").position();
     } else {
       var curPosition = this.$el.find(".mini-cell[ord='" + j + "']").position();
     }
-    // if (!curPosition) { curPosition = $(".cell-handle.grabbed").position(); }
     var curPos = [curPosition.left, curPosition.top];
     if (this.rhythmCells[j]) {
       if (prevPos) this.drawSide(curPos, prevPos);

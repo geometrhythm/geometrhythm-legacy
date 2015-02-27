@@ -73,18 +73,6 @@ $.RhythmRing.prototype.playRhythm2 = function() {
     this.time += this.pulseDuration;
     var diff = (new Date().getTime() - this.start) - this.time;
 
-    // if (this.playPos === 0) {
-    //   var that = this;
-    //   $('#bb-analysis-evenness').append("<div class='playcursor'>");
-    //   $('.playcursor').css('transform', 'transition: transform 3s;');
-    //   $('.playcursor').css('transform', 'left: 0px; top: 0px;');
-    //   // ' + that.loopDurationInSec + '
-    //   setTimeout(function(){
-    //     console.log("lunbox");
-    //     $('.playcursor').css('transform', 'left: 400px; top: -200px; transition: transform 3s;')
-    //   }, 5)
-    // }
-
     this.$el.find(".cell-handle[ord='" + this.playPos + "']:not('.grabbed')")
       .removeClass('activated')
     this.$el.find(".cell[ord='" + this.playPos + "']")
@@ -113,14 +101,6 @@ $.RhythmRing.prototype.playRhythm2 = function() {
       $('.evenness-point').removeClass('activatedForPlaying');
         $('body').find(".evenness-point[ord='" + this.playPos + "']")
           .addClass('activatedForPlaying');
-      // if ($('body').find(".TEDAS_sq[ord='" + this.playPos + "']")) {
-      //   $('body').find(".AIC_sq[ord='" +
-      //   $('body').find(".TEDAS_sq[ord='" + this.playPos + "']").attr('dur')
-      //     + "']").addClass('activated')
-      // }
-
-      // $('body').find(".FIC_sq[ord='" + this.playPos + "']")
-        // .addClass('activated')
     }
 
     if (this.rhythmCells[this.playPos]) {

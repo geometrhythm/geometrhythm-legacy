@@ -26,7 +26,6 @@ Geometrhythm.Views.AnalysisOnset = Backbone.View.extend({
       })
       var len = largestAdjacentInterval;
       var max_height = this.model.get("longest_interval")
-            // var heightPixelsUnit = 120 / max_height;
       var widthPercentageUnit = 85 / len;
       var heightPixelsUnit = ((window.innerWidth / 4.25) * 0.85) / len;
       if (heightPixelsUnit * max_height > 120) {
@@ -34,7 +33,6 @@ Geometrhythm.Views.AnalysisOnset = Backbone.View.extend({
         heightPixelsUnit = 120 / max_height;
       }
       var windowWidth = ((window.innerWidth / 4.25) * 0.85);
-      // console.log(this.model.get("onset_complexity_interval_durations"));
       var content = this.template({
         rhythm: this.model,
         widthPercentageUnit: widthPercentageUnit,

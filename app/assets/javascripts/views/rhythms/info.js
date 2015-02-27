@@ -57,11 +57,6 @@ Geometrhythm.Views.Info = Backbone.View.extend({
     });
     this.$el.html(content);
 
-    // var elt, hasOverflow = (elt = $('#bb-info')).innerHeight() < elt[0].scrollHeight;
-    // if (hasOverflow) {
-    //   console.log("nyan nyan nyan");
-    // }
-
     return this;
   },
 

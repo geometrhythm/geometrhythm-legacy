@@ -135,7 +135,7 @@ $.SymmetryRhythmRing.prototype.showIntercellDiameter = function(event) {
   } else {
     var otherPosition = this.$el.find(".symmetry-cell[ord='" + ((Math.floor(antipode) + 1) % this.rhythmStr.length) + "']").position();
   }
-  // debugger
+
   var curPos = [curPosition.left, curPosition.top];
   var otherPos = [otherPosition.left, otherPosition.top];
   if (this.rhythmStr.length % 2 === 0) {
