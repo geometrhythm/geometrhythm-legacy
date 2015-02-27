@@ -1,3 +1,8 @@
+# I will break out the huge code for the complexity analyses into a
+# decorator or helper.
+
+# Several of these methods are too long and could use refactoring. 
+
 class Rhythm < ActiveRecord::Base
   validates :creator_id, :rhythm_str, :play_count, presence: true
 
