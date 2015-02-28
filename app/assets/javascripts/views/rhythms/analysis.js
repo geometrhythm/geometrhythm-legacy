@@ -203,7 +203,7 @@ Geometrhythm.Views.Analysis = Backbone.CompositeView.extend({
     this.ctx.shadowBlur=20;
     this.ctx.shadowColor="#5DA2D6";
 
-    $(this.canvas).css('display','inline');
+    //$(this.canvas).css('display','inline');
     var ord = $('.FIC_box').find('.FIC_sq[count="' + this.model.get("tallness") + '"]').attr('ord');
     var linesToDraw = this.model.get("full_intervals_onset_pairs")[ord];
 
@@ -224,7 +224,7 @@ Geometrhythm.Views.Analysis = Backbone.CompositeView.extend({
   unHighlightTallness: function() {
     $('.FIC_box').find('.FIC_sq').removeClass("semiHovered");
     this.ctx.clearRect(0,0,400,400);
-    $(this.canvas).css('display','none');
+    //$(this.canvas).css('display','none');
   },
 
   highlightContour: function() {
@@ -302,7 +302,7 @@ Geometrhythm.Views.Analysis = Backbone.CompositeView.extend({
     this.ctx.shadowBlur=20;
     this.ctx.shadowColor="#ff9800";
 
-    $(this.canvas).css('display','inline');
+    //$(this.canvas).css('display','inline');
     var ord = parseInt($('.TEDAS_box').find('.TEDAS_sq[idx="' +
       parseInt($(event.currentTarget).attr('ord')) + '"]').attr('ord'));
 
@@ -326,7 +326,7 @@ Geometrhythm.Views.Analysis = Backbone.CompositeView.extend({
       .removeClass('activatedHoverStyle');
     $('.durational-pattern-words').removeClass('activated');
     this.ctx.clearRect(0,0,400,400);
-    $(this.canvas).css('display','none');
+    //$(this.canvas).css('display','none');
   },
 
   highlightEntireTEDAS: function() {
@@ -349,7 +349,7 @@ Geometrhythm.Views.Analysis = Backbone.CompositeView.extend({
     this.ctx.shadowBlur=20;
     this.ctx.shadowColor="#ff9800";
 
-    $(this.canvas).css('display','inline');
+    //$(this.canvas).css('display','inline');
     var ord = parseInt($('.TEDAS_box').find('.TEDAS_sq[idx="' +
       parseInt($(event.currentTarget).attr('ord')) + '"]').attr('ord'));
 
@@ -372,7 +372,7 @@ Geometrhythm.Views.Analysis = Backbone.CompositeView.extend({
     $('.box-notation-words').removeClass('activated');
 
     this.ctx.clearRect(0,0,400,400);
-    $(this.canvas).css('display','none');
+    //$(this.canvas).css('display','none');
   },
 
   highlightNPVI: function() {
@@ -591,7 +591,7 @@ Geometrhythm.Views.Analysis = Backbone.CompositeView.extend({
     this.ctx.shadowBlur=20;
     this.ctx.shadowColor="#ff9800";
 
-    $(this.canvas).css('display','inline');
+    //$(this.canvas).css('display','inline');
     var linesToDraw = this.model.get("full_intervals_onset_pairs")[ord];
     this.ctx.clearRect(0,0,400,400);
     var that = this;
@@ -610,7 +610,7 @@ Geometrhythm.Views.Analysis = Backbone.CompositeView.extend({
   unHighlightIntervalVectorEl: function(event) {
     $('.FIC_box').find('.FIC_sq').removeClass("columnHovered");
     this.ctx.clearRect(0,0,400,400);
-    $(this.canvas).css('display','none');
+    //$(this.canvas).css('display','none');
   },
 
   highlightOffbeat: function() {
@@ -707,7 +707,7 @@ Geometrhythm.Views.Analysis = Backbone.CompositeView.extend({
       }
     });
 
-    $(this.canvas).css('display','inline');
+    //$(this.canvas).css('display','inline');
     this.ctx.clearRect(0,0,400,400);
     linesToDraw.forEach(function(lineToDraw, index) {
       var posParse1 = $('body').find(".cell[ord='" + lineToDraw + "']").position();
@@ -738,7 +738,7 @@ Geometrhythm.Views.Analysis = Backbone.CompositeView.extend({
     $('body').find(".MH_sq").removeClass('columnHovered');
 
     this.ctx.clearRect(0,0,400,400);
-    $(this.canvas).css('display','none');
+    //$(this.canvas).css('display','none');
   },
 
   highlightAllDiffs: function() {

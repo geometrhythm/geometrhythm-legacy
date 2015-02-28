@@ -145,7 +145,7 @@ Geometrhythm.Views.AnalysisEvenness = Backbone.View.extend({
     this.ctx2.shadowColor="#ff9800";
     var that = this;
     var linesToDraw = [];
-    $(this.canvas2).css('display','inline')
+    //$(this.canvas2).css('display','inline')
     this.ctx2.clearRect(0,0,400,400);
     var curAngle = -90;
     var prevAngleInRadians = curAngle * (Math.PI / 180);
@@ -177,7 +177,7 @@ Geometrhythm.Views.AnalysisEvenness = Backbone.View.extend({
 
   clearPerfectlyEvenRhythm: function(event) {
     this.ctx2.clearRect(0,0,400,400);
-    $(this.canvas2).css('display','none');
+    //$(this.canvas2).css('display','none');
     this.render();
   }
 

@@ -76,7 +76,7 @@ Geometrhythm.Views.AnalysisMeter = Backbone.View.extend({
         }
       }
     });
-    $(this.canvas).css('display','inline');
+    //$(this.canvas).css('display','inline');
     this.ctx.clearRect(0,0,400,400);
     linesToDraw.forEach(function(lineToDraw, index) {
       var posParse1 = $('body').find(".cell[ord='" + lineToDraw + "']").position();
@@ -105,7 +105,7 @@ Geometrhythm.Views.AnalysisMeter = Backbone.View.extend({
     $('body').find(".MH_sq").removeClass('columnHovered');
 
     this.ctx.clearRect(0,0,400,400);
-    $(this.canvas).css('display','none');
+    //$(this.canvas).css('display','none');
   },
 
   factors: function(n) {

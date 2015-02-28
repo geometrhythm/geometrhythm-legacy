@@ -30,9 +30,9 @@ container {
 
 #polygon-analysis-canvas {
   position: absolute;
-  display: none;
+  //display: none;
   top: 0px;
-  z-index: 3;
+  z-index: -300;
 }
 
 .rhythm-ring {
