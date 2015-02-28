@@ -11,7 +11,8 @@
 <body>
 
   <% 4.times do %>
-    <%= audio_tag "clave.wav" %>
+    <%= audio_tag "clave.mp3", class: "audio-mp3" %>
+    <%= audio_tag "clave.wav", class: "audio-wav" %>
   <% end %>
 
   <input type='hidden' id='cur-rhythm-id' value=''>

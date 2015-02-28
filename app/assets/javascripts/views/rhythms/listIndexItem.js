@@ -14,9 +14,17 @@ Geometrhythm.Views.RhythmListItemView = Backbone.CompositeView.extend({
     this.busses = [];
     this.tempo = 125;
     this.pulseDuration = ( 1000 / ( this.tempo / 60 ) ) / 4;
-    $('audio').each(function(index) {
-      this.busses.push($('audio')[index]);
-    }.bind(this));
+
+    if (window.safari) {
+      $('audio.audio-wav').each(function(index) {
+        this.busses.push($('audio.audio-wav')[index]);
+      }.bind(this));
+    } else {
+      $('audio.audio-mp3').each(function(index) {
+        this.busses.push($('audio.audio-mp3')[index]);
+      }.bind(this));
+    }
+    
     this.playPos = -1;
     this.curBus = 0;
     Geometrhythm.curPlayingRhythm = null;
