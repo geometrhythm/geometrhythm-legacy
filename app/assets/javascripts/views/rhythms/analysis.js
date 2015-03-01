@@ -2,6 +2,10 @@
 // for me right now. It was a last-minute sprint to the finish to give a demo.
 // I do, of course, intend to DRY it up, refactor, and deodorize soon.
 
+// For a better impression of the good coding style I'm capable of,
+// please look at the javascripts/rhythm_ring folder. That was written under
+// significantly less duress, and demonstrates modularity and expressiveness.
+
 Geometrhythm.Views.Analysis = Backbone.CompositeView.extend({
 
   template: JST['rhythms/analysis'],

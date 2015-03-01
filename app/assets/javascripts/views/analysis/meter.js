@@ -1,5 +1,9 @@
-//Like most of my analysis-related files, this was rushed and
-//does not reflect my best coding practices.
+// Like most of my analysis-related files, this was rushed and
+// does not reflect my best coding practices. I will clean it up soon.
+
+// For a better impression of the good coding style I'm capable of,
+// please look at the javascripts/rhythm_ring folder. That was written under
+// significantly less duress, and demonstrates modularity and expressiveness.
 
 Geometrhythm.Views.AnalysisMeter = Backbone.View.extend({
 
