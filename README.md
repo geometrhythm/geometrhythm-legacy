@@ -39,9 +39,9 @@ Geometrhythm uses these core technologies:
 
 User authentication is handled through Rails, while the rhythmic analyses, information displays, and index are Backbone views within views within views, making extensive use of listeners.
 
-The algorithms behind the [seeding](seeds.rb) of the database with 3000+ quality rhythms are written in Ruby, as are the algorithms behind the [complexity measurements](rhythm.rb) rendered in my data visualizations. The soon-to-come search algorithms will also be built in Ruby.
+The algorithms behind the [seeding](db/seeds.rb) of the database with 3000+ quality rhythms are written in Ruby, as are the algorithms behind the [complexity measurements](app/models/rhythm.rb) rendered in my data visualizations. The soon-to-come search algorithms will also be built in Ruby.
 
-The central ["rhythm ring" widget](rhythm_ring) is powered by a combination of:
+The central ["rhythm ring" widget](app/assets/javascripts/rhythm_ring) is powered by a combination of:
 - HTML5 Canvas
 - CSS transitions
 - jQuery UI
