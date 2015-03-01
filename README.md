@@ -45,6 +45,10 @@ Unfortunately, however, jQuery UI's draggable and droppable functionality does n
 
 Finally, the polygon that appears in the center of the ring, connecting the onsets of the rhythm, was a perfect job for HTML5 Canvas. It overlays on top of the CSS+jQuery elements, and draws lines that keep up with the rhythm whenever it's animating, by tracking coordinates of the CSS cells.
 
+### Note
+
+The analysis data visualizations were written at an insane pace at the last minute and do not reflect my best coding practices. For a better impression of the good coding style I'm capable of, look to the [rhythm ring widget](app/assets/javascripts/rhythm_ring), which demonstrates much better modularity and expressiveness.
+
 ## Backend
 
 Geometrhythm uses these core technologies:
