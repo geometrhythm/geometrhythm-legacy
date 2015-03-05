@@ -1,7 +1,7 @@
 # I will break out the huge code for the complexity analyses into a
 # decorator or helper.
 
-# Several of these methods are too long and could use refactoring. 
+# Several of these methods are too long and could use refactoring.
 
 class Rhythm < ActiveRecord::Base
   validates :creator_id, :rhythm_str, :play_count, presence: true
@@ -115,8 +115,9 @@ class Rhythm < ActiveRecord::Base
 
   def adjacent_interval_content
     output = Array.new(len) { 0 }
+
     durational_pattern.each do |duration|
-      output[duration] += 1
+      output[duration - 1] += 1
     end
 
     output

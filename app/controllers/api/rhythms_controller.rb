@@ -20,7 +20,7 @@ module Api
       @rhythms = Rhythm.all
       filter_rhythms
       page_number = params[:page] || 1
-      eager_load
+      eager_load(page_number)
 
       render partial: 'api/rhythms/all', locals: {
         models: @rhythms,
@@ -71,7 +71,7 @@ module Api
       end
     end
 
-    def eager_load
+    def eager_load(page_number)
       @rhythms = @rhythms.includes(:user).includes(:likers)
         .includes(:names).includes(:namers).includes(:comments)
         .page(page_number).per(25)
