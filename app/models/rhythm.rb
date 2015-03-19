@@ -41,7 +41,12 @@ class Rhythm < ActiveRecord::Base
     output
   end
 
+  def empty_rhythm?
+    rhythm_str.exclude?("x")
+  end
+
   def full_intervals_onset_pairs
+    return [[]] if empty_rhythm?
     full_intervals_onset_pairs = Array.new(len / 2) { [] }
     (0...onset_count).each do |i|
       (i + 1...onset_count).each do |j|
@@ -54,6 +59,7 @@ class Rhythm < ActiveRecord::Base
   end
 
   def full_interval_content
+    return [] if empty_rhythm?
     full_interval_content = Array.new(len / 2) { 0 }
     (0...onset_count).each do |i|
       (i + 1...onset_count).each do |j|
@@ -80,6 +86,7 @@ class Rhythm < ActiveRecord::Base
     end
 
     total = interval_content.inject(:+) #this is also just ?_interval_count
+    # return 0 if total == 0
     probs = []
     (0...interval_content.length).each do |i|
       probs << interval_content[i] / total.to_f
@@ -114,6 +121,7 @@ class Rhythm < ActiveRecord::Base
   end
 
   def adjacent_interval_content
+    return [] if empty_rhythm?
     output = Array.new(len) { 0 }
 
     durational_pattern.each do |duration|
@@ -142,6 +150,7 @@ class Rhythm < ActiveRecord::Base
   end
 
   def geodesic_distance(onset_1_idx, onset_2_idx)
+    return 0 if durational_pattern.empty?
     onset_1_idx, onset_2_idx = onset_2_idx, onset_1_idx if onset_2_idx < onset_1_idx
     clockwise_d = durational_pattern[onset_1_idx...onset_2_idx].inject(:+)
     c_clockwise_d = len - clockwise_d
@@ -187,6 +196,7 @@ class Rhythm < ActiveRecord::Base
   end
 
   def tallness
+    return 0 if full_interval_content.empty?
     full_interval_content.max
   end
 
@@ -195,6 +205,8 @@ class Rhythm < ActiveRecord::Base
   end
 
   def shallowness
+    return 0 if empty_rhythm?
+
     deep_interval_content = Array.new(onset_count - 1) { 0 }
     (1..onset_count - 1).each { |i| deep_interval_content[i] = i }
     abbrev = full_interval_content.reject{ |i| i == 0 }.sort
@@ -212,6 +224,7 @@ class Rhythm < ActiveRecord::Base
   end
 
   def max_metric_expectedness
+    return 0 if empty_rhythm?
     metric_hierarchy.sort.reverse[0...onset_count].inject(:+)
   end
 
@@ -292,6 +305,7 @@ class Rhythm < ActiveRecord::Base
   end
 
   def durational_pattern
+    return [] if empty_rhythm?
     output, i, initial_onset, count = [], 0, -1, -1
     until i == initial_onset
       if rhythm_str[i] == "x"
@@ -324,7 +338,7 @@ class Rhythm < ActiveRecord::Base
     total / (factors.length - 2)
   end
 
-  def edit_distance(other_rhythm_str)
+  def edit_distance(other_rhythm_str) #seems inaccurate, at least for empty rhythms?
     total = 0
     onset_indices.each do |onset_i|
       edit_dist = 0
@@ -660,6 +674,8 @@ class Rhythm < ActiveRecord::Base
   end
 
   def maximally_even_by_tolerance?(tolerance)
+    return true if empty_rhythm?
+
     even_division = len / onset_count.to_f
     anchor = 0
     until anchor >= even_division
