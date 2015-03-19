@@ -24,10 +24,12 @@ Geometrhythm.Views.RhythmListItemView = Backbone.CompositeView.extend({
         this.busses.push($('audio.audio-mp3')[index]);
       }.bind(this));
     }
-    
+
     this.playPos = -1;
     this.curBus = 0;
     Geometrhythm.curPlayingRhythm = null;
+    //$(window).on('unload', clearInterval(Geometrhythm.playingRhythm));
+    $(window).on('hashchange', clearInterval(Geometrhythm.playingRhythm));
   },
 
   //needs refactoring

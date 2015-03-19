@@ -8,7 +8,14 @@ $.RhythmRing.prototype.initializeAudio = function() {
   this.paused = true;
   $('body').on('click', '.browse',
     this.stopPlayingBecauseNavigatingAway.bind(this));
+  // $(window).on('unload', this.stopPlayingBecauseNavigatingAway.bind(this));
+  // window.onbeforeunload = function() {
+  //   console.log("what up");
+  //   this.stopPlayingBecauseNavigatingAway.bind(this);
+  // }
+  $(window).on('hashchange', this.stopPlayingBecauseNavigatingAway.bind(this));
 };
+
 
 $.RhythmRing.prototype.loadAudios = function() {
   var fileType = window.safari ? "mp3" : "wav"
@@ -18,7 +25,8 @@ $.RhythmRing.prototype.loadAudios = function() {
 }
 
 $.RhythmRing.prototype.stopPlayingBecauseNavigatingAway = function(event) {
-  event.preventDefault();
+  event && event.preventDefault();
+  console.log("howdy");
   this.paused = true;
   clearInterval(this.curPlaying);
   $('#play-pause').removeClass("active")
