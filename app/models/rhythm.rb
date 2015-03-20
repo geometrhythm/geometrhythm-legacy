@@ -677,26 +677,39 @@ class Rhythm < ActiveRecord::Base
     return true if empty_rhythm?
 
     even_division = len / onset_count.to_f
-    anchor = 0
-    until anchor >= even_division
+    # anchor = 0
+    # until anchor >= even_division
+    i = 0
+      even_marks = [i]
+      # i = anchor
 
-      even_marks = [anchor]
-      i = anchor
-      while i < len
+      while i < len - 2
         i += even_division
         even_marks << i
       end
 
-      onset_indices.each do |onset_index|
-        this_max_even = false
-        even_marks.each do |even_mark|
-          this_max_even = true if (even_mark - onset_index).abs < tolerance
-        end
-        return false if this_max_even == false
+      puts "even marks: "
+      puts even_marks
+
+      puts "onset indices: "
+      puts onset_indices
+
+      onset_indices.each_with_index do |onset_index, index|
+        puts "doing it for onset index #{onset_index}"
+        # this_max_even = true
+        # even_marks.each do |even_mark|
+          puts "and specifically for even mark #{even_marks[index]}, its diff is: "
+          puts (even_marks[index] - onset_index).abs
+          return false unless (even_marks[index] - onset_index).abs < tolerance
+            # this_max_even = false
+            # break
+          # end
+        # end
+
       end
-      # p anchor
-      anchor += 0.001
-    end
+
+      # anchor += 0.001
+    # end
 
     true
   end

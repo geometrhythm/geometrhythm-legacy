@@ -698,53 +698,78 @@ end
   end
 end
 
-def maximally_even_rhythms(num_onsets, num_pulses)
+# def maximally_even_rhythms(num_onsets, num_pulses)
+#   perfectly_even_division = num_pulses / num_onsets.to_f
+#   anchor = 0.0
+#   output = []
+#   until anchor >= perfectly_even_division
+#
+#     maximally_even_marks = []
+#     perfectly_even_marks = []
+#     i = anchor
+#     while i <= num_pulses
+#       maximally_even_marks << i.round % num_pulses
+#       perfectly_even_marks << i % num_pulses
+#       i += perfectly_even_division
+#     end
+#
+#     unless output.include?(maximally_even_marks.uniq.sort)
+#       output << maximally_even_marks.uniq.sort
+#     end
+#
+#     increment = num_pulses
+#     perfectly_even_marks.each do |perfectly_even_mark|
+#       maybe_smaller_increment = perfectly_even_mark.ceil - perfectly_even_mark
+#       next if maybe_smaller_increment == 0
+#       increment = maybe_smaller_increment if maybe_smaller_increment < increment
+#     end
+#     anchor += increment.to_f
+#
+#   end
+#
+#   output
+# end
+
+# def rhythm_stringify(e_r, length)
+#   output = "-"*length
+#   e_r.each { |index| output[index] = "x" }
+#
+#   output
+# end
+#
+# [6, 8, 12, 16, 24].each do |length|
+#   (2...length).each do |num_onsets|
+#     maximally_even_rhythms(num_onsets, length).each do |m_e_r|
+#       rhythm_str = rhythm_stringify(m_e_r, length)
+#       r = Rhythm.where(rhythm_str: rhythm_str).first_or_create!(creator_id: u1.id, rhythm_str: rhythm_str)
+#       n = Name.where(name: "maximally even rhythm #{num_onsets}/#{length}").first_or_create!(name: "maximally even rhythm #{num_onsets}/#{length}")
+#       g = Naming.create!(rhythm_id: r.id, name_id: n.id, namer_id: u1.id)
+#     end
+#   end
+# end
+
+def maximally_even_rhythm(num_onsets, num_pulses)
   perfectly_even_division = num_pulses / num_onsets.to_f
-  anchor = 0.0
-  output = []
-  until anchor >= perfectly_even_division
-
-    maximally_even_marks = []
-    perfectly_even_marks = []
-    i = anchor
-    while i <= num_pulses
-      maximally_even_marks << i.round % num_pulses
-      perfectly_even_marks << i % num_pulses
-      i += perfectly_even_division
-    end
-
-    unless output.include?(maximally_even_marks.uniq.sort)
-      output << maximally_even_marks.uniq.sort
-    end
-
-    increment = num_pulses
-    perfectly_even_marks.each do |perfectly_even_mark|
-      maybe_smaller_increment = perfectly_even_mark.ceil - perfectly_even_mark
-      next if maybe_smaller_increment == 0
-      increment = maybe_smaller_increment if maybe_smaller_increment < increment
-    end
-    anchor += increment.to_f
-
+  maximally_even_marks, i = [], 0.0
+  while i < num_pulses - 1
+    maximally_even_marks << i.round % num_pulses
+    i += perfectly_even_division
   end
 
-  output
-end
-
-def rhythm_stringify(e_r, length)
-  output = "-"*length
-  e_r.each { |index| output[index] = "x" }
+  output = "-"*num_pulses
+  maximally_even_marks.each { |index| output[index] = "x" }
 
   output
 end
 
 [6, 8, 12, 16, 24].each do |length|
   (2...length).each do |num_onsets|
-    maximally_even_rhythms(num_onsets, length).each do |m_e_r|
-      rhythm_str = rhythm_stringify(m_e_r, length)
-      r = Rhythm.where(rhythm_str: rhythm_str).first_or_create!(creator_id: u1.id, rhythm_str: rhythm_str)
-      n = Name.where(name: "maximally even rhythm #{num_onsets}/#{length}").first_or_create!(name: "maximally even rhythm #{num_onsets}/#{length}")
-      g = Naming.create!(rhythm_id: r.id, name_id: n.id, namer_id: u1.id)
-    end
+    rhythm_str = maximally_even_rhythm(num_onsets, length)
+    # rhythm_str = rhythm_stringify(m_e_r, length)
+    r = Rhythm.where(rhythm_str: rhythm_str).first_or_create!(creator_id: u1.id, rhythm_str: rhythm_str)
+    n = Name.where(name: "maximally even rhythm #{num_onsets}/#{length}").first_or_create!(name: "maximally even rhythm #{num_onsets}/#{length}")
+    g = Naming.create!(rhythm_id: r.id, name_id: n.id, namer_id: u1.id)
+    # end
   end
 end
 
