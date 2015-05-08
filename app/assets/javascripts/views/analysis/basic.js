@@ -1,5 +1,5 @@
 // Like most of my analysis-related files, this was rushed and
-// does not reflect my best coding practices.
+// doesn't reflect my best coding practices.
 
 // For a better impression of the good coding style I'm capable of,
 // please look at the javascripts/rhythm_ring folder. That was written under
