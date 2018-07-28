@@ -20,12 +20,13 @@ default: &default
   # For details on connection pooling, see rails configuration guide
   # http://guides.rubyonrails.org/configuring.html#database-pooling
   pool: 5
-  username: postgres
-  password: duperuser
+
 
 development:
   <<: *default
   database: Geometrhythm_development
+  username: postgres
+  password: duperuser
 
   # The specified database role being used to connect to postgres.
   # To create additional roles in postgres see `$ createuser --help`.
@@ -83,8 +84,6 @@ test:
 
 
 
-# production:
-#   <<: *default
-#   database: Geometrhythm_production
-  #username: Geometrhythm
-  #password: <%= ENV['GEOMETRHYTHM_DATABASE_PASSWORD'] %>
+production:
+  <<: *default
+  url: <%= ENV['GEOMETRHYTHM_PRODUCTION_DATABASE_URL'] %>

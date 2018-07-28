@@ -1,6 +1,6 @@
 ---
 applications:
 - name: geometrhythm
-  memory: 64M
+  memory: 128M
   routes:
   - route: geometrhythm.douglasblumeyer.com

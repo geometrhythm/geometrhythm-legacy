@@ -125,7 +125,27 @@ Further stretch goals:
 [phase-four]: ./docs/phases/phase4.md
 [phase-five]: ./docs/phases/phase5.md
 
+## Developing
 
+Local setup:
+
+Install Ruby (on Windows, download the installer with devtools from their site)
+
+```
+gem install bundle
+gem install rails
 bundle install
 rake db:setup
-compass compile *or* is rake assets:precompile better?
+rake assets:precompile
+```
+
+Installing Rails separately may be unnecessary since it's in the Gemfile.
+
+To then also be able to deploy:
+
+You have to break out the `schema:load` and `seed` steps from `setup` because you can't and don't need to create the remote db.
+
+```
+RAILS_ENV=production bundle exec rake db:schema:load
+RAILS_ENV=production bundle exec rake db:seed
+```

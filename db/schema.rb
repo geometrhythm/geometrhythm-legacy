@@ -1,4 +1,3 @@
-# encoding: UTF-8
 # This file is auto-generated from the current state of the database. Instead
 # of editing this file, please use the migrations feature of Active Record to
 # incrementally modify your database, and then regenerate this schema definition.
@@ -11,73 +10,68 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150205094023) do
+ActiveRecord::Schema.define(version: 2015_02_05_094023) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "comments", force: :cascade do |t|
-    t.string   "body",             null: false
-    t.integer  "commentable_id",   null: false
-    t.string   "commentable_type", null: false
-    t.integer  "user_id",          null: false
-    t.datetime "created_at",       null: false
-    t.datetime "updated_at",       null: false
-  end
-
-  add_index "comments", ["commentable_type", "commentable_id"], name: "index_comments_on_commentable_type_and_commentable_id", using: :btree
-  add_index "comments", ["user_id"], name: "index_comments_on_user_id", using: :btree
-
-  create_table "likes", force: :cascade do |t|
-    t.integer  "rhythm_id",  null: false
-    t.integer  "liker_id",   null: false
+    t.string "body", null: false
+    t.integer "commentable_id", null: false
+    t.string "commentable_type", null: false
+    t.integer "user_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["commentable_type", "commentable_id"], name: "index_comments_on_commentable_type_and_commentable_id"
+    t.index ["user_id"], name: "index_comments_on_user_id"
   end
 
-  add_index "likes", ["liker_id"], name: "index_likes_on_liker_id", using: :btree
-  add_index "likes", ["rhythm_id", "liker_id"], name: "index_likes_on_rhythm_id_and_liker_id", unique: true, using: :btree
-  add_index "likes", ["rhythm_id"], name: "index_likes_on_rhythm_id", using: :btree
+  create_table "likes", force: :cascade do |t|
+    t.integer "rhythm_id", null: false
+    t.integer "liker_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["liker_id"], name: "index_likes_on_liker_id"
+    t.index ["rhythm_id", "liker_id"], name: "index_likes_on_rhythm_id_and_liker_id", unique: true
+    t.index ["rhythm_id"], name: "index_likes_on_rhythm_id"
+  end
 
   create_table "names", force: :cascade do |t|
-    t.string   "name",       null: false
+    t.string "name", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
   create_table "namings", force: :cascade do |t|
-    t.integer  "name_id",    null: false
-    t.integer  "namer_id",   null: false
-    t.integer  "rhythm_id",  null: false
+    t.integer "name_id", null: false
+    t.integer "namer_id", null: false
+    t.integer "rhythm_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["name_id", "namer_id", "rhythm_id"], name: "index_namings_on_name_id_and_namer_id_and_rhythm_id", unique: true
+    t.index ["name_id"], name: "index_namings_on_name_id"
+    t.index ["namer_id"], name: "index_namings_on_namer_id"
+    t.index ["rhythm_id"], name: "index_namings_on_rhythm_id"
   end
-
-  add_index "namings", ["name_id", "namer_id", "rhythm_id"], name: "index_namings_on_name_id_and_namer_id_and_rhythm_id", unique: true, using: :btree
-  add_index "namings", ["name_id"], name: "index_namings_on_name_id", using: :btree
-  add_index "namings", ["namer_id"], name: "index_namings_on_namer_id", using: :btree
-  add_index "namings", ["rhythm_id"], name: "index_namings_on_rhythm_id", using: :btree
 
   create_table "rhythms", force: :cascade do |t|
-    t.integer  "creator_id",             null: false
-    t.string   "rhythm_str",             null: false
-    t.integer  "play_count", default: 0
-    t.datetime "created_at",             null: false
-    t.datetime "updated_at",             null: false
+    t.integer "creator_id", null: false
+    t.string "rhythm_str", null: false
+    t.integer "play_count", default: 0
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["creator_id"], name: "index_rhythms_on_creator_id"
+    t.index ["rhythm_str"], name: "index_rhythms_on_rhythm_str", unique: true
   end
-
-  add_index "rhythms", ["creator_id"], name: "index_rhythms_on_creator_id", using: :btree
-  add_index "rhythms", ["rhythm_str"], name: "index_rhythms_on_rhythm_str", unique: true, using: :btree
 
   create_table "users", force: :cascade do |t|
-    t.string   "email",           null: false
-    t.string   "password_digest", null: false
-    t.string   "session_token",   null: false
-    t.datetime "created_at",      null: false
-    t.datetime "updated_at",      null: false
+    t.string "email", null: false
+    t.string "password_digest", null: false
+    t.string "session_token", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["email"], name: "index_users_on_email", unique: true
+    t.index ["session_token"], name: "index_users_on_session_token", unique: true
   end
-
-  add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
-  add_index "users", ["session_token"], name: "index_users_on_session_token", unique: true, using: :btree
 
 end
