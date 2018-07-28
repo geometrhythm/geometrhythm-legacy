@@ -1,3 +1,4 @@
+* text=auto
 Gemfile text eol=lf
 *.rb text eol=lf
 *.ru text eol=lf
