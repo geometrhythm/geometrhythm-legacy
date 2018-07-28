@@ -124,3 +124,8 @@ Further stretch goals:
 [phase-three]: ./docs/phases/phase3.md
 [phase-four]: ./docs/phases/phase4.md
 [phase-five]: ./docs/phases/phase5.md
+
+
+bundle install
+rake db:setup
+compass compile *or* is rake assets:precompile better?

@@ -11,3 +11,8 @@
 /log/*
 !/log/.keep
 /tmp
+
+.idea
+.sass-cache
+public/assets
+stylesheets
