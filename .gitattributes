@@ -1,1 +1,14 @@
 Gemfile text
+*.rb text
+*.ru text
+*.md text
+*.scss text
+*.js text
+*.ejs text
+*.erb text
+*.jbuilder text
+*.yml text
+*.mp3 binary
+*.wav binary
+*.ico binary
+*.png binary
