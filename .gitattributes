@@ -1,13 +1,13 @@
-Gemfile text
-*.rb text
-*.ru text
-*.md text
-*.scss text
-*.js text
-*.ejs text
-*.erb text
-*.jbuilder text
-*.yml text
+Gemfile text eol=lf
+*.rb text eol=lf
+*.ru text eol=lf
+*.md text eol=lf
+*.scss text eol=lf
+*.js text eol=lf
+*.ejs text eol=lf
+*.erb text eol=lf
+*.jbuilder text eol=lf
+*.yml text eol=lf
 *.mp3 binary
 *.wav binary
 *.ico binary
