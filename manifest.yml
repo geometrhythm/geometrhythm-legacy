@@ -3,4 +3,5 @@ applications:
 - name: geometrhythm
   memory: 128M
   routes:
-  - route: geometrhythm.douglasblumeyer.com
+    - route: www.geometrhythm.com
+    - route: geometrhythm.douglasblumeyer.com
