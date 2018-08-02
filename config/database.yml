@@ -17,6 +17,7 @@
 default: &default
   adapter: postgresql
   encoding: unicode
+  username: postgres
   # For details on connection pooling, see rails configuration guide
   # http://guides.rubyonrails.org/configuring.html#database-pooling
   pool: 5
@@ -25,7 +26,6 @@ default: &default
 development:
   <<: *default
   database: Geometrhythm_development
-  username: postgres
   password: duperuser
 
   # The specified database role being used to connect to postgres.

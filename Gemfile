@@ -16,6 +16,7 @@ gem 'kaminari'
 gem 'bcrypt'
 gem 'compass-rails'
 gem 'tzinfo-data'
+gem "appengine", "~> 0.4.5"
 
 group :development, :test do
   gem 'byebug'

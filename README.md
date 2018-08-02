@@ -149,3 +149,48 @@ You have to break out the `schema:load` and `seed` steps from `setup` because yo
 RAILS_ENV=production bundle exec rake db:schema:load
 RAILS_ENV=production bundle exec rake db:seed
 ```
+
+## Developing w/r/t GCP
+
+One tricky thing - in order to brew install I had to have postgresql already brew installed and brew services started. 
+
+Again, I needed to create the project, enable the Cloud SQL Admin API, create the SQL instance, configure it.
+
+```
+gcloud config configurations create uncannly
+gcloud config set project uncannly
+gcloud config set account kingwoodchuckii@gmail.com
+```
+
+```
+gcloud sql instances create [INSTANCE_NAME] --database-version=POSTGRES_9_6 --cpu=1 --memory=3840MiB
+gcloud sql users set-password [USER] no-host --instance [INSTANCE_NAME] --password [PASSWORD]
+gcloud sql databases create [DATABASE_NAME] --instance [INSTANCE_NAME]
+gcloud sql instances describe [INSTANCE_NAME]
+```
+
+The last command will find you the `connectionName`, henceforth `[CONNECTION_NAME]`.
+
+You have to deploy it once, even though it won't work yet because the db isn't set up.
+
+I can't yet figure out what the means is to have secrets passed up to GCP, so for now, you have to manually replace the secret key in `app.yaml` (it's in Asana).
+
+You also have to manually update `database.yml`:
+
+```
+production:
+  <<: *default
+  database: [DATABASE_NAME]
+  password: [PASSWORD]
+  host: /cloudsql/[CONNECTION_NAME]
+  timeout: 5000
+```
+
+Then push it with `gcloud app deploy`.
+
+You can't use the same strategy used for the python app (Uncannly) for setting up this db.
+
+```
+gcloud projects add-iam-policy-binding geometrhythm --member=serviceAccount:373189069597@cloudbuild.gserviceaccount.com --role=roles/editor
+bundle exec rake appengine:exec -- bundle exec rake db:setup
+```

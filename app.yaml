@@ -1,0 +1,9 @@
+entrypoint: bundle exec rackup --port $PORT
+env: flex
+runtime: ruby
+
+env_variables:
+  SECRET_KEY_BASE: [SECRET_KEY_BASE]
+
+beta_settings:
+  cloud_sql_instances: geometrhythm:us-central1:geometrhythm-postgresql-instance
