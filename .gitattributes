@@ -3,12 +3,31 @@ Gemfile text eol=lf
 *.ru text eol=lf
 *.md text eol=lf
 *.scss text eol=lf
+*.css text eol=lf
 *.js text eol=lf
 *.ejs text eol=lf
 *.erb text eol=lf
 *.jbuilder text eol=lf
 *.yml text eol=lf
+*.yaml text eol=lf
+*.ts text eol=lf
+*.jsx text eol=lf
+*.tsx text eol=lf
+*.json text eol=lf
+*.xml text eol=lf
+*.iml text eol=lf
+*.html text eol=lf
+*.sh text eol=lf
+*.py text eol=lf
+*.txt text eol=lf
+*.m text eol=lf
+
 *.mp3 binary
 *.wav binary
 *.ico binary
 *.png binary
+*.eot binary
+*.ttf binary
+*.woff binary
+*.woff2 binary
+*.mid binary
